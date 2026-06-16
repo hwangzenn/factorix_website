@@ -1,37 +1,26 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { getPostsByTag } from "@/lib/ghost";
+import type { Metadata } from "next"
+import { sanityFetch } from "@/sanity/lib/live"
+import { referenceMaterialsQuery, type ReferenceMaterialSummary } from "@/sanity/lib/queries"
+import ResourceList from "../_components/ResourceList"
 
 export const metadata: Metadata = {
-  title: "공지사항",
+  title: "공지사항 | Factorix",
   description: "Factorix 공지사항",
-};
+}
 
 export default async function NoticePage() {
-  const posts = await getPostsByTag("notice");
+  const { data } = await sanityFetch({
+    query: referenceMaterialsQuery,
+    params: { category: "notice" },
+  })
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-20">
-      <p className="text-sm text-primary-600 font-medium mb-2">자료실</p>
-      <h1 className="text-4xl font-bold text-primary-800 mb-10">공지사항</h1>
-      {posts.length === 0 ? (
-        <p className="text-gray-500">등록된 공지사항이 없습니다.</p>
-      ) : (
-        <ul className="divide-y divide-gray-100">
-          {posts.map((post) => (
-            <li key={post.id} className="py-5">
-              <Link href={`/resources/notice/${post.slug}`} className="font-medium text-gray-800 hover:text-primary-700 transition-colors">
-                {post.title}
-              </Link>
-              {post.published_at && (
-                <p className="text-sm text-gray-400 mt-1">
-                  {new Date(post.published_at).toLocaleDateString("ko-KR")}
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
+    <ResourceList
+      eyebrow="자료실"
+      title="공지사항"
+      emptyMessage="등록된 공지사항이 없습니다."
+      basePath="/resources/notice"
+      items={(data as ReferenceMaterialSummary[]) ?? []}
+    />
+  )
 }
