@@ -13,7 +13,7 @@ const SLIDES = [
       { label: "도입 문의하기", href: ROUTES.support.meeting },
       { label: "솔루션 보기", href: ROUTES.solutions.ai.autoCalibration },
     ],
-    video: "/디스펜싱.mov",
+    video: "https://r2.factorix.co.kr/디스펜싱.mov",
   },
   {
     eyebrow: "AI 웨어러블 디바이스",
@@ -23,7 +23,7 @@ const SLIDES = [
       { label: "자세히 알아보기", href: ROUTES.wearable.intro },
       { label: "도입 문의하기", href: ROUTES.support.wearablePoc },
     ],
-    video: "/웨어러블.mov",
+    video: "https://r2.factorix.co.kr/웨어러블.mov",
   },
   {
     eyebrow: "스마트팩토리",
@@ -33,7 +33,7 @@ const SLIDES = [
       { label: "토탈 솔루션 보기", href: ROUTES.solutions.ai.smartFactory },
       { label: "도입 사례 보기", href: ROUTES.cases.product.solutions },
     ],
-    video: "/스마트팩토리.mov",
+    video: "https://r2.factorix.co.kr/스마트팩토리.mov",
   },
 ] as const;
 
