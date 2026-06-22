@@ -282,7 +282,7 @@ export default async function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">Newsroom</h2>
               <p className="text-lg md:text-xl font-medium text-gray-500 mt-1">팩토릭스 뉴스룸</p>
             </div>
-            <Link href={ROUTES.resources.press} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
+            <Link href={ROUTES.resources} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
               전체보기
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

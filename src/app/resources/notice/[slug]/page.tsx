@@ -24,8 +24,8 @@ export default async function NoticeDetailPage({ params }: Props) {
   return (
     <ResourceDetail
       eyebrow="자료실 · 공지사항"
-      backHref={ROUTES.resources.notice}
-      backLabel="공지사항 목록"
+      backHref={ROUTES.resources}
+      backLabel="자료실"
       data={item}
     />
   )

@@ -24,8 +24,8 @@ export default async function TechDocDetailPage({ params }: Props) {
   return (
     <ResourceDetail
       eyebrow="자료실 · 기술자료실"
-      backHref={ROUTES.resources.techDocs}
-      backLabel="기술자료실 목록"
+      backHref={ROUTES.resources}
+      backLabel="자료실"
       data={item}
     />
   )

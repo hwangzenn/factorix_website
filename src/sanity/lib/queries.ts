@@ -39,6 +39,23 @@ export const referenceMaterialsQuery = defineQuery(`
   }
 `)
 
+export type ReferenceMaterialWithCategory = ReferenceMaterialSummary & {
+  category: string
+}
+
+export const allReferenceMaterialsQuery = defineQuery(`
+  *[_type == "referenceMaterial" && isPublic == true]
+  | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    publishedAt,
+    description,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
 export const referenceMaterialBySlugQuery = defineQuery(`
   *[_type == "referenceMaterial" && slug.current == $slug && isPublic == true][0] {
     _id,

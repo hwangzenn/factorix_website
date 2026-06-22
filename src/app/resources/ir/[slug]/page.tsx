@@ -24,8 +24,8 @@ export default async function IrDetailPage({ params }: Props) {
   return (
     <ResourceDetail
       eyebrow="자료실 · 투자정보"
-      backHref={ROUTES.resources.ir}
-      backLabel="투자정보 목록"
+      backHref={ROUTES.resources}
+      backLabel="자료실"
       data={item}
     />
   )

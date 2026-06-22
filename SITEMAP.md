@@ -6,7 +6,7 @@
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
-총 페이지: **메인 1 + 랜딩 32 = 33개.**
+총 페이지: **메인 1 + 랜딩 28 = 29개.**
 
 ---
 
@@ -57,12 +57,8 @@
 │   ├─ ▣ 웨어러블 디바이스 PoC 문의    /support/wearable-poc
 │   └─ ▣ Q&A                         /support/qna
 │
-📁 자료실 (/resources)
-    ├─ ▣ 공지사항      /resources/notice
-    ├─ ▣ 언론보도      /resources/press
-    ├─ ▣ 특허/수상     /resources/patents
-    ├─ ▣ 기술자료실    /resources/tech-docs
-    └─ ▣ 투자정보      /resources/ir
+▣ 자료실             /resources
+    (서브네비 탭: 공지사항 | 언론보도 | 특허/수상 | 기술자료실 | 투자정보)
 ```
 
 > ⚠️ 판단 보류 1건: **오시는길**은 단일 페이지로 두고 "연구소/생산공장 위치"는 그 안의 `#map` 섹션으로 처리했다.

@@ -24,8 +24,8 @@ export default async function PressDetailPage({ params }: Props) {
   return (
     <ResourceDetail
       eyebrow="자료실 · 언론보도"
-      backHref={ROUTES.resources.press}
-      backLabel="언론보도 목록"
+      backHref={ROUTES.resources}
+      backLabel="자료실"
       data={item}
     />
   )

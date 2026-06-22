@@ -24,8 +24,8 @@ export default async function PatentsDetailPage({ params }: Props) {
   return (
     <ResourceDetail
       eyebrow="자료실 · 특허/수상"
-      backHref={ROUTES.resources.patents}
-      backLabel="특허/수상 목록"
+      backHref={ROUTES.resources}
+      backLabel="자료실"
       data={item}
     />
   )

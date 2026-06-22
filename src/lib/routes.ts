@@ -66,14 +66,8 @@ export const ROUTES = {
     qna: "/support/qna",                  // Q&A
   },
 
-  // 자료실  ── 디렉토리
-  resources: {
-    notice: "/resources/notice",      // 공지사항
-    press: "/resources/press",        // 언론보도
-    patents: "/resources/patents",    // 특허/수상
-    techDocs: "/resources/tech-docs", // 기술자료실
-    ir: "/resources/ir",              // 투자정보
-  },
+  // 자료실
+  resources: "/resources",
 } as const;
 
 // 깨진 링크 검증 / sitemap 생성용: 모든 실제 페이지 경로를 평탄화

@@ -90,11 +90,11 @@ export const GNB: NavItem[] = [
   {
     label: "자료실",
     children: [
-      { label: "공지사항", href: ROUTES.resources.notice },
-      { label: "언론 보도", href: ROUTES.resources.press },
-      { label: "특허/수상", href: ROUTES.resources.patents },
-      { label: "기술자료실", href: ROUTES.resources.techDocs },
-      { label: "투자정보", href: ROUTES.resources.ir },
+      { label: "공지사항", href: `${ROUTES.resources}?category=notice` },
+      { label: "언론 보도", href: `${ROUTES.resources}?category=press` },
+      { label: "특허/수상", href: `${ROUTES.resources}?category=patents` },
+      { label: "기술자료실", href: `${ROUTES.resources}?category=tech-docs` },
+      { label: "투자정보", href: `${ROUTES.resources}?category=ir` },
     ],
   },
 ];

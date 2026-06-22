@@ -38,10 +38,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm">자료실</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href={ROUTES.resources.notice} className="hover:text-white transition-colors">공지사항</Link></li>
-              <li><Link href={ROUTES.resources.press} className="hover:text-white transition-colors">언론보도</Link></li>
-              <li><Link href={ROUTES.resources.patents} className="hover:text-white transition-colors">특허/수상</Link></li>
-              <li><Link href={ROUTES.resources.ir} className="hover:text-white transition-colors">투자정보</Link></li>
+              <li><Link href={ROUTES.resources} className="hover:text-white transition-colors">자료실</Link></li>
             </ul>
           </div>
         </div>
