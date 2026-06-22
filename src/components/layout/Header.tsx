@@ -26,7 +26,7 @@ export default function Header() {
         <div className="max-w-[1440px] mx-auto px-8 h-20 flex items-center flex-nowrap">
           {/* Logo */}
           <Link href="/" onClick={() => setMenuOpen(false)} className="shrink-0 mr-10">
-            <Image src="/logo.png" alt="Factorix" width={180} height={50} priority className="h-12 w-auto object-contain" />
+            <Image src="/로고_블루블랙@4x.png" alt="Factorix" width={180} height={50} priority className="h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop nav — flex-nowrap 보장, 항목 수에 맞게 px 최소화 */}
