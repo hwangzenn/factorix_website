@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { useSearchParams } from "next/navigation"
-import Link from "next/link"
+import ContentCard from "@/components/content/ContentCard"
+import ContentCardGrid from "@/components/content/ContentCardGrid"
 
 const CATEGORIES = [
   { key: "notice", label: "공지사항", basePath: "/resources/notice" },
@@ -57,44 +58,18 @@ export default function ResourceListWithTabs({ items }: { items: ResourceItem[] 
         ))}
       </nav>
 
-      {filtered.length === 0 ? (
-        <p className="text-gray-500">등록된 자료가 없습니다.</p>
-      ) : (
-        <ul className="divide-y divide-gray-100">
-          {filtered.map((item) => (
-            <li key={item._id} className="py-5 flex gap-4 items-center">
-              {item.thumbnail?.asset?.url && (
-                <div className="flex-shrink-0 w-16 h-16 rounded-md overflow-hidden bg-gray-100">
-                  <img
-                    src={item.thumbnail.asset.url}
-                    alt={item.thumbnail.alt ?? item.title}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              )}
-
-              <div className="flex-1 min-w-0">
-                <Link
-                  href={`${basePath}/${item.slug}`}
-                  className="font-medium text-gray-800 hover:text-primary-700 transition-colors"
-                >
-                  {item.title}
-                </Link>
-
-                {item.publishedAt && (
-                  <p className="text-sm text-gray-400 mt-1">
-                    {new Date(item.publishedAt).toLocaleDateString("ko-KR")}
-                  </p>
-                )}
-
-                {item.description && (
-                  <p className="text-sm text-gray-500 mt-1 line-clamp-2">{item.description}</p>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ContentCardGrid isEmpty={filtered.length === 0} emptyMessage="등록된 자료가 없습니다.">
+        {filtered.map((item) => (
+          <ContentCard
+            key={item._id}
+            title={item.title}
+            description={item.description}
+            thumbnailUrl={item.thumbnail?.asset?.url}
+            thumbnailAlt={item.thumbnail?.alt}
+            href={`${basePath}/${item.slug}`}
+          />
+        ))}
+      </ContentCardGrid>
     </div>
   )
 }

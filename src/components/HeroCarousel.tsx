@@ -21,7 +21,7 @@ const SLIDES = [
     sub: "산업 현장의 작업자를 위한 AI 기반\n웨어러블 스마트 글라스 솔루션",
     ctas: [
       { label: "자세히 알아보기", href: ROUTES.wearable.intro },
-      { label: "도입 문의하기", href: ROUTES.support.wearablePoc },
+      { label: "도입 문의하기", href: ROUTES.support.poc },
     ],
     video: "https://r2.factorix.co.kr/웨어러블.mov",
   },

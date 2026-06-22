@@ -82,8 +82,8 @@ export const GNB: NavItem[] = [
     label: "고객지원",
     children: [
       { label: "온라인 상담", href: ROUTES.support.meeting },
-      { label: "PoC 문의", href: ROUTES.support.wearablePoc },
-      { label: "평가테스트 문의", href: ROUTES.support.poc },
+      { label: "PoC 문의", href: ROUTES.support.poc },
+      { label: "평가테스트 문의", href: ROUTES.support.demoTest },
       { label: "자주 묻는 질문", href: ROUTES.support.qna },
     ],
   },

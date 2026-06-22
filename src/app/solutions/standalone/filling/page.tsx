@@ -1,22 +1,45 @@
-﻿import type { Metadata } from "next";
-import Link from "next/link";
-import { ROUTES } from "@/lib/routes";
+import type { Metadata } from "next"
+import Link from "next/link"
+import { sanityFetch } from "@/sanity/lib/live"
+import { productsByCategoryQuery, type ProductItem } from "@/sanity/lib/queries"
+import { ROUTES } from "@/lib/routes"
+import ContentCard from "@/components/content/ContentCard"
+import ContentCardGrid from "@/components/content/ContentCardGrid"
 
 export const metadata: Metadata = {
   title: "액상충진기 | Factorix",
   description: "Factorix 액상충진기 — 고정밀 액상 충진 솔루션",
-};
+}
 
-export default function FillingPage() {
+export default async function FillingPage() {
+  const { data } = await sanityFetch({
+    query: productsByCategoryQuery,
+    params: { category: "standalone-filling" },
+  })
+  const products = (data as ProductItem[]) ?? []
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-20">
-      <p className="text-sm text-primary-600 font-medium mb-2">액제제조 솔루션 · 단독설비</p>
-      <h1 className="text-4xl font-bold text-primary-800 mb-6">액상충진기</h1>
-      <p className="text-gray-500 mb-16">콘텐츠 준비 중입니다.</p>
-      <div className="flex gap-4">
-        <Link href={ROUTES.support.poc} className="inline-flex px-6 py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors">도입 문의</Link>
-        <Link href={ROUTES.cases.industry.bio} className="inline-flex px-6 py-3 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors">적용사례 보기</Link>
+      <div className="flex items-center justify-between mb-10">
+        <h1 className="text-4xl font-bold text-primary-800">액상충진기</h1>
+        <div className="flex gap-3 shrink-0">
+          <Link href={ROUTES.support.poc} className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-sm font-semibold rounded-md hover:bg-primary-800 transition-colors">도입 문의</Link>
+          <Link href={ROUTES.cases.industry.cosmetics} className="inline-flex px-5 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded-md hover:bg-primary-50 transition-colors">적용사례 보기</Link>
+        </div>
       </div>
+
+      <ContentCardGrid isEmpty={products.length === 0} emptyMessage="콘텐츠 준비 중입니다.">
+        {products.map((p) => (
+          <ContentCard
+            key={p._id}
+            title={p.title}
+            description={p.description ?? p.summary}
+            thumbnailUrl={p.thumbnail?.asset?.url}
+            thumbnailAlt={p.thumbnail?.alt}
+            href={`${ROUTES.solutions.standalone.filling}/${p.slug}`}
+          />
+        ))}
+      </ContentCardGrid>
     </div>
-  );
+  )
 }

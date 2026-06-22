@@ -29,9 +29,9 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm">고객지원</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href={ROUTES.support.poc} className="hover:text-white transition-colors">시스템 PoC 문의</Link></li>
-              <li><Link href={ROUTES.support.meeting} className="hover:text-white transition-colors">방문 미팅 요청</Link></li>
-              <li><Link href={ROUTES.support.wearablePoc} className="hover:text-white transition-colors">웨어러블 PoC 문의</Link></li>
+              <li><Link href={ROUTES.support.poc} className="hover:text-white transition-colors">PoC 문의</Link></li>
+              <li><Link href={ROUTES.support.demoTest} className="hover:text-white transition-colors">평가테스트 문의</Link></li>
+              <li><Link href={ROUTES.support.meeting} className="hover:text-white transition-colors">온라인상담 신청</Link></li>
               <li><Link href={ROUTES.support.qna} className="hover:text-white transition-colors">Q&amp;A</Link></li>
             </ul>
           </div>

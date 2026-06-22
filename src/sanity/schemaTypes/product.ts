@@ -33,6 +33,13 @@ export const product = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: '슬러그 (URL)',
+      type: 'slug',
+      options: { source: 'title' },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'thumbnail',
       title: '대표 이미지',
       type: 'image',
@@ -43,6 +50,12 @@ export const product = defineType({
       title: '한 줄 요약',
       type: 'text',
       rows: 2,
+    }),
+    defineField({
+      name: 'description',
+      title: '카드 설명 (OG 겸용)',
+      type: 'text',
+      rows: 3,
     }),
     defineField({
       name: 'specs',
@@ -78,7 +91,25 @@ export const product = defineType({
       name: 'body',
       title: '상세 설명',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [
+        {
+          type: 'block',
+          styles: [
+            { title: '본문', value: 'normal' },
+            { title: '소제목 (H2)', value: 'h2' },
+            { title: '소제목 (H3)', value: 'h3' },
+            { title: '소제목 (H4)', value: 'h4' },
+          ],
+        },
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'alt', title: '이미지 설명 (alt)', type: 'string' }),
+            defineField({ name: 'caption', title: '캡션', type: 'string' }),
+          ],
+        },
+      ],
     }),
   ],
   preview: {

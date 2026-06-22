@@ -14,7 +14,7 @@ export default function WearableIntroPage() {
       <h1 className="text-4xl font-bold text-primary-800 mb-6">소개</h1>
       <p className="text-gray-500 mb-16">광고 영상 및 소개 콘텐츠 준비 중입니다.</p>
       <div className="flex gap-4">
-        <Link href={ROUTES.support.wearablePoc} className="inline-flex px-6 py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors">웨어러블 PoC 문의</Link>
+        <Link href={ROUTES.support.poc} className="inline-flex px-6 py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors">웨어러블 PoC 문의</Link>
         <Link href={ROUTES.wearable.b2b} className="inline-flex px-6 py-3 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors">B2B 모델 보기</Link>
       </div>
     </div>

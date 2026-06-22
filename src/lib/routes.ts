@@ -60,9 +60,9 @@ export const ROUTES = {
 
   // 고객지원  ── 디렉토리
   support: {
-    poc: "/support/poc",                  // 시스템 평가테스트 및 PoC 문의
-    meeting: "/support/meeting",          // 상세 방문미팅 요청
-    wearablePoc: "/support/wearable-poc", // 웨어러블 디바이스 PoC 문의
+    demoTest: "/support/demo-test",       // 평가테스트 문의
+    poc: "/support/poc",                  // PoC 문의
+    meeting: "/support/meeting",          // 온라인상담 신청
     qna: "/support/qna",                  // Q&A
   },
 
