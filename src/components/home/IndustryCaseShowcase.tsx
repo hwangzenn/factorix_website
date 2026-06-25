@@ -91,8 +91,8 @@ export default function IndustryCaseShowcase({ items }: { items: CaseItem[] }) {
                   <Image
                     src={item.thumbnail.asset.url}
                     alt={item.thumbnail.alt ?? item.title}
-                    width={640}
-                    height={360}
+                    width={1200}
+                    height={630}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 ) : (

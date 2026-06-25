@@ -15,13 +15,13 @@ export default function ContentCard({ title, description, thumbnailUrl, thumbnai
       href={href}
       className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col"
     >
-      <div className="aspect-video bg-gray-100 overflow-hidden">
+      <div className="aspect-[1200/630] bg-gray-100 overflow-hidden">
         {thumbnailUrl ? (
           <Image
             src={thumbnailUrl}
             alt={thumbnailAlt ?? title}
-            width={640}
-            height={360}
+            width={1200}
+            height={630}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
