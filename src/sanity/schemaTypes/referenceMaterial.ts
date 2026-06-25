@@ -98,6 +98,13 @@ export const referenceMaterial = defineType({
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'featuredOnMain',
+      title: '메인페이지 노출',
+      description: '체크하면 메인페이지 뉴스룸에 우선 노출됩니다 (최대 3개)',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
   preview: {
     select: { title: 'title', subtitle: 'category', media: 'thumbnail' },

@@ -77,6 +77,32 @@ export const allReferenceMaterialsQuery = defineQuery(`
   }
 `)
 
+export const featuredReferenceMaterialsQuery = defineQuery(`
+  *[_type == "referenceMaterial" && isPublic == true && featuredOnMain == true]
+  | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    publishedAt,
+    description,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
+export const latestReferenceMaterialsQuery = defineQuery(`
+  *[_type == "referenceMaterial" && isPublic == true]
+  | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    publishedAt,
+    description,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
 export const referenceMaterialBySlugQuery = defineQuery(`
   *[_type == "referenceMaterial" && slug.current == $slug && isPublic == true][0] {
     _id,

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
-import { getNewsPosts } from "@/lib/ghost";
 import HeroCarousel from "@/components/HeroCarousel";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
 import { sanityFetch } from "@/sanity/lib/live";
-import { allCaseStudiesQuery, type CaseStudySummaryWithCategory } from "@/sanity/lib/queries";
+import {
+  allCaseStudiesQuery,
+  featuredReferenceMaterialsQuery,
+  latestReferenceMaterialsQuery,
+  type CaseStudySummaryWithCategory,
+  type ReferenceMaterialWithCategory,
+} from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Factorix | AI-Powered Dispensing",
@@ -72,10 +77,17 @@ const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
 ];
 
 export default async function HomePage() {
-  const [{ items: newsPosts }, { data: caseData }] = await Promise.all([
-    getNewsPosts(3),
+  const [{ data: featuredData }, { data: latestData }, { data: caseData }] = await Promise.all([
+    sanityFetch({ query: featuredReferenceMaterialsQuery }),
+    sanityFetch({ query: latestReferenceMaterialsQuery }),
     sanityFetch({ query: allCaseStudiesQuery }),
   ]);
+  const featured = (featuredData as ReferenceMaterialWithCategory[]) ?? [];
+  const latest = (latestData as ReferenceMaterialWithCategory[]) ?? [];
+  const featuredIds = new Set(featured.map((p) => p._id));
+  const newsPosts = featured.length >= 3
+    ? featured.slice(0, 3)
+    : [...featured, ...latest.filter((p) => !featuredIds.has(p._id))].slice(0, 3);
   const caseStudies = (caseData as CaseStudySummaryWithCategory[]) ?? [];
 
   return (
@@ -127,7 +139,7 @@ export default async function HomePage() {
       {/* ── Value Chain ── */}
       <section className="relative overflow-hidden">
         <img
-          src="/valuechain_bg_2.png"
+          src="/valuechain_bg.png"
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -246,25 +258,23 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {newsPosts.length > 0 ? newsPosts.map((post) => (
-              <Link key={post.id} href={`/resources/press/${post.slug}`} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
-                {/* 이미지 */}
+              <Link key={post._id} href={`/resources/${post.category}/${post.slug}`} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
                 <div className="aspect-video bg-gray-100 overflow-hidden">
-                  {post.feature_image ? (
-                    <img src={post.feature_image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  {post.thumbnail?.asset?.url ? (
+                    <img src={post.thumbnail.asset.url} alt={post.thumbnail.alt ?? post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   ) : (
                     <div className="w-full h-full bg-gray-200" />
                   )}
                 </div>
-                {/* 본문 */}
                 <div className="p-5 flex flex-col flex-1">
-                  {post.published_at && (
+                  {post.publishedAt && (
                     <p className="text-xs text-gray-400 mb-2">
-                      {new Date(post.published_at).toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" })}
+                      {new Date(post.publishedAt).toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" })}
                     </p>
                   )}
                   <p className="font-semibold text-gray-900 text-base leading-snug mb-2 group-hover:text-[#196DDA] transition-colors">{post.title}</p>
-                  {post.excerpt && (
-                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{post.excerpt}</p>
+                  {post.description && (
+                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{post.description}</p>
                   )}
                 </div>
               </Link>
