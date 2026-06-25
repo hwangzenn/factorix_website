@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type FormEvent } from "react"
 
 const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; label: string }[] }> = {
   equipment: {
@@ -30,16 +30,85 @@ const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; labe
   },
 }
 
+const SHEET_URL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL ?? ""
+
 const inputClass = "w-full border border-gray-300 rounded-md px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
 
-export default function PocForm() {
+type Props = {
+  formType?: string
+  submitLabel?: string
+}
+
+export default function PocForm({ formType = "PoC 문의", submitLabel = "문의 접수완료" }: Props) {
   const [model, setModel] = useState("")
   const [subModel, setSubModel] = useState("")
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
 
   const subs = model ? MODEL_OPTIONS[model]?.subs ?? [] : []
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!SHEET_URL) { setStatus("error"); return }
+
+    setStatus("sending")
+    const fd = new FormData(e.currentTarget)
+
+    const modelLabel = model ? MODEL_OPTIONS[model]?.label ?? "" : ""
+    const subLabel = subModel
+      ? MODEL_OPTIONS[model]?.subs.find((s) => s.value === subModel)?.label ?? ""
+      : ""
+
+    const payload = {
+      formType,
+      company: fd.get("company") as string,
+      name: fd.get("name") as string,
+      phone: fd.get("phone") as string,
+      email: fd.get("email") as string,
+      model: modelLabel,
+      subModel: subLabel,
+      message: fd.get("message") as string,
+      timestamp: new Date().toISOString(),
+    }
+
+    const form = e.currentTarget
+    try {
+      await fetch(SHEET_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify(payload),
+      })
+      setStatus("success")
+      form.reset()
+      setModel("")
+      setSubModel("")
+    } catch {
+      setStatus("error")
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <div className="text-center py-16">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">접수 완료</h2>
+        <p className="text-gray-500">담당자가 빠르게 연락드리겠습니다.</p>
+        <button
+          type="button"
+          onClick={() => setStatus("idle")}
+          className="mt-6 px-6 py-2 border border-primary-700 text-primary-700 rounded-md hover:bg-primary-50 transition-colors text-sm font-medium"
+        >
+          추가 문의하기
+        </button>
+      </div>
+    )
+  }
+
   return (
-    <form className="space-y-6">
+    <form className="space-y-6" onSubmit={handleSubmit}>
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">회사명 *</label>
         <input type="text" name="company" className={inputClass} placeholder="회사명을 입력하세요" required />
@@ -91,9 +160,16 @@ export default function PocForm() {
         <label className="block text-sm font-medium text-gray-700 mb-1">문의 내용</label>
         <textarea name="message" rows={5} className={`${inputClass} resize-none`} placeholder="문의 내용을 입력하세요" />
       </div>
-      <button type="submit" className="w-full py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors">
-        문의 접수완료
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="w-full py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {status === "sending" ? "전송 중..." : submitLabel}
       </button>
+      {status === "error" && (
+        <p className="text-sm text-red-500 text-center">전송에 실패했습니다. 다시 시도해주세요.</p>
+      )}
     </form>
   )
 }

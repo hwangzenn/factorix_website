@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: "Factorix", template: "%s | Factorix" },
   description: "액제제조 솔루션 · AI 웨어러블 디바이스 B2B 전문 기업",
-  icons: { icon: "/logo_simple.png" },
+  icons: { icon: "/favicon.ico" },
   openGraph: {
     title: "Factorix | AI-Powered Dispensing",
     description: "AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스 전문 기업",
