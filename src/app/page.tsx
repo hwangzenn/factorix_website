@@ -13,8 +13,12 @@ import {
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "Factorix | AI-Powered Dispensing",
-  description: "AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스 전문 기업 Factorix",
+  title: "팩토릭스 | Factorix — AI 액제제조 · 디스펜싱 솔루션",
+  description: "팩토릭스(Factorix)는 AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스를 공급하는 B2B 전문 기업입니다.",
+  keywords: [
+    "팩토릭스", "Factorix", "디스펜싱 자동화", "액제제조 솔루션",
+    "AI 스마트팩토리", "디스펜서", "충진기", "AI 웨어러블",
+  ],
 };
 
 const SOLUTIONS: { label: string; href: string; span?: number; image?: string }[] = [
