@@ -10,7 +10,16 @@ export default function CeoPage() {
     <div className="max-w-4xl mx-auto px-6 py-20">
       {/* 헤더 */}
       <p className="text-sm text-[#196DDA] font-medium mb-2">기업정보</p>
-      <h1 className="text-4xl font-bold text-gray-900 mb-12">CEO 인사말</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">CEO 인사말</h1>
+
+      {/* 헤드라인 이미지 */}
+      <div className="w-full rounded-xl overflow-hidden mb-12">
+        <img
+          src="/ceo-handshake.jpg"
+          alt="팩토릭스 CEO 인사말"
+          className="w-full h-64 object-cover"
+        />
+      </div>
 
       {/* 대표 인용구 */}
       <blockquote className="border-l-4 border-[#196DDA] pl-6 py-2 mb-12">
