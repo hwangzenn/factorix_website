@@ -1,8 +1,10 @@
-import { Suspense } from "react"
+﻿import { Suspense } from "react"
 import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
 import { allReferenceMaterialsQuery, type ReferenceMaterialWithCategory } from "@/sanity/lib/queries"
 import ResourceListWithTabs from "./_components/ResourceListWithTabs"
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "자료실 | Factorix",

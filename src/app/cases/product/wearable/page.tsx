@@ -1,10 +1,12 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/live"
 import { caseStudiesByCategoryQuery, type CaseStudySummary } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
 import ContentCard from "@/components/content/ContentCard"
 import ContentCardGrid from "@/components/content/ContentCardGrid"
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "웨어러블 디바이스 적용사례 | Factorix",

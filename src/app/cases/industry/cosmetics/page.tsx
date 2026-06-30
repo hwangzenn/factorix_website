@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/live"
 import { caseStudiesByCategoryQuery, type CaseStudySummary } from "@/sanity/lib/queries"
@@ -6,6 +6,8 @@ import { ROUTES } from "@/lib/routes"
 import ContentCard from "@/components/content/ContentCard"
 import ContentCardGrid from "@/components/content/ContentCardGrid"
 import IndustrySubNav from "@/components/cases/IndustrySubNav"
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "화장품/뷰티 적용사례 | Factorix",
