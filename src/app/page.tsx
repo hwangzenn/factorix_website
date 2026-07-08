@@ -279,21 +279,25 @@ export default async function HomePage() {
                     <img
                       src={s.image}
                       alt={s.label}
-                      className="w-full h-auto block group-hover:scale-105 transition-transform duration-300"
+                      className="w-full aspect-[16/9] object-cover block group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
                     <div className="aspect-square" />
                   )}
-                  {/* 좌상단 장비명 태그 */}
-                  <span className="absolute top-10 left-10 text-2xl md:text-3xl font-normal text-primary-900">
-                    {s.tag}
-                  </span>
-                  {/* 좌하단 원형 화살표 버튼 */}
-                  <span className="absolute bottom-3 left-3 w-9 h-9 rounded-full border-2 border-white bg-transparent flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#196DDA] transition-colors">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
+                  {/* 호버 시 어두운 레이어 */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
+                  {/* 좌상단 장비명 태그 + 제품 라인업 보기 */}
+                  <div className="absolute top-10 left-10 flex flex-col items-start gap-2">
+                    <span className="text-2xl md:text-3xl font-normal text-primary-900">
+                      {s.tag}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-900">
+                      제품 라인업 보기
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>
