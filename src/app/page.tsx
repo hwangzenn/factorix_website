@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import HeroCarousel from "@/components/HeroCarousel";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
-import FaqAccordion from "@/components/home/FaqAccordion";
+import FaqTabs from "@/components/home/FaqTabs";
 import ContentCard from "@/components/content/ContentCard";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
@@ -79,11 +79,44 @@ const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] 
 ];
 
 const AFMS_FEATURE = {
-  title: "AI융합 차세대 디스펜싱 솔루션\nAFMS-X1",
-  desc: "AFMS는 바이오시약, 산업용 페이스트 등 액상 소재의 물성변화를 실시간 분석해 디스펜싱 조건을 자동으로 보정하는 AI 기반 제조 액상 자동보정 토출 시스템입니다. 기존 제조공정이 작업자의 경험에 의존해 토출량, 속도 등을 수동으로 조정했다면, AFMS는 공정 데이터와 비전 데이터를 실시간으로 학습해 최적의 토출 조건을 자동 보정합니다.",
+  name: "AFMS-X1",
+  desc: "AFMS는 바이오시약, 산업용 페이스트 등 액상 소재의 물성변화를 실시간 분석해 디스펜싱 조건을 자동으로 보정하는 AI 기반 제조 액상 자동보정 토출 시스템입니다.",
   href: ROUTES.solutions.ai.autoCalibration,
-  image: "/blue3/자동보정 시스템.png",
+  image: "/장비시스템/자동보정 시스템.png",
 };
+
+const AFMS_BENEFITS: { title: string; desc: string; icon: React.ReactNode }[] = [
+  {
+    title: "스마트 디스펜싱 컨트롤",
+    desc: "토출량, 압력 속도 및 오차 실시간 자동 보정",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M12 3c-3 4-5 7-5 10a5 5 0 0 0 10 0c0-3-2-6-5-10z" />
+      </svg>
+    ),
+  },
+  {
+    title: "스마트 비전 예측",
+    desc: "점, 라인, 도포 면적 및 미세 기포 검출, 불량 예측",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
+  },
+  {
+    title: "통합 제조 데이터 플랫폼",
+    desc: "공정, 품질 데이터 통합 저장 및 생산이력관리, 지속학습",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+        <ellipse cx="12" cy="6" rx="8" ry="3" />
+        <path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6" />
+        <path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
+      </svg>
+    ),
+  },
+];
 
 const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
   mixing: (
@@ -305,29 +338,67 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── AI융합 차세대 디스펜싱 솔루션 AFMS-X1 ── */}
-      <section className="bg-gray-50 py-20 px-8">
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6 whitespace-pre-line">
-              {AFMS_FEATURE.title}
-            </h2>
-            <p className="text-base md:text-lg text-gray-500 leading-relaxed mb-8">
-              {AFMS_FEATURE.desc}
-            </p>
-            <Link
-              href={AFMS_FEATURE.href}
-              className="inline-flex items-center justify-center px-6 py-3 bg-primary-700 text-white text-sm font-bold rounded hover:bg-primary-800 transition-colors"
-            >
-              제품 상세보기
-            </Link>
-          </div>
-          <div className="rounded-xl overflow-hidden bg-white">
-            <img
-              src={AFMS_FEATURE.image}
-              alt={AFMS_FEATURE.title.replace("\n", " ")}
-              className="w-full h-auto block"
-            />
+      {/* ── AI융합 차세대 디스펜싱 솔루션 ── */}
+      <section className="bg-white py-20 px-8">
+        <div className="max-w-[1440px] mx-auto">
+          {/* AFMS 소개 */}
+          <div className="mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                  AI융합 차세대 디스펜싱 솔루션
+                </h2>
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
+                  AFMS 소개
+                </h3>
+                <p className="text-base md:text-lg text-gray-500 leading-relaxed">
+                  {AFMS_FEATURE.desc}
+                </p>
+
+                {/* 기대효과 */}
+                <div className="mt-10">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
+                    기대효과
+                  </h3>
+                  <div className="grid grid-cols-3 gap-4">
+                    {AFMS_BENEFITS.map((b) => (
+                      <div key={b.title} className="rounded-xl border border-gray-200 bg-white p-6">
+                        <div className="w-10 h-10 rounded-full bg-primary-50 border border-primary-200 flex items-center justify-center text-primary-700 mb-3">
+                          {b.icon}
+                        </div>
+                        <p className="font-bold text-gray-900 mb-2">{b.title}</p>
+                        <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <Link
+                href={AFMS_FEATURE.href}
+                className="group relative overflow-hidden rounded-[5px] bg-gray-100 block w-[85%] mx-auto"
+              >
+                <img
+                  src={AFMS_FEATURE.image}
+                  alt={AFMS_FEATURE.name}
+                  className="w-full h-auto block group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
+                <div className="absolute top-10 left-10 flex flex-col items-start gap-2">
+                  <span className="text-2xl md:text-3xl font-normal text-white">
+                    {AFMS_FEATURE.name}
+                  </span>
+                  <span className="text-2xl md:text-3xl font-normal text-white">
+                    액상 자동보정 토출 시스템
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#196DDA]">
+                    자세히 알아보기
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -347,20 +418,12 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-6">
-                FactoriX 솔루션
-              </h3>
-              <FaqAccordion items={FAQ_SOLUTION} />
-            </div>
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-6">
-                액상 제조공정
-              </h3>
-              <FaqAccordion items={FAQ_PROCESS} />
-            </div>
-          </div>
+          <FaqTabs
+            categories={[
+              { key: "solution", label: "FactoriX 솔루션", items: FAQ_SOLUTION },
+              { key: "process", label: "액상 제조공정", items: FAQ_PROCESS },
+            ]}
+          />
         </div>
       </section>
 
