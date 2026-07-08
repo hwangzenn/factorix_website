@@ -171,9 +171,9 @@ export default async function HomePage() {
         <div className="max-w-[1440px] mx-auto">
           <div className="mb-14 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              까다로운 액상 공정<br />제조현장에서 겪는 어려움
+              까다로운 액상공정,<br />제조현장에서 겪는 어려움
             </h2>
-            <p className="text-lg md:text-xl text-gray-500 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-500 leading-relaxed md:text-right">
               첨단 산업의 핵심 소재인 접착제·바이오시약·페이스트 등<br />
               <strong className="font-bold text-gray-900">액상을 정밀하게 정량으로 도포하는 공정은</strong><br />
               매우 어렵습니다.
@@ -187,7 +187,7 @@ export default async function HomePage() {
                   <span className="text-primary-700">{p.icon}</span>
                   <span className="text-sm font-bold text-gray-300">{p.num}</span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{p.title}</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-10">{p.title}</h3>
                 <p className="text-sm md:text-base text-gray-500 leading-relaxed">{p.desc}</p>
               </div>
             ))}
@@ -195,30 +195,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── FactoriX 솔루션의 차별점 ── */}
-      <section className="bg-white py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="mb-16">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
-                FactoriX는 액상 공정 전문<br />스마트 디스펜싱 &amp; 자동화 솔루션 기업입니다.
-              </h2>
-              <div className="shrink-0 md:text-right">
-                <p className="text-4xl md:text-5xl font-bold text-primary-700 leading-none">1,000+</p>
-                <p className="text-sm text-gray-500 mt-2">누적 연구개발 건수</p>
-              </div>
-            </div>
-            <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-3xl">
+      {/* ── FactoriX 솔루션의 차별점 (배경 이미지) ── */}
+      <section className="relative overflow-hidden py-20 px-8">
+        <img
+          src="/valuechain_bg.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/35" />
+
+        <div className="relative max-w-[1440px] mx-auto">
+          <div className="mb-32 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+              액상공정 전문<br />디스펜싱&amp;공정 자동화 솔루션
+            </h2>
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed md:text-right">
               원료부터 자동화까지, FactoriX는 반도체 패키징에 편향된 액상공정 업계에서{" "}
-              <strong className="font-bold text-gray-900">30년간</strong> 다양한 산업용 액상 제조 공정을 다룬 엔지니어 그룹입니다.
+              <strong className="font-bold text-white">30년간</strong> 다양한 산업용 액상 제조 공정을 다룬 엔지니어 그룹입니다.
               누적 1,000건 이상 연구개발 노하우에 기반해{" "}
-              <strong className="font-bold text-gray-900">전체 밸류체인에 대한 통합 솔루션</strong>을 제공합니다.
+              <strong className="font-bold text-white">전체 밸류체인에 대한 통합 솔루션</strong>을 제공합니다.
             </p>
           </div>
 
           {/* 공정별로 세분화된 통합 솔루션 */}
-          <div className="mb-16">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-10">
+          <div>
+            <h3 className="text-xl md:text-2xl font-bold text-white leading-tight mb-10">
               공정별로 세분화된 통합 솔루션
             </h3>
             <div className="flex items-center justify-between flex-wrap gap-y-4">
@@ -226,15 +227,21 @@ export default async function HomePage() {
                 <div key={step.label} className="flex items-center gap-2 md:gap-3">
                   <Link
                     href={step.href}
-                    className="w-24 h-24 md:w-[140px] md:h-[140px] rounded-full bg-gray-50 border border-gray-200 flex flex-col items-center justify-center text-center hover:bg-primary-50 hover:border-primary-200 transition-all text-primary-700"
+                    className="w-32 h-36 md:w-40 md:h-44 rounded-2xl bg-white/95 border border-white/40 flex flex-col items-center text-center px-3 py-5 hover:bg-white transition-all text-primary-700"
                   >
                     {VALUE_CHAIN_ICONS[step.iconKey]}
-                    <span className="text-xs md:text-sm font-bold text-gray-800 leading-tight px-2 mt-1.5 whitespace-pre-line">
+                    <span className="flex-1 flex items-center justify-center text-xs md:text-sm font-bold text-gray-800 leading-tight whitespace-pre-line text-center mt-1.5">
                       {step.label}
+                    </span>
+                    <span className="inline-flex items-center justify-center gap-0.5 text-[11px] md:text-xs font-semibold text-primary-600">
+                      관련제품 보기
+                      <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
                     </span>
                   </Link>
                   {i < VALUE_CHAIN.length - 1 && (
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 text-gray-300">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 text-white/60">
                       <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   )}
@@ -242,7 +249,12 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* ── 고객 맞춤형 솔루션 / 장비 및 시스템 ── */}
+      <section className="bg-white py-20 px-8">
+        <div className="max-w-[1440px] mx-auto">
           {/* 고객 맞춤형 솔루션 */}
           <div id="cases" className="mb-16 scroll-mt-20">
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
@@ -289,7 +301,7 @@ export default async function HomePage() {
       <section className="bg-gray-50 py-20 px-8">
         <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6 whitespace-pre-line">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6 whitespace-pre-line">
               {AFMS_FEATURE.title}
             </h2>
             <p className="text-base md:text-lg text-gray-500 leading-relaxed mb-8">
