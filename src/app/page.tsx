@@ -69,13 +69,13 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   },
 ];
 
-const SOLUTIONS: { label: string; href: string; image?: string }[] = [
-  { label: "협동/직교/3축 로봇", href: ROUTES.solutions.standalone.robot, image: "/blue3/탁상로봇.png" },
-  { label: "AI 디스펜서", href: ROUTES.solutions.standalone.dispenser, image: "/blue3/디스펜서.png" },
-  { label: "액상 충진기", href: ROUTES.solutions.standalone.filling, image: "/blue3/충진기.png" },
-  { label: "교반/탈포/쓰리롤밀", href: ROUTES.solutions.standalone.mixer, image: "/blue3/쓰리롤밀.png" },
-  { label: "UV/IR 경화기", href: ROUTES.solutions.standalone.curing, image: "/blue3/경화기.png" },
-  { label: "자동화 시스템", href: ROUTES.solutions.ai.smartFactory, image: "/blue3/자동화시스템.png" },
+const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] = [
+  { label: "협동/직교/3축 로봇", tag: "3축로봇", href: ROUTES.solutions.standalone.robot, image: "/장비시스템/탁상로봇.png" },
+  { label: "AI 디스펜서", tag: "디스펜서", href: ROUTES.solutions.standalone.dispenser, image: "/장비시스템/디스펜서.png" },
+  { label: "액상 충진기", tag: "충진기", href: ROUTES.solutions.standalone.filling, image: "/장비시스템/충진기.png" },
+  { label: "교반/탈포/쓰리롤밀", tag: "교반기/쓰리롤밀", href: ROUTES.solutions.standalone.mixer, image: "/장비시스템/쓰리롤밀.png" },
+  { label: "UV/IR 경화기", tag: "UV/IR 경화기", href: ROUTES.solutions.standalone.curing, image: "/장비시스템/경화기.png" },
+  { label: "자동화 시스템", tag: "맞춤형 자동화 시스템", href: ROUTES.solutions.ai.smartFactory, image: "/장비시스템/자동화시스템.png" },
 ];
 
 const AFMS_FEATURE = {
@@ -263,10 +263,10 @@ export default async function HomePage() {
             <IndustryCaseShowcase items={caseStudies} />
           </div>
 
-          {/* 수율을 극대화하는 장비 및 시스템 */}
+          {/* FactoriX 장비 및 시스템 */}
           <div id="equipment" className="scroll-mt-20">
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-              수율을 극대화하는 장비 및 시스템
+              FactoriX 장비 및 시스템
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 items-start">
               {SOLUTIONS.map((s) => (
@@ -284,6 +284,10 @@ export default async function HomePage() {
                   ) : (
                     <div className="aspect-square" />
                   )}
+                  {/* 좌상단 장비명 태그 */}
+                  <span className="absolute top-10 left-10 text-2xl md:text-3xl font-normal text-primary-900">
+                    {s.tag}
+                  </span>
                   {/* 좌하단 원형 화살표 버튼 */}
                   <span className="absolute bottom-3 left-3 w-9 h-9 rounded-full border-2 border-white bg-transparent flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#196DDA] transition-colors">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
