@@ -4,13 +4,10 @@ import { ROUTES } from "@/lib/routes";
 import HeroCarousel from "@/components/HeroCarousel";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
 import FaqTabs from "@/components/home/FaqTabs";
-import ContentCard from "@/components/content/ContentCard";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   allCaseStudiesQuery,
-  referenceMaterialsQuery,
   type CaseStudySummaryWithCategory,
-  type ReferenceMaterialSummary,
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
@@ -183,15 +180,7 @@ const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
 ];
 
 export default async function HomePage() {
-  const [{ data: techDocsData }, { data: patentsData }, { data: pressData }, { data: caseData }] = await Promise.all([
-    sanityFetch({ query: referenceMaterialsQuery, params: { category: "tech-docs" } }),
-    sanityFetch({ query: referenceMaterialsQuery, params: { category: "patents" } }),
-    sanityFetch({ query: referenceMaterialsQuery, params: { category: "press" } }),
-    sanityFetch({ query: allCaseStudiesQuery }),
-  ]);
-  const techDocs = ((techDocsData as ReferenceMaterialSummary[]) ?? []).slice(0, 3);
-  const patents = ((patentsData as ReferenceMaterialSummary[]) ?? []).slice(0, 3);
-  const press = ((pressData as ReferenceMaterialSummary[]) ?? []).slice(0, 3);
+  const { data: caseData } = await sanityFetch({ query: allCaseStudiesQuery });
   const caseStudies = (caseData as CaseStudySummaryWithCategory[]) ?? [];
 
   return (
@@ -436,122 +425,31 @@ export default async function HomePage() {
             </h2>
           </div>
 
-          {/* AI 웨어러블 신사업 CES 수상 비하인드 */}
+          {/* AI 웨어러블 / 블로그 / 유튜브 / 특허자료 */}
           <div className="mb-14">
-            <div className="flex items-end justify-between mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                AI 웨어러블 신사업 CES 수상 비하인드
-              </h3>
-              <Link href={`${ROUTES.resources}?category=press`} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
-                전체보기
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* 좌측: AI 웨어러블 */}
+              <Link href={ROUTES.wearable.intro} className="group block rounded-lg overflow-hidden">
+                <img
+                  src="/ai웨어러블.png"
+                  alt="AI 웨어러블 신사업 CES 2026 혁신상 수상"
+                  className="w-full h-auto block group-hover:scale-105 transition-transform duration-300"
+                />
               </Link>
-            </div>
-            {press.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {press.map((doc) => (
-                  <ContentCard
-                    key={doc._id}
-                    title={doc.title}
-                    description={doc.description}
-                    thumbnailUrl={doc.thumbnail?.asset?.url}
-                    thumbnailAlt={doc.thumbnail?.alt}
-                    href={`${ROUTES.resources}/press/${doc.slug}`}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 py-6">등록된 언론보도 자료가 없습니다.</p>
-            )}
-          </div>
 
-          {/* 기술 블로그 */}
-          <div className="mb-14">
-            <div className="flex items-end justify-between mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                팩토릭스 기술 블로그 바로가기
-              </h3>
-              <Link href={`${ROUTES.resources}?category=tech-docs`} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
-                전체보기
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </div>
-            {techDocs.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {techDocs.map((doc) => (
-                  <ContentCard
-                    key={doc._id}
-                    title={doc.title}
-                    description={doc.description}
-                    thumbnailUrl={doc.thumbnail?.asset?.url}
-                    thumbnailAlt={doc.thumbnail?.alt}
-                    href={`${ROUTES.resources}/tech-docs/${doc.slug}`}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-gray-500 py-6">등록된 기술자료가 없습니다.</p>
-            )}
-          </div>
-
-          {/* 시연영상 유튜브 */}
-          <div className="mb-14">
-            <div className="flex items-end justify-between mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                팩토릭스 시연영상 유튜브 바로가기
-              </h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[0, 1, 2].map((i) => (
-                <div key={i} className="rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
-                  <div className="aspect-video bg-gray-200 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center text-gray-400">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <p className="font-semibold text-gray-400">영상 준비 중입니다.</p>
-                  </div>
+              {/* 우측: 블로그 / 유튜브 / 특허자료 */}
+              <div className="flex flex-col gap-4">
+                <Link href={`${ROUTES.resources}?category=tech-docs`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
+                  <img src="/블로그.png" alt="팩토릭스 기술 블로그" className="w-full h-auto block" />
+                </Link>
+                <div className="rounded-lg overflow-hidden opacity-90">
+                  <img src="/유튜브.png" alt="시연영상 유튜브 채널" className="w-full h-auto block" />
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 특허 및 기술자료실 */}
-          <div className="mb-14">
-            <div className="flex items-end justify-between mb-6">
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
-                특허 및 기술자료실 바로가기
-              </h3>
-              <Link href={`${ROUTES.resources}?category=patents`} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
-                전체보기
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </div>
-            {patents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {patents.map((doc) => (
-                  <ContentCard
-                    key={doc._id}
-                    title={doc.title}
-                    description={doc.description}
-                    thumbnailUrl={doc.thumbnail?.asset?.url}
-                    thumbnailAlt={doc.thumbnail?.alt}
-                    href={`${ROUTES.resources}/patents/${doc.slug}`}
-                  />
-                ))}
+                <Link href={`${ROUTES.resources}?category=patents`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
+                  <img src="/특허자료.png" alt="특허 및 IR 자료실" className="w-full h-auto block" />
+                </Link>
               </div>
-            ) : (
-              <p className="text-gray-500 py-6">등록된 특허/인증 자료가 없습니다.</p>
-            )}
+            </div>
           </div>
 
           {/* 온라인 상담 CTA */}
