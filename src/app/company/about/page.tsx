@@ -89,7 +89,7 @@ export default function AboutPage() {
     <div className="flex flex-col">
 
       {/* ── Hero ── */}
-      <section className="relative text-white py-24 px-8 overflow-hidden">
+      <section className="relative -mt-20 text-white py-24 px-8 overflow-hidden">
         <img
           src="/about-hero.jpg"
           alt=""

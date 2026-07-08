@@ -58,7 +58,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko" className={`${geist.variable} h-full antialiased`}>
+    <html lang="ko" className={`${geist.variable} h-full antialiased scroll-smooth`}>
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"

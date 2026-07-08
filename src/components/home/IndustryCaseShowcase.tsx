@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { ROUTES } from "@/lib/routes"
 
@@ -25,33 +24,18 @@ type CaseItem = {
   thumbnail: { asset: { url: string }; alt: string | null } | null
 }
 
-function PlaceholderCard({ label }: { label: string }) {
-  return (
-    <div className="bg-gray-50 rounded-xl overflow-hidden flex flex-col md:flex-row">
-      <div className="md:w-1/2 aspect-video md:aspect-auto bg-gray-200 flex items-center justify-center min-h-[320px]">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" className="text-gray-300">
-          <rect x="6" y="10" width="36" height="28" rx="2" stroke="currentColor" strokeWidth="2" />
-          <circle cx="18" cy="22" r="4" stroke="currentColor" strokeWidth="2" />
-          <path d="M6 34l10-8 6 4 10-10 10 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </div>
-      <div className="md:w-1/2 p-5 flex flex-col justify-center">
-        <p className="font-semibold text-gray-400 text-base leading-snug">{label} 적용사례 준비 중</p>
-        <p className="text-sm text-gray-300 mt-2">콘텐츠가 곧 등록됩니다.</p>
-      </div>
-    </div>
-  )
-}
+const CASE_FIELDS = ["해결과제", "적용 솔루션", "기대효과"] as const
 
 export default function IndustryCaseShowcase({ items }: { items: CaseItem[] }) {
   const [active, setActive] = useState<string>(CATEGORIES[0].key)
 
   const filtered = items.filter((item) => item.category === active)
   const activeCat = CATEGORIES.find((c) => c.key === active)!
+  const featured = filtered[0]
 
   return (
     <div>
-      {/* Category pills + 전체보기 */}
+      {/* Category pills */}
       <div className="flex flex-wrap items-center gap-3 mb-10">
         {CATEGORIES.map((cat) => (
           <button
@@ -66,54 +50,55 @@ export default function IndustryCaseShowcase({ items }: { items: CaseItem[] }) {
             {cat.label}
           </button>
         ))}
-        <Link
-          href={activeCat.href}
-          className="ml-auto inline-flex items-center gap-1 text-sm font-semibold text-primary-700 hover:underline shrink-0"
-        >
-          전체보기
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </Link>
       </div>
 
-      {/* Case cards */}
-      <div className="flex flex-col gap-6">
-        {filtered.length > 0 ? (
-          filtered.slice(0, 4).map((item) => (
+      {/* Case detail card */}
+      <div className="grid grid-cols-1 md:grid-cols-2 rounded-xl overflow-hidden">
+        {/* 좌측: 산업군 + 적용사례 더보기 + 고객사 로고 */}
+        <div className="bg-[#0B1B3D] text-white p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
+          <div>
+            <p className="text-xl font-bold mb-2">{activeCat.label} 산업군</p>
             <Link
-              key={item._id}
-              href={`${activeCat.href}/${item.slug}`}
-              className="group bg-gray-50 rounded-xl overflow-hidden hover:shadow-md transition-shadow flex flex-col md:flex-row"
+              href={activeCat.href}
+              className="inline-flex items-center gap-1 text-sm text-blue-200 hover:text-white transition-colors"
             >
-              <div className="md:w-1/2 aspect-video md:aspect-auto bg-gray-100 overflow-hidden min-h-[320px]">
-                {item.thumbnail?.asset?.url ? (
-                  <Image
-                    src={item.thumbnail.asset.url}
-                    alt={item.thumbnail.alt ?? item.title}
-                    width={1200}
-                    height={630}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-200" />
-                )}
-              </div>
-              <div className="md:w-1/2 p-5 flex flex-col justify-center">
-                <p className="font-semibold text-gray-900 text-base leading-snug mb-2 group-hover:text-primary-700 transition-colors">
-                  {item.title}
-                </p>
-                {item.description && (
-                  <p className="text-sm text-gray-500 line-clamp-3">{item.description}</p>
-                )}
-              </div>
+              적용사례 더보기
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </Link>
-          ))
-        ) : (
-          <PlaceholderCard label={activeCat.label} />
-        )}
-      </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4 mt-8">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} className="h-10 rounded bg-white/10 flex items-center justify-center text-xs font-semibold text-white/40 tracking-wider">
+                LOGO
+              </div>
+            ))}
+          </div>
+        </div>
 
+        {/* 우측: 프로젝트 정보 */}
+        <div className="bg-gray-100 p-8 md:p-10 flex flex-col justify-center min-h-[320px]">
+          {featured ? (
+            <Link
+              href={`${activeCat.href}/${featured.slug}`}
+              className="font-bold text-gray-900 text-lg mb-6 hover:text-primary-700 transition-colors"
+            >
+              {featured.title}
+            </Link>
+          ) : (
+            <p className="font-bold text-gray-400 text-lg mb-6">프로젝트 준비 중</p>
+          )}
+          <dl className="space-y-4">
+            {CASE_FIELDS.map((label) => (
+              <div key={label}>
+                <dt className="text-xs font-bold text-gray-400 tracking-wide mb-1">{label}</dt>
+                <dd className="text-sm text-gray-400 italic">콘텐츠 준비 중입니다.</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
     </div>
   )
 }
