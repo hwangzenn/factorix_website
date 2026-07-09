@@ -445,14 +445,29 @@ export default async function EnHomePage() {
 
               {/* Right: blog / YouTube / patents */}
               <div className="flex flex-col gap-4">
-                <Link href={`${ROUTES.resources}?category=tech-docs`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
-                  <img src="/블로그.png" alt="FactoriX Tech Blog" className="w-full h-auto block" />
+                <Link
+                  href={`${ROUTES.resources}?category=tech-docs`}
+                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+                >
+                  <span className="text-lg md:text-xl font-semibold">Visit FactoriX Tech Blog</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </Link>
-                <div className="rounded-lg overflow-hidden opacity-90">
-                  <img src="/유튜브.png" alt="Demo Video YouTube Channel" className="w-full h-auto block" />
+                <div className="flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-400 px-6 py-6">
+                  <span className="text-lg md:text-xl font-semibold">Visit Demo Video YouTube Channel</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
-                <Link href={`${ROUTES.resources}?category=patents`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
-                  <img src="/특허자료.png" alt="Patents & IR Resources" className="w-full h-auto block" />
+                <Link
+                  href={`${ROUTES.resources}?category=patents`}
+                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+                >
+                  <span className="text-lg md:text-xl font-semibold">Visit Patents &amp; IR Resources</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </Link>
               </div>
             </div>

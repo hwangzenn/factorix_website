@@ -443,14 +443,29 @@ export default async function HomePage() {
 
               {/* 우측: 블로그 / 유튜브 / 특허자료 */}
               <div className="flex flex-col gap-4">
-                <Link href={`${ROUTES.resources}?category=tech-docs`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
-                  <img src="/블로그.png" alt="팩토릭스 기술 블로그" className="w-full h-auto block" />
+                <Link
+                  href={`${ROUTES.resources}?category=tech-docs`}
+                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+                >
+                  <span className="text-lg md:text-xl font-semibold">팩토릭스 기술블로그 바로가기</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </Link>
-                <div className="rounded-lg overflow-hidden opacity-90">
-                  <img src="/유튜브.png" alt="시연영상 유튜브 채널" className="w-full h-auto block" />
+                <div className="flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-400 px-6 py-6">
+                  <span className="text-lg md:text-xl font-semibold">시연영상 유튜브 채널 바로가기</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </div>
-                <Link href={`${ROUTES.resources}?category=patents`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
-                  <img src="/특허자료.png" alt="특허 및 IR 자료실" className="w-full h-auto block" />
+                <Link
+                  href={`${ROUTES.resources}?category=patents`}
+                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+                >
+                  <span className="text-lg md:text-xl font-semibold">특허 및 IR 자료실 바로가기</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </Link>
               </div>
             </div>
