@@ -24,6 +24,7 @@ export default function Header({ locale }: { locale: Locale }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrolled = hasDarkHero ? isScrolled : true;
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const langMenuRef = useRef<HTMLDivElement | null>(null);
 
   const open = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -40,6 +41,17 @@ export default function Header({ locale }: { locale: Locale }) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [hasDarkHero]);
+
+  useEffect(() => {
+    if (!langMenuOpen) return;
+    const onClickOutside = (e: MouseEvent) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(e.target as Node)) {
+        setLangMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, [langMenuOpen]);
 
   const koPath = getAlternatePath(pathname, "ko");
   const enPath = getAlternatePath(pathname, "en");
@@ -85,7 +97,7 @@ export default function Header({ locale }: { locale: Locale }) {
 
           {/* Right actions */}
           <div className="hidden lg:flex items-center gap-3 shrink-0 ml-auto">
-            <div className="relative" onMouseEnter={() => setLangMenuOpen(true)} onMouseLeave={() => setLangMenuOpen(false)}>
+            <div className="relative" ref={langMenuRef}>
               <button
                 onClick={() => setLangMenuOpen((p) => !p)}
                 className={[
@@ -96,19 +108,23 @@ export default function Header({ locale }: { locale: Locale }) {
                 {locale === "en" ? "EN" : "KR"} <span className="text-[10px] leading-none">▾</span>
               </button>
               {langMenuOpen && (
-                <div className="absolute right-0 top-full mt-1 bg-white shadow-lg border border-gray-200 rounded-md overflow-hidden z-50 min-w-[120px]">
-                  <Link
-                    href={koPath}
-                    className={`block px-4 py-2 text-sm hover:bg-gray-50 ${locale === "ko" ? "text-primary-700 font-semibold" : "text-gray-700"}`}
-                  >
-                    한국어
-                  </Link>
-                  <Link
-                    href={enPath}
-                    className={`block px-4 py-2 text-sm hover:bg-gray-50 ${locale === "en" ? "text-primary-700 font-semibold" : "text-gray-700"}`}
-                  >
-                    English
-                  </Link>
+                <div className="absolute right-0 top-full pt-1 z-50 min-w-[120px]">
+                  <div className="bg-white shadow-lg border border-gray-200 rounded-md overflow-hidden">
+                    <Link
+                      href={koPath}
+                      onClick={() => setLangMenuOpen(false)}
+                      className={`block px-4 py-2 text-sm hover:bg-gray-50 ${locale === "ko" ? "text-primary-700 font-semibold" : "text-gray-700"}`}
+                    >
+                      한국어
+                    </Link>
+                    <Link
+                      href={enPath}
+                      onClick={() => setLangMenuOpen(false)}
+                      className={`block px-4 py-2 text-sm hover:bg-gray-50 ${locale === "en" ? "text-primary-700 font-semibold" : "text-gray-700"}`}
+                    >
+                      English
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
