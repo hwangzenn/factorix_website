@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SanityLive } from "@/sanity/lib/live";
+import type { Locale } from "@/lib/i18n";
 
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
@@ -56,17 +58,20 @@ const jsonLd = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") === "en" ? "en" : "ko") as Locale;
+
   return (
-    <html lang="ko" className={`${geist.variable} h-full antialiased scroll-smooth`}>
+    <html lang={locale} className={`${geist.variable} h-full antialiased scroll-smooth`}>
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Header />
+        <Header locale={locale} />
         <main className="flex-1 pt-20">{children}</main>
-        <Footer />
+        <Footer locale={locale} />
         <SanityLive />
       </body>
     </html>

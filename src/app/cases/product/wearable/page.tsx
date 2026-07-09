@@ -30,7 +30,6 @@ export default async function ProductWearableCasePage() {
 
       <div className="flex gap-4 mt-16">
         <Link href={ROUTES.support.poc} className="inline-flex px-6 py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors">웨어러블 PoC 문의</Link>
-        <Link href={ROUTES.wearable.intro} className="inline-flex px-6 py-3 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors">디바이스 소개</Link>
       </div>
     </div>
   )

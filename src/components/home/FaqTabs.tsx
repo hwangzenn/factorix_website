@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Locale } from "@/lib/i18n";
 
 type FaqCategory = {
   key: string;
@@ -8,7 +9,7 @@ type FaqCategory = {
   items: { question: string }[];
 };
 
-export default function FaqTabs({ categories }: { categories: FaqCategory[] }) {
+export default function FaqTabs({ categories, locale = "ko" }: { categories: FaqCategory[]; locale?: Locale }) {
   const [active, setActive] = useState(categories[0].key);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -70,7 +71,7 @@ export default function FaqTabs({ categories }: { categories: FaqCategory[] }) {
                 </svg>
               </button>
               {isOpen && (
-                <p className="px-6 pb-5 text-sm text-gray-400 italic">답변 준비 중입니다.</p>
+                <p className="px-6 pb-5 text-sm text-gray-400 italic">{locale === "en" ? "Answer coming soon." : "답변 준비 중입니다."}</p>
               )}
             </div>
           );

@@ -6,7 +6,7 @@
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
-총 페이지: **메인 1 + 랜딩 28 = 29개.**
+총 페이지: **메인 1 + 랜딩 24 = 25개.**
 
 ---
 
@@ -30,12 +30,6 @@
 │   └─ 📁 AI 시스템 (/solutions/ai)
 │       ├─ ▣ AI 자동보정 토출시스템 /solutions/ai/auto-calibration
 │       └─ ▣ 자동화 시스템         /solutions/ai/smart-factory
-│
-📁 AI 웨어러블 디바이스 (/wearable)
-│   ├─ ▣ 소개(광고영상)      /wearable/intro
-│   ├─ ▣ B2C 모델           /wearable/b2c
-│   ├─ ▣ B2B 모델           /wearable/b2b
-│   └─ ▣ B2G 모델           /wearable/b2g
 │
 📁 적용사례 (/cases)
 │   ├─ 📁 산업별 (/cases/industry)
@@ -92,12 +86,6 @@ src/
 │  │  └─ ai/                     # 📁
 │  │     ├─ auto-calibration/page.tsx
 │  │     └─ smart-factory/page.tsx
-│  │
-│  ├─ wearable/                  # 📁
-│  │  ├─ intro/page.tsx
-│  │  ├─ b2c/page.tsx
-│  │  ├─ b2b/page.tsx
-│  │  └─ b2g/page.tsx
 │  │
 │  ├─ cases/                     # 📁
 │  │  ├─ industry/               # 📁

@@ -11,23 +11,24 @@ import {
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "팩토릭스 | Factorix — AI 액제제조 · 디스펜싱 솔루션",
-  description: "팩토릭스(Factorix)는 AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스를 공급하는 B2B 전문 기업입니다.",
+  title: "Factorix | AI Liquid Manufacturing & Dispensing Solutions",
+  description: "Factorix is a B2B specialist supplying AI-powered ultra-precision dispensing automation systems and AI wearable devices.",
   keywords: [
-    "팩토릭스", "Factorix", "디스펜싱 자동화", "액제제조 솔루션",
-    "AI 스마트팩토리", "디스펜서", "충진기", "AI 웨어러블",
+    "Factorix", "liquid manufacturing", "dispensing automation", "AI smart factory",
+    "dispenser", "filling machine", "AI wearable",
   ],
   alternates: {
-    canonical: ROUTES.home,
+    canonical: ROUTES.en.home,
     languages: { ko: ROUTES.home, en: ROUTES.en.home },
   },
+  openGraph: { locale: "en_US" },
 };
 
 const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNode }[] = [
   {
     num: "01",
-    title: "실시간 변화하는 변수",
-    desc: "액상은 온도, 습도, 압력 등 외부 및 내부 환경 변화에 따라 물리·화학적 특성이 실시간으로 변화해 동일한 설정값으로도 동일한 품질을 보장하기 어렵습니다.",
+    title: "Constantly Changing Variables",
+    desc: "Liquid materials constantly change their physical and chemical properties in real time due to temperature, humidity, pressure, and other internal and external conditions — making it difficult to guarantee consistent quality even with identical settings.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M3 13c2-7 4-7 6 0s4 7 6 0 4-7 6 0" />
@@ -36,8 +37,8 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   },
   {
     num: "02",
-    title: "높은 불량률",
-    desc: "수작업자의 실수와 액상 변화로 인한 토출량 불안정은 과다·과소 도포 및 설계 위치 이탈 등 불량으로 이어지기 쉽습니다.",
+    title: "High Defect Rates",
+    desc: "Manual operator error combined with unstable dispensing volume easily leads to defects such as over/under-application and misalignment from the designed position.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M12 3l9 16H3L12 3z" />
@@ -48,8 +49,8 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   },
   {
     num: "03",
-    title: "원가 상승 및 수율 저하",
-    desc: "불량 발생 시 즉각적인 수동 보정 및 재작업이 필요해 재작업 비용이 발생할 뿐만 아니라 소재 낭비 등 공정 전반의 제조 원가를 상승시킵니다.",
+    title: "Rising Costs & Lower Yield",
+    desc: "Defects require immediate manual correction and rework, driving up rework costs and material waste — raising manufacturing costs across the entire process.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M3 7l7 7 4-4 7 7" />
@@ -59,8 +60,8 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   },
   {
     num: "04",
-    title: "고객 신뢰도 하락",
-    desc: "성능이 저하된 부품이 납품될 경우 최종 엔드유저 제품 성능에 치명적인 문제가 발생하며, 이는 결국 기업 평판을 크게 하락시킵니다.",
+    title: "Declining Customer Trust",
+    desc: "Shipping underperforming components can critically damage the performance of the end user's final product, ultimately harming your company's reputation.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" />
@@ -71,25 +72,25 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
 ];
 
 const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] = [
-  { label: "협동/직교/3축 로봇", tag: "3축로봇", href: ROUTES.solutions.standalone.robot, image: "/장비시스템/탁상로봇.png" },
-  { label: "AI 디스펜서", tag: "디스펜서", href: ROUTES.solutions.standalone.dispenser, image: "/장비시스템/디스펜서.png" },
-  { label: "액상 충진기", tag: "충진기", href: ROUTES.solutions.standalone.filling, image: "/장비시스템/충진기.png" },
-  { label: "교반/탈포/쓰리롤밀", tag: "교반기/쓰리롤밀", href: ROUTES.solutions.standalone.mixer, image: "/장비시스템/쓰리롤밀.png" },
-  { label: "UV/IR 경화기", tag: "UV/IR 경화기", href: ROUTES.solutions.standalone.curing, image: "/장비시스템/경화기.png" },
-  { label: "자동화 시스템", tag: "맞춤형 자동화 시스템", href: ROUTES.solutions.ai.smartFactory, image: "/장비시스템/자동화시스템.png" },
+  { label: "Collaborative/Cartesian/3-Axis Robot", tag: "3-Axis Robot", href: ROUTES.solutions.standalone.robot, image: "/장비시스템/탁상로봇.png" },
+  { label: "AI Dispenser", tag: "Dispenser", href: ROUTES.solutions.standalone.dispenser, image: "/장비시스템/디스펜서.png" },
+  { label: "Liquid Filling Machine", tag: "Filling Machine", href: ROUTES.solutions.standalone.filling, image: "/장비시스템/충진기.png" },
+  { label: "Mixing/Defoaming/Three-Roll Mill", tag: "Mixer/Three-Roll Mill", href: ROUTES.solutions.standalone.mixer, image: "/장비시스템/쓰리롤밀.png" },
+  { label: "UV/IR Curing System", tag: "UV/IR Curing System", href: ROUTES.solutions.standalone.curing, image: "/장비시스템/경화기.png" },
+  { label: "Automation System", tag: "Custom Automation System", href: ROUTES.solutions.ai.smartFactory, image: "/장비시스템/자동화시스템.png" },
 ];
 
 const AFMS_FEATURE = {
   name: "AFMS-X1",
-  desc: "AFMS는 바이오시약, 산업용 페이스트 등 액상 소재의 물성변화를 실시간 분석해 디스펜싱 조건을 자동으로 보정하는 AI 기반 제조 액상 자동보정 토출 시스템입니다.",
-  href: ROUTES.solutions.ai.autoCalibration,
+  desc: "AFMS is an AI-powered liquid auto-calibration dispensing system that analyzes real-time changes in the physical properties of liquid materials — such as bio-reagents and industrial pastes — and automatically corrects dispensing conditions.",
+  href: ROUTES.en.autoCalibration,
   image: "/장비시스템/자동보정 시스템.png",
 };
 
 const AFMS_BENEFITS: { title: string; desc: string; icon: React.ReactNode }[] = [
   {
-    title: "스마트 디스펜싱 컨트롤",
-    desc: "토출량, 압력 속도 및 오차 실시간 자동 보정",
+    title: "Smart Dispensing Control",
+    desc: "Real-time automatic correction of dispensing volume, pressure, speed, and error",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M12 3c-3 4-5 7-5 10a5 5 0 0 0 10 0c0-3-2-6-5-10z" />
@@ -97,8 +98,8 @@ const AFMS_BENEFITS: { title: string; desc: string; icon: React.ReactNode }[] = 
     ),
   },
   {
-    title: "스마트 비전 예측",
-    desc: "점, 라인, 도포 면적 및 미세 기포 검출, 불량 예측",
+    title: "Smart Vision Prediction",
+    desc: "Detects dots, lines, coating area, and micro air bubbles to predict defects",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
@@ -107,8 +108,8 @@ const AFMS_BENEFITS: { title: string; desc: string; icon: React.ReactNode }[] = 
     ),
   },
   {
-    title: "통합 제조 데이터 플랫폼",
-    desc: "공정, 품질 데이터 통합 저장 및 생산이력관리, 지속학습",
+    title: "Integrated Manufacturing Data Platform",
+    desc: "Unified storage of process and quality data, production history management, and continuous learning",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
         <ellipse cx="12" cy="6" rx="8" ry="3" />
@@ -158,51 +159,51 @@ const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
 };
 
 const FAQ_SOLUTION: { question: string }[] = [
-  { question: "FactoriX가 제조장비 유통기업과 무엇이 다른가요?" },
-  { question: "반도체 패키징 공정 솔루션만 제공하나요?" },
-  { question: "일반적인 산업용 페이스트만 취급하시나요?" },
-  { question: "규모가 작은 프로젝트도 솔루션 도입이 가능한가요?" },
-  { question: "솔루션 도입 시, 작업 프로세스는 어떻게 되나요?" },
-  { question: "솔루션 견적은 어떻게 측정되나요?" },
+  { question: "How is FactoriX different from an equipment distributor?" },
+  { question: "Do you only provide solutions for semiconductor packaging processes?" },
+  { question: "Do you only handle general industrial pastes?" },
+  { question: "Can small-scale projects also adopt your solutions?" },
+  { question: "What is the process for adopting a solution?" },
+  { question: "How is a solution quote determined?" },
 ];
 
 const FAQ_PROCESS: { question: string }[] = [
-  { question: "동일한 설정값인데 왜 액상도포 품질 편차가 발생하나요?" },
-  { question: "액상 도포 불량으로 인한 구체적인 기업손실은?" },
-  { question: "액상 공정의 안정성을 높이려면 무엇이 필요한가요?" },
-  { question: "액상공정 개선의 핵심 지표는 무엇인가요?" },
+  { question: "Why does dispensing quality vary with identical settings?" },
+  { question: "What are the concrete business losses from dispensing defects?" },
+  { question: "What is needed to improve liquid process stability?" },
+  { question: "What are the key metrics for improving liquid processes?" },
 ];
 
 const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
-  { label: "액상 교반\n및 탈포", iconKey: "mixing", href: ROUTES.solutions.standalone.mixer },
-  { label: "입자 분산\n및 3롤밀", iconKey: "dispersion", href: ROUTES.solutions.standalone.mixer },
-  { label: "액상 충진\n및 소분", iconKey: "filling", href: ROUTES.solutions.standalone.filling },
-  { label: "정량/정밀\n토출", iconKey: "dispensing", href: ROUTES.solutions.standalone.dispenser },
-  { label: "탁상로봇", iconKey: "robot", href: ROUTES.solutions.standalone.robot },
-  { label: "IR/UV경화\n및 오븐", iconKey: "curing", href: ROUTES.solutions.standalone.curing },
-  { label: "맞춤형 공정\n자동화 시스템", iconKey: "automation", href: ROUTES.solutions.ai.smartFactory },
+  { label: "Liquid Mixing\n& Defoaming", iconKey: "mixing", href: ROUTES.solutions.standalone.mixer },
+  { label: "Particle Dispersion\n& 3-Roll Milling", iconKey: "dispersion", href: ROUTES.solutions.standalone.mixer },
+  { label: "Liquid Filling\n& Dividing", iconKey: "filling", href: ROUTES.solutions.standalone.filling },
+  { label: "Precision\nDispensing", iconKey: "dispensing", href: ROUTES.solutions.standalone.dispenser },
+  { label: "Desktop Robot", iconKey: "robot", href: ROUTES.solutions.standalone.robot },
+  { label: "IR/UV Curing\n& Ovens", iconKey: "curing", href: ROUTES.solutions.standalone.curing },
+  { label: "Custom Process\nAutomation Systems", iconKey: "automation", href: ROUTES.solutions.ai.smartFactory },
 ];
 
-export default async function HomePage() {
+export default async function EnHomePage() {
   const { data: caseData } = await sanityFetch({ query: allCaseStudiesQuery });
   const caseStudies = (caseData as CaseStudySummaryWithCategory[]) ?? [];
 
   return (
     <div className="flex flex-col">
       {/* ── Hero ── */}
-      <HeroCarousel />
+      <HeroCarousel locale="en" />
 
-      {/* ── 까다로운 액상제조 공정, Factorix가 해결합니다 ── */}
+      {/* ── Demanding liquid processes, Factorix solves them ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
           <div className="mb-14 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              까다로운 액상공정,<br />제조현장에서 겪는 어려움
+              Demanding Liquid Processes,<br />Challenges on the Factory Floor
             </h2>
             <p className="text-lg md:text-xl text-gray-500 leading-relaxed md:text-right">
-              첨단 산업의 핵심 소재인 접착제·바이오시약·페이스트 등<br />
-              <strong className="font-bold text-gray-900">액상을 정밀하게 정량으로 도포하는 공정은</strong><br />
-              매우 어렵습니다.
+              Adhesives, bio-reagents, pastes, and other core materials for advanced industries<br />
+              <strong className="font-bold text-gray-900">precisely dispensing liquids in exact quantities</strong><br />
+              is extremely difficult.
             </p>
           </div>
 
@@ -221,7 +222,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── FactoriX 솔루션의 차별점 (배경 이미지) ── */}
+      {/* ── What sets FactoriX apart (background image) ── */}
       <section className="relative overflow-hidden py-20 px-8">
         <img
           src="/valuechain_bg.png"
@@ -233,20 +234,20 @@ export default async function HomePage() {
         <div className="relative max-w-[1440px] mx-auto">
           <div className="mb-32 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
             <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-              액상공정 전문<br />디스펜싱&amp;공정 자동화 솔루션
+              Liquid Process Specialists —<br />Dispensing &amp; Process Automation
             </h2>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed md:text-right">
-              원료부터 자동화까지, FactoriX는 반도체 패키징에 편향된 액상공정 업계에서{" "}
-              <strong className="font-bold text-white">30년간</strong> 다양한 산업용 액상 제조 공정을 다룬 엔지니어 그룹입니다.
-              누적 1,000건 이상 연구개발 노하우에 기반해{" "}
-              <strong className="font-bold text-white">전체 밸류체인에 대한 통합 솔루션</strong>을 제공합니다.
+              From raw materials to automation, FactoriX is a team of engineers with{" "}
+              <strong className="font-bold text-white">30 years</strong> of experience across diverse industrial liquid manufacturing processes,
+              in an industry long biased toward semiconductor packaging. Built on more than 1,000 R&amp;D projects, we deliver{" "}
+              <strong className="font-bold text-white">integrated solutions across the entire value chain</strong>.
             </p>
           </div>
 
-          {/* 공정별로 세분화된 통합 솔루션 */}
+          {/* Integrated solutions by process stage */}
           <div>
             <h3 className="text-xl md:text-2xl font-bold text-white leading-tight mb-10">
-              공정별로 세분화된 통합 솔루션
+              Integrated Solutions by Process Stage
             </h3>
             <div className="flex items-center justify-between flex-wrap gap-y-4">
               {VALUE_CHAIN.map((step, i) => (
@@ -260,7 +261,7 @@ export default async function HomePage() {
                       {step.label}
                     </span>
                     <span className="inline-flex items-center justify-center gap-0.5 text-[11px] md:text-xs font-semibold text-primary-600">
-                      관련제품 보기
+                      View Products
                       <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                         <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -278,21 +279,21 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 고객 맞춤형 솔루션 / 장비 및 시스템 ── */}
+      {/* ── Customer-tailored solutions / Equipment & systems ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
-          {/* 고객 맞춤형 솔루션 */}
+          {/* Customer-tailored solutions */}
           <div id="cases" className="mb-16 scroll-mt-20">
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-              고객 맞춤형 솔루션
+              Customer-Tailored Solutions
             </h3>
-            <IndustryCaseShowcase items={caseStudies} />
+            <IndustryCaseShowcase items={caseStudies} locale="en" />
           </div>
 
-          {/* FactoriX 장비 및 시스템 */}
+          {/* FactoriX equipment & systems */}
           <div id="equipment" className="scroll-mt-20">
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-              FactoriX 장비 및 시스템
+              FactoriX Equipment &amp; Systems
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
               {SOLUTIONS.map((s) => (
@@ -310,15 +311,15 @@ export default async function HomePage() {
                   ) : (
                     <div className="aspect-square" />
                   )}
-                  {/* 호버 시 어두운 레이어 */}
+                  {/* Dark overlay on hover */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
-                  {/* 좌상단 장비명 태그 + 제품 라인업 보기 */}
+                  {/* Top-left equipment tag + view lineup */}
                   <div className="absolute top-6 left-6 md:top-10 md:left-10 flex flex-col items-start gap-2">
                     <span className="text-xl md:text-3xl font-normal text-primary-900">
                       {s.tag}
                     </span>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-900">
-                      제품 라인업 보기
+                      View Product Lineup
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
                         <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -331,27 +332,27 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── AI융합 차세대 디스펜싱 솔루션 ── */}
+      {/* ── AI-integrated next-gen dispensing solution ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
-          {/* AFMS 소개 */}
+          {/* AFMS intro */}
           <div className="mb-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                  AI융합 차세대 디스펜싱 솔루션
+                  AI-Integrated Next-Gen Dispensing Solutions
                 </h2>
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-                  AFMS 소개
+                  About AFMS
                 </h3>
                 <p className="text-base md:text-lg text-gray-500 leading-relaxed">
                   {AFMS_FEATURE.desc}
                 </p>
 
-                {/* 기대효과 */}
+                {/* Expected benefits */}
                 <div className="mt-10">
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-                    기대효과
+                    Expected Benefits
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {AFMS_BENEFITS.map((b) => (
@@ -381,10 +382,10 @@ export default async function HomePage() {
                     {AFMS_FEATURE.name}
                   </span>
                   <span className="text-2xl md:text-3xl font-normal text-white">
-                    액상 자동보정 토출 시스템
+                    Liquid Auto-Calibration Dispensing System
                   </span>
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#196DDA]">
-                    자세히 알아보기
+                    Learn More
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -396,15 +397,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 자주 묻는 질문 QnA ── */}
+      {/* ── Frequently Asked Questions ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
           <div className="mb-14 flex items-end justify-between">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              자주 묻는 질문 Q&amp;A
+              Frequently Asked Questions
             </h2>
             <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
-              전체보기
+              View All
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -413,59 +414,60 @@ export default async function HomePage() {
 
           <FaqTabs
             categories={[
-              { key: "solution", label: "FactoriX 솔루션", items: FAQ_SOLUTION },
-              { key: "process", label: "액상 제조공정", items: FAQ_PROCESS },
+              { key: "solution", label: "FactoriX Solutions", items: FAQ_SOLUTION },
+              { key: "process", label: "Liquid Manufacturing Process", items: FAQ_PROCESS },
             ]}
+            locale="en"
           />
         </div>
       </section>
 
-      {/* ── 팩토릭스 기술 인사이트 ── */}
+      {/* ── FactoriX tech insights ── */}
       <section className="bg-gray-50 py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
           <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              팩토릭스 기술 인사이트
+              FactoriX Tech Insights
             </h2>
           </div>
 
-          {/* AI 웨어러블 / 블로그 / 유튜브 / 특허자료 */}
+          {/* AI wearable / blog / YouTube / patents */}
           <div className="mb-14">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* 좌측: AI 웨어러블 */}
+              {/* Left: AI wearable */}
               <div className="block rounded-lg overflow-hidden">
                 <img
                   src="/ai웨어러블.png"
-                  alt="AI 웨어러블 신사업 CES 2026 혁신상 수상"
+                  alt="AI Wearable New Business — CES 2026 Innovation Award"
                   className="w-full h-auto block"
                 />
               </div>
 
-              {/* 우측: 블로그 / 유튜브 / 특허자료 */}
+              {/* Right: blog / YouTube / patents */}
               <div className="flex flex-col gap-4">
                 <Link href={`${ROUTES.resources}?category=tech-docs`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
-                  <img src="/블로그.png" alt="팩토릭스 기술 블로그" className="w-full h-auto block" />
+                  <img src="/블로그.png" alt="FactoriX Tech Blog" className="w-full h-auto block" />
                 </Link>
                 <div className="rounded-lg overflow-hidden opacity-90">
-                  <img src="/유튜브.png" alt="시연영상 유튜브 채널" className="w-full h-auto block" />
+                  <img src="/유튜브.png" alt="Demo Video YouTube Channel" className="w-full h-auto block" />
                 </div>
                 <Link href={`${ROUTES.resources}?category=patents`} className="block rounded-lg overflow-hidden hover:opacity-90 transition-opacity">
-                  <img src="/특허자료.png" alt="특허 및 IR 자료실" className="w-full h-auto block" />
+                  <img src="/특허자료.png" alt="Patents & IR Resources" className="w-full h-auto block" />
                 </Link>
               </div>
             </div>
           </div>
 
-          {/* 온라인 상담 CTA */}
+          {/* Online consultation CTA */}
           <div className="bg-primary-700 rounded-xl px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
-              온라인 상담 신청하기
+              Request an Online Consultation
             </h3>
             <Link
               href={ROUTES.support.meeting}
               className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary-700 text-sm font-bold rounded hover:bg-gray-100 transition-colors shrink-0"
             >
-              온라인상담 신청
+              Request Consultation
             </Link>
           </div>
         </div>

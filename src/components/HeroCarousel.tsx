@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
+import type { Locale } from "@/lib/i18n";
 
-const SLIDES = [
+const SLIDES_KO = [
   {
     image: "/hero-bg-2.jpg",
     heading: "Connect Innovation For Your Factory",
@@ -24,9 +25,30 @@ const SLIDES = [
   },
 ] as const;
 
+const SLIDES_EN = [
+  {
+    image: "/hero-bg-2.jpg",
+    heading: "Connect Innovation For Your Factory",
+    sub: "Custom smart factory solutions for liquid manufacturing",
+    ctas: [
+      { label: "View Equipment & Systems", href: `${ROUTES.en.home}#equipment` },
+      { label: "View Customer Case Studies", href: `${ROUTES.en.home}#cases` },
+    ],
+  },
+  {
+    image: "/hero-bg.jpg",
+    heading: "Hyper-Precision & Zero-Defection",
+    sub: "Next-generation AI-powered dispensing solutions",
+    ctas: [
+      { label: "View Product", href: ROUTES.en.autoCalibration },
+    ],
+  },
+] as const;
+
 const INTERVAL = 5000;
 
-export default function HeroCarousel() {
+export default function HeroCarousel({ locale = "ko" }: { locale?: Locale }) {
+  const SLIDES = locale === "en" ? SLIDES_EN : SLIDES_KO;
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -54,7 +76,7 @@ export default function HeroCarousel() {
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="relative max-w-[1440px] mx-auto px-8 w-full py-20 h-[380px] sm:h-[320px] md:h-[260px]">
-        <h1 className="sr-only">액상제조 공정 자동화, 팩토릭스(FactoriX) 스마트 솔루션</h1>
+        <h1 className="sr-only">{locale === "en" ? "Liquid Manufacturing Process Automation, FactoriX Smart Solutions" : "액상제조 공정 자동화, 팩토릭스(FactoriX) 스마트 솔루션"}</h1>
         {SLIDES.map((s, i) => (
           <div
             key={s.image}
@@ -86,7 +108,7 @@ export default function HeroCarousel() {
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            aria-label={`${i + 1}번 슬라이드`}
+            aria-label={locale === "en" ? `Slide ${i + 1}` : `${i + 1}번 슬라이드`}
             className={[
               "rounded-full transition-all duration-300",
               i === current ? "w-6 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/40 hover:bg-white/70",

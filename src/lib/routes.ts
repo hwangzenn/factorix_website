@@ -32,14 +32,6 @@ export const ROUTES = {
     },
   },
 
-  // AI 웨어러블 디바이스  ── 디렉토리
-  wearable: {
-    intro: "/wearable/intro",         // 소개: 광고영상
-    b2c: "/wearable/b2c",
-    b2b: "/wearable/b2b",
-    b2g: "/wearable/b2g",
-  },
-
   // 적용사례  ── 디렉토리
   cases: {
     industry: {                       // 산업별 ── 디렉토리
@@ -68,6 +60,12 @@ export const ROUTES = {
 
   // 자료실
   resources: "/resources",
+
+  // 영문(EN) 버전 ── 1단계: 홈 + AFMS 대표페이지만. 이후 단계에서 순차 추가.
+  en: {
+    home: "/en",
+    autoCalibration: "/en/solutions/ai/auto-calibration",
+  },
 } as const;
 
 // 깨진 링크 검증 / sitemap 생성용: 모든 실제 페이지 경로를 평탄화

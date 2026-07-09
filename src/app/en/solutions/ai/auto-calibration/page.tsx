@@ -9,20 +9,21 @@ import ContentCardGrid from "@/components/content/ContentCardGrid"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "AI 자동보정 토출시스템 AFMS | 팩토릭스 Factorix",
-  description: "실시간 물성 분석과 Vision AI로 디스펜싱 조건을 스스로 학습·자동보정하는 AI 제조 지능 시스템 AFMS",
+  title: "AI Auto-Calibration Dispensing System AFMS | Factorix",
+  description: "AFMS is an AI manufacturing intelligence system that learns and auto-calibrates dispensing conditions through real-time material analysis and Vision AI.",
   alternates: {
-    canonical: ROUTES.solutions.ai.autoCalibration,
+    canonical: ROUTES.en.autoCalibration,
     languages: { ko: ROUTES.solutions.ai.autoCalibration, en: ROUTES.en.autoCalibration },
   },
+  openGraph: { locale: "en_US" },
 }
 
 const FEATURES = [
   {
     num: "01",
     en: "AI FLUID LEARNING",
-    title: "지능형 물성 데이터 학습",
-    desc: "점도·온도·습도 및 소재 특성의 실시간 특성 학습",
+    title: "Intelligent Material Property Learning",
+    desc: "Real-time learning of viscosity, temperature, humidity, and material characteristics",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <path d="M8 30c2-8 4-12 12-12s10 4 12 12" />
@@ -35,8 +36,8 @@ const FEATURES = [
   {
     num: "02",
     en: "SMART DISPENSING CONTROL",
-    title: "정밀 토출 및 경로 제어",
-    desc: "토출량·압력·속도 및 분주 경로의 실시간 최적 제어",
+    title: "Precision Dispensing & Path Control",
+    desc: "Real-time optimal control of dispensing volume, pressure, speed, and dispensing path",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <circle cx="20" cy="20" r="12" />
@@ -49,8 +50,8 @@ const FEATURES = [
   {
     num: "03",
     en: "VISION AI INSPECTION",
-    title: "Vision AI 품질 검사",
-    desc: "Dot·Line·도포 면적 및 내부 미세 기포 검출, 불량 예측",
+    title: "Vision AI Quality Inspection",
+    desc: "Detects dots, lines, coating area, and internal micro air bubbles to predict defects",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <path d="M4 20c4-8 8-12 16-12s12 4 16 12c-4 8-8 12-16 12S8 28 4 20z" />
@@ -62,8 +63,8 @@ const FEATURES = [
   {
     num: "04",
     en: "SELF CALIBRATION",
-    title: "실시간 자율 오차 보정",
-    desc: "압력·속도·토출량 자동 보정",
+    title: "Real-Time Autonomous Error Correction",
+    desc: "Automatic correction of pressure, speed, and dispensing volume",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <path d="M20 6a14 14 0 0 1 0 28" strokeDasharray="4 2" />
@@ -76,8 +77,8 @@ const FEATURES = [
   {
     num: "05",
     en: "MANUFACTURING DATA PLATFORM",
-    title: "통합 공정 데이터 플랫폼",
-    desc: "공정·품질 데이터 통합 저장, 생산 이력 관리 및 지속 학습",
+    title: "Integrated Process Data Platform",
+    desc: "Unified storage of process and quality data, production history management, and continuous learning",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
         <ellipse cx="20" cy="10" rx="12" ry="4" />
@@ -90,23 +91,23 @@ const FEATURES = [
 
 const EFFECTS = [
   {
-    label: "공정 안정성",
-    desc: "작업자 숙련도와 관계없는 균일한 품질 유지",
+    label: "Process Stability",
+    desc: "Consistent quality regardless of operator skill level",
     icon: "⚙️",
   },
   {
-    label: "비용 절감",
-    desc: "불량으로 인한 폐기 비용 및 재작업 시간 최소화",
+    label: "Cost Reduction",
+    desc: "Minimizes scrap costs and rework time from defects",
     icon: "💰",
   },
   {
-    label: "지능형 전환",
-    desc: "기존 장비와 통합 가능한 스마트팩토리 기반 구축",
+    label: "Intelligent Transformation",
+    desc: "Builds a smart factory foundation that integrates with existing equipment",
     icon: "🏭",
   },
 ]
 
-export default async function AutoCalibrationPage() {
+export default async function EnAutoCalibrationPage() {
   const { data } = await sanityFetch({
     query: productsByCategoryQuery,
     params: { category: "ai-auto-calibration" },
@@ -116,59 +117,59 @@ export default async function AutoCalibrationPage() {
   return (
     <div className="flex flex-col">
 
-      {/* ── 인트로 ── */}
+      {/* ── Intro ── */}
       <section className="bg-[#0f1f3d] text-white py-20 px-8">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-bold text-blue-300 tracking-widest uppercase mb-6">AI AUTO-CALIBRATION SYSTEM · AFMS</p>
           <h1 className="text-3xl md:text-4xl font-bold leading-snug mb-8 max-w-2xl">
-            당신의 공정은 여전히<br />
-            <span className="text-blue-300">'감'에 의존하고 있습니까?</span>
+            Is your process still<br />
+            <span className="text-blue-300">relying on gut feeling?</span>
           </h1>
           <div className="max-w-2xl space-y-4 text-blue-100/80 leading-relaxed">
             <p>
-              접착제, 실버페이스트, 바이오시약 등 핵심 소재의 미세한 물성 변화가
-              최종 제품의 불량을 결정합니다.
+              Subtle changes in the physical properties of core materials — adhesives, silver paste,
+              bio-reagents — determine whether your final product is defective.
             </p>
             <p>
-              환경과 숙련도에 따라 변하는 제조 환경을 더 이상
-              <strong className="text-white"> 인간의 직관에 맡기지 마십시오.</strong>
+              Stop leaving a manufacturing environment that shifts with conditions and operator skill
+              <strong className="text-white"> to human intuition.</strong>
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── 제품 개요 ── */}
+      {/* ── Product overview ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-3">PRODUCT OVERVIEW</p>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-                AFMS<br />제조 지능의 표준
+                AFMS<br />The Standard for Manufacturing Intelligence
               </h2>
               <p className="text-gray-600 leading-relaxed mb-8">
-                AFMS는 실시간 물성 분석과 비전 데이터를 연동하여, 디스펜싱 조건을
-                스스로 학습하고 자동 보정하는 <strong className="text-gray-900">지능형 제조 시스템</strong>입니다.
+                AFMS is an <strong className="text-gray-900">intelligent manufacturing system</strong> that links real-time material analysis
+                with vision data to autonomously learn and auto-calibrate dispensing conditions.
               </p>
               <div className="flex gap-3">
                 <Link
                   href={ROUTES.support.poc}
                   className="inline-flex px-5 py-2.5 bg-[#196DDA] text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  도입 문의
+                  Contact Us
                 </Link>
                 <Link
                   href={ROUTES.cases.industry.electronics}
                   className="inline-flex px-5 py-2.5 border border-[#196DDA] text-[#196DDA] text-sm font-semibold rounded-lg hover:bg-blue-50 transition-colors"
                 >
-                  적용사례 보기
+                  View Case Studies
                 </Link>
               </div>
             </div>
             <div className="rounded-2xl overflow-hidden bg-gray-100">
               <img
                 src="/blue3/자동보정 시스템.png"
-                alt="AFMS AI 자동보정 토출시스템"
+                alt="AFMS AI Auto-Calibration Dispensing System"
                 className="w-full h-auto"
               />
             </div>
@@ -176,11 +177,11 @@ export default async function AutoCalibrationPage() {
         </div>
       </section>
 
-      {/* ── 핵심 기능 ── */}
+      {/* ── Core functions ── */}
       <section className="bg-gray-50 py-20 px-8">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-2">CORE FUNCTIONS</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">5가지 자동화 아키텍처</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">5 Automation Architectures</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map((f) => (
@@ -200,11 +201,11 @@ export default async function AutoCalibrationPage() {
         </div>
       </section>
 
-      {/* ── 기대 효과 ── */}
+      {/* ── Expected results ── */}
       <section className="bg-[#196DDA] text-white py-20 px-8">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-bold text-blue-200 tracking-widest uppercase mb-2">EXPECTED RESULTS</p>
-          <h2 className="text-2xl md:text-3xl font-bold mb-12">도입 후 변화되는 지표</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-12">Metrics That Change After Adoption</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {EFFECTS.map((e) => (
@@ -218,12 +219,12 @@ export default async function AutoCalibrationPage() {
         </div>
       </section>
 
-      {/* ── 제품 목록 (Sanity) ── */}
+      {/* ── Product lineup (Sanity) ── */}
       {products.length > 0 && (
         <section className="bg-white py-20 px-8">
           <div className="max-w-5xl mx-auto">
             <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-2">PRODUCTS</p>
-            <h2 className="text-2xl font-bold text-gray-900 mb-10">제품 라인업</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-10">Product Lineup</h2>
             <ContentCardGrid isEmpty={false}>
               {products.map((p) => (
                 <ContentCard
@@ -244,21 +245,21 @@ export default async function AutoCalibrationPage() {
       <section className="bg-gray-50 py-16 px-8">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-1">AFMS 도입을 검토 중이시라면</h2>
-            <p className="text-gray-500 text-sm">공정 현황을 분석하고 최적의 구성을 제안드립니다.</p>
+            <h2 className="text-xl font-bold text-gray-900 mb-1">Considering AFMS for Your Facility?</h2>
+            <p className="text-gray-500 text-sm">We&apos;ll analyze your process and propose the optimal configuration.</p>
           </div>
           <div className="flex gap-3 shrink-0">
             <Link
               href={ROUTES.support.poc}
               className="inline-flex px-6 py-3 bg-[#196DDA] text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-sm"
             >
-              PoC 문의
+              PoC Inquiry
             </Link>
             <Link
               href={ROUTES.support.demoTest}
               className="inline-flex px-6 py-3 border border-[#196DDA] text-[#196DDA] font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
             >
-              평가테스트 신청
+              Request Evaluation Test
             </Link>
           </div>
         </div>

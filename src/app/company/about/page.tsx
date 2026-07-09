@@ -73,7 +73,6 @@ const BUSINESSES = [
     tag: "WEARABLE · CES 2026 수상",
     title: "AI 웨어러블 디바이스 HSS1",
     desc: "CES 2026 혁신상 수상 기술 기반의 차세대 AI 비서 플랫폼. 산업 현장부터 일상까지 연결하는 스마트 웨어러블 솔루션입니다.",
-    href: ROUTES.wearable.intro,
   },
 ];
 
@@ -142,23 +141,36 @@ export default function AboutPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">주요 사업 영역</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {BUSINESSES.map((b) => (
-              <Link
-                key={b.tag}
-                href={b.href}
-                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#196DDA]/30 hover:shadow-md transition-all"
-              >
-                <span className="inline-block text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-3">{b.tag}</span>
-                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#196DDA] transition-colors">{b.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
-                <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-[#196DDA]">
-                  자세히 보기
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </Link>
-            ))}
+            {BUSINESSES.map((b) => {
+              const content = (
+                <>
+                  <span className="inline-block text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-3">{b.tag}</span>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#196DDA] transition-colors">{b.title}</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
+                  {b.href && (
+                    <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-[#196DDA]">
+                      자세히 보기
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                  )}
+                </>
+              );
+              return b.href ? (
+                <Link
+                  key={b.tag}
+                  href={b.href}
+                  className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#196DDA]/30 hover:shadow-md transition-all"
+                >
+                  {content}
+                </Link>
+              ) : (
+                <div key={b.tag} className="bg-white rounded-2xl p-8 border border-gray-100">
+                  {content}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
