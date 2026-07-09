@@ -9,10 +9,8 @@ const CATEGORIES = [
   { key: "bio", label: "바이오", labelEn: "Bio", href: ROUTES.cases.industry.bio },
   { key: "cosmetics", label: "화장품/뷰티", labelEn: "Cosmetics/Beauty", href: ROUTES.cases.industry.cosmetics },
   { key: "chemical", label: "화학/소재", labelEn: "Chemical/Materials", href: ROUTES.cases.industry.chemical },
-  { key: "display", label: "디스플레이", labelEn: "Display", href: ROUTES.cases.industry.display },
   { key: "electronics", label: "전기/전자", labelEn: "Electronics", href: ROUTES.cases.industry.electronics },
   { key: "automotive", label: "자동차", labelEn: "Automotive", href: ROUTES.cases.industry.automotive },
-  { key: "battery", label: "이차전지", labelEn: "Battery", href: ROUTES.cases.industry.battery },
   { key: "research", label: "연구기관/대학", labelEn: "Research/Academia", href: ROUTES.cases.industry.research },
 ] as const
 

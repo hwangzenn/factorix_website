@@ -38,10 +38,8 @@ export const ROUTES = {
       bio: "/cases/industry/bio",                 // 바이오
       cosmetics: "/cases/industry/cosmetics",     // 화장품/뷰티
       chemical: "/cases/industry/chemical",       // 화학/소재
-      display: "/cases/industry/display",         // 디스플레이
       electronics: "/cases/industry/electronics", // 전기/전자
       automotive: "/cases/industry/automotive",   // 자동차
-      battery: "/cases/industry/battery",         // 이차전지
       research: "/cases/industry/research",       // 연구기관/대학
     },
     product: {                        // 제품유형별 ── 디렉토리

@@ -6,7 +6,7 @@
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
-총 페이지: **메인 1 + 랜딩 24 = 25개.**
+총 페이지: **메인 1 + 랜딩 22 = 23개.**
 
 ---
 
@@ -36,10 +36,8 @@
 │   │   ├─ ▣ 바이오          /cases/industry/bio
 │   │   ├─ ▣ 화장품/뷰티      /cases/industry/cosmetics
 │   │   ├─ ▣ 화학/소재        /cases/industry/chemical
-│   │   ├─ ▣ 디스플레이       /cases/industry/display
 │   │   ├─ ▣ 전기/전자        /cases/industry/electronics
 │   │   ├─ ▣ 자동차          /cases/industry/automotive
-│   │   ├─ ▣ 이차전지        /cases/industry/battery
 │   │   └─ ▣ 연구기관/대학    /cases/industry/research
 │   └─ 📁 제품유형별 (/cases/product)
 │       ├─ ▣ 액제제조 솔루션  /cases/product/solutions
@@ -92,10 +90,8 @@ src/
 │  │  │  ├─ bio/page.tsx
 │  │  │  ├─ cosmetics/page.tsx
 │  │  │  ├─ chemical/page.tsx
-│  │  │  ├─ display/page.tsx
 │  │  │  ├─ electronics/page.tsx
 │  │  │  ├─ automotive/page.tsx
-│  │  │  ├─ battery/page.tsx
 │  │  │  └─ research/page.tsx
 │  │  └─ product/                # 📁
 │  │     ├─ solutions/page.tsx
