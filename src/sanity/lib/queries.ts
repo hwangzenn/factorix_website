@@ -41,10 +41,16 @@ export type CaseStudySummary = {
   description: string | null
   publishedAt: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
+  tags: string[] | null
+  customerName: string | null
 }
 
 export type CaseStudyDetail = CaseStudySummary & {
   category: string
+  challenge: string | null
+  solution: string | null
+  result: string | null
+  metrics: { label: string; before: string; after: string }[] | null
   body: PortableTextBlock[] | null
 }
 
@@ -155,7 +161,9 @@ export const caseStudiesByCategoryQuery = defineQuery(`
     "slug": slug.current,
     description,
     publishedAt,
-    thumbnail { asset->{ url }, alt }
+    thumbnail { asset->{ url }, alt },
+    tags,
+    customerName
   }
 `)
 
@@ -172,7 +180,9 @@ export const allCaseStudiesQuery = defineQuery(`
     category,
     description,
     publishedAt,
-    thumbnail { asset->{ url }, alt }
+    thumbnail { asset->{ url }, alt },
+    tags,
+    customerName
   }
 `)
 
@@ -185,6 +195,12 @@ export const caseStudyBySlugQuery = defineQuery(`
     description,
     publishedAt,
     thumbnail { asset->{ url }, alt },
+    tags,
+    customerName,
+    challenge,
+    solution,
+    result,
+    metrics[]{ label, before, after },
     body
   }
 `)

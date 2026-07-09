@@ -31,6 +31,18 @@ export const caseStudy = defineType({
       rows: 3,
     }),
     defineField({
+      name: 'tags',
+      title: '태그 키워드',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+    }),
+    defineField({
+      name: 'customerName',
+      title: '고객사명',
+      type: 'string',
+    }),
+    defineField({
       name: 'category',
       title: '카테고리',
       type: 'string',
@@ -55,6 +67,45 @@ export const caseStudy = defineType({
       title: '발행일',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'challenge',
+      title: '과제',
+      type: 'text',
+      rows: 4,
+    }),
+    defineField({
+      name: 'solution',
+      title: '해결방안',
+      type: 'text',
+      rows: 4,
+    }),
+    defineField({
+      name: 'result',
+      title: '성과',
+      type: 'text',
+      rows: 4,
+    }),
+    defineField({
+      name: 'metrics',
+      title: '데이터 (전·후)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'label', title: '항목', type: 'string' },
+            { name: 'before', title: '전', type: 'string' },
+            { name: 'after', title: '후', type: 'string' },
+          ],
+          preview: {
+            select: { title: 'label', before: 'before', after: 'after' },
+            prepare({ title, before, after }: { title?: string; before?: string; after?: string }) {
+              return { title, subtitle: `전: ${before ?? '-'} → 후: ${after ?? '-'}` }
+            },
+          },
+        },
+      ],
     }),
     defineField({
       name: 'body',

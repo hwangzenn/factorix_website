@@ -20,14 +20,11 @@ type CaseItem = {
   slug: string
   category: string
   description: string | null
+  publishedAt: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
+  tags: string[] | null
+  customerName: string | null
 }
-
-const CASE_FIELDS = [
-  { ko: "해결과제", en: "Challenge" },
-  { ko: "적용 솔루션", en: "Solution Applied" },
-  { ko: "기대효과", en: "Expected Impact" },
-] as const
 
 export default function IndustryCaseShowcase({ items, locale = "ko" }: { items: CaseItem[]; locale?: Locale }) {
   const en = locale === "en"
@@ -79,27 +76,47 @@ export default function IndustryCaseShowcase({ items, locale = "ko" }: { items: 
           />
         </div>
 
-        {/* 우측: 프로젝트 정보 */}
-        <div className="bg-gray-100 p-8 md:p-10 flex flex-col justify-center min-h-[320px]">
-          {featured ? (
-            <Link
-              href={`${activeCat.href}/${featured.slug}`}
-              className="font-bold text-gray-900 text-lg mb-6 hover:text-primary-700 transition-colors"
-            >
-              {featured.title}
-            </Link>
-          ) : (
-            <p className="font-bold text-gray-400 text-lg mb-6">{en ? "Project coming soon" : "프로젝트 준비 중"}</p>
-          )}
-          <dl className="space-y-4">
-            {CASE_FIELDS.map((field) => (
-              <div key={field.ko}>
-                <dt className="text-xs font-bold text-gray-400 tracking-wide mb-1">{en ? field.en : field.ko}</dt>
-                <dd className="text-sm text-gray-400 italic">{en ? "Content coming soon." : "콘텐츠 준비 중입니다."}</dd>
+        {/* 우측: 대표 사례 오버레이 카드 */}
+        {featured ? (
+          <Link
+            href={`${activeCat.href}/${featured.slug}`}
+            className="group relative min-h-[320px] overflow-hidden block"
+          >
+            {featured.thumbnail?.asset?.url ? (
+              <img
+                src={featured.thumbnail.asset.url}
+                alt={featured.thumbnail.alt ?? featured.title}
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gray-800" />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+              {featured.tags && featured.tags.length > 0 && (
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {featured.tags.map((tag) => (
+                    <span key={tag} className="px-2.5 py-1 rounded-full bg-white/20 text-white text-xs font-semibold">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <p className="font-bold text-white text-lg mb-2">{featured.title}</p>
+              <div className="flex items-center gap-2 text-xs text-white/70">
+                {featured.customerName && <span>{featured.customerName}</span>}
+                {featured.customerName && featured.publishedAt && <span>·</span>}
+                {featured.publishedAt && (
+                  <span>{new Date(featured.publishedAt).toLocaleDateString(en ? "en-US" : "ko-KR")}</span>
+                )}
               </div>
-            ))}
-          </dl>
-        </div>
+            </div>
+          </Link>
+        ) : (
+          <div className="bg-gray-100 p-8 md:p-10 flex flex-col justify-center min-h-[320px]">
+            <p className="font-bold text-gray-400 text-lg">{en ? "Project coming soon" : "프로젝트 준비 중"}</p>
+          </div>
+        )}
       </div>
     </div>
   )
