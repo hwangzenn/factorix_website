@@ -290,7 +290,7 @@ export default async function HomePage() {
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
               FactoriX 장비 및 시스템
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 items-start">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
               {SOLUTIONS.map((s) => (
                 <Link
                   key={s.label}
@@ -309,13 +309,13 @@ export default async function HomePage() {
                   {/* 호버 시 어두운 레이어 */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
                   {/* 좌상단 장비명 태그 + 제품 라인업 보기 */}
-                  <div className="absolute top-10 left-10 flex flex-col items-start gap-2">
-                    <span className="text-2xl md:text-3xl font-normal text-primary-900">
+                  <div className="absolute top-6 left-6 md:top-10 md:left-10 flex flex-col items-start gap-2">
+                    <span className="text-xl md:text-3xl font-normal text-primary-900">
                       {s.tag}
                     </span>
                     <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-900">
                       제품 라인업 보기
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
                         <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
@@ -349,7 +349,7 @@ export default async function HomePage() {
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
                     기대효과
                   </h3>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {AFMS_BENEFITS.map((b) => (
                       <div key={b.title} className="rounded-xl border border-gray-200 bg-white p-6">
                         <div className="w-10 h-10 rounded-full bg-primary-50 border border-primary-200 flex items-center justify-center text-primary-700 mb-3">
@@ -364,7 +364,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href={AFMS_FEATURE.href}
-                className="group relative overflow-hidden rounded-[5px] bg-gray-100 block w-[85%] mx-auto"
+                className="group relative overflow-hidden rounded-[5px] bg-gray-100 block w-full md:w-[85%] mx-auto"
               >
                 <img
                   src={AFMS_FEATURE.image}

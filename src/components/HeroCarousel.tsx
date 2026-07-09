@@ -40,7 +40,7 @@ export default function HeroCarousel() {
   }, []);
 
   return (
-    <section className="relative -mt-20 aspect-[1920/972] flex items-center overflow-hidden">
+    <section className="relative -mt-20 min-h-[560px] md:min-h-0 md:aspect-[1920/972] flex items-center overflow-hidden">
       {/* 배경 이미지 — 슬라이드별 opacity 전환 */}
       {SLIDES.map((s, i) => (
         <img
@@ -53,7 +53,7 @@ export default function HeroCarousel() {
       ))}
       <div className="absolute inset-0 bg-black/50" />
 
-      <div className="relative max-w-[1440px] mx-auto px-8 w-full py-20" style={{ height: 260 }}>
+      <div className="relative max-w-[1440px] mx-auto px-8 w-full py-20 h-[380px] sm:h-[320px] md:h-[260px]">
         <h1 className="sr-only">액상제조 공정 자동화, 팩토릭스(FactoriX) 스마트 솔루션</h1>
         {SLIDES.map((s, i) => (
           <div
@@ -61,10 +61,10 @@ export default function HeroCarousel() {
             className="absolute inset-x-8 flex flex-col items-center justify-center text-center transition-opacity duration-1000"
             style={{ opacity: i === current ? 1 : 0, pointerEvents: i === current ? "auto" : "none" }}
           >
-            <p className="text-5xl md:text-6xl font-bold text-white leading-tight mb-4">
+            <p className="text-2xl sm:text-3xl md:text-6xl font-bold text-white leading-tight mb-4">
               {s.heading}
             </p>
-            {s.sub && <p className="text-[21.6px] text-gray-300 mb-10">{s.sub}</p>}
+            {s.sub && <p className="text-sm sm:text-base md:text-[21.6px] text-gray-300 mb-10">{s.sub}</p>}
             <div className="flex flex-wrap justify-center gap-3">
               {s.ctas.map((cta) => (
                 <Link
@@ -81,7 +81,7 @@ export default function HeroCarousel() {
       </div>
 
       {/* Dot indicators */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2">
+      <div className="absolute bottom-6 md:bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2">
         {SLIDES.map((_, i) => (
           <button
             key={i}
