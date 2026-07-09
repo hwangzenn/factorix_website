@@ -5,7 +5,17 @@ import { GNB, NavItem, isGroup } from "@/lib/nav";
 import { ROUTES } from "@/lib/routes";
 import type { Locale } from "@/lib/i18n";
 
-export default function MobileNav({ onClose, locale }: { onClose: () => void; locale: Locale }) {
+export default function MobileNav({
+  onClose,
+  locale,
+  koPath,
+  enPath,
+}: {
+  onClose: () => void;
+  locale: Locale;
+  koPath: string;
+  enPath: string;
+}) {
   return (
     <div className="fixed inset-0 z-50 bg-white overflow-y-auto lg:hidden">
       <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
@@ -13,6 +23,26 @@ export default function MobileNav({ onClose, locale }: { onClose: () => void; lo
         <button onClick={onClose} className="p-2 text-gray-600 text-xl" aria-label={locale === "en" ? "Close menu" : "메뉴 닫기"}>
           ✕
         </button>
+      </div>
+      <div className="flex px-6 py-3 gap-2 border-b border-gray-100">
+        <Link
+          href={koPath}
+          onClick={onClose}
+          className={`flex-1 text-center py-2 rounded-md text-sm font-semibold transition-colors ${
+            locale === "ko" ? "bg-primary-700 text-white" : "bg-gray-100 text-gray-600"
+          }`}
+        >
+          한국어
+        </Link>
+        <Link
+          href={enPath}
+          onClick={onClose}
+          className={`flex-1 text-center py-2 rounded-md text-sm font-semibold transition-colors ${
+            locale === "en" ? "bg-primary-700 text-white" : "bg-gray-100 text-gray-600"
+          }`}
+        >
+          English
+        </Link>
       </div>
       <nav className="px-4 py-2">
         {GNB.map((item) => (

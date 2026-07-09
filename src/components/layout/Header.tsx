@@ -187,7 +187,9 @@ export default function Header({ locale }: { locale: Locale }) {
         </div>
       )}
 
-      {mobileOpen && <MobileNav onClose={() => setMobileOpen(false)} locale={locale} />}
+      {mobileOpen && (
+        <MobileNav onClose={() => setMobileOpen(false)} locale={locale} koPath={koPath} enPath={enPath} />
+      )}
     </header>
   );
 }
