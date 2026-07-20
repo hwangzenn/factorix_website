@@ -69,9 +69,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Header locale={locale} />
+        <Header />
         <main className="flex-1 pt-20">{children}</main>
-        <Footer locale={locale} />
+        <Footer />
         <SanityLive />
       </body>
     </html>

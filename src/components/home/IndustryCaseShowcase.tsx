@@ -4,34 +4,37 @@ import { useState } from "react"
 import Link from "next/link"
 import { ROUTES } from "@/lib/routes"
 import type { Locale } from "@/lib/i18n"
+import type { CaseStudyWithTags } from "@/sanity/lib/queries"
 
 const CATEGORIES = [
-  { key: "bio", label: "바이오", labelEn: "Bio", href: ROUTES.cases.industry.bio, logo: "/고객사로고/바이오.png" },
-  { key: "cosmetics", label: "화장품/뷰티", labelEn: "Cosmetics/Beauty", href: ROUTES.cases.industry.cosmetics, logo: "/고객사로고/뷰티.png" },
-  { key: "chemical", label: "화학/소재", labelEn: "Chemical/Materials", href: ROUTES.cases.industry.chemical, logo: "/고객사로고/화학소재.png" },
-  { key: "electronics", label: "전기/전자", labelEn: "Electronics", href: ROUTES.cases.industry.electronics, logo: "/고객사로고/전기전자.png" },
-  { key: "automotive", label: "자동차", labelEn: "Automotive", href: ROUTES.cases.industry.automotive, logo: "/고객사로고/자동차.png" },
-  { key: "research", label: "연구기관/대학", labelEn: "Research/Academia", href: ROUTES.cases.industry.research, logo: "/고객사로고/연구기관.png" },
+  { key: "bio", label: "바이오", labelEn: "Bio" },
+  { key: "cosmetics", label: "화장품/뷰티", labelEn: "Cosmetics/Beauty" },
+  { key: "chemical", label: "화학/소재", labelEn: "Chemical/Materials" },
+  { key: "electronics", label: "전기/전자", labelEn: "Electronics" },
+  { key: "automotive", label: "자동차", labelEn: "Automotive" },
+  { key: "research", label: "연구기관/대학", labelEn: "Research/Academia" },
 ] as const
 
-type CaseItem = {
-  _id: string
-  title: string
-  slug: string
+type IndustryLogo = {
   category: string
-  description: string | null
-  publishedAt: string | null
-  thumbnail: { asset: { url: string }; alt: string | null } | null
-  tags: string[] | null
-  customerName: string | null
+  logos: { image: { asset: { url: string } } | null; alt: string | null }[] | null
 }
 
-export default function IndustryCaseShowcase({ items, locale = "ko" }: { items: CaseItem[]; locale?: Locale }) {
+export default function IndustryCaseShowcase({
+  items,
+  logos = [],
+  locale = "ko",
+}: {
+  items: CaseStudyWithTags[]
+  logos?: IndustryLogo[]
+  locale?: Locale
+}) {
   const en = locale === "en"
   const [active, setActive] = useState<string>(CATEGORIES[0].key)
 
-  const filtered = items.filter((item) => item.category === active)
+  const filtered = items.filter((item) => item.industries === active)
   const activeCat = CATEGORIES.find((c) => c.key === active)!
+  const activeLogos = (logos.find((l) => l.category === active)?.logos ?? []).slice(0, 4)
   const featured = filtered[0]
 
   return (
@@ -60,7 +63,7 @@ export default function IndustryCaseShowcase({ items, locale = "ko" }: { items: 
           <div>
             <p className="text-xl font-bold mb-2">{en ? `${activeCat.labelEn} Industry` : `${activeCat.label} 산업군`}</p>
             <Link
-              href={activeCat.href}
+              href={`${ROUTES.blog.cases}?industry=${active}`}
               className="inline-flex items-center gap-1 text-sm text-primary-700 hover:text-primary-900 transition-colors"
             >
               {en ? "View more case studies" : "적용사례 더보기"}
@@ -69,17 +72,27 @@ export default function IndustryCaseShowcase({ items, locale = "ko" }: { items: 
               </svg>
             </Link>
           </div>
-          <img
-            src={activeCat.logo}
-            alt={en ? `${activeCat.labelEn} customer logos` : `${activeCat.label} 고객사 로고`}
-            className="w-full h-auto mt-8"
-          />
+          {activeLogos.length > 0 && (
+            <div className="grid grid-cols-4 gap-3 mt-8">
+              {activeLogos.map((item, i) =>
+                item.image?.asset?.url ? (
+                  <div key={i} className="aspect-square bg-gray-50 rounded-lg flex items-center justify-center p-2">
+                    <img
+                      src={item.image.asset.url}
+                      alt={item.alt ?? (en ? `${activeCat.labelEn} customer logo` : `${activeCat.label} 고객사 로고`)}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                ) : null
+              )}
+            </div>
+          )}
         </div>
 
         {/* 우측: 대표 사례 오버레이 카드 */}
         {featured ? (
           <Link
-            href={`${activeCat.href}/${featured.slug}`}
+            href={`${ROUTES.blog.cases}/${featured.slug}`}
             className="group relative min-h-[320px] overflow-hidden block"
           >
             {featured.thumbnail?.asset?.url ? (
@@ -93,23 +106,12 @@ export default function IndustryCaseShowcase({ items, locale = "ko" }: { items: 
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-              {featured.tags && featured.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {featured.tags.map((tag) => (
-                    <span key={tag} className="px-2.5 py-1 rounded-full bg-white/20 text-white text-xs font-semibold">
-                      {tag}
-                    </span>
-                  ))}
+              <p className="font-bold text-white text-lg mb-2">{featured.title}</p>
+              {featured.publishedAt && (
+                <div className="flex items-center gap-2 text-xs text-white/70">
+                  <span>{new Date(featured.publishedAt).toLocaleDateString(en ? "en-US" : "ko-KR")}</span>
                 </div>
               )}
-              <p className="font-bold text-white text-lg mb-2">{featured.title}</p>
-              <div className="flex items-center gap-2 text-xs text-white/70">
-                {featured.customerName && <span>{featured.customerName}</span>}
-                {featured.customerName && featured.publishedAt && <span>·</span>}
-                {featured.publishedAt && (
-                  <span>{new Date(featured.publishedAt).toLocaleDateString(en ? "en-US" : "ko-KR")}</span>
-                )}
-              </div>
             </div>
           </Link>
         ) : (

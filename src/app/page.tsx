@@ -7,7 +7,9 @@ import FaqTabs from "@/components/home/FaqTabs";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   allCaseStudiesQuery,
-  type CaseStudySummaryWithCategory,
+  industryLogosQuery,
+  type CaseStudyWithTags,
+  type IndustryLogo,
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
@@ -185,7 +187,9 @@ const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
 
 export default async function HomePage() {
   const { data: caseData } = await sanityFetch({ query: allCaseStudiesQuery });
-  const caseStudies = (caseData as CaseStudySummaryWithCategory[]) ?? [];
+  const caseStudies = (caseData as CaseStudyWithTags[]) ?? [];
+  const { data: logoData } = await sanityFetch({ query: industryLogosQuery });
+  const industryLogos = (logoData as IndustryLogo[]) ?? [];
 
   return (
     <div className="flex flex-col">
@@ -286,7 +290,7 @@ export default async function HomePage() {
             <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
               고객 맞춤형 솔루션
             </h3>
-            <IndustryCaseShowcase items={caseStudies} />
+            <IndustryCaseShowcase items={caseStudies} logos={industryLogos} />
           </div>
 
           {/* FactoriX 장비 및 시스템 */}
@@ -459,7 +463,7 @@ export default async function HomePage() {
                   </svg>
                 </div>
                 <Link
-                  href={`${ROUTES.resources}?category=patents`}
+                  href={ROUTES.blog.news}
                   className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
                 >
                   <span className="text-lg md:text-xl font-semibold">특허 및 IR 자료실 바로가기</span>

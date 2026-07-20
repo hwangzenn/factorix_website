@@ -39,6 +39,7 @@ export const GNB: NavItem[] = [
           { label: "AI 디스펜서", labelEn: "AI Dispenser", href: ROUTES.solutions.standalone.dispenser },
           { label: "협동/직교/3축로봇", labelEn: "Collaborative/Cartesian/3-Axis Robot", href: ROUTES.solutions.standalone.robot },
           { label: "UV/IR 경화기", labelEn: "UV/IR Curing System", href: ROUTES.solutions.standalone.curing },
+          { label: "소모품", labelEn: "Consumables", href: ROUTES.solutions.standalone.consumables },
         ],
       },
       {
@@ -52,30 +53,9 @@ export const GNB: NavItem[] = [
     ],
   },
   {
-    label: "적용사례",
-    labelEn: "Case Studies",
-    children: [
-      {
-        label: "산업별",
-        labelEn: "By Industry",
-        children: [
-          { label: "바이오", labelEn: "Bio", href: ROUTES.cases.industry.bio },
-          { label: "화장품/뷰티", labelEn: "Cosmetics/Beauty", href: ROUTES.cases.industry.cosmetics },
-          { label: "화학/소재", labelEn: "Chemical/Materials", href: ROUTES.cases.industry.chemical },
-          { label: "전기/전자", labelEn: "Electronics", href: ROUTES.cases.industry.electronics },
-          { label: "자동차", labelEn: "Automotive", href: ROUTES.cases.industry.automotive },
-          { label: "연구기관/대학", labelEn: "Research/Academia", href: ROUTES.cases.industry.research },
-        ],
-      },
-      {
-        label: "제품유형별",
-        labelEn: "By Product Type",
-        children: [
-          { label: "액제공정 솔루션", labelEn: "Liquid Process Solutions", href: ROUTES.cases.product.solutions },
-          { label: "AI 스마트 글라스", labelEn: "AI Smart Glasses", href: ROUTES.cases.product.wearable },
-        ],
-      },
-    ],
+    label: "블로그",
+    labelEn: "Blog",
+    href: ROUTES.blog.all,
   },
   {
     label: "고객지원",
@@ -92,8 +72,6 @@ export const GNB: NavItem[] = [
     labelEn: "Resources",
     children: [
       { label: "공지사항", labelEn: "Notices", href: `${ROUTES.resources}?category=notice` },
-      { label: "언론 보도", labelEn: "Press", href: `${ROUTES.resources}?category=press` },
-      { label: "특허/수상", labelEn: "Patents/Awards", href: `${ROUTES.resources}?category=patents` },
       { label: "기술자료실", labelEn: "Technical Documents", href: `${ROUTES.resources}?category=tech-docs` },
       { label: "투자정보", labelEn: "Investor Information", href: `${ROUTES.resources}?category=ir` },
     ],

@@ -2,6 +2,8 @@ import type React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { PortableText, type PortableTextBlock } from "@portabletext/react"
+import { extractHeadings, slugifyHeading, blockText } from "@/lib/toc"
+import TableOfContents from "@/components/content/TableOfContents"
 
 type ImageBlock = {
   asset: { url: string }
@@ -14,10 +16,10 @@ type ResourceDetailData = {
   publishedAt: string | null
   description: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
-  images: ImageBlock[] | null
   body: PortableTextBlock[] | null
-  fileUrl: string | null
-  externalUrl: string | null
+  images?: ImageBlock[] | null
+  fileUrl?: string | null
+  externalUrl?: string | null
 }
 
 type Props = {
@@ -47,7 +49,11 @@ const portableComponents = {
   },
   block: {
     h1: ({ children }: { children?: React.ReactNode }) => <h1 className="text-3xl font-bold mt-10 mb-4">{children}</h1>,
-    h2: ({ children }: { children?: React.ReactNode }) => <h2 className="text-2xl font-bold mt-8 mb-3">{children}</h2>,
+    h2: ({ children, value }: { children?: React.ReactNode; value: PortableTextBlock }) => (
+      <h2 id={slugifyHeading(blockText(value))} className="text-2xl font-bold mt-8 mb-3 scroll-mt-28">
+        {children}
+      </h2>
+    ),
     h3: ({ children }: { children?: React.ReactNode }) => <h3 className="text-xl font-semibold mt-6 mb-2">{children}</h3>,
     h4: ({ children }: { children?: React.ReactNode }) => <h4 className="text-lg font-semibold mt-4 mb-2">{children}</h4>,
     normal: ({ children }: { children?: React.ReactNode }) => <p className="text-base leading-relaxed mb-4">{children}</p>,
@@ -56,8 +62,14 @@ const portableComponents = {
 }
 
 export default function ResourceDetail({ eyebrow, backHref, backLabel, data }: Props) {
+  const headings = extractHeadings(data.body)
+  const hasToc = headings.length >= 2
+
   return (
-    <div className="max-w-3xl mx-auto px-6 py-20">
+    <div className={`mx-auto px-6 py-20 ${hasToc ? "max-w-5xl" : "max-w-3xl"}`}>
+      <div className={hasToc ? "grid lg:grid-cols-[200px_1fr] gap-10" : ""}>
+        {hasToc && <TableOfContents headings={headings} />}
+        <div>
       <p className="text-sm text-primary-600 font-medium mb-1">{eyebrow}</p>
       <Link href={backHref} className="text-sm text-gray-400 hover:text-primary-600 transition-colors">
         ← {backLabel}
@@ -132,6 +144,8 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data }: P
             원문 보기 ↗
           </a>
         )}
+      </div>
+        </div>
       </div>
     </div>
   )

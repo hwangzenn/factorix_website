@@ -12,7 +12,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { data } = await sanityFetch({ query: productBySlugQuery, params: { slug } })
   const item = data as ProductDetail | null
   if (!item) return {}
-  return { title: `${item.title} | Factorix`, description: item.description ?? item.summary ?? undefined }
+  return {
+    title: `${item.seo?.metaTitle || item.title} | Factorix`,
+    description: item.seo?.metaDescription || item.description || item.summary || undefined,
+    openGraph: (item.seo?.ogImage?.asset?.url || item.thumbnail?.asset?.url)
+      ? { images: [{ url: item.seo?.ogImage?.asset?.url || item.thumbnail!.asset.url }] }
+      : undefined,
+  }
 }
 
 export default async function DispenserDetailPage({ params }: Props) {

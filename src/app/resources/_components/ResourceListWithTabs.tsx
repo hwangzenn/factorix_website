@@ -7,8 +7,6 @@ import ContentCardGrid from "@/components/content/ContentCardGrid"
 
 const CATEGORIES = [
   { key: "notice", label: "공지사항", basePath: "/resources/notice" },
-  { key: "press", label: "언론보도", basePath: "/resources/press" },
-  { key: "patents", label: "특허/수상", basePath: "/resources/patents" },
   { key: "tech-docs", label: "기술자료실", basePath: "/resources/tech-docs" },
   { key: "ir", label: "투자정보", basePath: "/resources/ir" },
 ]

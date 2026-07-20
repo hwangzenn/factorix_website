@@ -229,7 +229,7 @@ export default function AboutPage() {
               온라인상담
             </Link>
             <Link
-              href={ROUTES.resources}
+              href={ROUTES.blog.news}
               className="inline-flex px-6 py-3 border border-[#196DDA] text-[#196DDA] font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
             >
               특허/수상정보 보기

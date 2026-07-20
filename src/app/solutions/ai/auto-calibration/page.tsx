@@ -158,7 +158,7 @@ export default async function AutoCalibrationPage() {
                   도입 문의
                 </Link>
                 <Link
-                  href={ROUTES.cases.industry.electronics}
+                  href={`${ROUTES.blog.cases}?industry=electronics`}
                   className="inline-flex px-5 py-2.5 border border-[#196DDA] text-[#196DDA] text-sm font-semibold rounded-lg hover:bg-blue-50 transition-colors"
                 >
                   적용사례 보기

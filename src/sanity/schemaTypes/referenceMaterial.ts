@@ -27,8 +27,6 @@ export const referenceMaterial = defineType({
           { title: '공지사항', value: 'notice' },
           { title: '기술 문서', value: 'tech-docs' },
           { title: 'IR 자료', value: 'ir' },
-          { title: '특허/수상', value: 'patents' },
-          { title: '언론 보도', value: 'press' },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -42,6 +40,7 @@ export const referenceMaterial = defineType({
     defineField({
       name: 'thumbnail',
       title: '대표 이미지',
+      description: '권장 크기 1200×630px (카드/OG 이미지 겸용)',
       type: 'image',
       options: { hotspot: true },
     }),
@@ -104,6 +103,11 @@ export const referenceMaterial = defineType({
       description: '체크하면 메인페이지 뉴스룸에 우선 노출됩니다 (최대 3개)',
       type: 'boolean',
       initialValue: false,
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO / 메타데이터',
+      type: 'seo',
     }),
   ],
   preview: {

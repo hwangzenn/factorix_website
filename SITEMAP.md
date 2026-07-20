@@ -1,12 +1,15 @@
 # SITEMAP & 파일 구조
 
+> Claude Code가 매 작업마다 따르는 프로젝트 규칙. 중요한 규칙을 위에 둔다.
+
 **구조 원칙: 메인페이지 1개 + 랜딩페이지(leaf)만 실제 page 파일.**
-중간 분류(기업정보·적용사례·산업별 등)는 **디렉토리일 뿐 page.tsx 가 없다.**
-즉 `/cases`, `/cases/industry` 같은 중간 경로는 페이지가 아니며, GNB에서도 링크가 아니라 펼침 그룹이다.
+중간 분류(기업정보·솔루션·블로그 카테고리 등)는 **디렉토리일 뿐 page.tsx 가 없다.**
+즉 `/solutions`, `/solutions/standalone` 같은 중간 경로는 페이지가 아니며, GNB에서도 링크가 아니라 펼침 그룹이다.
+단, **블로그(`/blog`)는 예외**로 GNB에서 하위 카테고리를 펼치지 않고 `/blog` 페이지로 바로 링크된다(카테고리 이동은 `/blog` 페이지 안의 탭 링크로 한다).
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
-총 페이지: **메인 1 + 랜딩 22 = 23개.**
+총 페이지: **메인 1 + 랜딩 23 = 24개** (영문(EN) 버전 2개는 별도).
 
 ---
 
@@ -20,25 +23,25 @@
 │   ├─ ▣ CEO 인사말          /company/ceo
 │   └─ ▣ 오시는길            /company/location   (연구소/생산공장 위치 = #map 섹션)
 │
-📁 액제제조 솔루션 (/solutions)
+📁 솔루션 (/solutions)
 │   ├─ 📁 단독설비 (/solutions/standalone)
-│   │   ├─ ▣ 교반/탈포/쓰리롤밀   /solutions/standalone/mixer
+│   │   ├─ ▣ 교반/탈포/쓰리롤밀   /solutions/standalone/mixer   (Sanity category: mixer/defoamer/three-roll-mill 3종 통합)
 │   │   ├─ ▣ 액상충진기           /solutions/standalone/filling
 │   │   ├─ ▣ AI 디스펜서          /solutions/standalone/dispenser
 │   │   ├─ ▣ 협동/직교/3축로봇    /solutions/standalone/robot
-│   │   └─ ▣ UV/IR 경화기         /solutions/standalone/curing
-│   └─ 📁 AI 시스템 (/solutions/ai)
+│   │   ├─ ▣ UV/IR 경화기         /solutions/standalone/curing
+│   │   └─ ▣ 소모품               /solutions/standalone/consumables
+│   └─ 📁 AI 시스템 (/solutions/ai)  ── GNB 유지, 제품 CMS 카테고리에선 제외(별도 콘텐츠 모델 예정)
 │       ├─ ▣ AI 자동보정 토출시스템 /solutions/ai/auto-calibration
 │       └─ ▣ 자동화 시스템         /solutions/ai/smart-factory
 │
-📁 적용사례 (/cases)
-│   ├─ 📁 산업별 (/cases/industry)
-│   │   ├─ ▣ 바이오          /cases/industry/bio
-│   │   ├─ ▣ 화장품/뷰티      /cases/industry/cosmetics
-│   │   ├─ ▣ 화학/소재        /cases/industry/chemical
-│   │   ├─ ▣ 전기/전자        /cases/industry/electronics
-│   │   ├─ ▣ 자동차          /cases/industry/automotive
-│   │   └─ ▣ 연구기관/대학    /cases/industry/research
+▣ 블로그 (/blog)   ── GNB에서 바로 링크(하위 카테고리 펼침 없음). 페이지 안에서 아래로 이동.
+│   ├─ ▣ 인사이트            /blog/insight        (Sanity: blogPost, category=insight)
+│   ├─ ▣ 팁                  /blog/tips           (Sanity: blogPost, category=tips)
+│   ├─ ▣ 케이스 스터디        /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)
+│   └─ ▣ 뉴스                /blog/news           (Sanity: blogPost, category=news — 구 언론보도/특허수상 이전)
+│
+📁 적용사례(제품유형별) (/cases)  ── GNB 비노출, 레거시 유지
 │   └─ 📁 제품유형별 (/cases/product)
 │       ├─ ▣ 액제제조 솔루션  /cases/product/solutions
 │       └─ ▣ 웨어러블 디바이스 /cases/product/wearable
@@ -46,11 +49,11 @@
 📁 고객지원 (/support)
 │   ├─ ▣ 시스템 평가테스트 및 PoC 문의 /support/poc
 │   ├─ ▣ 상세 방문미팅 요청           /support/meeting
-│   ├─ ▣ 웨어러블 디바이스 PoC 문의    /support/wearable-poc
+│   ├─ ▣ 평가테스트 문의               /support/demo-test
 │   └─ ▣ Q&A                         /support/qna
 │
 ▣ 자료실             /resources
-    (서브네비 탭: 공지사항 | 언론보도 | 특허/수상 | 기술자료실 | 투자정보)
+    (서브네비 탭: 공지사항 | 기술자료실 | 투자정보 — 언론보도/특허수상은 블로그>뉴스로 이전)
 ```
 
 > ⚠️ 판단 보류 1건: **오시는길**은 단일 페이지로 두고 "연구소/생산공장 위치"는 그 안의 `#map` 섹션으로 처리했다.
@@ -76,45 +79,46 @@ src/
 │  │
 │  ├─ solutions/                 # 📁
 │  │  ├─ standalone/             # 📁
-│  │  │  ├─ mixer/page.tsx
-│  │  │  ├─ filling/page.tsx
-│  │  │  ├─ dispenser/page.tsx
-│  │  │  ├─ robot/page.tsx
-│  │  │  └─ curing/page.tsx
+│  │  │  ├─ mixer/page.tsx (+[slug])
+│  │  │  ├─ filling/page.tsx (+[slug])
+│  │  │  ├─ dispenser/page.tsx (+[slug])
+│  │  │  ├─ robot/page.tsx (+[slug])
+│  │  │  ├─ curing/page.tsx (+[slug])
+│  │  │  └─ consumables/page.tsx (+[slug])
 │  │  └─ ai/                     # 📁
-│  │     ├─ auto-calibration/page.tsx
-│  │     └─ smart-factory/page.tsx
+│  │     ├─ auto-calibration/page.tsx (+[slug])
+│  │     └─ smart-factory/page.tsx (+[slug])
 │  │
-│  ├─ cases/                     # 📁
-│  │  ├─ industry/               # 📁
-│  │  │  ├─ bio/page.tsx
-│  │  │  ├─ cosmetics/page.tsx
-│  │  │  ├─ chemical/page.tsx
-│  │  │  ├─ electronics/page.tsx
-│  │  │  ├─ automotive/page.tsx
-│  │  │  └─ research/page.tsx
+│  ├─ blog/                      # ▣ /blog (전체보기) + 카테고리 3종
+│  │  ├─ page.tsx                # 전체보기 (blogPost + caseStudy 통합 피드)
+│  │  ├─ insight/page.tsx (+[slug])
+│  │  ├─ tips/page.tsx (+[slug])
+│  │  ├─ news/page.tsx (+[slug])
+│  │  └─ cases/page.tsx (+[slug])  # 산업군·공정 태그 필터(CaseStudyFilter)
+│  │
+│  ├─ cases/                     # 📁 (레거시, GNB 비노출)
 │  │  └─ product/                # 📁
-│  │     ├─ solutions/page.tsx
-│  │     └─ wearable/page.tsx
+│  │     ├─ solutions/page.tsx (+[slug])
+│  │     └─ wearable/page.tsx (+[slug])
 │  │
 │  ├─ support/                   # 📁
 │  │  ├─ poc/page.tsx
 │  │  ├─ meeting/page.tsx
-│  │  ├─ wearable-poc/page.tsx
+│  │  ├─ demo-test/page.tsx
 │  │  └─ qna/page.tsx
 │  │
-│  └─ resources/                 # 📁
-│     ├─ notice/page.tsx
-│     ├─ press/page.tsx
-│     ├─ patents/page.tsx
-│     ├─ tech-docs/page.tsx
-│     └─ ir/page.tsx
+│  └─ resources/                 # 📁 — 단일 /resources 페이지 + 카테고리별 [slug] 상세
+│     ├─ page.tsx                # ?category= 쿼리로 탭 전환 (공지/기술문서/IR)
+│     ├─ notice/[slug]/page.tsx
+│     ├─ tech-docs/[slug]/page.tsx
+│     └─ ir/[slug]/page.tsx
 │
 ├─ components/
-│  ├─ layout/Header.tsx          # GNB 데스크톱(그룹=펼침, leaf=링크)
+│  ├─ layout/Header.tsx          # GNB 데스크톱(그룹=펼침, leaf=링크). 블로그는 leaf.
 │  ├─ layout/MobileNav.tsx       # GNB 모바일 아코디언
 │  ├─ layout/Footer.tsx
-│  ├─ sections/                  # Hero, FeatureGrid, CTA 등
+│  ├─ blog/CaseStudyFilter.tsx   # /blog/cases 산업군·공정 태그 필터
+│  ├─ content/                   # ContentCard, ContentCardGrid, ContentDetail, TableOfContents
 │  └─ ui/                        # Button, Card 등
 │
 └─ lib/
@@ -123,7 +127,7 @@ src/
 ```
 
 ### 참고
-- 중간 디렉토리엔 `page.tsx`가 없으므로 `/cases` 등을 직접 입력하면 404다. 정상 동작.
-  (원하면 중간 경로를 첫 자식으로 redirect 시킬 수 있음 — 선택사항)
-- 산업별 8개는 템플릿이 동일하면 `industry/[industry]/page.tsx` + 데이터 파일로 합칠 수도 있으나,
-  기본은 요청대로 **바이오 등 개별 page.tsx**로 둔다.
+- 중간 디렉토리엔 `page.tsx`가 없으므로 `/solutions`, `/cases` 등을 직접 입력하면 404다. 정상 동작.
+- 블로그는 다른 그룹과 달리 GNB에서 하위 카테고리를 펼치지 않고 `/blog`로 바로 이동한다. 카테고리(인사이트/팁/케이스 스터디/뉴스) 이동은 `/blog` 페이지 상단 탭 링크로 한다.
+- 산업별 적용사례(구 `/cases/industry/*` 6개)는 `/blog/cases` 하나로 통합되었고, 산업군·공정은 URL이 아니라 Sanity `caseStudy` 문서의 태그(`industries`, `processes`)로 관리된다.
+- 자료실의 언론보도·특허수상은 `/blog/news`로 이전되었다(Sanity `blogPost`, category=news).

@@ -1,6 +1,21 @@
 import { defineQuery } from 'next-sanity'
 import type { PortableTextBlock } from '@portabletext/react'
 
+// 다국어 쿼리 컨벤션 (product/caseStudy/blogPost/referenceMaterial 공통):
+// 한국어(기본): language == "ko" || !defined(language)  — language 필드가 없는 기존 문서는 한국어로 취급
+// 영문: language == "en"
+// 지금은 모든 목록/상세 쿼리가 KO 전용 라우트에서만 쓰이므로 필터를 걸지 않는다.
+// EN 전용 페이지를 만들 때 그 쿼리에만 `&& language == "en"`을 추가한다.
+
+export type SeoData = {
+  metaTitle: string | null
+  metaDescription: string | null
+  ogImage: { asset: { url: string } } | null
+  ogImageAlt: string | null
+} | null
+
+const seoProjection = `seo { metaTitle, metaDescription, ogImage { asset->{ url } }, ogImageAlt }`
+
 export type ReferenceMaterialSummary = {
   _id: string
   title: string
@@ -16,6 +31,7 @@ export type ReferenceMaterialDetail = ReferenceMaterialSummary & {
   body: PortableTextBlock[] | null
   fileUrl: string | null
   externalUrl: string | null
+  seo: SeoData
 }
 
 export type ProductItem = {
@@ -32,6 +48,7 @@ export type ProductItem = {
 export type ProductDetail = ProductItem & {
   category: string
   body: PortableTextBlock[] | null
+  seo: SeoData
 }
 
 export type CaseStudySummary = {
@@ -41,17 +58,33 @@ export type CaseStudySummary = {
   description: string | null
   publishedAt: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
-  tags: string[] | null
-  customerName: string | null
 }
 
-export type CaseStudyDetail = CaseStudySummary & {
-  category: string
-  challenge: string | null
-  solution: string | null
-  result: string | null
-  metrics: { label: string; before: string; after: string }[] | null
+export type CaseStudyWithTags = CaseStudySummary & {
+  industries: string | null
+  processes: string | null
+}
+
+export type CaseStudyDetail = CaseStudyWithTags & {
   body: PortableTextBlock[] | null
+  seo: SeoData
+}
+
+export type BlogPostSummary = {
+  _id: string
+  title: string
+  slug: string
+  category: string
+  author: string | null
+  publishedAt: string | null
+  description: string | null
+  thumbnail: { asset: { url: string }; alt: string | null } | null
+  tags: string[] | null
+}
+
+export type BlogPostDetail = BlogPostSummary & {
+  body: PortableTextBlock[] | null
+  seo: SeoData
 }
 
 export const referenceMaterialsQuery = defineQuery(`
@@ -121,12 +154,38 @@ export const referenceMaterialBySlugQuery = defineQuery(`
     images[] { asset->{ url }, alt, caption },
     body,
     "fileUrl": file.asset->url,
-    externalUrl
+    externalUrl,
+    ${seoProjection}
+  }
+`)
+
+export type IndustryLogo = {
+  category: string
+  logos: { image: { asset: { url: string } } | null; alt: string | null }[] | null
+}
+
+export const industryLogosQuery = defineQuery(`
+  *[_type == "industryLogo"] {
+    category,
+    logos[] { image { asset->{ url } }, alt }
   }
 `)
 
 export const productsByCategoryQuery = defineQuery(`
   *[_type == "product" && category == $category] | order(_createdAt asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    summary,
+    description,
+    specs,
+    thumbnail { asset->{ url }, alt },
+    images[] { asset->{ url }, alt, caption }
+  }
+`)
+
+export const productsByCategoriesQuery = defineQuery(`
+  *[_type == "product" && category in $categories] | order(_createdAt asc) {
     _id,
     title,
     "slug": slug.current,
@@ -149,7 +208,8 @@ export const productBySlugQuery = defineQuery(`
     specs,
     thumbnail { asset->{ url }, alt },
     images[] { asset->{ url }, alt, caption },
-    body
+    body,
+    ${seoProjection}
   }
 `)
 
@@ -161,28 +221,21 @@ export const caseStudiesByCategoryQuery = defineQuery(`
     "slug": slug.current,
     description,
     publishedAt,
-    thumbnail { asset->{ url }, alt },
-    tags,
-    customerName
+    thumbnail { asset->{ url }, alt }
   }
 `)
 
-export type CaseStudySummaryWithCategory = CaseStudySummary & {
-  category: string
-}
-
 export const allCaseStudiesQuery = defineQuery(`
   *[_type == "caseStudy" && isPublic == true]
-  | order(publishedAt desc) [0...30] {
+  | order(publishedAt desc) [0...60] {
     _id,
     title,
     "slug": slug.current,
-    category,
+    industries,
+    processes,
     description,
     publishedAt,
-    thumbnail { asset->{ url }, alt },
-    tags,
-    customerName
+    thumbnail { asset->{ url }, alt }
   }
 `)
 
@@ -191,16 +244,58 @@ export const caseStudyBySlugQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    category,
+    industries,
+    processes,
     description,
     publishedAt,
     thumbnail { asset->{ url }, alt },
+    body,
+    ${seoProjection}
+  }
+`)
+
+export const blogPostsByCategoryQuery = defineQuery(`
+  *[_type == "blogPost" && category == $category && isPublic == true]
+  | order(publishedAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    author,
+    publishedAt,
+    description,
+    thumbnail { asset->{ url }, alt },
+    tags
+  }
+`)
+
+export const allBlogPostsQuery = defineQuery(`
+  *[_type == "blogPost" && isPublic == true]
+  | order(publishedAt desc) [0...60] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    author,
+    publishedAt,
+    description,
+    thumbnail { asset->{ url }, alt },
+    tags
+  }
+`)
+
+export const blogPostBySlugQuery = defineQuery(`
+  *[_type == "blogPost" && slug.current == $slug && isPublic == true][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    author,
+    publishedAt,
+    description,
+    thumbnail { asset->{ url }, alt },
     tags,
-    customerName,
-    challenge,
-    solution,
-    result,
-    metrics[]{ label, before, after },
-    body
+    body,
+    ${seoProjection}
   }
 `)

@@ -25,6 +25,7 @@ export const ROUTES = {
       dispenser: "/solutions/standalone/dispenser",  // AI 디스펜서
       robot: "/solutions/standalone/robot",          // 협동/직교/3축로봇
       curing: "/solutions/standalone/curing",        // UV/IR 경화기
+      consumables: "/solutions/standalone/consumables", // 소모품
     },
     ai: {                             // AI 시스템 ── 디렉토리
       autoCalibration: "/solutions/ai/auto-calibration",       // AI 자동보정 토출시스템
@@ -32,20 +33,21 @@ export const ROUTES = {
     },
   },
 
-  // 적용사례  ── 디렉토리
+  // 적용사례(제품유형별) ── 디렉토리. 산업별 적용사례는 blog.cases로 통합됨.
   cases: {
-    industry: {                       // 산업별 ── 디렉토리
-      bio: "/cases/industry/bio",                 // 바이오
-      cosmetics: "/cases/industry/cosmetics",     // 화장품/뷰티
-      chemical: "/cases/industry/chemical",       // 화학/소재
-      electronics: "/cases/industry/electronics", // 전기/전자
-      automotive: "/cases/industry/automotive",   // 자동차
-      research: "/cases/industry/research",       // 연구기관/대학
-    },
     product: {                        // 제품유형별 ── 디렉토리
       solutions: "/cases/product/solutions",      // 액제제조 솔루션
       wearable: "/cases/product/wearable",        // 웨어러블 디바이스
     },
+  },
+
+  // 블로그 ── 콘텐츠마케팅(인사이트/팁/뉴스/케이스 스터디)
+  blog: {
+    all: "/blog",                     // 전체보기
+    insight: "/blog/insight",         // 인사이트
+    tips: "/blog/tips",               // 팁
+    cases: "/blog/cases",             // 케이스 스터디 (구 적용사례 > 산업별 통합)
+    news: "/blog/news",               // 뉴스 (구 자료실 > 언론보도/특허수상 통합)
   },
 
   // 고객지원  ── 디렉토리

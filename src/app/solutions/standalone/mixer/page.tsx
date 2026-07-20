@@ -1,7 +1,7 @@
 ﻿import type { Metadata } from "next"
 import Link from "next/link"
 import { sanityFetch } from "@/sanity/lib/live"
-import { productsByCategoryQuery, type ProductItem } from "@/sanity/lib/queries"
+import { productsByCategoriesQuery, type ProductItem } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
 import ContentCard from "@/components/content/ContentCard"
 import ContentCardGrid from "@/components/content/ContentCardGrid"
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 export default async function MixerPage() {
   const { data } = await sanityFetch({
-    query: productsByCategoryQuery,
-    params: { category: "standalone-mixer" },
+    query: productsByCategoriesQuery,
+    params: { categories: ["mixer", "defoamer", "three-roll-mill"] },
   })
   const products = (data as ProductItem[]) ?? []
 
@@ -26,7 +26,7 @@ export default async function MixerPage() {
         <h1 className="text-4xl font-bold text-primary-800">교반/탈포/쓰리롤밀</h1>
         <div className="flex gap-3 shrink-0">
           <Link href={ROUTES.support.poc} className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-sm font-semibold rounded-md hover:bg-primary-800 transition-colors">도입 문의</Link>
-          <Link href={ROUTES.cases.industry.bio} className="inline-flex px-5 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded-md hover:bg-primary-50 transition-colors">적용사례 보기</Link>
+          <Link href={`${ROUTES.blog.cases}?industry=bio`} className="inline-flex px-5 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded-md hover:bg-primary-50 transition-colors">적용사례 보기</Link>
         </div>
       </div>
 

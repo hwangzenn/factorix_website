@@ -26,7 +26,7 @@ export default async function FillingPage() {
         <h1 className="text-4xl font-bold text-primary-800">액상충진기</h1>
         <div className="flex gap-3 shrink-0">
           <Link href={ROUTES.support.poc} className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-sm font-semibold rounded-md hover:bg-primary-800 transition-colors">도입 문의</Link>
-          <Link href={ROUTES.cases.industry.cosmetics} className="inline-flex px-5 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded-md hover:bg-primary-50 transition-colors">적용사례 보기</Link>
+          <Link href={`${ROUTES.blog.cases}?industry=cosmetics`} className="inline-flex px-5 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded-md hover:bg-primary-50 transition-colors">적용사례 보기</Link>
         </div>
       </div>
 

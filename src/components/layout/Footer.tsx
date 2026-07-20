@@ -1,10 +1,13 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
-import type { Locale } from "@/lib/i18n";
+import { getLocaleFromPathname } from "@/lib/i18n";
 
-export default function Footer({ locale }: { locale: Locale }) {
-  const en = locale === "en";
+export default function Footer() {
+  const pathname = usePathname();
+  const en = getLocaleFromPathname(pathname) === "en";
   const autoCalibrationHref = en ? ROUTES.en.autoCalibration : ROUTES.solutions.ai.autoCalibration;
 
   return (

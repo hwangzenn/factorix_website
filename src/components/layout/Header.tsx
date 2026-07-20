@@ -6,16 +6,26 @@ import { useEffect, useState, useRef } from "react";
 import { GNB, NavItem, isGroup } from "@/lib/nav";
 import MobileNav from "./MobileNav";
 import { ROUTES } from "@/lib/routes";
-import { getAlternatePath, type Locale } from "@/lib/i18n";
+import { getAlternatePath, getLocaleFromPathname, type Locale } from "@/lib/i18n";
 
 // 페이지 최상단에 어두운 히어로 이미지/배경이 있어 헤더를 투명하게 얹을 수 있는 경로.
 // 그 외 페이지는 최상단부터 흰 배경이라 투명 헤더의 흰 글자가 보이지 않으므로 항상 스크롤된 스타일을 쓴다.
-const DARK_HERO_PATHS: string[] = [ROUTES.home, ROUTES.company.about, ROUTES.en.home];
+const DARK_HERO_PATHS: string[] = [
+  ROUTES.home,
+  ROUTES.company.about,
+  ROUTES.en.home,
+  ROUTES.blog.all,
+  ROUTES.blog.insight,
+  ROUTES.blog.tips,
+  ROUTES.blog.cases,
+  ROUTES.blog.news,
+];
 
 const label = (item: NavItem, locale: Locale) => (locale === "en" ? item.labelEn ?? item.label : item.label);
 
-export default function Header({ locale }: { locale: Locale }) {
+export default function Header() {
   const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
   const hasDarkHero = DARK_HERO_PATHS.includes(pathname);
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -81,18 +91,32 @@ export default function Header({ locale }: { locale: Locale }) {
 
           {/* Desktop nav — flex-nowrap 보장, 항목 수에 맞게 px 최소화 */}
           <nav className="hidden lg:flex items-center flex-nowrap flex-1">
-            {GNB.map((item) => (
-              <button
-                key={item.label}
-                onMouseEnter={open}
-                className={[
-                  "px-4 h-20 text-[15.4px] font-medium transition-colors whitespace-nowrap",
-                  scrolled ? "text-gray-700 hover:text-primary-700" : "text-white hover:text-white/70",
-                ].join(" ")}
-              >
-                {label(item, locale)}
-              </button>
-            ))}
+            {GNB.map((item) =>
+              isGroup(item) ? (
+                <button
+                  key={item.label}
+                  onMouseEnter={open}
+                  className={[
+                    "px-4 h-20 text-[15.4px] font-medium transition-colors whitespace-nowrap",
+                    scrolled ? "text-gray-700 hover:text-primary-700" : "text-white hover:text-white/70",
+                  ].join(" ")}
+                >
+                  {label(item, locale)}
+                </button>
+              ) : (
+                <Link
+                  key={item.label}
+                  href={item.href!}
+                  onClick={() => setMenuOpen(false)}
+                  className={[
+                    "px-4 h-20 flex items-center text-[15.4px] font-medium transition-colors whitespace-nowrap",
+                    scrolled ? "text-gray-700 hover:text-primary-700" : "text-white hover:text-white/70",
+                  ].join(" ")}
+                >
+                  {label(item, locale)}
+                </Link>
+              )
+            )}
           </nav>
 
           {/* Right actions */}
@@ -157,16 +181,16 @@ export default function Header({ locale }: { locale: Locale }) {
           onMouseEnter={open}
         >
           <div className="max-w-[1440px] mx-auto px-10 py-10">
-            {/* 6-column flex layout — 적용사례 gets 2× width */}
+            {/* 6-column flex layout — 솔루션 gets 2× width for its 2-column sub-groups */}
             <div className="flex">
-              {GNB.map((col, ci) => {
-                const isCases = col.label === "적용사례";
-                const isLast = ci === GNB.length - 1;
+              {GNB.filter(isGroup).map((col, ci, groups) => {
+                const isSolutions = col.label === "솔루션";
+                const isLast = ci === groups.length - 1;
                 return (
                   <div
                     key={col.label}
                     className={[
-                      isCases ? "flex-[2]" : "flex-1",
+                      isSolutions ? "flex-[2]" : "flex-1",
                       !isLast ? "border-r border-gray-200 mr-8 pr-8" : "",
                     ].join(" ")}
                   >
@@ -174,8 +198,8 @@ export default function Header({ locale }: { locale: Locale }) {
                     <p className="text-base font-bold text-gray-800 mb-5">{label(col, locale)}</p>
 
                     {/* Column contents */}
-                    {isCases ? (
-                      <CasesColumn items={col.children ?? []} onClose={() => setMenuOpen(false)} locale={locale} />
+                    {isSolutions ? (
+                      <SolutionsColumn items={col.children ?? []} onClose={() => setMenuOpen(false)} locale={locale} />
                     ) : (
                       <ColItems items={col.children ?? []} onClose={() => setMenuOpen(false)} locale={locale} />
                     )}
@@ -238,51 +262,31 @@ function ColItems({ items, onClose, locale }: { items: NavItem[]; onClose: () =>
   );
 }
 
-/* ── 적용사례 컬럼: 산업별 2열 그리드 ── */
-function CasesColumn({ items, onClose, locale }: { items: NavItem[]; onClose: () => void; locale: Locale }) {
+/* ── 솔루션 컬럼: 제품/시스템 하위 그룹을 2열로 나란히 ── */
+function SolutionsColumn({ items, onClose, locale }: { items: NavItem[]; onClose: () => void; locale: Locale }) {
   return (
-    <div className="space-y-4">
+    <div className="grid grid-cols-2 gap-x-16 gap-y-4">
       {items.map((group) => {
         if (!isGroup(group)) return null;
-        const isIndustry = group.label === "산업별";
         return (
           <div key={group.label}>
             <p className="text-xs text-gray-400 font-medium mb-2">
               {label(group, locale)} <span className="text-[11px]">›</span>
             </p>
-            {isIndustry ? (
-              /* 산업별: 2-column grid */
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1.5">
-                {group.children?.map((child) =>
-                  child.href ? (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      onClick={onClose}
-                      className="text-[14px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
-                    >
-                      {label(child, locale)}
-                    </Link>
-                  ) : null
-                )}
-              </div>
-            ) : (
-              /* 제품유형별: single column */
-              <div className="space-y-1.5">
-                {group.children?.map((child) =>
-                  child.href ? (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      onClick={onClose}
-                      className="block text-[14px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
-                    >
-                      {label(child, locale)}
-                    </Link>
-                  ) : null
-                )}
-              </div>
-            )}
+            <div className="space-y-1.5">
+              {group.children?.map((child) =>
+                child.href ? (
+                  <Link
+                    key={child.label}
+                    href={child.href}
+                    onClick={onClose}
+                    className="block text-[14px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
+                  >
+                    {label(child, locale)}
+                  </Link>
+                ) : null
+              )}
+            </div>
           </div>
         );
       })}

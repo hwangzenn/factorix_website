@@ -4,6 +4,9 @@ export const caseStudy = defineType({
   name: 'caseStudy',
   title: '적용사례',
   type: 'document',
+  fieldsets: [
+    { name: 'tagsRow', title: '분류 태그', options: { columns: 2 } },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -12,15 +15,55 @@ export const caseStudy = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'industries',
+      title: '산업군',
+      description: '블로그 > 케이스 스터디(/blog/cases)의 필터로 사용됩니다.',
+      type: 'string',
+      fieldset: 'tagsRow',
+      options: {
+        layout: 'dropdown',
+        list: [
+          { title: '바이오', value: 'bio' },
+          { title: '화장품/뷰티', value: 'cosmetics' },
+          { title: '화학/소재', value: 'chemical' },
+          { title: '전기/전자', value: 'electronics' },
+          { title: '자동차', value: 'automotive' },
+          { title: '연구기관/대학', value: 'research' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'processes',
+      title: '해당 공정',
+      type: 'string',
+      fieldset: 'tagsRow',
+      options: {
+        layout: 'dropdown',
+        list: [
+          { title: '교반/탈포/쓰리롤밀', value: 'mixer' },
+          { title: '액상충진', value: 'filling' },
+          { title: 'AI 디스펜싱', value: 'dispenser' },
+          { title: 'UV/IR 경화', value: 'curing' },
+          { title: '로봇', value: 'robot' },
+        ],
+      },
+    }),
+    defineField({
       name: 'slug',
       title: '슬러그 (URL)',
+      description: '제목 + 산업군/공정 태그에서 자동 생성됩니다.',
       type: 'slug',
-      options: { source: 'title' },
+      options: {
+        source: (doc: Record<string, unknown>) =>
+          [doc.industries, doc.processes, doc.title].filter(Boolean).join(' '),
+        maxLength: 96,
+      },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'thumbnail',
       title: '대표 이미지',
+      description: '권장 크기 1200×630px (카드/OG 이미지 겸용)',
       type: 'image',
       options: { hotspot: true },
     }),
@@ -31,85 +74,15 @@ export const caseStudy = defineType({
       rows: 3,
     }),
     defineField({
-      name: 'tags',
-      title: '태그 키워드',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-    }),
-    defineField({
-      name: 'customerName',
-      title: '고객사명',
-      type: 'string',
-    }),
-    defineField({
-      name: 'category',
-      title: '카테고리',
-      type: 'string',
-      options: {
-        list: [
-          { title: '산업별 — 바이오', value: 'bio' },
-          { title: '산업별 — 화장품/뷰티', value: 'cosmetics' },
-          { title: '산업별 — 화학/소재', value: 'chemical' },
-          { title: '산업별 — 디스플레이', value: 'display' },
-          { title: '산업별 — 전기/전자', value: 'electronics' },
-          { title: '산업별 — 자동차', value: 'automotive' },
-          { title: '산업별 — 이차전지', value: 'battery' },
-          { title: '산업별 — 연구기관/대학', value: 'research' },
-          { title: '제품유형별 — 액제제조 솔루션', value: 'solutions' },
-          { title: '제품유형별 — 웨어러블 디바이스', value: 'wearable' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'publishedAt',
       title: '발행일',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'challenge',
-      title: '과제',
-      type: 'text',
-      rows: 4,
-    }),
-    defineField({
-      name: 'solution',
-      title: '해결방안',
-      type: 'text',
-      rows: 4,
-    }),
-    defineField({
-      name: 'result',
-      title: '성과',
-      type: 'text',
-      rows: 4,
-    }),
-    defineField({
-      name: 'metrics',
-      title: '데이터 (전·후)',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            { name: 'label', title: '항목', type: 'string' },
-            { name: 'before', title: '전', type: 'string' },
-            { name: 'after', title: '후', type: 'string' },
-          ],
-          preview: {
-            select: { title: 'label', before: 'before', after: 'after' },
-            prepare({ title, before, after }: { title?: string; before?: string; after?: string }) {
-              return { title, subtitle: `전: ${before ?? '-'} → 후: ${after ?? '-'}` }
-            },
-          },
-        },
-      ],
-    }),
-    defineField({
       name: 'body',
       title: '상세 내용',
+      description: '소제목(H2)으로 구분해서 작성하면 상세페이지 좌측에 목차가 자동 생성됩니다.',
       type: 'array',
       of: [
         {
@@ -137,8 +110,13 @@ export const caseStudy = defineType({
       type: 'boolean',
       initialValue: true,
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO / 메타데이터',
+      type: 'seo',
+    }),
   ],
   preview: {
-    select: { title: 'title', subtitle: 'category', media: 'thumbnail' },
+    select: { title: 'title', subtitle: 'industries', media: 'thumbnail' },
   },
 })
