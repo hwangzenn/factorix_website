@@ -35,9 +35,9 @@ export default async function ConsumablesPage() {
           <ContentCard
             key={p._id}
             title={p.title}
-            description={p.description ?? p.summary}
-            thumbnailUrl={p.thumbnail?.asset?.url}
-            thumbnailAlt={p.thumbnail?.alt}
+            description={p.description}
+            thumbnailUrl={p.images?.[0]?.asset?.url}
+            thumbnailAlt={p.images?.[0]?.alt}
             href={`${ROUTES.solutions.standalone.consumables}/${p.slug}`}
           />
         ))}

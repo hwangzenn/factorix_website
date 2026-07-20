@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { SpecsTableInput } from '../components/SpecsTableInput'
 
 export const product = defineType({
   name: 'product',
@@ -38,33 +39,21 @@ export const product = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'thumbnail',
-      title: '대표 이미지',
-      description: '권장 크기 1200×630px (카드/OG 이미지 겸용)',
-      type: 'image',
-      options: { hotspot: true },
-    }),
-    defineField({
-      name: 'summary',
-      title: '한 줄 요약',
-      type: 'text',
-      rows: 2,
-    }),
-    defineField({
       name: 'description',
-      title: '카드 설명 (OG 겸용)',
+      title: '제품 개요 (OG 겸용)',
       type: 'text',
       rows: 3,
     }),
     defineField({
       name: 'specs',
       title: '스펙',
-      description: '"+ Add item"으로 행을 추가하세요. Attribute(항목) / Property(값) 2열로 표시됩니다.',
+      description: 'Attribute(항목) / Property(값) 2열 표로 편집합니다. "+ 행 추가"로 행을 늘리세요.',
       type: 'array',
-      options: { modal: { type: 'popover' } },
+      components: { input: SpecsTableInput },
       of: [
         {
           type: 'object',
+          name: 'specItem',
           fields: [
             { name: 'key', title: 'Attribute', type: 'string' },
             { name: 'value', title: 'Property', type: 'string' },
@@ -81,7 +70,7 @@ export const product = defineType({
     defineField({
       name: 'images',
       title: '제품 이미지',
-      description: '권장 비율 1:1(정사각형)',
+      description: '권장 비율 1:1(정사각형). 첫 번째 이미지가 카드/OG 대표 이미지로 사용됩니다.',
       type: 'array',
       of: [
         {
@@ -125,6 +114,6 @@ export const product = defineType({
     }),
   ],
   preview: {
-    select: { title: 'title', subtitle: 'category', media: 'thumbnail' },
+    select: { title: 'title', subtitle: 'category', media: 'images.0' },
   },
 })

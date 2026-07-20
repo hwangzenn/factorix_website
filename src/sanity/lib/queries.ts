@@ -38,10 +38,8 @@ export type ProductItem = {
   _id: string
   title: string
   slug: string
-  summary: string | null
   description: string | null
   specs: { key: string; value: string }[] | null
-  thumbnail: { asset: { url: string }; alt: string | null } | null
   images: { asset: { url: string }; alt: string | null; caption: string | null }[] | null
 }
 
@@ -176,10 +174,8 @@ export const productsByCategoryQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    summary,
     description,
     specs,
-    thumbnail { asset->{ url }, alt },
     images[] { asset->{ url }, alt, caption }
   }
 `)
@@ -189,10 +185,8 @@ export const productsByCategoriesQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    summary,
     description,
     specs,
-    thumbnail { asset->{ url }, alt },
     images[] { asset->{ url }, alt, caption }
   }
 `)
@@ -203,10 +197,8 @@ export const productBySlugQuery = defineQuery(`
     title,
     "slug": slug.current,
     category,
-    summary,
     description,
     specs,
-    thumbnail { asset->{ url }, alt },
     images[] { asset->{ url }, alt, caption },
     body,
     ${seoProjection}

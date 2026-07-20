@@ -14,9 +14,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!item) return {}
   return {
     title: `${item.seo?.metaTitle || item.title} | Factorix`,
-    description: item.seo?.metaDescription || item.description || item.summary || undefined,
-    openGraph: (item.seo?.ogImage?.asset?.url || item.thumbnail?.asset?.url)
-      ? { images: [{ url: item.seo?.ogImage?.asset?.url || item.thumbnail!.asset.url }] }
+    description: item.seo?.metaDescription || item.description || undefined,
+    openGraph: (item.seo?.ogImage?.asset?.url || item.images?.[0]?.asset?.url)
+      ? { images: [{ url: item.seo?.ogImage?.asset?.url || item.images![0].asset.url }] }
       : undefined,
   }
 }
