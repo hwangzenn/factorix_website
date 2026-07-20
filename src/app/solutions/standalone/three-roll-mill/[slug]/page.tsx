@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function MixerDetailPage({ params }: Props) {
+export default async function ThreeRollMillDetailPage({ params }: Props) {
   const { slug } = await params
   const { data } = await sanityFetch({ query: productBySlugQuery, params: { slug } })
   const item = data as ProductDetail | null
@@ -29,9 +29,9 @@ export default async function MixerDetailPage({ params }: Props) {
 
   return (
     <ContentDetail
-      eyebrow="액제제조 솔루션 · 단독설비 · 교반/탈포기"
-      backHref={ROUTES.solutions.standalone.mixer}
-      backLabel="교반/탈포기"
+      eyebrow="액제제조 솔루션 · 단독설비 · 쓰리롤밀"
+      backHref={ROUTES.solutions.standalone.threeRollMill}
+      backLabel="쓰리롤밀"
       data={item}
     />
   )

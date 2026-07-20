@@ -20,7 +20,8 @@ export const ROUTES = {
   // 액제제조 솔루션  ── 디렉토리
   solutions: {
     standalone: {                     // 단독설비 ── 디렉토리
-      mixer: "/solutions/standalone/mixer",          // 교반/탈포/쓰리롤밀
+      mixer: "/solutions/standalone/mixer",          // 교반/탈포기
+      threeRollMill: "/solutions/standalone/three-roll-mill", // 쓰리롤밀
       filling: "/solutions/standalone/filling",      // 액상충진기
       dispenser: "/solutions/standalone/dispenser",  // AI 디스펜서
       robot: "/solutions/standalone/robot",          // 협동/직교/3축로봇

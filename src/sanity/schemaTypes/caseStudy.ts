@@ -40,7 +40,8 @@ export const caseStudy = defineType({
       options: {
         layout: 'dropdown',
         list: [
-          { title: '교반/탈포/쓰리롤밀', value: 'mixer' },
+          { title: '교반/탈포기', value: 'mixer-defoamer' },
+          { title: '쓰리롤밀', value: 'three-roll-mill' },
           { title: '액상충진', value: 'filling' },
           { title: 'AI 디스펜싱', value: 'dispenser' },
           { title: 'UV/IR 경화', value: 'curing' },

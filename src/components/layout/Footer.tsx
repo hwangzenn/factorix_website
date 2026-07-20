@@ -25,7 +25,8 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm">{en ? "Solutions" : "솔루션"}</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href={ROUTES.solutions.standalone.mixer} className="hover:text-white transition-colors">{en ? "Mixing/Defoaming/Three-Roll Mill" : "교반/탈포/쓰리롤밀"}</Link></li>
+              <li><Link href={ROUTES.solutions.standalone.mixer} className="hover:text-white transition-colors">{en ? "Mixing/Defoaming" : "교반/탈포기"}</Link></li>
+              <li><Link href={ROUTES.solutions.standalone.threeRollMill} className="hover:text-white transition-colors">{en ? "Three-Roll Mill" : "쓰리롤밀"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.filling} className="hover:text-white transition-colors">{en ? "Liquid Filling Machine" : "액상충진기"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.dispenser} className="hover:text-white transition-colors">{en ? "AI Dispenser" : "AI 디스펜서"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.robot} className="hover:text-white transition-colors">{en ? "Collaborative/Cartesian/3-Axis Robot" : "협동/직교/3축로봇"}</Link></li>

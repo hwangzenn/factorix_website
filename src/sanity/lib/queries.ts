@@ -180,17 +180,6 @@ export const productsByCategoryQuery = defineQuery(`
   }
 `)
 
-export const productsByCategoriesQuery = defineQuery(`
-  *[_type == "product" && category in $categories] | order(_createdAt asc) {
-    _id,
-    title,
-    "slug": slug.current,
-    description,
-    specs,
-    images[] { asset->{ url }, alt, caption }
-  }
-`)
-
 export const productBySlugQuery = defineQuery(`
   *[_type == "product" && slug.current == $slug][0] {
     _id,

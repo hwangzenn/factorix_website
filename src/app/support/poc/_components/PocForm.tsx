@@ -6,7 +6,8 @@ const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; labe
   equipment: {
     label: "장비",
     subs: [
-      { value: "mixer", label: "교반/탈포/쓰리롤밀" },
+      { value: "mixer", label: "교반/탈포기" },
+      { value: "three-roll-mill", label: "쓰리롤밀" },
       { value: "filling", label: "액상충진기" },
       { value: "dispenser", label: "AI 디스펜서" },
       { value: "robot", label: "협동/직교/3축로봇" },

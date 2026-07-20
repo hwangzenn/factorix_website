@@ -18,8 +18,7 @@ export const product = defineType({
       type: 'string',
       options: {
         list: [
-          { title: '교반기', value: 'mixer' },
-          { title: '탈포기', value: 'defoamer' },
+          { title: '교반/탈포기', value: 'mixer-defoamer' },
           { title: '쓰리롤밀', value: 'three-roll-mill' },
           { title: '충진기', value: 'standalone-filling' },
           { title: '디스펜서', value: 'standalone-dispenser' },

@@ -9,7 +9,7 @@
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
-총 페이지: **메인 1 + 랜딩 23 = 24개** (영문(EN) 버전 2개는 별도).
+총 페이지: **메인 1 + 랜딩 24 = 25개** (영문(EN) 버전 2개는 별도).
 
 ---
 
@@ -25,7 +25,8 @@
 │
 📁 솔루션 (/solutions)
 │   ├─ 📁 단독설비 (/solutions/standalone)
-│   │   ├─ ▣ 교반/탈포/쓰리롤밀   /solutions/standalone/mixer   (Sanity category: mixer/defoamer/three-roll-mill 3종 통합)
+│   │   ├─ ▣ 교반/탈포기         /solutions/standalone/mixer   (Sanity category: mixer-defoamer)
+│   │   ├─ ▣ 쓰리롤밀            /solutions/standalone/three-roll-mill
 │   │   ├─ ▣ 액상충진기           /solutions/standalone/filling
 │   │   ├─ ▣ AI 디스펜서          /solutions/standalone/dispenser
 │   │   ├─ ▣ 협동/직교/3축로봇    /solutions/standalone/robot
@@ -80,6 +81,7 @@ src/
 │  ├─ solutions/                 # 📁
 │  │  ├─ standalone/             # 📁
 │  │  │  ├─ mixer/page.tsx (+[slug])
+│  │  │  ├─ three-roll-mill/page.tsx (+[slug])
 │  │  │  ├─ filling/page.tsx (+[slug])
 │  │  │  ├─ dispenser/page.tsx (+[slug])
 │  │  │  ├─ robot/page.tsx (+[slug])

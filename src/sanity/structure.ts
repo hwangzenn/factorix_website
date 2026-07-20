@@ -2,8 +2,7 @@ import type {StructureResolver} from 'sanity/structure'
 
 // 제품(product) 카테고리 그룹 — src/sanity/schemaTypes/product.ts 의 category 옵션과 동기화
 const PRODUCT_GROUPS = [
-  { key: 'mixer', title: '교반기', categories: ['mixer'] },
-  { key: 'defoamer', title: '탈포기', categories: ['defoamer'] },
+  { key: 'mixer-defoamer', title: '교반/탈포기', categories: ['mixer-defoamer'] },
   { key: 'three-roll-mill', title: '쓰리롤밀', categories: ['three-roll-mill'] },
   { key: 'filling', title: '충진기', categories: ['standalone-filling'] },
   { key: 'dispenser', title: '디스펜서', categories: ['standalone-dispenser'] },

@@ -34,7 +34,8 @@ export const GNB: NavItem[] = [
         label: "제품",
         labelEn: "Products",
         children: [
-          { label: "교반/탈포/쓰리롤밀", labelEn: "Mixing/Defoaming/Three-Roll Mill", href: ROUTES.solutions.standalone.mixer },
+          { label: "교반/탈포기", labelEn: "Mixing/Defoaming", href: ROUTES.solutions.standalone.mixer },
+          { label: "쓰리롤밀", labelEn: "Three-Roll Mill", href: ROUTES.solutions.standalone.threeRollMill },
           { label: "액상충진기", labelEn: "Liquid Filling Machine", href: ROUTES.solutions.standalone.filling },
           { label: "AI 디스펜서", labelEn: "AI Dispenser", href: ROUTES.solutions.standalone.dispenser },
           { label: "협동/직교/3축로봇", labelEn: "Collaborative/Cartesian/3-Axis Robot", href: ROUTES.solutions.standalone.robot },

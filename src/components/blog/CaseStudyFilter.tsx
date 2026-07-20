@@ -16,7 +16,8 @@ const INDUSTRIES = [
 ]
 
 const PROCESSES = [
-  { key: "mixer", label: "교반/탈포/쓰리롤밀" },
+  { key: "mixer-defoamer", label: "교반/탈포기" },
+  { key: "three-roll-mill", label: "쓰리롤밀" },
   { key: "filling", label: "액상충진" },
   { key: "dispenser", label: "AI 디스펜싱" },
   { key: "curing", label: "UV/IR 경화" },
