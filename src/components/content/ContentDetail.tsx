@@ -16,6 +16,8 @@ export type ContentDetailData = {
   publishedAt?: string | null
   description?: string | null
   thumbnail?: { asset: { url: string }; alt: string | null } | null
+  specs?: { key: string; value: string }[] | null
+  images?: ImageBlock[] | null
   body?: PortableTextBlock[] | null
 }
 
@@ -91,6 +93,47 @@ export default function ContentDetail({ eyebrow, backHref, backLabel, data }: Pr
 
       {data.description && (
         <p className="text-gray-600 mb-8 leading-relaxed">{data.description}</p>
+      )}
+
+      {data.specs && data.specs.length > 0 && (
+        <div className="mb-8 overflow-hidden rounded-xl border border-gray-200">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-gray-50 text-gray-500">
+                <th className="text-left font-semibold px-4 py-3 w-1/3">Attribute</th>
+                <th className="text-left font-semibold px-4 py-3">Property</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.specs.map((s) => (
+                <tr key={s.key} className="border-t border-gray-100">
+                  <td className="px-4 py-3 font-medium text-gray-900">{s.key}</td>
+                  <td className="px-4 py-3 text-gray-600">{s.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {data.images && data.images.length > 0 && (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+          {data.images.map((img, idx) => (
+            <figure key={idx}>
+              <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-100">
+                <Image
+                  src={img.asset.url}
+                  alt={img.alt ?? ""}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              {img.caption && (
+                <figcaption className="text-center text-xs text-gray-400 mt-1">{img.caption}</figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
       )}
 
       {data.body && data.body.length > 0 && (

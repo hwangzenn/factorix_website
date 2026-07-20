@@ -18,7 +18,28 @@ export default defineConfig({
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
+  schema: {
+    types: schema.types,
+    templates: (prev) => [
+      ...prev,
+      // 자료실/제품 카테고리 폴더 안에서 "새로 만들기"를 누르면 해당 카테고리가 미리 선택된 채로 열림
+      // (사용처: src/sanity/structure.ts의 RESOURCE_GROUPS / PRODUCT_GROUPS)
+      {
+        id: 'referenceMaterial-by-category',
+        title: '자료실 (카테고리 지정)',
+        schemaType: 'referenceMaterial',
+        parameters: [{name: 'category', type: 'string'}],
+        value: (params: {category: string}) => ({category: params.category}),
+      },
+      {
+        id: 'product-by-category',
+        title: '제품 (카테고리 지정)',
+        schemaType: 'product',
+        parameters: [{name: 'category', type: 'string'}],
+        value: (params: {category: string}) => ({category: params.category}),
+      },
+    ],
+  },
   plugins: [
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio

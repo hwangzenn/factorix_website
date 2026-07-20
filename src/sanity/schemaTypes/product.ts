@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity'
-import { apiVersion } from '../env'
 
 export const product = defineType({
   name: 'product',
@@ -31,32 +30,11 @@ export const product = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'productId',
-      title: 'Product ID',
-      type: 'string',
-      description:
-        '형식: "카테고리값-순번" (예: mixer-001). 슬러그(URL)가 이 값에서 생성됩니다.',
-      validation: (Rule) =>
-        Rule.required().custom(async (value, context) => {
-          if (!value) return true
-          const category = (context.document as { category?: string } | undefined)?.category
-          if (category && !value.startsWith(`${category}-`)) {
-            return `"${category}-순번" 형식으로 입력해주세요 (예: ${category}-001)`
-          }
-          const id = context.document?._id.replace(/^drafts\./, '') ?? ''
-          const client = context.getClient({ apiVersion })
-          const existingId = await client.fetch(
-            `*[_type == "product" && !(_id in [$draft, $published]) && productId == $productId][0]._id`,
-            { draft: `drafts.${id}`, published: id, productId: value }
-          )
-          return existingId ? '이미 사용 중인 Product ID입니다.' : true
-        }),
-    }),
-    defineField({
       name: 'slug',
       title: '슬러그 (URL)',
+      description: '제품명에서 자동 생성됩니다.',
       type: 'slug',
-      options: { source: 'productId' },
+      options: { source: 'title' },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -81,7 +59,9 @@ export const product = defineType({
     defineField({
       name: 'specs',
       title: '스펙',
+      description: '"+ Add item"으로 행을 추가하세요. Attribute(항목) / Property(값) 2열로 표시됩니다.',
       type: 'array',
+      options: { modal: { type: 'popover' } },
       of: [
         {
           type: 'object',
@@ -89,13 +69,19 @@ export const product = defineType({
             { name: 'key', title: 'Attribute', type: 'string' },
             { name: 'value', title: 'Property', type: 'string' },
           ],
-          preview: { select: { title: 'key', subtitle: 'value' } },
+          preview: {
+            select: { title: 'key', subtitle: 'value' },
+            prepare({ title, subtitle }: { title?: string; subtitle?: string }) {
+              return { title: title || 'Attribute', subtitle: subtitle || 'Property' }
+            },
+          },
         },
       ],
     }),
     defineField({
       name: 'images',
       title: '제품 이미지',
+      description: '권장 비율 1:1(정사각형)',
       type: 'array',
       of: [
         {

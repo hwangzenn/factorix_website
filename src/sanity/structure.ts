@@ -49,6 +49,9 @@ export const structure: StructureResolver = (S) =>
                       .title(group.title)
                       .filter('_type == "product" && category in $categories')
                       .params({ categories: group.categories })
+                      .initialValueTemplates([
+                        S.initialValueTemplateItem('product-by-category', { category: group.categories[0] }),
+                      ])
                   )
               )
             )
@@ -71,6 +74,9 @@ export const structure: StructureResolver = (S) =>
                       .title(group.title)
                       .filter('_type == "referenceMaterial" && category == $category')
                       .params({ category: group.key })
+                      .initialValueTemplates([
+                        S.initialValueTemplateItem('referenceMaterial-by-category', { category: group.key }),
+                      ])
                   )
               )
             )
