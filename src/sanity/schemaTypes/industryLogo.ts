@@ -25,7 +25,7 @@ export const industryLogo = defineType({
     defineField({
       name: 'logos',
       title: '고객사 로고',
-      description: '이 산업군 카드에 노출할 고객사 로고 (최대 6개, 투명 배경 권장)',
+      description: '이 산업군 카드에 노출할 고객사 로고 (2열 2행, 최대 4개, 투명 배경 권장)',
       type: 'array',
       of: [
         {
@@ -51,7 +51,7 @@ export const industryLogo = defineType({
           },
         },
       ],
-      validation: (Rule) => Rule.max(6),
+      validation: (Rule) => Rule.max(4),
     }),
   ],
   preview: {

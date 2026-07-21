@@ -34,7 +34,7 @@ export default function IndustryCaseShowcase({
 
   const filtered = items.filter((item) => item.industries === active)
   const activeCat = CATEGORIES.find((c) => c.key === active)!
-  const activeLogos = (logos.find((l) => l.category === active)?.logos ?? []).slice(0, 6)
+  const activeLogos = (logos.find((l) => l.category === active)?.logos ?? []).slice(0, 4)
   const featured = filtered[0]
 
   return (
@@ -73,15 +73,16 @@ export default function IndustryCaseShowcase({
             </Link>
           </div>
           {activeLogos.length > 0 && (
-            <div className="flex flex-nowrap items-center gap-6 mt-8 overflow-x-auto">
+            <div className="grid grid-cols-2 grid-rows-2 gap-4 mt-8 w-full">
               {activeLogos.map((item, i) =>
                 item.image?.asset?.url ? (
-                  <img
-                    key={i}
-                    src={item.image.asset.url}
-                    alt={item.alt ?? (en ? `${activeCat.labelEn} customer logo` : `${activeCat.label} 고객사 로고`)}
-                    className="h-12 w-auto shrink-0 object-contain"
-                  />
+                  <div key={i} className="h-20 w-full flex items-center justify-center">
+                    <img
+                      src={item.image.asset.url}
+                      alt={item.alt ?? (en ? `${activeCat.labelEn} customer logo` : `${activeCat.label} 고객사 로고`)}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
                 ) : null
               )}
             </div>
