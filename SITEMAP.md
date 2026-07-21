@@ -28,7 +28,7 @@
 │   │   ├─ ▣ 교반/탈포기         /solutions/standalone/mixer   (Sanity category: mixer-defoamer)
 │   │   ├─ ▣ 쓰리롤밀            /solutions/standalone/three-roll-mill
 │   │   ├─ ▣ 액상충진기           /solutions/standalone/filling
-│   │   ├─ ▣ AI 디스펜서          /solutions/standalone/dispenser
+│   │   ├─ ▣ 디스펜서             /solutions/standalone/dispenser
 │   │   ├─ ▣ 협동/직교/3축로봇    /solutions/standalone/robot
 │   │   ├─ ▣ UV/IR 경화기         /solutions/standalone/curing
 │   │   └─ ▣ 소모품               /solutions/standalone/consumables
@@ -37,9 +37,10 @@
 │       └─ ▣ 자동화 시스템         /solutions/ai/smart-factory
 │
 ▣ 블로그 (/blog)   ── GNB에서 바로 링크(하위 카테고리 펼침 없음). 페이지 안에서 아래로 이동.
+│   ├─ ▣ 적용사례            /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)
 │   ├─ ▣ 인사이트            /blog/insight        (Sanity: blogPost, category=insight)
-│   ├─ ▣ 팁                  /blog/tips           (Sanity: blogPost, category=tips)
-│   ├─ ▣ 케이스 스터디        /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)
+│   ├─ ▣ 액상제조 입문       /blog/guide-intro    (Sanity: blogPost, category=guide-intro)
+│   ├─ ▣ 제품 선택 방법      /blog/guide-product  (Sanity: blogPost, category=guide-product)
 │   └─ ▣ 뉴스                /blog/news           (Sanity: blogPost, category=news — 구 언론보도/특허수상 이전)
 │
 📁 적용사례(제품유형별) (/cases)  ── GNB 비노출, 레거시 유지
@@ -91,12 +92,20 @@ src/
 │  │     ├─ auto-calibration/page.tsx (+[slug])
 │  │     └─ smart-factory/page.tsx (+[slug])
 │  │
-│  ├─ blog/                      # ▣ /blog (전체보기) + 카테고리 3종
-│  │  ├─ page.tsx                # 전체보기 (blogPost + caseStudy 통합 피드)
-│  │  ├─ insight/page.tsx (+[slug])
-│  │  ├─ tips/page.tsx (+[slug])
-│  │  ├─ news/page.tsx (+[slug])
-│  │  └─ cases/page.tsx (+[slug])  # 산업군·공정 태그 필터(CaseStudyFilter)
+│  ├─ blog/                      # ▣ /blog (전체보기) + 카테고리 4종
+│  │  ├─ (list)/                 # 라우트 그룹(URL 미노출) — BlogHero를 layout에 둬 카테고리 전환 시 헤더 고정
+│  │  │  ├─ layout.tsx           # BlogHero(카테고리 탭 + 산업/공정 필터) + children
+│  │  │  ├─ page.tsx             # 전체보기 (blogPost + caseStudy 통합 피드)
+│  │  │  ├─ insight/page.tsx
+│  │  │  ├─ guide-intro/page.tsx
+│  │  │  ├─ guide-product/page.tsx
+│  │  │  ├─ news/page.tsx
+│  │  │  └─ cases/page.tsx        # 산업군·공정 필터는 BlogHero 우측 BlogFilterBar로 이동
+│  │  ├─ insight/[slug]/page.tsx
+│  │  ├─ guide-intro/[slug]/page.tsx
+│  │  ├─ guide-product/[slug]/page.tsx
+│  │  ├─ news/[slug]/page.tsx
+│  │  └─ cases/[slug]/page.tsx
 │  │
 │  ├─ cases/                     # 📁 (레거시, GNB 비노출)
 │  │  └─ product/                # 📁
@@ -119,7 +128,8 @@ src/
 │  ├─ layout/Header.tsx          # GNB 데스크톱(그룹=펼침, leaf=링크). 블로그는 leaf.
 │  ├─ layout/MobileNav.tsx       # GNB 모바일 아코디언
 │  ├─ layout/Footer.tsx
-│  ├─ blog/CaseStudyFilter.tsx   # /blog/cases 산업군·공정 태그 필터
+│  ├─ blog/BlogHero.tsx          # 카테고리 탭(고정 헤더) — usePathname으로 활성 탭 계산
+│  ├─ blog/BlogFilterBar.tsx     # 산업군·공정 필터(select 2개) — BlogHero 우측에 배치, URL 쿼리 갱신
 │  ├─ content/                   # ContentCard, ContentCardGrid, ContentDetail, TableOfContents
 │  └─ ui/                        # Button, Card 등
 │
@@ -130,6 +140,6 @@ src/
 
 ### 참고
 - 중간 디렉토리엔 `page.tsx`가 없으므로 `/solutions`, `/cases` 등을 직접 입력하면 404다. 정상 동작.
-- 블로그는 다른 그룹과 달리 GNB에서 하위 카테고리를 펼치지 않고 `/blog`로 바로 이동한다. 카테고리(인사이트/팁/케이스 스터디/뉴스) 이동은 `/blog` 페이지 상단 탭 링크로 한다.
+- 블로그는 다른 그룹과 달리 GNB에서 하위 카테고리를 펼치지 않고 `/blog`로 바로 이동한다. 카테고리(인사이트/액상제조 입문/제품 선택 방법/적용사례/뉴스) 이동은 `/blog` 페이지 상단 탭 링크로 한다.
 - 산업별 적용사례(구 `/cases/industry/*` 6개)는 `/blog/cases` 하나로 통합되었고, 산업군·공정은 URL이 아니라 Sanity `caseStudy` 문서의 태그(`industries`, `processes`)로 관리된다.
 - 자료실의 언론보도·특허수상은 `/blog/news`로 이전되었다(Sanity `blogPost`, category=news).

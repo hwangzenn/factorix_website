@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
-import { caseStudyBySlugQuery, type CaseStudyDetail } from "@/sanity/lib/queries"
+import { blogPostBySlugQuery, type BlogPostDetail } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
-import ContentDetail from "@/components/content/ContentDetail"
+import ResourceDetail from "@/app/resources/_components/ResourceDetail"
 
 type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const { data } = await sanityFetch({ query: caseStudyBySlugQuery, params: { slug } })
-  const item = data as CaseStudyDetail | null
+  const { data } = await sanityFetch({ query: blogPostBySlugQuery, params: { slug } })
+  const item = data as BlogPostDetail | null
   if (!item) return {}
   return {
     title: `${item.seo?.metaTitle || item.title} | Factorix`,
@@ -21,17 +21,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function CaseStudyDetailPage({ params }: Props) {
+export default async function GuideProductDetailPage({ params }: Props) {
   const { slug } = await params
-  const { data } = await sanityFetch({ query: caseStudyBySlugQuery, params: { slug } })
-  const item = data as CaseStudyDetail | null
+  const { data } = await sanityFetch({ query: blogPostBySlugQuery, params: { slug } })
+  const item = data as BlogPostDetail | null
   if (!item) notFound()
 
   return (
-    <ContentDetail
-      eyebrow="블로그 · 적용사례"
-      backHref={ROUTES.blog.cases}
-      backLabel="적용사례"
+    <ResourceDetail
+      eyebrow="블로그 · 제품 선택 방법"
+      backHref={ROUTES.blog.guideProduct}
+      backLabel="제품 선택 방법"
       data={item}
     />
   )

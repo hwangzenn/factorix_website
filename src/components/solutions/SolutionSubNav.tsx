@@ -11,7 +11,7 @@ const GROUPS = [
       { href: ROUTES.solutions.standalone.mixer, label: "교반/탈포기" },
       { href: ROUTES.solutions.standalone.threeRollMill, label: "쓰리롤밀" },
       { href: ROUTES.solutions.standalone.filling, label: "액상충진기" },
-      { href: ROUTES.solutions.standalone.dispenser, label: "AI 디스펜서" },
+      { href: ROUTES.solutions.standalone.dispenser, label: "디스펜서" },
       { href: ROUTES.solutions.standalone.robot, label: "협동/직교/3축로봇" },
       { href: ROUTES.solutions.standalone.curing, label: "UV/IR 경화기" },
     ],

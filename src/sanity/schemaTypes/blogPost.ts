@@ -1,9 +1,13 @@
 import { defineField, defineType } from 'sanity'
+import { INDUSTRIES, PROCESSES } from '../../lib/blogFilters'
 
 export const blogPost = defineType({
   name: 'blogPost',
   title: '블로그',
   type: 'document',
+  fieldsets: [
+    { name: 'tagsRow', title: '분류 태그', options: { columns: 2 } },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -25,7 +29,8 @@ export const blogPost = defineType({
       options: {
         list: [
           { title: '인사이트', value: 'insight' },
-          { title: '팁', value: 'tips' },
+          { title: '액상제조 입문', value: 'guide-intro' },
+          { title: '제품 선택 방법', value: 'guide-product' },
           { title: '뉴스', value: 'news' },
         ],
       },
@@ -35,6 +40,28 @@ export const blogPost = defineType({
       name: 'author',
       title: '작성자',
       type: 'string',
+    }),
+    defineField({
+      name: 'industries',
+      title: '산업군',
+      description: '블로그 목록 페이지의 산업군 필터로 사용됩니다.',
+      type: 'string',
+      fieldset: 'tagsRow',
+      options: {
+        layout: 'dropdown',
+        list: INDUSTRIES.map((i) => ({ title: i.label, value: i.key })),
+      },
+    }),
+    defineField({
+      name: 'processes',
+      title: '해당 공정',
+      description: '블로그 목록 페이지의 공정 필터로 사용됩니다.',
+      type: 'string',
+      fieldset: 'tagsRow',
+      options: {
+        layout: 'dropdown',
+        list: PROCESSES.map((p) => ({ title: p.label, value: p.key })),
+      },
     }),
     defineField({
       name: 'publishedAt',

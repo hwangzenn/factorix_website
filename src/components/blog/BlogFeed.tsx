@@ -11,7 +11,7 @@ export type FeedItem = {
   tag?: string | null
 }
 
-// 최상단 1개만 피처드(2열 큰 카드), 나머지는 2열 그리드
+// 첫 번째 아이템은 이미지가 화면 절반 크기인 featured 카드, 나머지는 2열 그리드
 export default function BlogFeed({
   items,
   emptyMessage = "콘텐츠 준비 중입니다.",
@@ -26,7 +26,7 @@ export default function BlogFeed({
   const [featured, ...rest] = items
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       <BlogCard
         title={featured.title}
         description={featured.description}
@@ -41,7 +41,7 @@ export default function BlogFeed({
       />
 
       {rest.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
           {rest.map((item, i) => (
             <BlogCard
               key={item._id}

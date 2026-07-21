@@ -60,7 +60,7 @@ const BUSINESSES = [
   {
     tag: "EQUIPMENT",
     title: "스마트 자동화 시스템",
-    desc: "액상 충진기, AI 디스펜서, 교반/탈포기, 3축 로봇 등 정밀 제조 장비 라인업. 단품부터 통합 자동화 시스템까지 구성 가능합니다.",
+    desc: "액상 충진기, 디스펜서, 교반/탈포기, 3축 로봇 등 정밀 제조 장비 라인업. 단품부터 통합 자동화 시스템까지 구성 가능합니다.",
     href: ROUTES.solutions.ai.smartFactory,
   },
   {

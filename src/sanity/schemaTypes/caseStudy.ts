@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { INDUSTRIES, PROCESSES } from '../../lib/blogFilters'
 
 export const caseStudy = defineType({
   name: 'caseStudy',
@@ -17,19 +18,12 @@ export const caseStudy = defineType({
     defineField({
       name: 'industries',
       title: '산업군',
-      description: '블로그 > 케이스 스터디(/blog/cases)의 필터로 사용됩니다.',
+      description: '블로그 > 적용사례(/blog/cases)의 필터로 사용됩니다.',
       type: 'string',
       fieldset: 'tagsRow',
       options: {
         layout: 'dropdown',
-        list: [
-          { title: '바이오', value: 'bio' },
-          { title: '화장품/뷰티', value: 'cosmetics' },
-          { title: '화학/소재', value: 'chemical' },
-          { title: '전기/전자', value: 'electronics' },
-          { title: '자동차', value: 'automotive' },
-          { title: '연구기관/대학', value: 'research' },
-        ],
+        list: INDUSTRIES.map((i) => ({ title: i.label, value: i.key })),
       },
     }),
     defineField({
@@ -39,14 +33,7 @@ export const caseStudy = defineType({
       fieldset: 'tagsRow',
       options: {
         layout: 'dropdown',
-        list: [
-          { title: '교반/탈포기', value: 'mixer-defoamer' },
-          { title: '쓰리롤밀', value: 'three-roll-mill' },
-          { title: '액상충진', value: 'filling' },
-          { title: 'AI 디스펜싱', value: 'dispenser' },
-          { title: 'UV/IR 경화', value: 'curing' },
-          { title: '로봇', value: 'robot' },
-        ],
+        list: PROCESSES.map((p) => ({ title: p.label, value: p.key })),
       },
     }),
     defineField({

@@ -7,44 +7,48 @@ import {
   type CaseStudyWithTags,
 } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
-import BlogHero from "@/components/blog/BlogHero"
+import { INDUSTRIES } from "@/lib/blogFilters"
 import BlogFeed, { type FeedItem } from "@/components/blog/BlogFeed"
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "블로그 | Factorix",
-  description: "액제제조·디스펜싱 자동화에 대한 팩토릭스의 인사이트, 팁, 케이스 스터디, 뉴스",
+  description: "액제제조·디스펜싱 자동화에 대한 팩토릭스의 인사이트, 액상제조 입문, 제품 선택 방법, 적용사례, 뉴스",
 }
 
 const CATEGORY_PATH: Record<string, string> = {
   insight: ROUTES.blog.insight,
-  tips: ROUTES.blog.tips,
+  "guide-intro": ROUTES.blog.guideIntro,
+  "guide-product": ROUTES.blog.guideProduct,
   news: ROUTES.blog.news,
 }
 
 const CATEGORY_LABEL: Record<string, string> = {
   insight: "인사이트",
-  tips: "팁",
+  "guide-intro": "액상제조 입문",
+  "guide-product": "제품 선택 방법",
   news: "뉴스",
 }
 
-const INDUSTRY_LABEL: Record<string, string> = {
-  bio: "바이오",
-  cosmetics: "화장품/뷰티",
-  chemical: "화학/소재",
-  electronics: "전기/전자",
-  automotive: "자동차",
-  research: "연구기관/대학",
+const INDUSTRY_LABEL: Record<string, string> = Object.fromEntries(INDUSTRIES.map((i) => [i.key, i.label]))
+
+type Props = {
+  searchParams: Promise<{ industry?: string; process?: string }>
 }
 
-export default async function BlogAllPage() {
+export default async function BlogAllPage({ searchParams }: Props) {
+  const { industry, process } = await searchParams
   const [{ data: postData }, { data: caseData }] = await Promise.all([
     sanityFetch({ query: allBlogPostsQuery }),
     sanityFetch({ query: allCaseStudiesQuery }),
   ])
-  const posts = (postData as BlogPostSummary[]) ?? []
-  const cases = (caseData as CaseStudyWithTags[]) ?? []
+  const posts = ((postData as BlogPostSummary[]) ?? []).filter(
+    (p) => (!industry || p.industries === industry) && (!process || p.processes === process)
+  )
+  const cases = ((caseData as CaseStudyWithTags[]) ?? []).filter(
+    (c) => (!industry || c.industries === industry) && (!process || c.processes === process)
+  )
 
   const items: FeedItem[] = [
     ...posts.map((p) => ({
@@ -64,22 +68,14 @@ export default async function BlogAllPage() {
       publishedAt: c.publishedAt,
       thumbnail: c.thumbnail,
       href: `${ROUTES.blog.cases}/${c.slug}`,
-      categoryLabel: "케이스 스터디",
+      categoryLabel: "적용사례",
       tag: c.industries ? INDUSTRY_LABEL[c.industries] ?? c.industries : null,
     })),
   ].sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
 
   return (
-    <div>
-      <BlogHero
-        title="블로그"
-        description="적용사례부터 다양한 인사이트까지, 팩토릭스의 블로그"
-        active="all"
-      />
-
-      <div className="max-w-5xl mx-auto px-6 py-14">
-        <BlogFeed items={items} />
-      </div>
+    <div className="max-w-5xl mx-auto px-6 py-14">
+      <BlogFeed items={items} />
     </div>
   )
 }

@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function TipsDetailPage({ params }: Props) {
+export default async function GuideIntroDetailPage({ params }: Props) {
   const { slug } = await params
   const { data } = await sanityFetch({ query: blogPostBySlugQuery, params: { slug } })
   const item = data as BlogPostDetail | null
@@ -29,9 +29,9 @@ export default async function TipsDetailPage({ params }: Props) {
 
   return (
     <ResourceDetail
-      eyebrow="블로그 · 팁"
-      backHref={ROUTES.blog.tips}
-      backLabel="팁"
+      eyebrow="블로그 · 액상제조 입문"
+      backHref={ROUTES.blog.guideIntro}
+      backLabel="액상제조 입문"
       data={item}
     />
   )

@@ -15,7 +15,7 @@ export default function ContentCard({ title, description, thumbnailUrl, thumbnai
       href={href}
       className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col"
     >
-      <div className="aspect-[1200/630] bg-gray-100 overflow-hidden">
+      <div className="aspect-square bg-gray-100 overflow-hidden">
         {thumbnailUrl ? (
           <Image
             src={thumbnailUrl}

@@ -28,7 +28,7 @@ export default function Footer() {
               <li><Link href={ROUTES.solutions.standalone.mixer} className="hover:text-white transition-colors">{en ? "Mixing/Defoaming" : "교반/탈포기"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.threeRollMill} className="hover:text-white transition-colors">{en ? "Three-Roll Mill" : "쓰리롤밀"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.filling} className="hover:text-white transition-colors">{en ? "Liquid Filling Machine" : "액상충진기"}</Link></li>
-              <li><Link href={ROUTES.solutions.standalone.dispenser} className="hover:text-white transition-colors">{en ? "AI Dispenser" : "AI 디스펜서"}</Link></li>
+              <li><Link href={ROUTES.solutions.standalone.dispenser} className="hover:text-white transition-colors">{en ? "Dispenser" : "디스펜서"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.robot} className="hover:text-white transition-colors">{en ? "Collaborative/Cartesian/3-Axis Robot" : "협동/직교/3축로봇"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.curing} className="hover:text-white transition-colors">{en ? "UV/IR Curing System" : "UV/IR 경화기"}</Link></li>
               <li><Link href={autoCalibrationHref} className="hover:text-white transition-colors">{en ? "AI Auto-Calibration System" : "AI 자동보정 토출시스템"}</Link></li>

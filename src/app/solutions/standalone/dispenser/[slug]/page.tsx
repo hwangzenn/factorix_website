@@ -29,9 +29,9 @@ export default async function DispenserDetailPage({ params }: Props) {
 
   return (
     <ContentDetail
-      eyebrow="액제제조 솔루션 · 단독설비 · AI 디스펜서"
+      eyebrow="액제제조 솔루션 · 단독설비 · 디스펜서"
       backHref={ROUTES.solutions.standalone.dispenser}
-      backLabel="AI 디스펜서"
+      backLabel="디스펜서"
       data={item}
     />
   )

@@ -16,7 +16,8 @@ const DARK_HERO_PATHS: string[] = [
   ROUTES.en.home,
   ROUTES.blog.all,
   ROUTES.blog.insight,
-  ROUTES.blog.tips,
+  ROUTES.blog.guideIntro,
+  ROUTES.blog.guideProduct,
   ROUTES.blog.cases,
   ROUTES.blog.news,
 ];

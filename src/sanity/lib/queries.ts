@@ -78,6 +78,8 @@ export type BlogPostSummary = {
   description: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
   tags: string[] | null
+  industries: string | null
+  processes: string | null
 }
 
 export type BlogPostDetail = BlogPostSummary & {
@@ -246,7 +248,9 @@ export const blogPostsByCategoryQuery = defineQuery(`
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },
-    tags
+    tags,
+    industries,
+    processes
   }
 `)
 
@@ -261,7 +265,9 @@ export const allBlogPostsQuery = defineQuery(`
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },
-    tags
+    tags,
+    industries,
+    processes
   }
 `)
 

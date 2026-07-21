@@ -23,7 +23,7 @@ export const ROUTES = {
       mixer: "/solutions/standalone/mixer",          // 교반/탈포기
       threeRollMill: "/solutions/standalone/three-roll-mill", // 쓰리롤밀
       filling: "/solutions/standalone/filling",      // 액상충진기
-      dispenser: "/solutions/standalone/dispenser",  // AI 디스펜서
+      dispenser: "/solutions/standalone/dispenser",  // 디스펜서
       robot: "/solutions/standalone/robot",          // 협동/직교/3축로봇
       curing: "/solutions/standalone/curing",        // UV/IR 경화기
       consumables: "/solutions/standalone/consumables", // 소모품
@@ -42,12 +42,13 @@ export const ROUTES = {
     },
   },
 
-  // 블로그 ── 콘텐츠마케팅(인사이트/팁/뉴스/케이스 스터디)
+  // 블로그 ── 콘텐츠마케팅(인사이트/액상제조 입문/제품 선택 방법/뉴스/적용사례)
   blog: {
     all: "/blog",                     // 전체보기
+    cases: "/blog/cases",             // 적용사례 (산업별 통합)
     insight: "/blog/insight",         // 인사이트
-    tips: "/blog/tips",               // 팁
-    cases: "/blog/cases",             // 케이스 스터디 (구 적용사례 > 산업별 통합)
+    guideIntro: "/blog/guide-intro",       // 액상제조 입문
+    guideProduct: "/blog/guide-product",   // 제품 선택 방법
     news: "/blog/news",               // 뉴스 (구 자료실 > 언론보도/특허수상 통합)
   },
 

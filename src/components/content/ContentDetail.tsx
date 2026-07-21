@@ -55,7 +55,7 @@ const portableComponents = {
     ),
     h3: ({ children }: { children?: React.ReactNode }) => <h3 className="text-xl font-semibold mt-6 mb-2">{children}</h3>,
     h4: ({ children }: { children?: React.ReactNode }) => <h4 className="text-lg font-semibold mt-4 mb-2">{children}</h4>,
-    normal: ({ children }: { children?: React.ReactNode }) => <p className="text-base leading-relaxed mb-4">{children}</p>,
+    normal: ({ children }: { children?: React.ReactNode }) => <p className="text-base leading-relaxed mb-4 whitespace-pre-line">{children}</p>,
     blockquote: ({ children }: { children?: React.ReactNode }) => <blockquote className="border-l-4 border-primary-300 pl-4 italic text-gray-600 my-4">{children}</blockquote>,
   },
 }
@@ -92,7 +92,7 @@ export default function ContentDetail({ eyebrow, backHref, backLabel, data }: Pr
       )}
 
       {data.description && (
-        <p className="text-gray-600 mb-8 leading-relaxed">{data.description}</p>
+        <p className="text-gray-600 mb-8 leading-relaxed whitespace-pre-line">{data.description}</p>
       )}
 
       {data.specs && data.specs.length > 0 && (

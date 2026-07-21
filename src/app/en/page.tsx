@@ -75,7 +75,7 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
 
 const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] = [
   { label: "Collaborative/Cartesian/3-Axis Robot", tag: "3-Axis Robot", href: ROUTES.solutions.standalone.robot, image: "/장비시스템/탁상로봇.png" },
-  { label: "AI Dispenser", tag: "Dispenser", href: ROUTES.solutions.standalone.dispenser, image: "/장비시스템/디스펜서.png" },
+  { label: "Dispenser", tag: "Dispenser", href: ROUTES.solutions.standalone.dispenser, image: "/장비시스템/디스펜서.png" },
   { label: "Liquid Filling Machine", tag: "Filling Machine", href: ROUTES.solutions.standalone.filling, image: "/장비시스템/충진기.png" },
   { label: "Mixing/Defoaming", tag: "Mixer/Defoamer", href: ROUTES.solutions.standalone.mixer, image: "/장비시스템/쓰리롤밀.png" },
   { label: "UV/IR Curing System", tag: "UV/IR Curing System", href: ROUTES.solutions.standalone.curing, image: "/장비시스템/경화기.png" },

@@ -9,7 +9,7 @@ const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; labe
       { value: "mixer", label: "교반/탈포기" },
       { value: "three-roll-mill", label: "쓰리롤밀" },
       { value: "filling", label: "액상충진기" },
-      { value: "dispenser", label: "AI 디스펜서" },
+      { value: "dispenser", label: "디스펜서" },
       { value: "robot", label: "협동/직교/3축로봇" },
       { value: "curing", label: "UV/IR 경화기" },
     ],
