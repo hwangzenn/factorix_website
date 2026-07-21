@@ -76,7 +76,7 @@ export default function ContentDetail({ eyebrow, backHref, data }: Props) {
       <div className="flex items-center justify-between gap-4 mb-6">
         <p className="text-base text-primary-600 font-medium">{eyebrow}</p>
         <Link href={backHref} className="text-base text-gray-400 hover:text-primary-600 transition-colors shrink-0">
-          ← 뒤로가기
+          ← {isProduct ? "다른 제품 보러가기" : "뒤로가기"}
         </Link>
       </div>
       {isProduct ? (
