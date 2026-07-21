@@ -31,7 +31,6 @@ export default async function CaseStudyDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="블로그 · 적용사례"
       backHref={ROUTES.blog.cases}
-      backLabel="적용사례"
       data={item}
     />
   )

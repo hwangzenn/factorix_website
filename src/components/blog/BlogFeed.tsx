@@ -7,6 +7,7 @@ export type FeedItem = {
   thumbnail?: { asset: { url: string } | null; alt?: string | null } | null
   href: string
   publishedAt?: string | null
+  author?: string | null
   categoryLabel: string
   tag?: string | null
 }
@@ -34,6 +35,7 @@ export default function BlogFeed({
         thumbnailAlt={featured.thumbnail?.alt}
         href={featured.href}
         publishedAt={featured.publishedAt}
+        author={featured.author}
         categoryLabel={featured.categoryLabel}
         tag={featured.tag}
         size="featured"
@@ -51,6 +53,7 @@ export default function BlogFeed({
               thumbnailAlt={item.thumbnail?.alt}
               href={item.href}
               publishedAt={item.publishedAt}
+              author={item.author}
               categoryLabel={item.categoryLabel}
               tag={item.tag}
               size="medium"

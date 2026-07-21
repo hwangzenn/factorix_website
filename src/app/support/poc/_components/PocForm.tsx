@@ -38,9 +38,10 @@ const inputClass = "w-full border border-gray-300 rounded-md px-4 py-3 text-sm f
 type Props = {
   formType?: string
   submitLabel?: string
+  presetProduct?: string
 }
 
-export default function PocForm({ formType = "PoC 문의", submitLabel = "문의 접수완료" }: Props) {
+export default function PocForm({ formType = "PoC 문의", submitLabel = "문의 접수완료", presetProduct }: Props) {
   const [model, setModel] = useState("")
   const [subModel, setSubModel] = useState("")
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
@@ -65,8 +66,8 @@ export default function PocForm({ formType = "PoC 문의", submitLabel = "문의
       name: fd.get("name") as string,
       phone: fd.get("phone") as string,
       email: fd.get("email") as string,
-      model: modelLabel,
-      subModel: subLabel,
+      model: presetProduct ?? modelLabel,
+      subModel: presetProduct ? "" : subLabel,
       message: fd.get("message") as string,
       timestamp: new Date().toISOString(),
     }
@@ -126,37 +127,44 @@ export default function PocForm({ formType = "PoC 문의", submitLabel = "문의
         <label className="block text-sm font-medium text-gray-700 mb-1">이메일 *</label>
         <input type="email" name="email" className={inputClass} placeholder="이메일을 입력하세요" required />
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {presetProduct ? (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">관심 모델</label>
-          <select
-            name="model"
-            className={inputClass}
-            value={model}
-            onChange={(e) => { setModel(e.target.value); setSubModel("") }}
-          >
-            <option value="">선택안함</option>
-            {Object.entries(MODEL_OPTIONS).map(([key, opt]) => (
-              <option key={key} value={key}>{opt.label}</option>
-            ))}
-          </select>
+          <label className="block text-sm font-medium text-gray-700 mb-1">문의 제품</label>
+          <input type="text" value={presetProduct} readOnly className={`${inputClass} bg-gray-50 text-gray-600`} />
         </div>
-        <div>
-          <label className={`block text-sm font-medium mb-1 ${model ? "text-gray-700" : "text-gray-400"}`}>하위 모델</label>
-          <select
-            name="subModel"
-            className={`${inputClass} ${!model ? "bg-gray-100 text-gray-400 cursor-not-allowed" : ""}`}
-            value={subModel}
-            onChange={(e) => setSubModel(e.target.value)}
-            disabled={!model}
-          >
-            <option value="">선택안함</option>
-            {subs.map((s) => (
-              <option key={s.value} value={s.value}>{s.label}</option>
-            ))}
-          </select>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">관심 모델</label>
+            <select
+              name="model"
+              className={inputClass}
+              value={model}
+              onChange={(e) => { setModel(e.target.value); setSubModel("") }}
+            >
+              <option value="">선택안함</option>
+              {Object.entries(MODEL_OPTIONS).map(([key, opt]) => (
+                <option key={key} value={key}>{opt.label}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={`block text-sm font-medium mb-1 ${model ? "text-gray-700" : "text-gray-400"}`}>하위 모델</label>
+            <select
+              name="subModel"
+              className={`${inputClass} ${!model ? "bg-gray-100 text-gray-400 cursor-not-allowed" : ""}`}
+              value={subModel}
+              onChange={(e) => setSubModel(e.target.value)}
+              disabled={!model}
+            >
+              <option value="">선택안함</option>
+              {subs.map((s) => (
+                <option key={s.value} value={s.value}>{s.label}</option>
+              ))}
+            </select>
+          </div>
         </div>
-      </div>
+      )}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">문의 내용</label>
         <textarea name="message" rows={5} className={`${inputClass} resize-none`} placeholder="문의 내용을 입력하세요" />

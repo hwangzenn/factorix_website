@@ -31,7 +31,6 @@ export default async function SolutionsCaseDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="적용사례 · 제품유형별 · 액제제조 솔루션"
       backHref={ROUTES.cases.product.solutions}
-      backLabel="솔루션 적용사례"
       data={item}
     />
   )

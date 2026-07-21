@@ -31,7 +31,6 @@ export default async function ConsumablesDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · 단독설비 · 소모품"
       backHref={ROUTES.solutions.standalone.consumables}
-      backLabel="소모품"
       data={item}
     />
   )

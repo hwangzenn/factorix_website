@@ -14,20 +14,18 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "블로그 | Factorix",
-  description: "액제제조·디스펜싱 자동화에 대한 팩토릭스의 인사이트, 액상제조 입문, 제품 선택 방법, 적용사례, 뉴스",
+  description: "액제제조·디스펜싱 자동화에 대한 팩토릭스의 인사이트, 액상 공정 엔지니어링 위키, 적용사례, 뉴스",
 }
 
 const CATEGORY_PATH: Record<string, string> = {
   insight: ROUTES.blog.insight,
   "guide-intro": ROUTES.blog.guideIntro,
-  "guide-product": ROUTES.blog.guideProduct,
   news: ROUTES.blog.news,
 }
 
 const CATEGORY_LABEL: Record<string, string> = {
   insight: "인사이트",
-  "guide-intro": "액상제조 입문",
-  "guide-product": "제품 선택 방법",
+  "guide-intro": "액상 공정 엔지니어링 위키",
   news: "뉴스",
 }
 
@@ -58,6 +56,7 @@ export default async function BlogAllPage({ searchParams }: Props) {
       publishedAt: p.publishedAt,
       thumbnail: p.thumbnail,
       href: `${CATEGORY_PATH[p.category]}/${p.slug}`,
+      author: p.author,
       categoryLabel: CATEGORY_LABEL[p.category] ?? p.category,
       tag: p.tags?.[0] ?? null,
     })),

@@ -7,8 +7,8 @@ import BlogFeed from "@/components/blog/BlogFeed"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "액상제조 입문 | Factorix",
-  description: "액제제조·디스펜싱 자동화를 처음 접하는 분들을 위한 팩토릭스의 입문 가이드",
+  title: "액상 공정 엔지니어링 위키 | Factorix",
+  description: "액상 제조·디스펜싱 공정의 기초 개념과 실무 지식을 정리한 팩토릭스의 엔지니어링 위키",
 }
 
 type Props = {
@@ -32,7 +32,8 @@ export default async function GuideIntroPage({ searchParams }: Props) {
           thumbnail: item.thumbnail,
           href: `${ROUTES.blog.guideIntro}/${item.slug}`,
           publishedAt: item.publishedAt,
-          categoryLabel: "액상제조 입문",
+          author: item.author,
+          categoryLabel: "액상 공정 엔지니어링 위키",
           tag: item.tags?.[0] ?? null,
         }))}
       />

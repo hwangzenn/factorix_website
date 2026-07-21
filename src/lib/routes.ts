@@ -42,13 +42,12 @@ export const ROUTES = {
     },
   },
 
-  // 블로그 ── 콘텐츠마케팅(인사이트/액상제조 입문/제품 선택 방법/뉴스/적용사례)
+  // 블로그 ── 콘텐츠마케팅(인사이트/액상 공정 엔지니어링 위키/뉴스/적용사례)
   blog: {
     all: "/blog",                     // 전체보기
     cases: "/blog/cases",             // 적용사례 (산업별 통합)
     insight: "/blog/insight",         // 인사이트
-    guideIntro: "/blog/guide-intro",       // 액상제조 입문
-    guideProduct: "/blog/guide-product",   // 제품 선택 방법
+    guideIntro: "/blog/guide-intro",       // 액상 공정 엔지니어링 위키
     news: "/blog/news",               // 뉴스 (구 자료실 > 언론보도/특허수상 통합)
   },
 

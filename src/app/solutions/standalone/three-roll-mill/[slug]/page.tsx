@@ -31,7 +31,6 @@ export default async function ThreeRollMillDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · 단독설비 · 쓰리롤밀"
       backHref={ROUTES.solutions.standalone.threeRollMill}
-      backLabel="쓰리롤밀"
       data={item}
     />
   )

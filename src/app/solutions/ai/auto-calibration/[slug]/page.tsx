@@ -31,7 +31,6 @@ export default async function AutoCalibrationDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · AI 시스템 · AI 자동보정"
       backHref={ROUTES.solutions.ai.autoCalibration}
-      backLabel="AI 자동보정 토출시스템"
       data={item}
     />
   )

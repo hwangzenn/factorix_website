@@ -29,8 +29,7 @@ export const blogPost = defineType({
       options: {
         list: [
           { title: '인사이트', value: 'insight' },
-          { title: '액상제조 입문', value: 'guide-intro' },
-          { title: '제품 선택 방법', value: 'guide-product' },
+          { title: '액상 공정 엔지니어링 위키', value: 'guide-intro' },
           { title: '뉴스', value: 'news' },
         ],
       },
@@ -102,6 +101,23 @@ export const blogPost = defineType({
             { title: '소제목 (H3)', value: 'h3' },
             { title: '소제목 (H4)', value: 'h4' },
           ],
+          marks: {
+            annotations: [
+              {
+                name: 'link',
+                type: 'object',
+                title: '링크',
+                fields: [
+                  defineField({
+                    name: 'href',
+                    title: 'URL',
+                    type: 'url',
+                    validation: (Rule) => Rule.uri({ scheme: ['http', 'https', 'mailto', 'tel'] }),
+                  }),
+                ],
+              },
+            ],
+          },
         },
         {
           type: 'image',

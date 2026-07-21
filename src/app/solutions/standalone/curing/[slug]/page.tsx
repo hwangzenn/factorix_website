@@ -31,7 +31,6 @@ export default async function CuringDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · 단독설비 · UV/IR 경화기"
       backHref={ROUTES.solutions.standalone.curing}
-      backLabel="UV/IR 경화기"
       data={item}
     />
   )

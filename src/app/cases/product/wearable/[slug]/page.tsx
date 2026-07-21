@@ -31,7 +31,6 @@ export default async function WearableCaseDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="적용사례 · 제품유형별 · 웨어러블 디바이스"
       backHref={ROUTES.cases.product.wearable}
-      backLabel="웨어러블 적용사례"
       data={item}
     />
   )

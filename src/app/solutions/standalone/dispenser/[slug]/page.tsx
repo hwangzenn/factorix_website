@@ -31,7 +31,6 @@ export default async function DispenserDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · 단독설비 · 디스펜서"
       backHref={ROUTES.solutions.standalone.dispenser}
-      backLabel="디스펜서"
       data={item}
     />
   )

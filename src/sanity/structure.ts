@@ -21,8 +21,7 @@ const RESOURCE_GROUPS = [
 // 블로그(blogPost) 카테고리 그룹 — src/sanity/schemaTypes/blogPost.ts 의 category 옵션과 동기화
 const BLOG_POST_GROUPS = [
   { key: 'insight', title: '인사이트' },
-  { key: 'guide-intro', title: '액상제조 입문' },
-  { key: 'guide-product', title: '제품 선택 방법' },
+  { key: 'guide-intro', title: '액상 공정 엔지니어링 위키' },
   { key: 'news', title: '뉴스' },
 ]
 

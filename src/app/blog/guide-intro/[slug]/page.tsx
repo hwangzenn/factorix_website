@@ -29,9 +29,9 @@ export default async function GuideIntroDetailPage({ params }: Props) {
 
   return (
     <ResourceDetail
-      eyebrow="블로그 · 액상제조 입문"
+      eyebrow="블로그 · 액상 공정 엔지니어링 위키"
       backHref={ROUTES.blog.guideIntro}
-      backLabel="액상제조 입문"
+      backLabel="액상 공정 엔지니어링 위키"
       data={item}
     />
   )

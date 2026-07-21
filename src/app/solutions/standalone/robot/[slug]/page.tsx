@@ -31,7 +31,6 @@ export default async function RobotDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · 단독설비 · 협동/직교/3축로봇"
       backHref={ROUTES.solutions.standalone.robot}
-      backLabel="협동/직교/3축로봇"
       data={item}
     />
   )

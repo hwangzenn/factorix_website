@@ -31,7 +31,6 @@ export default async function SmartFactoryDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · AI 시스템 · 자동화 시스템"
       backHref={ROUTES.solutions.ai.smartFactory}
-      backLabel="자동화 시스템"
       data={item}
     />
   )

@@ -31,7 +31,6 @@ export default async function FillingDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · 단독설비 · 액상충진기"
       backHref={ROUTES.solutions.standalone.filling}
-      backLabel="액상충진기"
       data={item}
     />
   )

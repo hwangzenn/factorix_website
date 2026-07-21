@@ -31,7 +31,6 @@ export default async function MixerDetailPage({ params }: Props) {
     <ContentDetail
       eyebrow="액제제조 솔루션 · 단독설비 · 교반/탈포기"
       backHref={ROUTES.solutions.standalone.mixer}
-      backLabel="교반/탈포기"
       data={item}
     />
   )

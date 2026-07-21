@@ -32,6 +32,7 @@ export default async function NewsPage({ searchParams }: Props) {
           thumbnail: item.thumbnail,
           href: `${ROUTES.blog.news}/${item.slug}`,
           publishedAt: item.publishedAt,
+          author: item.author,
           categoryLabel: "뉴스",
           tag: item.tags?.[0] ?? null,
         }))}
