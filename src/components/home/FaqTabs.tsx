@@ -6,7 +6,7 @@ import type { Locale } from "@/lib/i18n";
 type FaqCategory = {
   key: string;
   label: string;
-  items: { question: string }[];
+  items: { _id?: string; question: string; answer?: string }[];
 };
 
 export default function FaqTabs({ categories, locale = "ko" }: { categories: FaqCategory[]; locale?: Locale }) {
@@ -52,7 +52,7 @@ export default function FaqTabs({ categories, locale = "ko" }: { categories: Faq
         {activeCategory.items.map((item, i) => {
           const isOpen = openIndex === i;
           return (
-            <div key={item.question} className="rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
+            <div key={item._id ?? item.question} className="rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
               <button
                 type="button"
                 onClick={() => setOpenIndex(isOpen ? null : i)}
@@ -71,7 +71,9 @@ export default function FaqTabs({ categories, locale = "ko" }: { categories: Faq
                 </svg>
               </button>
               {isOpen && (
-                <p className="px-6 pb-5 text-sm text-gray-400 italic">{locale === "en" ? "Answer coming soon." : "답변 준비 중입니다."}</p>
+                <p className="px-6 pb-5 text-sm text-gray-500 whitespace-pre-line">
+                  {item.answer || (locale === "en" ? "Answer coming soon." : "답변 준비 중입니다.")}
+                </p>
               )}
             </div>
           );

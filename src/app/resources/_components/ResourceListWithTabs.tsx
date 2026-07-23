@@ -34,7 +34,6 @@ export default function ResourceListWithTabs({ items }: { items: ResourceItem[] 
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-20">
-      <p className="text-sm text-primary-600 font-medium mb-2">자료실</p>
       <h1 className="text-4xl font-bold text-primary-800 mb-8">자료실</h1>
 
       <nav className="flex gap-1 border-b border-gray-200 mb-10">

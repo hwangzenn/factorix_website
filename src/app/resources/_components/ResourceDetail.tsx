@@ -14,7 +14,7 @@ type ImageBlock = {
 }
 
 type BodyImageBlock = {
-  asset: { url: string; metadata?: { dimensions?: { width: number; height: number } } }
+  asset?: { url: string; metadata?: { dimensions?: { width: number; height: number } } }
   alt: string | null
   caption: string | null
 }
@@ -49,6 +49,7 @@ type Props = {
 const portableComponents = {
   types: {
     image: ({ value }: { value: BodyImageBlock }) => {
+      if (!value.asset?.url) return null
       const { width, height } = value.asset.metadata?.dimensions ?? { width: 1200, height: 630 }
       return (
         <figure className="my-6">

@@ -298,6 +298,33 @@ export type RelatedBlogPost = {
   thumbnail: { asset: { url: string }; alt: string | null } | null
 }
 
+export type FaqItem = {
+  _id: string
+  question: string
+  answer: string
+  category: string
+}
+
+export const featuredFaqsQuery = defineQuery(`
+  *[_type == "faq" && isPublic == true && featuredOnMain == true]
+  | order(category asc, order asc) {
+    _id,
+    question,
+    answer,
+    category
+  }
+`)
+
+export const allFaqsQuery = defineQuery(`
+  *[_type == "faq" && isPublic == true]
+  | order(category asc, order asc) {
+    _id,
+    question,
+    answer,
+    category
+  }
+`)
+
 export const blogPostBySlugQuery = defineQuery(`
   *[_type == "blogPost" && slug.current == $slug && isPublic == true][0] {
     _id,

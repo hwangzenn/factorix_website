@@ -107,11 +107,16 @@ export const structure: StructureResolver = (S) =>
               ),
             ])
         ),
+      S.listItem()
+        .id('faq')
+        .title('자주 묻는 질문')
+        .child(S.documentTypeList('faq').id('faq-list').title('자주 묻는 질문')),
       ...S.documentTypeListItems().filter(
         (item) =>
           item.getId() !== 'product' &&
           item.getId() !== 'referenceMaterial' &&
           item.getId() !== 'caseStudy' &&
-          item.getId() !== 'blogPost'
+          item.getId() !== 'blogPost' &&
+          item.getId() !== 'faq'
       ),
     ])

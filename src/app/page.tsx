@@ -8,8 +8,10 @@ import { sanityFetch } from "@/sanity/lib/live";
 import {
   allCaseStudiesQuery,
   industryLogosQuery,
+  featuredFaqsQuery,
   type CaseStudyWithTags,
   type IndustryLogo,
+  type FaqItem,
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
@@ -159,6 +161,7 @@ const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
+// Sanity(faq)에 featuredOnMain == true로 등록된 문항이 없을 때 노출되는 기본값
 const FAQ_SOLUTION: { question: string }[] = [
   { question: "FactoriX가 제조장비 유통기업과 무엇이 다른가요?" },
   { question: "반도체 패키징 공정 솔루션만 제공하나요?" },
@@ -175,6 +178,11 @@ const FAQ_PROCESS: { question: string }[] = [
   { question: "액상공정 개선의 핵심 지표는 무엇인가요?" },
 ];
 
+const FAQ_CATEGORY_LABELS: Record<string, string> = {
+  solution: "FactoriX 솔루션",
+  process: "액상 제조공정",
+};
+
 const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
   { label: "액상 교반\n및 탈포", iconKey: "mixing", href: ROUTES.solutions.standalone.mixer },
   { label: "입자 분산\n및 3롤밀", iconKey: "dispersion", href: ROUTES.solutions.standalone.mixer },
@@ -190,6 +198,16 @@ export default async function HomePage() {
   const caseStudies = (caseData as CaseStudyWithTags[]) ?? [];
   const { data: logoData } = await sanityFetch({ query: industryLogosQuery });
   const industryLogos = (logoData as IndustryLogo[]) ?? [];
+  const { data: faqData } = await sanityFetch({ query: featuredFaqsQuery });
+  const faqs = (faqData as FaqItem[]) ?? [];
+  const faqCategories = faqs.length > 0
+    ? Object.entries(FAQ_CATEGORY_LABELS)
+        .map(([key, label]) => ({ key, label, items: faqs.filter((f) => f.category === key) }))
+        .filter((c) => c.items.length > 0)
+    : [
+        { key: "solution", label: FAQ_CATEGORY_LABELS.solution, items: FAQ_SOLUTION },
+        { key: "process", label: FAQ_CATEGORY_LABELS.process, items: FAQ_PROCESS },
+      ];
 
   return (
     <div className="flex flex-col">
@@ -415,12 +433,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <FaqTabs
-            categories={[
-              { key: "solution", label: "FactoriX 솔루션", items: FAQ_SOLUTION },
-              { key: "process", label: "액상 제조공정", items: FAQ_PROCESS },
-            ]}
-          />
+          <FaqTabs categories={faqCategories} />
         </div>
       </section>
 
