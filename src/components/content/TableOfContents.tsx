@@ -24,6 +24,12 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
 
   if (headings.length < 2) return null
 
+  const LEVEL_STYLE: Record<Heading["level"], string> = {
+    h2: "pl-4 text-sm font-semibold",
+    h3: "pl-8 text-sm",
+    h4: "pl-12 text-xs",
+  }
+
   return (
     <nav className="hidden lg:block sticky top-28 self-start w-[200px] shrink-0">
       <p className="text-xs font-semibold text-gray-400 mb-3 tracking-wide">목차</p>
@@ -32,7 +38,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
           <li key={h.id}>
             <a
               href={`#${h.id}`}
-              className={`block pl-4 -ml-px border-l-2 py-0.5 text-sm transition-colors ${
+              className={`block -ml-px border-l-2 py-0.5 transition-colors ${LEVEL_STYLE[h.level]} ${
                 activeId === h.id
                   ? "border-primary-700 text-primary-700 font-medium"
                   : "border-transparent text-gray-500 hover:text-gray-800"

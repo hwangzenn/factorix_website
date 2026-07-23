@@ -3,12 +3,20 @@ import Image from "next/image"
 import Link from "next/link"
 import { PortableText, type PortableTextBlock } from "@portabletext/react"
 import { extractHeadings, slugifyHeading, blockText } from "@/lib/toc"
+import { getVideoEmbedUrl } from "@/lib/video"
+import type { VideoEmbedBlock } from "@/sanity/lib/queries"
 import TableOfContents from "./TableOfContents"
 import QuoteButton from "./QuoteButton"
 import ProductHero from "./ProductHero"
 
 type ImageBlock = {
   asset: { url: string }
+  alt: string | null
+  caption: string | null
+}
+
+type BodyImageBlock = {
+  asset: { url: string; metadata?: { dimensions?: { width: number; height: number } } }
   alt: string | null
   caption: string | null
 }
@@ -31,21 +39,42 @@ type Props = {
 
 const portableComponents = {
   types: {
-    image: ({ value }: { value: ImageBlock }) => (
-      <figure className="my-6">
-        <div className="relative w-full aspect-[1200/630] rounded-lg overflow-hidden bg-gray-100">
+    image: ({ value }: { value: BodyImageBlock }) => {
+      const { width, height } = value.asset.metadata?.dimensions ?? { width: 1200, height: 630 }
+      return (
+        <figure className="my-6">
           <Image
             src={value.asset.url}
             alt={value.alt ?? ""}
-            fill
-            className="object-cover"
+            width={width}
+            height={height}
+            className="w-full h-auto max-h-[600px] object-contain rounded-lg mx-auto"
           />
-        </div>
-        {value.caption && (
-          <figcaption className="text-center text-base text-gray-400 mt-2">{value.caption}</figcaption>
-        )}
-      </figure>
-    ),
+          {value.caption && (
+            <figcaption className="text-center text-base text-gray-400 mt-2">{value.caption}</figcaption>
+          )}
+        </figure>
+      )
+    },
+    videoEmbed: ({ value }: { value: VideoEmbedBlock }) => {
+      const src = getVideoEmbedUrl(value.url)
+      if (!src) return null
+      return (
+        <figure className="my-6">
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-100">
+            <iframe
+              src={src}
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          {value.caption && (
+            <figcaption className="text-center text-base text-gray-400 mt-2">{value.caption}</figcaption>
+          )}
+        </figure>
+      )
+    },
   },
   block: {
     h1: ({ children }: { children?: React.ReactNode }) => <h1 className="text-4xl font-bold mt-10 mb-4">{children}</h1>,

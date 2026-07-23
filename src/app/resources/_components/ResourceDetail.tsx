@@ -3,10 +3,18 @@ import Image from "next/image"
 import Link from "next/link"
 import { PortableText, type PortableTextBlock } from "@portabletext/react"
 import { extractHeadings, slugifyHeading, blockText } from "@/lib/toc"
+import { getVideoEmbedUrl } from "@/lib/video"
+import type { VideoEmbedBlock } from "@/sanity/lib/queries"
 import TableOfContents from "@/components/content/TableOfContents"
 
 type ImageBlock = {
   asset: { url: string }
+  alt: string | null
+  caption: string | null
+}
+
+type BodyImageBlock = {
+  asset: { url: string; metadata?: { dimensions?: { width: number; height: number } } }
   alt: string | null
   caption: string | null
 }
@@ -22,30 +30,60 @@ type ResourceDetailData = {
   externalUrl?: string | null
 }
 
+type RelatedItem = {
+  _id: string
+  title: string
+  href: string
+  publishedAt?: string | null
+  thumbnail?: { asset: { url: string }; alt: string | null } | null
+}
+
 type Props = {
   eyebrow: string
   backHref: string
   backLabel: string
   data: ResourceDetailData
+  related?: RelatedItem[]
 }
 
 const portableComponents = {
   types: {
-    image: ({ value }: { value: ImageBlock }) => (
-      <figure className="my-6">
-        <div className="relative w-full aspect-[1200/630] rounded-lg overflow-hidden bg-gray-100">
+    image: ({ value }: { value: BodyImageBlock }) => {
+      const { width, height } = value.asset.metadata?.dimensions ?? { width: 1200, height: 630 }
+      return (
+        <figure className="my-6">
           <Image
             src={value.asset.url}
             alt={value.alt ?? ""}
-            fill
-            className="object-cover"
+            width={width}
+            height={height}
+            className="w-full h-auto max-h-[600px] object-contain rounded-lg mx-auto"
           />
-        </div>
-        {value.caption && (
-          <figcaption className="text-center text-sm text-gray-400 mt-2">{value.caption}</figcaption>
-        )}
-      </figure>
-    ),
+          {value.caption && (
+            <figcaption className="text-center text-sm text-gray-400 mt-2">{value.caption}</figcaption>
+          )}
+        </figure>
+      )
+    },
+    videoEmbed: ({ value }: { value: VideoEmbedBlock }) => {
+      const src = getVideoEmbedUrl(value.url)
+      if (!src) return null
+      return (
+        <figure className="my-6">
+          <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-gray-100">
+            <iframe
+              src={src}
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          {value.caption && (
+            <figcaption className="text-center text-sm text-gray-400 mt-2">{value.caption}</figcaption>
+          )}
+        </figure>
+      )
+    },
   },
   marks: {
     link: ({ children, value }: { children?: React.ReactNode; value?: { href?: string } }) => {
@@ -76,13 +114,21 @@ const portableComponents = {
   },
 }
 
-export default function ResourceDetail({ eyebrow, backHref, backLabel, data }: Props) {
+export default function ResourceDetail({ eyebrow, backHref, backLabel, data, related }: Props) {
   const headings = extractHeadings(data.body)
   const hasToc = headings.length >= 2
+  const hasRelated = Boolean(related && related.length > 0)
+  const gridCols = hasToc && hasRelated
+    ? "lg:grid-cols-[200px_1fr_260px]"
+    : hasToc
+    ? "lg:grid-cols-[200px_1fr]"
+    : hasRelated
+    ? "lg:grid-cols-[1fr_260px]"
+    : ""
 
   return (
-    <div className={`mx-auto px-6 py-20 ${hasToc ? "max-w-5xl" : "max-w-3xl"}`}>
-      <div className={hasToc ? "grid lg:grid-cols-[200px_1fr] gap-10" : ""}>
+    <div className={`mx-auto px-6 py-20 ${hasToc || hasRelated ? "max-w-6xl" : "max-w-3xl"}`}>
+      <div className={gridCols ? `grid ${gridCols} gap-10` : ""}>
         {hasToc && <TableOfContents headings={headings} />}
         <div>
       <p className="text-sm text-primary-600 font-medium mb-1">{eyebrow}</p>
@@ -161,6 +207,38 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data }: P
         )}
       </div>
         </div>
+
+        {hasRelated && (
+          <aside className="hidden lg:block self-start sticky top-28">
+            <p className="text-xs font-semibold text-gray-400 mb-3 tracking-wide">연관 콘텐츠</p>
+            <div className="space-y-4">
+              {related!.map((item) => (
+                <Link key={item._id} href={item.href} className="group flex gap-3">
+                  <div className="relative w-20 aspect-square rounded-lg overflow-hidden bg-gray-100 shrink-0">
+                    {item.thumbnail?.asset?.url && (
+                      <Image
+                        src={item.thumbnail.asset.url}
+                        alt={item.thumbnail.alt ?? item.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium text-gray-900 line-clamp-2 group-hover:text-primary-700 transition-colors">
+                      {item.title}
+                    </p>
+                    {item.publishedAt && (
+                      <p className="text-xs text-gray-400 mt-1">
+                        {new Date(item.publishedAt).toLocaleDateString("ko-KR")}
+                      </p>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </aside>
+        )}
       </div>
     </div>
   )

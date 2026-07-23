@@ -14,6 +14,7 @@ const GROUPS = [
       { href: ROUTES.solutions.standalone.dispenser, label: "디스펜서" },
       { href: ROUTES.solutions.standalone.robot, label: "협동/직교/3축로봇" },
       { href: ROUTES.solutions.standalone.curing, label: "UV/IR 경화기" },
+      { href: ROUTES.solutions.standalone.consumables, label: "소모품" },
     ],
   },
   {

@@ -70,7 +70,7 @@ export default function BlogCard({
         </div>
       </div>
 
-      <div className={`flex flex-col flex-1 min-w-0 p-5 pb-[120px] ${isFeatured ? "md:p-8 md:pb-[132px] md:justify-center" : ""}`}>
+      <div className={`flex flex-col flex-1 min-w-0 p-5 pb-[120px] ${isFeatured ? "md:p-8 md:pb-[132px]" : ""}`}>
         <p
           className={`font-bold text-gray-900 leading-snug group-hover:text-primary-700 transition-colors mb-2 ${
             isFeatured ? "text-2xl md:text-3xl line-clamp-2" : "text-base line-clamp-2"

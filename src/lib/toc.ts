@@ -1,6 +1,7 @@
 import type { PortableTextBlock } from "@portabletext/react"
 
-export type Heading = { id: string; text: string }
+export type HeadingLevel = "h2" | "h3" | "h4"
+export type Heading = { id: string; text: string; level: HeadingLevel }
 
 export function slugifyHeading(text: string): string {
   return (
@@ -21,7 +22,11 @@ export function blockText(block: PortableTextBlock): string {
 export function extractHeadings(body: PortableTextBlock[] | null | undefined): Heading[] {
   if (!body) return []
   return body
-    .filter((block) => block.style === "h2")
-    .map((block) => ({ id: slugifyHeading(blockText(block)), text: blockText(block) }))
+    .filter((block) => block.style === "h2" || block.style === "h3" || block.style === "h4")
+    .map((block) => ({
+      id: slugifyHeading(blockText(block)),
+      text: blockText(block),
+      level: block.style as HeadingLevel,
+    }))
     .filter((h) => h.text.trim().length > 0)
 }

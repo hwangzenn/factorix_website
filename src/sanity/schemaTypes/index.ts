@@ -5,7 +5,8 @@ import { caseStudy } from './caseStudy'
 import { seo } from './seo'
 import { industryLogo } from './industryLogo'
 import { blogPost } from './blogPost'
+import { videoEmbed } from './videoEmbed'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [product, referenceMaterial, caseStudy, industryLogo, blogPost, seo],
+  types: [product, referenceMaterial, caseStudy, industryLogo, blogPost, seo, videoEmbed],
 }

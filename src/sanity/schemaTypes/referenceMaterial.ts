@@ -73,6 +73,7 @@ export const referenceMaterial = defineType({
             defineField({ name: 'caption', title: '캡션', type: 'string' }),
           ],
         },
+        { type: 'videoEmbed' },
       ],
     }),
     defineField({

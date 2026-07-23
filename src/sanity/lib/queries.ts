@@ -16,6 +16,12 @@ export type SeoData = {
 
 const seoProjection = `seo { metaTitle, metaDescription, ogImage { asset->{ url } }, ogImageAlt }`
 
+// body(PortableText) 안의 image 블록은 asset이 참조(_ref)일 뿐이라 asset->로 역참조해야
+// 프론트에서 value.asset.url을 읽을 수 있다. block/videoEmbed 타입은 ...로 그대로 통과.
+const bodyProjection = `body[]{ ..., _type == "image" => { ..., asset->{ url, metadata { dimensions { width, height } } } } }`
+
+export type VideoEmbedBlock = { _type: 'videoEmbed'; url: string; caption: string | null }
+
 export type ReferenceMaterialSummary = {
   _id: string
   title: string
@@ -152,7 +158,7 @@ export const referenceMaterialBySlugQuery = defineQuery(`
     description,
     thumbnail { asset->{ url }, alt },
     images[] { asset->{ url }, alt, caption },
-    body,
+    ${bodyProjection},
     "fileUrl": file.asset->url,
     externalUrl,
     ${seoProjection}
@@ -191,7 +197,7 @@ export const productBySlugQuery = defineQuery(`
     description,
     specs,
     images[] { asset->{ url }, alt, caption },
-    body,
+    ${bodyProjection},
     ${seoProjection}
   }
 `)
@@ -232,7 +238,7 @@ export const caseStudyBySlugQuery = defineQuery(`
     description,
     publishedAt,
     thumbnail { asset->{ url }, alt },
-    body,
+    ${bodyProjection},
     ${seoProjection}
   }
 `)
@@ -271,6 +277,25 @@ export const allBlogPostsQuery = defineQuery(`
   }
 `)
 
+export const relatedBlogPostsQuery = defineQuery(`
+  *[_type == "blogPost" && category == $category && isPublic == true && slug.current != $slug]
+  | order(publishedAt desc) [0...4] {
+    _id,
+    title,
+    "slug": slug.current,
+    publishedAt,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
+export type RelatedBlogPost = {
+  _id: string
+  title: string
+  slug: string
+  publishedAt: string | null
+  thumbnail: { asset: { url: string }; alt: string | null } | null
+}
+
 export const blogPostBySlugQuery = defineQuery(`
   *[_type == "blogPost" && slug.current == $slug && isPublic == true][0] {
     _id,
@@ -282,7 +307,7 @@ export const blogPostBySlugQuery = defineQuery(`
     description,
     thumbnail { asset->{ url }, alt },
     tags,
-    body,
+    ${bodyProjection},
     ${seoProjection}
   }
 `)

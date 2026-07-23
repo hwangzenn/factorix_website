@@ -127,6 +127,7 @@ export const blogPost = defineType({
             defineField({ name: 'caption', title: '캡션', type: 'string' }),
           ],
         },
+        { type: 'videoEmbed' },
       ],
     }),
     defineField({
