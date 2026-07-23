@@ -4,7 +4,7 @@ import Link from "next/link"
 import { PortableText, type PortableTextBlock } from "@portabletext/react"
 import { extractHeadings, slugifyHeading, blockText } from "@/lib/toc"
 import { getVideoEmbedUrl } from "@/lib/video"
-import type { VideoEmbedBlock } from "@/sanity/lib/queries"
+import type { VideoEmbedBlock, TableBlock } from "@/sanity/lib/queries"
 import TableOfContents from "@/components/content/TableOfContents"
 
 type ImageBlock = {
@@ -82,6 +82,32 @@ const portableComponents = {
             <figcaption className="text-center text-sm text-gray-400 mt-2">{value.caption}</figcaption>
           )}
         </figure>
+      )
+    },
+    table: ({ value }: { value: TableBlock }) => {
+      const [head, ...body] = value.rows ?? []
+      if (!head) return null
+      return (
+        <div className="my-6 overflow-x-auto rounded-lg border border-gray-200">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-gray-50 text-gray-500">
+                {head.cells.map((c, i) => (
+                  <th key={i} className="text-left font-semibold px-4 py-2.5">{c}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {body.map((row) => (
+                <tr key={row._key} className="border-t border-gray-100">
+                  {row.cells.map((c, i) => (
+                    <td key={i} className="px-4 py-2.5 text-gray-600 whitespace-pre-line">{c}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )
     },
   },

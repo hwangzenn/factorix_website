@@ -106,6 +106,7 @@ export const product = defineType({
           ],
         },
         { type: 'videoEmbed' },
+        { type: 'table' },
       ],
     }),
     defineField({

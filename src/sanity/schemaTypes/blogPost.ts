@@ -128,6 +128,7 @@ export const blogPost = defineType({
           ],
         },
         { type: 'videoEmbed' },
+        { type: 'table' },
       ],
     }),
     defineField({

@@ -74,6 +74,7 @@ export const referenceMaterial = defineType({
           ],
         },
         { type: 'videoEmbed' },
+        { type: 'table' },
       ],
     }),
     defineField({

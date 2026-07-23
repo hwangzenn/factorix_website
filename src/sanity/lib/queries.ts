@@ -22,6 +22,8 @@ const bodyProjection = `body[]{ ..., _type == "image" => { ..., asset->{ url, me
 
 export type VideoEmbedBlock = { _type: 'videoEmbed'; url: string; caption: string | null }
 
+export type TableBlock = { _type: 'table'; rows: { _key: string; cells: string[] }[] }
+
 export type ReferenceMaterialSummary = {
   _id: string
   title: string

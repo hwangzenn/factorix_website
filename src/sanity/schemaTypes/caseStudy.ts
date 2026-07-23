@@ -91,6 +91,7 @@ export const caseStudy = defineType({
           ],
         },
         { type: 'videoEmbed' },
+        { type: 'table' },
       ],
     }),
     defineField({
