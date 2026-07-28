@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://factorix.co.kr";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.factorix.co.kr";
 
 type FeedItem = {
   title: string;

@@ -9,7 +9,7 @@ import type { Locale } from "@/lib/i18n";
 
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://factorix.co.kr";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.factorix.co.kr";
 const NAVER_VERIFICATION = process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION ?? "";
 
 export const metadata: Metadata = {
