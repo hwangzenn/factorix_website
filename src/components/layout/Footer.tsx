@@ -32,7 +32,7 @@ export default function Footer() {
               <li><Link href={ROUTES.solutions.standalone.robot} className="hover:text-white transition-colors">{en ? "Collaborative/Cartesian/3-Axis Robot" : "협동/직교/3축로봇"}</Link></li>
               <li><Link href={ROUTES.solutions.standalone.curing} className="hover:text-white transition-colors">{en ? "UV/IR Curing System" : "UV/IR 경화기"}</Link></li>
               <li><Link href={autoCalibrationHref} className="hover:text-white transition-colors">{en ? "AI Auto-Calibration System" : "AI 자동보정 토출시스템"}</Link></li>
-              <li><Link href={ROUTES.solutions.ai.smartFactory} className="hover:text-white transition-colors">{en ? "Automation System" : "자동화 시스템"}</Link></li>
+              <li><Link href={ROUTES.solutions.ai.smartFactory} className="hover:text-white transition-colors">{en ? "Automation System" : "자동화 설비 시스템"}</Link></li>
             </ul>
           </div>
           <div>

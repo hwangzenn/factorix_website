@@ -8,6 +8,8 @@ import type { VideoEmbedBlock, TableBlock } from "@/sanity/lib/queries"
 import TableOfContents from "./TableOfContents"
 import QuoteButton from "./QuoteButton"
 import ProductHero from "./ProductHero"
+import RelatedContent from "./RelatedContent"
+import type { RelatedContentItem } from "@/sanity/lib/queries"
 
 type ImageBlock = {
   asset: { url: string }
@@ -23,6 +25,7 @@ type BodyImageBlock = {
 
 export type ContentDetailData = {
   title: string
+  slug?: string
   publishedAt?: string | null
   description?: string | null
   thumbnail?: { asset: { url: string }; alt: string | null } | null
@@ -32,9 +35,12 @@ export type ContentDetailData = {
 }
 
 type Props = {
-  eyebrow: string
+  eyebrow?: string
+  category?: string
+  groupLabel?: string
   backHref: string
   data: ContentDetailData
+  relatedContent?: RelatedContentItem[]
 }
 
 const portableComponents = {
@@ -117,24 +123,40 @@ const portableComponents = {
   },
 }
 
-export default function ContentDetail({ eyebrow, backHref, data }: Props) {
-  const headings = extractHeadings(data.body)
-  const hasToc = headings.length >= 2
+export default function ContentDetail({ eyebrow, category, groupLabel, backHref, data, relatedContent }: Props) {
   const isProduct = "specs" in data
+  const headings = extractHeadings(data.body)
+  const hasToc = !isProduct && headings.length >= 2
   const heroImage = data.thumbnail
   const galleryImages = data.images
+  const productHref = data.slug ? `${backHref}/${data.slug}` : backHref
+  const specs = (data.specs ?? []).filter((s) => s.key?.trim() || s.value?.trim())
 
   return (
     <div className="mx-auto max-w-7xl px-8 py-20">
       <div className={hasToc ? "grid lg:grid-cols-[200px_1fr] gap-10" : ""}>
         {hasToc && <TableOfContents headings={headings} />}
         <div>
-      <div className="flex items-center justify-between gap-4 mb-6">
-        <p className="text-base text-primary-600 font-medium">{eyebrow}</p>
-        <Link href={backHref} className="text-base text-gray-400 hover:text-primary-600 transition-colors shrink-0">
-          ← {isProduct ? "다른 제품 보러가기" : "뒤로가기"}
-        </Link>
-      </div>
+      {isProduct ? (
+        <nav aria-label="breadcrumb" className="flex flex-wrap items-center gap-2 text-base mb-6">
+          <span className="text-gray-400">{category}</span>
+          <span className="text-gray-300" aria-hidden>&gt;</span>
+          <Link href={backHref} className="text-gray-400 underline underline-offset-2 hover:text-primary-600 transition-colors">
+            {groupLabel}
+          </Link>
+          <span className="text-gray-300" aria-hidden>&gt;</span>
+          <Link href={productHref} className="text-primary-600 font-medium underline underline-offset-2">
+            {data.title}
+          </Link>
+        </nav>
+      ) : (
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <p className="text-base text-primary-600 font-medium">{eyebrow}</p>
+          <Link href={backHref} className="text-base text-gray-400 hover:text-primary-600 transition-colors shrink-0">
+            ← 뒤로가기
+          </Link>
+        </div>
+      )}
       {isProduct ? (
         <ProductHero
           images={data.images}
@@ -167,7 +189,7 @@ export default function ContentDetail({ eyebrow, backHref, data }: Props) {
         </>
       )}
 
-      {data.specs && data.specs.length > 0 && (
+      {specs.length > 0 && (
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-3">제품 상세 스펙</h2>
           <div className="overflow-hidden rounded-xl border border-gray-200">
@@ -179,7 +201,7 @@ export default function ContentDetail({ eyebrow, backHref, data }: Props) {
               </tr>
             </thead>
             <tbody>
-              {data.specs.map((s) => (
+              {specs.map((s) => (
                 <tr key={s.key} className="border-t border-gray-100">
                   <td className="px-4 py-3 font-medium text-gray-900 whitespace-pre-line">{s.key}</td>
                   <td className="px-4 py-3 text-gray-600 whitespace-pre-line">{s.value}</td>
@@ -214,6 +236,20 @@ export default function ContentDetail({ eyebrow, backHref, data }: Props) {
       {data.body && data.body.length > 0 && (
         <div className="prose prose-gray max-w-none">
           <PortableText value={data.body} components={portableComponents} />
+        </div>
+      )}
+
+      {isProduct && (
+        <div className="mt-12">
+          <RelatedContent items={relatedContent ?? []} />
+          <div className="text-center">
+            <Link
+              href={backHref}
+              className="inline-block rounded-full bg-primary-700 text-white px-8 py-3 font-medium hover:bg-primary-800 transition-colors"
+            >
+              다른 제품 보러가기 →
+            </Link>
+          </div>
         </div>
       )}
         </div>

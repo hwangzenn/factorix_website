@@ -23,7 +23,7 @@ const VALUES = [
   },
   {
     label: "Total Solution",
-    desc: "원료 제조부터 로봇, AI 자동화 시스템까지 액제공정 전 과정을 하나의 파트너로 지원합니다.",
+    desc: "원료 제조부터 로봇, AI 자동화 설비 시스템까지 액제공정 전 과정을 하나의 파트너로 지원합니다.",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
         <rect x="4" y="14" width="10" height="12" rx="1" />
@@ -59,8 +59,8 @@ const BUSINESSES = [
   },
   {
     tag: "EQUIPMENT",
-    title: "스마트 자동화 시스템",
-    desc: "액상 충진기, 디스펜서, 교반/탈포기, 3축 로봇 등 정밀 제조 장비 라인업. 단품부터 통합 자동화 시스템까지 구성 가능합니다.",
+    title: "스마트 자동화 설비 시스템",
+    desc: "액상 충진기, 디스펜서, 교반/탈포기, 3축 로봇 등 정밀 제조 장비 라인업. 단품부터 통합 자동화 설비 시스템까지 구성 가능합니다.",
     href: ROUTES.solutions.ai.smartFactory,
   },
   {

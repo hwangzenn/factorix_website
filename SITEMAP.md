@@ -33,8 +33,8 @@
 │   │   ├─ ▣ UV/IR 경화기         /solutions/standalone/curing
 │   │   └─ ▣ 소모품               /solutions/standalone/consumables
 │   └─ 📁 AI 시스템 (/solutions/ai)  ── GNB 유지, 제품 CMS 카테고리에선 제외(별도 콘텐츠 모델 예정)
-│       ├─ ▣ AI 자동보정 토출시스템 /solutions/ai/auto-calibration
-│       └─ ▣ 자동화 시스템         /solutions/ai/smart-factory
+│       ├─ ▣ 자동화 설비 시스템    /solutions/ai/smart-factory
+│       └─ ▣ AI 자동보정 토출시스템 /solutions/ai/auto-calibration
 │
 ▣ 블로그 (/blog)   ── GNB에서 바로 링크(하위 카테고리 펼침 없음). 페이지 안에서 아래로 이동.
 │   ├─ ▣ 적용사례            /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)

@@ -16,7 +16,7 @@ import {
 
 export const metadata: Metadata = {
   title: "팩토릭스 | Factorix — AI 액제제조 · 디스펜싱 솔루션",
-  description: "팩토릭스(Factorix)는 AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스를 공급하는 B2B 전문 기업입니다.",
+  description: "팩토릭스 — 정밀 토출, 디스펜싱, 액상 제조 전문 자동화 설비 기업",
   keywords: [
     "팩토릭스", "Factorix", "디스펜싱 자동화", "액제제조 솔루션",
     "AI 스마트팩토리", "디스펜서", "충진기", "AI 웨어러블",
@@ -80,7 +80,7 @@ const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] 
   { label: "액상 충진기", tag: "충진기", href: ROUTES.solutions.standalone.filling, image: "/장비시스템/충진기.png" },
   { label: "교반/탈포기", tag: "교반기/탈포기", href: ROUTES.solutions.standalone.mixer, image: "/장비시스템/쓰리롤밀.png" },
   { label: "UV/IR 경화기", tag: "UV/IR 경화기", href: ROUTES.solutions.standalone.curing, image: "/장비시스템/경화기.png" },
-  { label: "자동화 시스템", tag: "맞춤형 자동화 시스템", href: ROUTES.solutions.ai.smartFactory, image: "/장비시스템/자동화시스템.png" },
+  { label: "자동화 설비 시스템", tag: "맞춤형 자동화 설비 시스템", href: ROUTES.solutions.ai.smartFactory, image: "/장비시스템/자동화시스템.png" },
 ];
 
 const AFMS_FEATURE = {
@@ -190,7 +190,7 @@ const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
   { label: "정량/정밀\n토출", iconKey: "dispensing", href: ROUTES.solutions.standalone.dispenser },
   { label: "탁상로봇", iconKey: "robot", href: ROUTES.solutions.standalone.robot },
   { label: "IR/UV경화\n및 오븐", iconKey: "curing", href: ROUTES.solutions.standalone.curing },
-  { label: "맞춤형 공정\n자동화 시스템", iconKey: "automation", href: ROUTES.solutions.ai.smartFactory },
+  { label: "맞춤형 공정\n자동화 설비 시스템", iconKey: "automation", href: ROUTES.solutions.ai.smartFactory },
 ];
 
 export default async function HomePage() {

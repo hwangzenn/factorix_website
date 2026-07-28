@@ -18,7 +18,7 @@ const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; labe
     label: "시스템",
     subs: [
       { value: "auto-calibration", label: "AI 자동보정 토출시스템" },
-      { value: "smart-factory", label: "자동화 시스템" },
+      { value: "smart-factory", label: "자동화 설비 시스템" },
     ],
   },
   wearable: {

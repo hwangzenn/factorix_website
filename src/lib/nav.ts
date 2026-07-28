@@ -31,7 +31,7 @@ export const GNB: NavItem[] = [
     labelEn: "Solutions",
     children: [
       {
-        label: "제품",
+        label: "장비",
         labelEn: "Products",
         children: [
           { label: "교반/탈포기", labelEn: "Mixing/Defoaming", href: ROUTES.solutions.standalone.mixer },
@@ -44,11 +44,11 @@ export const GNB: NavItem[] = [
         ],
       },
       {
-        label: "시스템",
+        label: "설비 시스템",
         labelEn: "Systems",
         children: [
+          { label: "자동화 설비 시스템", labelEn: "Automation System", href: ROUTES.solutions.ai.smartFactory },
           { label: "AI 자동보정 토출시스템", labelEn: "AI Auto-Calibration Dispensing System", href: ROUTES.solutions.ai.autoCalibration },
-          { label: "자동화 시스템", labelEn: "Automation System", href: ROUTES.solutions.ai.smartFactory },
         ],
       },
     ],

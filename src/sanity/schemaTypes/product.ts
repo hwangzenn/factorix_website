@@ -25,7 +25,7 @@ export const product = defineType({
           { title: '3축로봇', value: 'standalone-robot' },
           { title: '경화기', value: 'standalone-curing' },
           { title: '소모품', value: 'consumables' },
-          { title: '자동화 시스템', value: 'ai-smart-factory' },
+          { title: '자동화 설비 시스템', value: 'ai-smart-factory' },
         ],
       },
       validation: (Rule) => Rule.required(),

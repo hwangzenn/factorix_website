@@ -30,7 +30,7 @@ export const ROUTES = {
     },
     ai: {                             // AI 시스템 ── 디렉토리
       autoCalibration: "/solutions/ai/auto-calibration",       // AI 자동보정 토출시스템
-      smartFactory: "/solutions/ai/smart-factory",             // 자동화 시스템
+      smartFactory: "/solutions/ai/smart-factory",             // 자동화 설비 시스템
     },
   },
 

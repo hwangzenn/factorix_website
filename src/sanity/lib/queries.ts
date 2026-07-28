@@ -298,6 +298,27 @@ export type RelatedBlogPost = {
   thumbnail: { asset: { url: string }; alt: string | null } | null
 }
 
+export const relatedContentByTagsQuery = defineQuery(`
+  *[_type == "blogPost" && isPublic == true && defined(tags) && count(tags[@ in $tags]) > 0]
+  | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    description,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
+export type RelatedContentItem = {
+  _id: string
+  title: string
+  slug: string
+  category: string
+  description: string | null
+  thumbnail: { asset: { url: string }; alt: string | null } | null
+}
+
 export type FaqItem = {
   _id: string
   question: string

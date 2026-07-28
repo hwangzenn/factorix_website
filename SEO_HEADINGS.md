@@ -18,7 +18,7 @@
 
 ```
 title: "팩토릭스 | Factorix — AI 액제제조 · 디스펜싱 솔루션"
-description: "팩토릭스(Factorix)는 AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스를 공급하는 B2B 전문 기업입니다."
+description: "팩토릭스(Factorix)는 AI 기반 초정밀 디스펜싱 자동화 설비 시스템과 AI 웨어러블 디바이스를 공급하는 B2B 전문 기업입니다."
 
 h1: "액상제조 공정 자동화, 팩토릭스(FactoriX) 스마트 솔루션"  ← HeroCarousel 내 sr-only, 슬라이드 회전 카피와 별개로 페이지 전체 유일 h1
 
@@ -104,15 +104,15 @@ description: "실시간 물성 분석과 Vision AI로 디스펜싱 조건을 스
   h2: "AFMS 도입을 검토 중이시라면"  ← CTA
 ```
 
-### 자동화 시스템 `/solutions/ai/smart-factory`
+### 자동화 설비 시스템 `/solutions/ai/smart-factory`
 
 **파일:** `src/app/solutions/ai/smart-factory/page.tsx`
 
 ```
-title: "자동화 시스템 | Factorix"
+title: "자동화 설비 시스템 | Factorix"
 description: "Factorix AI 스마트팩토리 시스템 — 생산 공정 자동화"
 
-  h1: "자동화 시스템"
+  h1: "자동화 설비 시스템"
 ```
 
 ### 디스펜서 `/solutions/standalone/dispenser`
@@ -412,12 +412,12 @@ description: "Factorix 공지사항, 언론보도, 기술자료, 특허/수상, 
 
 ```
 og:title: "팩토릭스(Factorix) | AI 액제제조 솔루션"
-og:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스 전문 기업"
+og:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 설비 시스템과 AI 웨어러블 디바이스 전문 기업"
 og:image: "/og-image.png"  (1200×630px 권장)
 og:type: "website"
 og:locale: "ko_KR"
 
 twitter:card: "summary_large_image"
 twitter:title: "팩토릭스(Factorix) | AI 액제제조 솔루션"
-twitter:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 시스템과 AI 웨어러블 디바이스 전문 기업"
+twitter:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 설비 시스템과 AI 웨어러블 디바이스 전문 기업"
 ```

@@ -6,7 +6,14 @@ import { ROUTES } from "@/lib/routes"
 
 const GROUPS = [
   {
-    label: "제품",
+    label: "설비 시스템",
+    items: [
+      { href: ROUTES.solutions.ai.autoCalibration, label: "AI 자동보정 토출시스템" },
+      { href: ROUTES.solutions.ai.smartFactory, label: "자동화 설비 시스템" },
+    ],
+  },
+  {
+    label: "장비",
     items: [
       { href: ROUTES.solutions.standalone.mixer, label: "교반/탈포기" },
       { href: ROUTES.solutions.standalone.threeRollMill, label: "쓰리롤밀" },
@@ -15,13 +22,6 @@ const GROUPS = [
       { href: ROUTES.solutions.standalone.robot, label: "협동/직교/3축로봇" },
       { href: ROUTES.solutions.standalone.curing, label: "UV/IR 경화기" },
       { href: ROUTES.solutions.standalone.consumables, label: "소모품" },
-    ],
-  },
-  {
-    label: "시스템",
-    items: [
-      { href: ROUTES.solutions.ai.autoCalibration, label: "AI 자동보정 토출시스템" },
-      { href: ROUTES.solutions.ai.smartFactory, label: "자동화 시스템" },
     ],
   },
 ] as const

@@ -7,17 +7,17 @@ type Mode = "quote" | "inquiry"
 
 const MODE_CONTENT: Record<Mode, { buttonLabel: string; title: string; description: string; formType: string; submitLabel: string }> = {
   quote: {
-    buttonLabel: "금액 확인하기",
-    title: "금액 확인",
-    description: "담당 영업 엔지니어가 확인 후 견적을 안내드립니다.",
-    formType: "제품 금액 문의",
+    buttonLabel: "경쟁사 대비 가격 비교받기",
+    title: "예산에 맞는지 먼저 확인해보세요",
+    description: "부담스러운 영업 상담 없이, 정확한 금액대만 빠르게 안내드립니다.",
+    formType: "가격문의",
     submitLabel: "문의 접수완료",
   },
   inquiry: {
-    buttonLabel: "제품 온라인 문의하기",
-    title: "온라인 문의",
-    description: "담당 엔지니어가 확인 후 온라인으로 상담을 도와드립니다.",
-    formType: "제품 온라인 문의",
+    buttonLabel: "제품 상세자료 받기",
+    title: "지금 보고계신 제품의\n상세기술자료를 확인하세요",
+    description: "담당 엔지니어가 스펙·도면 등 기술자료를 정리해 보내드립니다.",
+    formType: "특정제품문의",
     submitLabel: "문의 접수완료",
   },
 }
@@ -71,7 +71,7 @@ export default function QuoteButton({ productName }: { productName: string }) {
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             </button>
-            <h2 className="text-xl font-bold text-gray-900 mb-1">{content.title}</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-1 whitespace-pre-line">{content.title}</h2>
             <p className="text-sm text-gray-500 mb-6">{content.description}</p>
             <PocForm formType={content.formType} submitLabel={content.submitLabel} presetProduct={productName} />
           </div>
