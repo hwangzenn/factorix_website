@@ -449,15 +449,17 @@ export default async function EnHomePage() {
 
               {/* Right: blog / YouTube / patents */}
               <div className="flex flex-col gap-4">
-                <Link
-                  href={`${ROUTES.resources}?category=tech-docs`}
+                <a
+                  href="https://blog.naver.com/factorix"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
                 >
-                  <span className="text-lg md:text-xl font-semibold">Visit FactoriX Tech Blog</span>
+                  <span className="text-lg md:text-xl font-semibold">Naver Blog</span>
                   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
                     <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </Link>
+                </a>
                 <a
                   href="https://www.youtube.com/@FactoriX-t9f"
                   target="_blank"

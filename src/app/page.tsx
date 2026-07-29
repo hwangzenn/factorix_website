@@ -460,15 +460,17 @@ export default async function HomePage() {
 
               {/* 우측: 블로그 / 유튜브 / 특허자료 */}
               <div className="flex flex-col gap-4">
-                <Link
-                  href={`${ROUTES.resources}?category=tech-docs`}
+                <a
+                  href="https://blog.naver.com/factorix"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
                 >
-                  <span className="text-lg md:text-xl font-semibold">팩토릭스 기술블로그 바로가기</span>
+                  <span className="text-lg md:text-xl font-semibold">네이버블로그</span>
                   <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
                     <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </Link>
+                </a>
                 <a
                   href="https://www.youtube.com/@FactoriX-t9f"
                   target="_blank"
