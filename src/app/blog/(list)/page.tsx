@@ -7,7 +7,7 @@ import {
   type CaseStudyWithTags,
 } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
-import { INDUSTRIES } from "@/lib/blogFilters"
+import { INDUSTRIES, PROCESSES } from "@/lib/blogFilters"
 import BlogFeed, { type FeedItem } from "@/components/blog/BlogFeed"
 
 export const revalidate = 3600
@@ -30,6 +30,7 @@ const CATEGORY_LABEL: Record<string, string> = {
 }
 
 const INDUSTRY_LABEL: Record<string, string> = Object.fromEntries(INDUSTRIES.map((i) => [i.key, i.label]))
+const PROCESS_LABEL: Record<string, string> = Object.fromEntries(PROCESSES.map((p) => [p.key, p.label]))
 
 type Props = {
   searchParams: Promise<{ industry?: string; process?: string }>
@@ -58,6 +59,7 @@ export default async function BlogAllPage({ searchParams }: Props) {
       href: `${CATEGORY_PATH[p.category]}/${p.slug}`,
       categoryLabel: CATEGORY_LABEL[p.category] ?? p.category,
       tag: p.tags?.[0] ?? null,
+      processLabel: p.processes ? PROCESS_LABEL[p.processes] ?? p.processes : null,
     })),
     ...cases.map((c) => ({
       _id: c._id,
@@ -68,6 +70,7 @@ export default async function BlogAllPage({ searchParams }: Props) {
       href: `${ROUTES.blog.cases}/${c.slug}`,
       categoryLabel: "적용사례",
       tag: c.industries ? INDUSTRY_LABEL[c.industries] ?? c.industries : null,
+      processLabel: c.processes ? PROCESS_LABEL[c.processes] ?? c.processes : null,
     })),
   ].sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
 

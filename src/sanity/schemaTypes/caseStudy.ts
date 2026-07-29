@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { INDUSTRIES, PROCESSES } from '../../lib/blogFilters'
+import { FeaturedToggleInput } from '../components/FeaturedToggleInput'
 
 export const caseStudy = defineType({
   name: 'caseStudy',
@@ -99,6 +100,14 @@ export const caseStudy = defineType({
       title: '공개 여부',
       type: 'boolean',
       initialValue: true,
+    }),
+    defineField({
+      name: 'featuredOnMain',
+      title: '대표콘텐츠 (메인페이지 노출)',
+      description: '메인페이지 산업군별 적용사례 카드에 노출할 대표콘텐츠. 산업군당 1개만 켤 수 있으며, 켜면 같은 산업군의 이전 대표콘텐츠는 자동으로 꺼집니다.',
+      type: 'boolean',
+      initialValue: false,
+      components: { input: FeaturedToggleInput },
     }),
     defineField({
       name: 'seo',

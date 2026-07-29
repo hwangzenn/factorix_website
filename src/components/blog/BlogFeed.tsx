@@ -9,6 +9,7 @@ export type FeedItem = {
   publishedAt?: string | null
   categoryLabel: string
   tag?: string | null
+  processLabel?: string | null
 }
 
 export default function BlogFeed({
@@ -39,6 +40,7 @@ export default function BlogFeed({
             publishedAt={item.publishedAt}
             categoryLabel={item.categoryLabel}
             tag={item.tag}
+            processLabel={item.processLabel}
             colorIndex={i}
           />
         ))}

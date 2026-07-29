@@ -2,7 +2,10 @@ import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
 import { blogPostsByCategoryQuery, type BlogPostSummary } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
+import { PROCESSES } from "@/lib/blogFilters"
 import BlogFeed from "@/components/blog/BlogFeed"
+
+const PROCESS_LABEL: Record<string, string> = Object.fromEntries(PROCESSES.map((p) => [p.key, p.label]))
 
 export const revalidate = 3600
 
@@ -34,6 +37,7 @@ export default async function NewsPage({ searchParams }: Props) {
           publishedAt: item.publishedAt,
           categoryLabel: "뉴스",
           tag: item.tags?.[0] ?? null,
+          processLabel: item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null,
         }))}
       />
     </div>

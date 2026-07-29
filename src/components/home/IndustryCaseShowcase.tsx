@@ -35,7 +35,7 @@ export default function IndustryCaseShowcase({
   const filtered = items.filter((item) => item.industries === active)
   const activeCat = CATEGORIES.find((c) => c.key === active)!
   const activeLogos = (logos.find((l) => l.category === active)?.logos ?? []).slice(0, 4)
-  const featured = filtered[0]
+  const featured = filtered.find((item) => item.featuredOnMain) ?? filtered[0]
 
   return (
     <div>

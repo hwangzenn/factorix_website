@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
 import { allCaseStudiesQuery, type CaseStudyWithTags } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
-import { INDUSTRIES } from "@/lib/blogFilters"
+import { INDUSTRIES, PROCESSES } from "@/lib/blogFilters"
 import BlogFeed from "@/components/blog/BlogFeed"
 
 export const revalidate = 3600
@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 }
 
 const INDUSTRY_LABEL: Record<string, string> = Object.fromEntries(INDUSTRIES.map((i) => [i.key, i.label]))
+const PROCESS_LABEL: Record<string, string> = Object.fromEntries(PROCESSES.map((p) => [p.key, p.label]))
 
 type Props = {
   searchParams: Promise<{ industry?: string; process?: string }>
@@ -38,6 +39,7 @@ export default async function CaseStudiesPage({ searchParams }: Props) {
           publishedAt: item.publishedAt,
           categoryLabel: "적용사례",
           tag: item.industries ? INDUSTRY_LABEL[item.industries] ?? item.industries : null,
+          processLabel: item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null,
         }))}
       />
     </div>

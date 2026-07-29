@@ -69,6 +69,7 @@ export type CaseStudySummary = {
 export type CaseStudyWithTags = CaseStudySummary & {
   industries: string | null
   processes: string | null
+  featuredOnMain?: boolean | null
 }
 
 export type CaseStudyDetail = CaseStudyWithTags & {
@@ -225,6 +226,7 @@ export const allCaseStudiesQuery = defineQuery(`
     processes,
     description,
     publishedAt,
+    featuredOnMain,
     thumbnail { asset->{ url }, alt }
   }
 `)

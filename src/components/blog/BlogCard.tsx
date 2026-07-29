@@ -12,6 +12,7 @@ type Props = {
   publishedAt?: string | null
   categoryLabel: string
   tag?: string | null
+  processLabel?: string | null
   colorIndex?: number
 }
 
@@ -24,6 +25,7 @@ export default function BlogCard({
   publishedAt,
   categoryLabel,
   tag,
+  processLabel,
   colorIndex = 0,
 }: Props) {
   return (
@@ -51,6 +53,11 @@ export default function BlogCard({
           {tag && (
             <span className="px-2.5 py-1 rounded-full bg-white/90 text-gray-900 text-xs font-semibold shadow-sm backdrop-blur-sm">
               {tag}
+            </span>
+          )}
+          {processLabel && (
+            <span className="px-2.5 py-1 rounded-full bg-white/90 text-gray-900 text-xs font-semibold shadow-sm backdrop-blur-sm">
+              {processLabel}
             </span>
           )}
         </div>
