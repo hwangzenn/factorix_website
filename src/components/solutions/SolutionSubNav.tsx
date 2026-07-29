@@ -30,10 +30,10 @@ export default function SolutionSubNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="border-b border-gray-200 bg-white">
+    <nav className="hidden sm:block border-b border-gray-200 bg-white">
       <div className="max-w-5xl mx-auto px-6">
         {GROUPS.map((group) => (
-          <div key={group.label} className="flex items-center gap-6">
+          <div key={group.label} className="flex items-center gap-6 overflow-x-auto whitespace-nowrap">
             <span className="text-sm font-bold text-gray-900 shrink-0 py-3">{group.label}</span>
             {group.items.map((item) => {
               const isActive = pathname.startsWith(item.href)
@@ -41,7 +41,7 @@ export default function SolutionSubNav() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative text-sm py-3 transition-colors ${
+                  className={`relative shrink-0 text-sm py-3 transition-colors ${
                     isActive
                       ? "text-primary-700 font-semibold"
                       : "text-gray-500 hover:text-gray-900"
