@@ -25,14 +25,14 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
   if (headings.length < 2) return null
 
   const LEVEL_STYLE: Record<Heading["level"], string> = {
-    h2: "pl-4 text-sm font-semibold",
+    h2: "pl-4 text-base font-semibold",
     h3: "pl-8 text-sm",
-    h4: "pl-12 text-xs",
+    h4: "pl-12 text-sm",
   }
 
   return (
     <nav className="hidden lg:block sticky top-28 self-start w-[200px] shrink-0">
-      <p className="text-xs font-semibold text-gray-400 mb-3 tracking-wide">목차</p>
+      <p className="text-sm font-semibold text-gray-400 mb-3 tracking-wide">목차</p>
       <ul className="space-y-2 border-l border-gray-200">
         {headings.map((h) => (
           <li key={h.id}>

@@ -6,6 +6,7 @@ import { extractHeadings, slugifyHeading, blockText } from "@/lib/toc"
 import { getVideoEmbedUrl } from "@/lib/video"
 import type { VideoEmbedBlock, TableBlock } from "@/sanity/lib/queries"
 import TableOfContents from "@/components/content/TableOfContents"
+import ContentInquiryButton from "@/components/content/ContentInquiryButton"
 
 type ImageBlock = {
   asset: { url: string }
@@ -44,6 +45,9 @@ type Props = {
   backLabel: string
   data: ResourceDetailData
   related?: RelatedItem[]
+  breadcrumbRoot?: { label: string; href: string }
+  contentInquirySlug?: string
+  browseMoreHref?: string
 }
 
 const portableComponents = {
@@ -141,10 +145,10 @@ const portableComponents = {
   },
 }
 
-export default function ResourceDetail({ eyebrow, backHref, backLabel, data, related }: Props) {
+export default function ResourceDetail({ eyebrow, backHref, backLabel, data, related, breadcrumbRoot, contentInquirySlug, browseMoreHref }: Props) {
   const headings = extractHeadings(data.body)
   const hasToc = headings.length >= 2
-  const hasRelated = Boolean(related && related.length > 0)
+  const hasRelated = related !== undefined
   const gridCols = hasToc && hasRelated
     ? "lg:grid-cols-[200px_1fr_260px]"
     : hasToc
@@ -154,14 +158,28 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
     : ""
 
   return (
-    <div className={`mx-auto px-6 py-20 ${hasToc || hasRelated ? "max-w-6xl" : "max-w-3xl"}`}>
+    <div className={`mx-auto px-6 py-20 ${hasToc || hasRelated ? "max-w-7xl" : "max-w-3xl"}`}>
       <div className={gridCols ? `grid ${gridCols} gap-10` : ""}>
         {hasToc && <TableOfContents headings={headings} />}
         <div>
-      <p className="text-sm text-primary-600 font-medium mb-1">{eyebrow}</p>
-      <Link href={backHref} className="text-sm text-gray-400 hover:text-primary-600 transition-colors">
-        ← {backLabel}
-      </Link>
+      {breadcrumbRoot ? (
+        <nav aria-label="breadcrumb" className="flex flex-wrap items-center gap-2 text-sm mb-1">
+          <Link href={breadcrumbRoot.href} className="text-primary-600 underline underline-offset-2 hover:text-primary-700 transition-colors">
+            {breadcrumbRoot.label}
+          </Link>
+          <span className="text-gray-300" aria-hidden>&gt;</span>
+          <Link href={backHref} className="text-primary-600 font-medium underline underline-offset-2 hover:text-primary-700 transition-colors">
+            {backLabel}
+          </Link>
+        </nav>
+      ) : (
+        <>
+          <p className="text-sm text-primary-600 font-medium mb-1">{eyebrow}</p>
+          <Link href={backHref} className="text-sm text-gray-400 hover:text-primary-600 transition-colors">
+            ← {backLabel}
+          </Link>
+        </>
+      )}
 
       <h1 className="text-3xl font-bold text-primary-800 mt-6 mb-3">{data.title}</h1>
 
@@ -233,11 +251,22 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
           </a>
         )}
       </div>
+
+      {contentInquirySlug && (
+        <div className="flex flex-wrap gap-3 mt-10 pt-8 border-t border-gray-100">
+          <ContentInquiryButton slug={contentInquirySlug} />
+        </div>
+      )}
         </div>
 
         {hasRelated && (
           <aside className="hidden lg:block self-start sticky top-28">
-            <p className="text-xs font-semibold text-gray-400 mb-3 tracking-wide">연관 콘텐츠</p>
+            <p className="text-sm font-semibold text-gray-400 mb-3 tracking-wide">연관 콘텐츠</p>
+            {related!.length === 0 ? (
+              <p className="text-sm text-gray-400 text-center py-8 border border-dashed border-gray-200 rounded-xl">
+                해당없음
+              </p>
+            ) : (
             <div className="space-y-4">
               {related!.map((item) => (
                 <Link key={item._id} href={item.href} className="group flex gap-3">
@@ -264,6 +293,15 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
                 </Link>
               ))}
             </div>
+            )}
+            {browseMoreHref && (
+              <Link
+                href={browseMoreHref}
+                className="mt-6 inline-flex items-center justify-center w-full px-6 py-3 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors text-sm"
+              >
+                더보기 →
+              </Link>
+            )}
           </aside>
         )}
       </div>

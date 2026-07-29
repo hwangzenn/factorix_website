@@ -3,8 +3,6 @@ import Link from "next/link"
 
 const FALLBACK_BG = ["bg-primary-700", "bg-primary-900", "bg-gray-800", "bg-primary-600", "bg-primary-800"]
 
-export type BlogCardSize = "featured" | "medium"
-
 type Props = {
   title: string
   description?: string | null
@@ -12,10 +10,8 @@ type Props = {
   thumbnailAlt?: string | null
   href: string
   publishedAt?: string | null
-  author?: string | null
   categoryLabel: string
   tag?: string | null
-  size?: BlogCardSize
   colorIndex?: number
 }
 
@@ -26,26 +22,16 @@ export default function BlogCard({
   thumbnailAlt,
   href,
   publishedAt,
-  author,
   categoryLabel,
   tag,
-  size = "medium",
   colorIndex = 0,
 }: Props) {
-  const isFeatured = size === "featured"
-
   return (
     <Link
       href={href}
-      className={`group flex h-full rounded-2xl border border-gray-200 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-xl hover:shadow-primary-900/5 ${
-        isFeatured ? "flex-col md:flex-row" : "flex-col"
-      }`}
+      className="group flex flex-col h-full rounded-2xl border border-gray-200 bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-xl hover:shadow-primary-900/5"
     >
-      <div
-        className={`relative bg-gray-100 overflow-hidden shrink-0 aspect-[2400/600] ${
-          isFeatured ? "md:w-1/2" : ""
-        }`}
-      >
+      <div className="relative bg-gray-100 overflow-hidden shrink-0 aspect-[1200/630]">
         {thumbnailUrl ? (
           <Image
             src={thumbnailUrl}
@@ -55,7 +41,7 @@ export default function BlogCard({
           />
         ) : (
           <div className={`w-full h-full flex items-center justify-center ${FALLBACK_BG[colorIndex % FALLBACK_BG.length]}`}>
-            <span className={`text-white/25 font-bold tracking-wide ${isFeatured ? "text-4xl" : "text-3xl"}`}>FX</span>
+            <span className="text-white/25 font-bold tracking-wide text-3xl">FX</span>
           </div>
         )}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
@@ -70,21 +56,17 @@ export default function BlogCard({
         </div>
       </div>
 
-      <div className={`flex flex-col flex-1 min-w-0 p-5 pb-[120px] ${isFeatured ? "md:p-8 md:pb-[132px]" : ""}`}>
-        <p
-          className={`font-bold text-gray-900 leading-snug group-hover:text-primary-700 transition-colors mb-2 ${
-            isFeatured ? "text-2xl md:text-3xl line-clamp-2" : "text-base line-clamp-2"
-          }`}
-        >
+      <div className="flex flex-col flex-1 min-w-0 p-5">
+        <p className="font-bold text-gray-900 leading-snug group-hover:text-primary-700 transition-colors mb-2 text-lg min-h-[25px]">
           {title}
         </p>
-        <p className={`text-gray-500 leading-relaxed ${isFeatured ? "text-sm md:text-base line-clamp-3" : "text-sm line-clamp-2"}`}>
+        <p className="text-gray-500 leading-relaxed text-sm line-clamp-1 min-h-[23px]">
           {description || "내용이 없습니다."}
         </p>
         <div className="mt-auto pt-4 border-t border-gray-100 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-400">
           {publishedAt && <span>{new Date(publishedAt).toLocaleDateString("ko-KR")}</span>}
           <span>·</span>
-          <span>작성자: {author || "팩토릭스"}</span>
+          <span>작성자: Factorix 팩토릭스</span>
         </div>
       </div>
     </Link>

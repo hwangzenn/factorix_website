@@ -9,6 +9,7 @@ type Props = { params: Promise<{ slug: string }> }
 
 const CATEGORY = "설비 시스템"
 const GROUP_LABEL = "자동화 설비 시스템"
+const PROCESS_KEY = "other"
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
@@ -33,7 +34,7 @@ export default async function SmartFactoryDetailPage({ params }: Props) {
 
   const { data: relatedData } = await sanityFetch({
     query: relatedContentByTagsQuery,
-    params: { tags: [GROUP_LABEL, item.title] },
+    params: { process: PROCESS_KEY },
   })
 
   return (

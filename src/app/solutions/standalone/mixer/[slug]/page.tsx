@@ -9,6 +9,7 @@ type Props = { params: Promise<{ slug: string }> }
 
 const CATEGORY = "장비"
 const GROUP_LABEL = "교반/탈포기"
+const PROCESS_KEY = "mixer-defoamer"
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
@@ -33,7 +34,7 @@ export default async function MixerDetailPage({ params }: Props) {
 
   const { data: relatedData } = await sanityFetch({
     query: relatedContentByTagsQuery,
-    params: { tags: [GROUP_LABEL, item.title] },
+    params: { process: PROCESS_KEY },
   })
 
   return (

@@ -56,7 +56,6 @@ export default async function BlogAllPage({ searchParams }: Props) {
       publishedAt: p.publishedAt,
       thumbnail: p.thumbnail,
       href: `${CATEGORY_PATH[p.category]}/${p.slug}`,
-      author: p.author,
       categoryLabel: CATEGORY_LABEL[p.category] ?? p.category,
       tag: p.tags?.[0] ?? null,
     })),

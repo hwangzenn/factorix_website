@@ -81,7 +81,6 @@ export type BlogPostSummary = {
   title: string
   slug: string
   category: string
-  author: string | null
   publishedAt: string | null
   description: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
@@ -252,7 +251,6 @@ export const blogPostsByCategoryQuery = defineQuery(`
     title,
     "slug": slug.current,
     category,
-    author,
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },
@@ -269,7 +267,6 @@ export const allBlogPostsQuery = defineQuery(`
     title,
     "slug": slug.current,
     category,
-    author,
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },
@@ -299,7 +296,7 @@ export type RelatedBlogPost = {
 }
 
 export const relatedContentByTagsQuery = defineQuery(`
-  *[_type == "blogPost" && isPublic == true && defined(tags) && count(tags[@ in $tags]) > 0]
+  *[_type == "blogPost" && isPublic == true && processes == $process]
   | order(publishedAt desc) [0...3] {
     _id,
     title,
@@ -316,6 +313,46 @@ export type RelatedContentItem = {
   slug: string
   category: string
   description: string | null
+  thumbnail: { asset: { url: string }; alt: string | null } | null
+}
+
+export const relatedBlogPostsByTagQuery = defineQuery(`
+  *[_type == "blogPost" && isPublic == true && slug.current != $slug && defined(tags) && count(tags[@ in $tags]) > 0]
+  | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    publishedAt,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
+export type RelatedBlogPostByTag = {
+  _id: string
+  title: string
+  slug: string
+  category: string
+  publishedAt: string | null
+  thumbnail: { asset: { url: string }; alt: string | null } | null
+}
+
+export const relatedCaseStudiesQuery = defineQuery(`
+  *[_type == "caseStudy" && isPublic == true && slug.current != $slug && (industries == $industries || processes == $processes)]
+  | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    publishedAt,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
+export type RelatedCaseStudy = {
+  _id: string
+  title: string
+  slug: string
+  publishedAt: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
 }
 
@@ -352,7 +389,6 @@ export const blogPostBySlugQuery = defineQuery(`
     title,
     "slug": slug.current,
     category,
-    author,
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },

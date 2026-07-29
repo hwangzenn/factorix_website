@@ -1,9 +1,15 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
-import { blogPostBySlugQuery, relatedBlogPostsQuery, type BlogPostDetail, type RelatedBlogPost } from "@/sanity/lib/queries"
+import { blogPostBySlugQuery, relatedBlogPostsByTagQuery, type BlogPostDetail, type RelatedBlogPostByTag } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
 import ResourceDetail from "@/app/resources/_components/ResourceDetail"
+
+const CATEGORY_ROUTE: Record<string, string> = {
+  insight: ROUTES.blog.insight,
+  "guide-intro": ROUTES.blog.guideIntro,
+  news: ROUTES.blog.news,
+}
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -28,13 +34,13 @@ export default async function GuideIntroDetailPage({ params }: Props) {
   if (!item) notFound()
 
   const { data: relatedData } = await sanityFetch({
-    query: relatedBlogPostsQuery,
-    params: { category: "guide-intro", slug },
+    query: relatedBlogPostsByTagQuery,
+    params: { tags: item.tags ?? [], slug },
   })
-  const related = ((relatedData as RelatedBlogPost[]) ?? []).map((p) => ({
+  const related = ((relatedData as RelatedBlogPostByTag[]) ?? []).map((p) => ({
     _id: p._id,
     title: p.title,
-    href: `${ROUTES.blog.guideIntro}/${p.slug}`,
+    href: `${CATEGORY_ROUTE[p.category] ?? ROUTES.blog.guideIntro}/${p.slug}`,
     publishedAt: p.publishedAt,
     thumbnail: p.thumbnail,
   }))
@@ -46,6 +52,9 @@ export default async function GuideIntroDetailPage({ params }: Props) {
       backLabel="액상 공정 엔지니어링 위키"
       data={item}
       related={related}
+      breadcrumbRoot={{ label: "블로그", href: ROUTES.blog.all }}
+      contentInquirySlug={item.slug}
+      browseMoreHref={ROUTES.blog.guideIntro}
     />
   )
 }

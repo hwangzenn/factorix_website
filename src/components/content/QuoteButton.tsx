@@ -7,7 +7,7 @@ type Mode = "quote" | "inquiry"
 
 const MODE_CONTENT: Record<Mode, { buttonLabel: string; title: string; description: string; formType: string; submitLabel: string }> = {
   quote: {
-    buttonLabel: "경쟁사 대비 가격 비교받기",
+    buttonLabel: "견적안내 받기",
     title: "예산에 맞는지 먼저 확인해보세요",
     description: "부담스러운 영업 상담 없이, 정확한 금액대만 빠르게 안내드립니다.",
     formType: "가격문의",

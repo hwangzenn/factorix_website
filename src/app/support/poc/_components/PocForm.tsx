@@ -31,9 +31,10 @@ type Props = {
   formType?: string
   submitLabel?: string
   presetProduct?: string
+  presetProductLabel?: string
 }
 
-export default function PocForm({ formType = "PoC 문의", submitLabel = "문의 접수완료", presetProduct }: Props) {
+export default function PocForm({ formType = "PoC 문의", submitLabel = "문의 접수완료", presetProduct, presetProductLabel = "문의 제품" }: Props) {
   const [model, setModel] = useState("")
   const [subModel, setSubModel] = useState("")
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
@@ -121,7 +122,7 @@ export default function PocForm({ formType = "PoC 문의", submitLabel = "문의
       </div>
       {presetProduct ? (
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">문의 제품</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">{presetProductLabel}</label>
           <input type="text" value={presetProduct} readOnly className={`${inputClass} bg-gray-50 text-gray-600`} />
         </div>
       ) : (

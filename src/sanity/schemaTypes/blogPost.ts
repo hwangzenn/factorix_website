@@ -36,11 +36,6 @@ export const blogPost = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'author',
-      title: '작성자',
-      type: 'string',
-    }),
-    defineField({
       name: 'industries',
       title: '산업군',
       description: '블로그 목록 페이지의 산업군 필터로 사용됩니다.',

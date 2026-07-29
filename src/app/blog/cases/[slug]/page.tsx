@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
-import { caseStudyBySlugQuery, type CaseStudyDetail } from "@/sanity/lib/queries"
+import { caseStudyBySlugQuery, relatedCaseStudiesQuery, type CaseStudyDetail, type RelatedCaseStudy } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
-import ContentDetail from "@/components/content/ContentDetail"
+import ResourceDetail from "@/app/resources/_components/ResourceDetail"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -27,11 +27,28 @@ export default async function CaseStudyDetailPage({ params }: Props) {
   const item = data as CaseStudyDetail | null
   if (!item) notFound()
 
+  const { data: relatedData } = await sanityFetch({
+    query: relatedCaseStudiesQuery,
+    params: { industries: item.industries, processes: item.processes, slug },
+  })
+  const related = ((relatedData as RelatedCaseStudy[]) ?? []).map((c) => ({
+    _id: c._id,
+    title: c.title,
+    href: `${ROUTES.blog.cases}/${c.slug}`,
+    publishedAt: c.publishedAt,
+    thumbnail: c.thumbnail,
+  }))
+
   return (
-    <ContentDetail
+    <ResourceDetail
       eyebrow="블로그 · 적용사례"
       backHref={ROUTES.blog.cases}
+      backLabel="적용사례"
       data={item}
+      related={related}
+      breadcrumbRoot={{ label: "블로그", href: ROUTES.blog.all }}
+      contentInquirySlug={item.slug}
+      browseMoreHref={ROUTES.blog.cases}
     />
   )
 }
