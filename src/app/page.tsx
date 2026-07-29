@@ -270,18 +270,18 @@ export default async function HomePage() {
             <h3 className="text-xl md:text-2xl font-bold text-white leading-tight mb-10">
               공정별로 세분화된 통합 솔루션
             </h3>
-            <div className="flex items-center justify-between flex-wrap gap-y-4">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:flex-wrap md:gap-y-4">
               {VALUE_CHAIN.map((step, i) => (
-                <div key={step.label} className="flex items-center gap-2 md:gap-3">
+                <div key={step.label} className="flex items-center gap-2 w-full md:w-auto md:gap-3">
                   <Link
                     href={step.href}
-                    className="w-32 h-36 md:w-40 md:h-44 rounded-2xl bg-white/95 border border-white/40 flex flex-col items-center text-center px-3 py-5 hover:bg-white transition-all text-primary-700"
+                    className="flex items-center gap-4 w-full rounded-xl px-5 py-4 md:w-40 md:h-44 md:flex-col md:gap-0 md:rounded-2xl md:px-3 md:py-5 bg-white/95 border border-white/40 text-center hover:bg-white transition-all text-primary-700"
                   >
                     {VALUE_CHAIN_ICONS[step.iconKey]}
-                    <span className="flex-1 flex items-center justify-center text-xs md:text-sm font-bold text-gray-800 leading-tight whitespace-pre-line text-center mt-1.5">
+                    <span className="flex-1 text-left text-sm font-bold text-gray-800 leading-tight md:flex-1 md:flex md:items-center md:justify-center md:whitespace-pre-line md:text-center md:text-xs md:mt-1.5">
                       {step.label}
                     </span>
-                    <span className="inline-flex items-center justify-center gap-0.5 text-[11px] md:text-xs font-semibold text-primary-600">
+                    <span className="shrink-0 inline-flex items-center gap-0.5 text-xs md:text-[11px] font-semibold text-primary-600">
                       관련제품 보기
                       <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                         <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -289,7 +289,7 @@ export default async function HomePage() {
                     </span>
                   </Link>
                   {i < VALUE_CHAIN.length - 1 && (
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="shrink-0 text-white/60">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="hidden md:block shrink-0 text-white/60">
                       <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   )}

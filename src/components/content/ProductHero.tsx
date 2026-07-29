@@ -22,7 +22,7 @@ export default function ProductHero({ images, title, description, actions }: Pro
   const activeImage = list[selected]
 
   return (
-    <div className="grid grid-cols-2 gap-x-8 gap-y-3 mb-10">
+    <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-3 mb-10">
       <div className="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-100">
         {activeImage?.asset?.url ? (
           <Image
@@ -38,7 +38,7 @@ export default function ProductHero({ images, title, description, actions }: Pro
         )}
       </div>
       <div>
-        <h1 className="text-4xl font-bold text-primary-800 mb-3">{title}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-primary-800 mb-3">{title}</h1>
         {description && <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line">{description}</p>}
       </div>
 
@@ -64,10 +64,10 @@ export default function ProductHero({ images, title, description, actions }: Pro
           ))}
         </div>
       ) : (
-        <div />
+        <div className="hidden md:block" />
       )}
 
-      <div className="flex items-start -mt-[200px]">{actions}</div>
+      <div className="flex items-start md:-mt-[200px]">{actions}</div>
     </div>
   )
 }

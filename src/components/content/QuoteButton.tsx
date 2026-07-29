@@ -40,18 +40,18 @@ export default function QuoteButton({ productName }: { productName: string }) {
 
   return (
     <>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col w-full gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
         <button
           type="button"
           onClick={() => setMode("quote")}
-          className="inline-flex px-8 py-4 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors text-lg"
+          className="inline-flex justify-center px-8 py-4 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors text-lg"
         >
           {MODE_CONTENT.quote.buttonLabel}
         </button>
         <button
           type="button"
           onClick={() => setMode("inquiry")}
-          className="inline-flex px-8 py-4 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors text-lg"
+          className="inline-flex justify-center px-8 py-4 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors text-lg"
         >
           {MODE_CONTENT.inquiry.buttonLabel}
         </button>
