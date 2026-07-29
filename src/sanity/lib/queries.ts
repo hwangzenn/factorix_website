@@ -298,12 +298,12 @@ export type RelatedBlogPost = {
 }
 
 export const relatedContentByTagsQuery = defineQuery(`
-  *[_type == "blogPost" && isPublic == true && processes == $process]
+  *[(_type == "blogPost" || _type == "caseStudy") && isPublic == true && processes == $process]
   | order(publishedAt desc) [0...3] {
     _id,
     title,
     "slug": slug.current,
-    category,
+    "category": select(_type == "caseStudy" => "cases", category),
     description,
     thumbnail { asset->{ url }, alt }
   }

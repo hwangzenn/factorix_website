@@ -7,6 +7,7 @@ const CATEGORY_ROUTE: Record<string, string> = {
   insight: ROUTES.blog.insight,
   "guide-intro": ROUTES.blog.guideIntro,
   news: ROUTES.blog.news,
+  cases: ROUTES.blog.cases,
 }
 
 type Props = {

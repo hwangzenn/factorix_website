@@ -161,23 +161,6 @@ const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
   ),
 };
 
-// Sanity(faq)에 featuredOnMain == true로 등록된 문항이 없을 때 노출되는 기본값
-const FAQ_SOLUTION: { question: string }[] = [
-  { question: "FactoriX가 제조장비 유통기업과 무엇이 다른가요?" },
-  { question: "반도체 패키징 공정 솔루션만 제공하나요?" },
-  { question: "일반적인 산업용 페이스트만 취급하시나요?" },
-  { question: "규모가 작은 프로젝트도 솔루션 도입이 가능한가요?" },
-  { question: "솔루션 도입 시, 작업 프로세스는 어떻게 되나요?" },
-  { question: "솔루션 견적은 어떻게 측정되나요?" },
-];
-
-const FAQ_PROCESS: { question: string }[] = [
-  { question: "동일한 설정값인데 왜 액상도포 품질 편차가 발생하나요?" },
-  { question: "액상 도포 불량으로 인한 구체적인 기업손실은?" },
-  { question: "액상 공정의 안정성을 높이려면 무엇이 필요한가요?" },
-  { question: "액상공정 개선의 핵심 지표는 무엇인가요?" },
-];
-
 const FAQ_CATEGORY_LABELS: Record<string, string> = {
   solution: "FactoriX 솔루션",
   process: "액상 제조공정",
@@ -190,7 +173,7 @@ const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
   { label: "정량/정밀\n토출", iconKey: "dispensing", href: ROUTES.solutions.standalone.dispenser },
   { label: "탁상로봇", iconKey: "robot", href: ROUTES.solutions.standalone.robot },
   { label: "IR/UV경화\n및 오븐", iconKey: "curing", href: ROUTES.solutions.standalone.curing },
-  { label: "맞춤형 공정\n자동화 설비 시스템", iconKey: "automation", href: ROUTES.solutions.ai.smartFactory },
+  { label: "커스텀 자동화 설비 시스템", iconKey: "automation", href: ROUTES.solutions.ai.smartFactory },
 ];
 
 export default async function HomePage() {
@@ -200,14 +183,9 @@ export default async function HomePage() {
   const industryLogos = (logoData as IndustryLogo[]) ?? [];
   const { data: faqData } = await sanityFetch({ query: featuredFaqsQuery });
   const faqs = (faqData as FaqItem[]) ?? [];
-  const faqCategories = faqs.length > 0
-    ? Object.entries(FAQ_CATEGORY_LABELS)
-        .map(([key, label]) => ({ key, label, items: faqs.filter((f) => f.category === key) }))
-        .filter((c) => c.items.length > 0)
-    : [
-        { key: "solution", label: FAQ_CATEGORY_LABELS.solution, items: FAQ_SOLUTION },
-        { key: "process", label: FAQ_CATEGORY_LABELS.process, items: FAQ_PROCESS },
-      ];
+  const faqCategories = Object.entries(FAQ_CATEGORY_LABELS)
+    .map(([key, label]) => ({ key, label, items: faqs.filter((f) => f.category === key) }))
+    .filter((c) => c.items.length > 0);
 
   return (
     <div className="flex flex-col">
@@ -278,7 +256,7 @@ export default async function HomePage() {
                     className="flex items-center gap-4 w-full rounded-xl px-5 py-4 md:w-40 md:h-44 md:flex-col md:gap-0 md:rounded-2xl md:px-3 md:py-5 bg-white/95 border border-white/40 text-center hover:bg-white transition-all text-primary-700"
                   >
                     {VALUE_CHAIN_ICONS[step.iconKey]}
-                    <span className="flex-1 text-left text-sm font-bold text-gray-800 leading-tight md:flex-1 md:flex md:items-center md:justify-center md:whitespace-pre-line md:text-center md:text-xs md:mt-1.5">
+                    <span className="flex-1 text-left text-sm font-bold text-gray-800 leading-tight md:flex-1 md:flex md:items-center md:justify-center md:whitespace-pre-line md:text-center md:mt-1.5">
                       {step.label}
                     </span>
                     <span className="shrink-0 inline-flex items-center gap-0.5 text-xs md:text-[11px] font-semibold text-primary-600">
@@ -418,24 +396,25 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 자주 묻는 질문 QnA ── */}
-      <section className="bg-white py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="mb-14 flex items-end justify-between">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              자주 묻는 질문 Q&amp;A
-            </h2>
-            <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-primary-700 hover:underline shrink-0">
-              전체보기
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
+      {faqCategories.length > 0 && (
+        <section className="bg-white py-20 px-8">
+          <div className="max-w-[1440px] mx-auto">
+            <div className="mb-14 flex items-end justify-between">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                자주 묻는 질문 Q&amp;A
+              </h2>
+              <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-primary-700 hover:underline shrink-0">
+                전체보기
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </div>
 
-          <FaqTabs categories={faqCategories} />
-        </div>
-      </section>
+            <FaqTabs categories={faqCategories} />
+          </div>
+        </section>
+      )}
 
       {/* ── 팩토릭스 기술 인사이트 ── */}
       <section className="bg-gray-50 py-20 px-8">

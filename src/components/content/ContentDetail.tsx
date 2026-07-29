@@ -245,7 +245,7 @@ export default function ContentDetail({ eyebrow, category, groupLabel, backHref,
           <div className="text-center">
             <Link
               href={backHref}
-              className="inline-block rounded-full bg-primary-700 text-white px-24 py-9 text-3xl font-bold hover:bg-accent transition-colors"
+              className="inline-flex justify-center px-8 py-4 rounded-md bg-primary-700 text-white text-lg font-bold hover:bg-accent transition-colors"
             >
               다른 제품 보러가기 →
             </Link>

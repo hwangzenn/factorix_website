@@ -8,8 +8,8 @@ const GROUPS = [
   {
     label: "설비 시스템",
     items: [
-      { href: ROUTES.solutions.ai.autoCalibration, label: "AI 자동보정 토출시스템" },
       { href: ROUTES.solutions.ai.smartFactory, label: "자동화 설비 시스템" },
+      { href: ROUTES.solutions.ai.autoCalibration, label: "AI보정 토출시스템" },
     ],
   },
   {
@@ -34,14 +34,14 @@ export default function SolutionSubNav() {
       <div className="max-w-5xl mx-auto px-6">
         {GROUPS.map((group) => (
           <div key={group.label} className="flex items-center gap-6 overflow-x-auto whitespace-nowrap">
-            <span className="text-sm font-bold text-gray-900 shrink-0 py-3">{group.label}</span>
+            <span className="text-base font-bold text-gray-900 shrink-0 py-3">{group.label}</span>
             {group.items.map((item) => {
               const isActive = pathname.startsWith(item.href)
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative shrink-0 text-sm py-3 transition-colors ${
+                  className={`relative shrink-0 text-base py-3 transition-colors ${
                     isActive
                       ? "text-primary-700 font-semibold"
                       : "text-gray-500 hover:text-gray-900"

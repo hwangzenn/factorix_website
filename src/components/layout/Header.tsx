@@ -23,6 +23,15 @@ const DARK_HERO_PATHS: string[] = [
 
 const label = (item: NavItem, locale: Locale) => (locale === "en" ? item.labelEn ?? item.label : item.label);
 
+// 블로그는 GNB 자체에서는 하위 카테고리를 펼치지 않는 리프 링크지만(항상 /blog로 바로 이동),
+// 다른 그룹을 열었을 때 함께 뜨는 메가메뉴 안에서는 카테고리 미리보기를 보여준다.
+const BLOG_LINKS: NavItem[] = [
+  { label: "인사이트", labelEn: "Insight", href: ROUTES.blog.insight },
+  { label: "액상 공정 엔지니어링 위키", labelEn: "Engineering Wiki", href: ROUTES.blog.guideIntro },
+  { label: "적용사례", labelEn: "Case Studies", href: ROUTES.blog.cases },
+  { label: "뉴스", labelEn: "News", href: ROUTES.blog.news },
+];
+
 export default function Header() {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
@@ -183,17 +192,31 @@ export default function Header() {
           <div className="max-w-[1440px] mx-auto px-10 py-10">
             {/* 6-column flex layout — 솔루션 gets 2× width for its 2-column sub-groups */}
             <div className="flex">
-              {GNB.filter(isGroup).map((col, ci, groups) => {
+              {GNB.map((col, ci, all) => {
                 const isSolutions = col.label === "솔루션";
-                const isLast = ci === groups.length - 1;
+                const isLast = ci === all.length - 1;
+                const colClass = [
+                  isSolutions ? "flex-[2]" : "flex-1",
+                  !isLast ? "border-r border-gray-200 mr-8 pr-8" : "",
+                ].join(" ");
+
+                if (!isGroup(col)) {
+                  return (
+                    <div key={col.label} className={colClass}>
+                      <Link
+                        href={col.href!}
+                        onClick={() => setMenuOpen(false)}
+                        className="block text-base font-bold text-gray-800 hover:text-primary-700 transition-colors mb-5"
+                      >
+                        {label(col, locale)}
+                      </Link>
+                      <ColItems items={BLOG_LINKS} onClose={() => setMenuOpen(false)} locale={locale} />
+                    </div>
+                  );
+                }
+
                 return (
-                  <div
-                    key={col.label}
-                    className={[
-                      isSolutions ? "flex-[2]" : "flex-1",
-                      !isLast ? "border-r border-gray-200 mr-8 pr-8" : "",
-                    ].join(" ")}
-                  >
+                  <div key={col.label} className={colClass}>
                     {/* Column header */}
                     <p className="text-base font-bold text-gray-800 mb-5">{label(col, locale)}</p>
 
@@ -227,7 +250,7 @@ function ColItems({ items, onClose, locale }: { items: NavItem[]; onClose: () =>
           return (
             <div key={item.label} className="pt-2 first:pt-0">
               {/* sub-group label */}
-              <p className="text-xs text-gray-400 font-medium mb-2">
+              <p className="text-sm text-gray-400 font-medium mb-2">
                 {label(item, locale)} <span className="text-[11px]">›</span>
               </p>
               <div className="space-y-1.5 mb-3">
@@ -237,7 +260,7 @@ function ColItems({ items, onClose, locale }: { items: NavItem[]; onClose: () =>
                       key={child.label}
                       href={child.href}
                       onClick={onClose}
-                      className="block text-[14px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
+                      className="block text-[16px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
                     >
                       {label(child, locale)}
                     </Link>
@@ -252,7 +275,7 @@ function ColItems({ items, onClose, locale }: { items: NavItem[]; onClose: () =>
             key={item.label}
             href={item.href}
             onClick={onClose}
-            className="block text-[14px] text-primary-700 hover:text-primary-900 hover:underline py-0.5"
+            className="block text-[16px] text-primary-700 hover:text-primary-900 hover:underline py-0.5"
           >
             {label(item, locale)}
           </Link>
@@ -270,7 +293,7 @@ function SolutionsColumn({ items, onClose, locale }: { items: NavItem[]; onClose
         if (!isGroup(group)) return null;
         return (
           <div key={group.label}>
-            <p className="text-xs text-gray-400 font-medium mb-2">
+            <p className="text-sm text-gray-400 font-medium mb-2">
               {label(group, locale)} <span className="text-[11px]">›</span>
             </p>
             <div className="space-y-1.5">
@@ -280,7 +303,7 @@ function SolutionsColumn({ items, onClose, locale }: { items: NavItem[]; onClose
                     key={child.label}
                     href={child.href}
                     onClick={onClose}
-                    className="block text-[14px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
+                    className="block text-[16px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
                   >
                     {label(child, locale)}
                   </Link>

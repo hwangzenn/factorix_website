@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import HeroCarousel from "@/components/HeroCarousel";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
-import FaqTabs from "@/components/home/FaqTabs";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   allCaseStudiesQuery,
@@ -159,22 +158,6 @@ const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
 };
-
-const FAQ_SOLUTION: { question: string }[] = [
-  { question: "How is FactoriX different from an equipment distributor?" },
-  { question: "Do you only provide solutions for semiconductor packaging processes?" },
-  { question: "Do you only handle general industrial pastes?" },
-  { question: "Can small-scale projects also adopt your solutions?" },
-  { question: "What is the process for adopting a solution?" },
-  { question: "How is a solution quote determined?" },
-];
-
-const FAQ_PROCESS: { question: string }[] = [
-  { question: "Why does dispensing quality vary with identical settings?" },
-  { question: "What are the concrete business losses from dispensing defects?" },
-  { question: "What is needed to improve liquid process stability?" },
-  { question: "What are the key metrics for improving liquid processes?" },
-];
 
 const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
   { label: "Liquid Mixing\n& Defoaming", iconKey: "mixing", href: ROUTES.solutions.standalone.mixer },
@@ -398,31 +381,6 @@ export default async function EnHomePage() {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── Frequently Asked Questions ── */}
-      <section className="bg-white py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="mb-14 flex items-end justify-between">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Frequently Asked Questions
-            </h2>
-            <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-primary-700 hover:underline shrink-0">
-              View All
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
-
-          <FaqTabs
-            categories={[
-              { key: "solution", label: "FactoriX Solutions", items: FAQ_SOLUTION },
-              { key: "process", label: "Liquid Manufacturing Process", items: FAQ_PROCESS },
-            ]}
-            locale="en"
-          />
         </div>
       </section>
 

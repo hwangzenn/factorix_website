@@ -48,7 +48,7 @@ export const GNB: NavItem[] = [
         labelEn: "Systems",
         children: [
           { label: "자동화 설비 시스템", labelEn: "Automation System", href: ROUTES.solutions.ai.smartFactory },
-          { label: "AI 자동보정 토출시스템", labelEn: "AI Auto-Calibration Dispensing System", href: ROUTES.solutions.ai.autoCalibration },
+          { label: "AI보정 토출시스템", labelEn: "AI Auto-Calibration Dispensing System", href: ROUTES.solutions.ai.autoCalibration },
         ],
       },
     ],
