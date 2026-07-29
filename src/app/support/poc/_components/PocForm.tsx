@@ -165,7 +165,7 @@ export default function PocForm({ formType = "PoC 문의", submitLabel = "문의
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {status === "sending" ? "전송 중..." : submitLabel}
       </button>

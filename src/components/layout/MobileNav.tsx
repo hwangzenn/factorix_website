@@ -53,7 +53,7 @@ export default function MobileNav({
         <Link
           href={ROUTES.support.poc}
           onClick={onClose}
-          className="block w-full text-center py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors"
+          className="block w-full text-center py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors"
         >
           {locale === "en" ? "Contact Us" : "도입 문의"}
         </Link>

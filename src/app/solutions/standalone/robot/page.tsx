@@ -5,6 +5,7 @@ import { productsByCategoryQuery, type ProductItem } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
 import ContentCard from "@/components/content/ContentCard"
 import ContentCardGrid from "@/components/content/ContentCardGrid"
+import CategoryBreadcrumb from "@/components/content/CategoryBreadcrumb"
 
 export const revalidate = 3600
 
@@ -23,10 +24,13 @@ export default async function RobotPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-20">
-      <div className="flex items-center justify-between mb-10">
-        <h1 className="text-4xl font-bold text-primary-800">협동/직교/3축로봇</h1>
-        <div className="flex gap-3 shrink-0">
-          <Link href={ROUTES.support.poc} className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-sm font-semibold rounded-md hover:bg-primary-800 transition-colors">도입 문의</Link>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
+        <div>
+          <CategoryBreadcrumb segments={["솔루션", "장비", "협동/직교/3축로봇"]} />
+          <h1 className="hidden sm:block text-4xl font-bold text-primary-800">협동/직교/3축로봇</h1>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Link href={ROUTES.support.poc} className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-sm font-semibold rounded-md hover:bg-accent transition-colors">도입 문의</Link>
           <Link href={`${ROUTES.blog.cases}?industry=automotive`} className="inline-flex px-5 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded-md hover:bg-primary-50 transition-colors">적용사례 보기</Link>
         </div>
       </div>

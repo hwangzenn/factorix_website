@@ -10,7 +10,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="px-8 py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors"
+        className="px-8 py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors"
       >
         홈으로 돌아가기
       </Link>

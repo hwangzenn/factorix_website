@@ -155,7 +155,7 @@ export default function Header() {
             <Link
               href={ROUTES.support.meeting}
               onClick={() => setMenuOpen(false)}
-              className="inline-flex items-center px-5 py-2 bg-primary-700 text-white text-sm font-semibold rounded hover:bg-primary-800 transition-colors"
+              className="inline-flex items-center px-5 py-2 bg-primary-700 text-white text-sm font-semibold rounded hover:bg-accent transition-colors"
             >
               {locale === "en" ? "Contact Us" : "도입 문의"}
             </Link>

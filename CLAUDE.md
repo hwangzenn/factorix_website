@@ -35,10 +35,10 @@
 
 ### 톤 & 팔레트
 - 톤: 깔끔하고 여백 넉넉한 모던 B2B/산업 기술 느낌.
-- 포인트 컬러: `#006dff`(비비드 블루) — 버튼·링크·강조 텍스트 등 액션/강조 요소.
-- 기본 컬러: `#101236`(딥 네이비) — 헤더/푸터 등 어두운 배경 섹션.
+- 기본(중심) 컬러: `#0A40C0`(`primary-700`) 계열 — 버튼·헤딩·강조 텍스트 등 대부분의 액션/강조 요소 기본값. 어두운 배경 섹션은 `primary-900`(`#101236`)까지 확장.
+- 액센트 컬러: `#006dff`(비비드 블루, `--accent`) — 남색 요소의 **호버 시 색상반전**으로만 사용(`hover:bg-accent`/`hover:text-accent`). 기본 상태의 주 색상으로는 쓰지 않음.
 - 중립색: 블랙 & 화이트(Tailwind `black`/`white`/`gray-*`) 그대로 사용.
-- 색 토큰은 `src/app/globals.css`의 `--primary-50`~`--primary-900`(Tailwind v4 `@theme inline`)에 정의, 전 페이지 재사용.
+- 색 토큰은 `src/app/globals.css`의 `--primary-50`~`--primary-900`, `--accent`(Tailwind v4 `@theme inline`)에 정의, 전 페이지 재사용.
 
 ---
 

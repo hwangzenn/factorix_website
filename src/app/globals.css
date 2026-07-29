@@ -5,16 +5,18 @@
   --background: #ffffff;
   --foreground: #1a1a2e;
 
-  --primary-50: #e6f1ff;
-  --primary-100: #cce3ff;
-  --primary-200: #99c7ff;
-  --primary-300: #66aaff;
-  --primary-400: #338eff;
-  --primary-500: #1a7bff;
-  --primary-600: #0074ff;
-  --primary-700: #006dff;
-  --primary-800: #0d3f8a;
+  --primary-50: #eef1fb;
+  --primary-100: #d1dbf5;
+  --primary-200: #a3b8ea;
+  --primary-300: #7594e0;
+  --primary-400: #4770d5;
+  --primary-500: #2657c8;
+  --primary-600: #144abe;
+  --primary-700: #0a40c0;
+  --primary-800: #0a2f8f;
   --primary-900: #101236;
+
+  --accent: #006dff;
 }
 
 @theme inline {
@@ -34,6 +36,7 @@
   --color-primary-800: var(--primary-800);
   --color-primary-900: var(--primary-900);
 
+  --color-accent: var(--accent);
 }
 
 body {

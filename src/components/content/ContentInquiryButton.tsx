@@ -22,7 +22,7 @@ export default function ContentInquiryButton({ slug }: { slug: string }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex px-8 py-4 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors text-lg"
+        className="inline-flex px-8 py-4 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors text-lg"
       >
         지금 보고 있는 콘텐츠로 온라인 문의하기
       </button>

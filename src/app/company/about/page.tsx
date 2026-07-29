@@ -106,7 +106,7 @@ export default function AboutPage() {
       {/* ── 핵심 가치 ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-xs font-bold text-[#006dff] tracking-widest uppercase mb-2">VALUE PROPOSITION</p>
+          <p className="text-xs font-bold text-primary-700 tracking-widest uppercase mb-2">VALUE PROPOSITION</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
             원료부터 자동화까지,<br />통합 밸류체인을 구축한 유일한 기업
           </h2>
@@ -118,7 +118,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {VALUES.map((v) => (
               <div key={v.label} className="p-8 rounded-2xl border border-gray-100 bg-gray-50 hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 rounded-xl bg-primary-50 flex items-center justify-center text-[#006dff] mb-5">
+                <div className="w-14 h-14 rounded-xl bg-primary-50 flex items-center justify-center text-primary-700 mb-5">
                   {v.icon}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-2">{v.label}</h3>
@@ -132,7 +132,7 @@ export default function AboutPage() {
       {/* ── 주요 사업 영역 ── */}
       <section className="bg-gray-50 py-20 px-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-xs font-bold text-[#006dff] tracking-widest uppercase mb-2">BUSINESS AREAS</p>
+          <p className="text-xs font-bold text-primary-700 tracking-widest uppercase mb-2">BUSINESS AREAS</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">주요 사업 영역</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -140,12 +140,12 @@ export default function AboutPage() {
               <Link
                 key={b.tag}
                 href={b.href}
-                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#006dff]/30 hover:shadow-md transition-all"
+                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-accent/30 hover:shadow-md transition-all"
               >
-                <span className="inline-block text-xs font-bold text-[#006dff] tracking-widest uppercase mb-3">{b.tag}</span>
-                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#006dff] transition-colors">{b.title}</h3>
+                <span className="inline-block text-xs font-bold text-primary-700 tracking-widest uppercase mb-3">{b.tag}</span>
+                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-accent transition-colors">{b.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
-                <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-[#006dff]">
+                <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-primary-700">
                   자세히 보기
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -206,13 +206,13 @@ export default function AboutPage() {
           <div className="flex gap-3 shrink-0">
             <Link
               href={ROUTES.support.meeting}
-              className="inline-flex px-6 py-3 bg-[#006dff] text-white font-semibold rounded-lg hover:bg-primary-800 transition-colors text-sm"
+              className="inline-flex px-6 py-3 bg-primary-700 text-white font-semibold rounded-lg hover:bg-accent transition-colors text-sm"
             >
               온라인상담
             </Link>
             <Link
               href={ROUTES.blog.news}
-              className="inline-flex px-6 py-3 border border-[#006dff] text-[#006dff] font-semibold rounded-lg hover:bg-primary-50 transition-colors text-sm"
+              className="inline-flex px-6 py-3 border border-primary-700 text-primary-700 font-semibold rounded-lg hover:bg-primary-50 transition-colors text-sm"
             >
               특허/수상정보 보기
             </Link>

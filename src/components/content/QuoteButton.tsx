@@ -44,7 +44,7 @@ export default function QuoteButton({ productName }: { productName: string }) {
         <button
           type="button"
           onClick={() => setMode("quote")}
-          className="inline-flex px-8 py-4 bg-primary-700 text-white font-semibold rounded-md hover:bg-primary-800 transition-colors text-lg"
+          className="inline-flex px-8 py-4 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors text-lg"
         >
           {MODE_CONTENT.quote.buttonLabel}
         </button>

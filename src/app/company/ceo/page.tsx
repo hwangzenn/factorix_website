@@ -11,7 +11,7 @@ export default function CeoPage() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-20">
       {/* 헤더 */}
-      <p className="text-sm text-[#006dff] font-medium mb-2">기업정보</p>
+      <p className="text-sm text-primary-700 font-medium mb-2">기업정보</p>
       <h1 className="text-4xl font-bold text-gray-900 mb-8">CEO 인사말</h1>
 
       {/* 헤드라인 이미지 */}
@@ -24,7 +24,7 @@ export default function CeoPage() {
       </div>
 
       {/* 대표 인용구 */}
-      <blockquote className="border-l-4 border-[#006dff] pl-6 py-2 mb-12">
+      <blockquote className="border-l-4 border-primary-700 pl-6 py-2 mb-12">
         <p className="text-xl md:text-2xl font-semibold text-gray-800 leading-snug">
           기술은 사람을 대신하는 것이 아니라,<br />사람의 가능성을 확장해야 합니다.
         </p>

@@ -123,7 +123,7 @@ const portableComponents = {
       return (
         <a
           href={href}
-          className="text-primary-700 underline underline-offset-2 hover:text-primary-800"
+          className="text-primary-700 underline underline-offset-2 hover:text-accent"
           {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
           {children}
@@ -235,7 +235,7 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
           <a
             href={data.fileUrl}
             download
-            className="inline-flex px-5 py-2.5 bg-primary-700 text-white font-medium rounded-md hover:bg-primary-800 transition-colors text-sm"
+            className="inline-flex px-5 py-2.5 bg-primary-700 text-white font-medium rounded-md hover:bg-accent transition-colors text-sm"
           >
             파일 다운로드
           </a>
