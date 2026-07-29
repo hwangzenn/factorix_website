@@ -10,6 +10,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "적용사례 | Factorix",
   description: "산업군·공정별로 살펴보는 팩토릭스 적용사례",
+  alternates: { canonical: ROUTES.blog.cases },
 }
 
 const INDUSTRY_LABEL: Record<string, string> = Object.fromEntries(INDUSTRIES.map((i) => [i.key, i.label]))

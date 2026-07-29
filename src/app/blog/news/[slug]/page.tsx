@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${item.seo?.metaTitle || item.title} | Factorix`,
     description: item.seo?.metaDescription || item.description || undefined,
+    alternates: { canonical: `${ROUTES.blog.news}/${slug}` },
     openGraph: (item.seo?.ogImage?.asset?.url || item.thumbnail?.asset?.url)
       ? { images: [{ url: item.seo?.ogImage?.asset?.url || item.thumbnail!.asset.url }] }
       : undefined,

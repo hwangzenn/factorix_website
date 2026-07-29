@@ -5,6 +5,7 @@ import { ROUTES } from "@/lib/routes";
 export const metadata: Metadata = {
   title: "회사소개 | 팩토릭스 Factorix",
   description: "팩토릭스는 액상 소재의 물성 변화를 실시간 학습하고 디스펜싱 공정을 자동 보정하는 AI 제조 지능 시스템 기업입니다.",
+  alternates: { canonical: ROUTES.company.about },
 };
 
 const VALUES = [
@@ -88,7 +89,7 @@ export default function AboutPage() {
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-[#0f1f3d]/70" />
+        <div className="absolute inset-0 bg-[#101236]/70" />
         <div className="relative max-w-4xl mx-auto">
           <p className="text-sm text-blue-300 font-medium tracking-widest uppercase mb-4">기업정보 · 회사소개</p>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
@@ -105,7 +106,7 @@ export default function AboutPage() {
       {/* ── 핵심 가치 ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-2">VALUE PROPOSITION</p>
+          <p className="text-xs font-bold text-[#006dff] tracking-widest uppercase mb-2">VALUE PROPOSITION</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
             원료부터 자동화까지,<br />통합 밸류체인을 구축한 유일한 기업
           </h2>
@@ -117,7 +118,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {VALUES.map((v) => (
               <div key={v.label} className="p-8 rounded-2xl border border-gray-100 bg-gray-50 hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 rounded-xl bg-blue-50 flex items-center justify-center text-[#196DDA] mb-5">
+                <div className="w-14 h-14 rounded-xl bg-primary-50 flex items-center justify-center text-[#006dff] mb-5">
                   {v.icon}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-2">{v.label}</h3>
@@ -131,7 +132,7 @@ export default function AboutPage() {
       {/* ── 주요 사업 영역 ── */}
       <section className="bg-gray-50 py-20 px-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-2">BUSINESS AREAS</p>
+          <p className="text-xs font-bold text-[#006dff] tracking-widest uppercase mb-2">BUSINESS AREAS</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">주요 사업 영역</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -139,12 +140,12 @@ export default function AboutPage() {
               <Link
                 key={b.tag}
                 href={b.href}
-                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#196DDA]/30 hover:shadow-md transition-all"
+                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#006dff]/30 hover:shadow-md transition-all"
               >
-                <span className="inline-block text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-3">{b.tag}</span>
-                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#196DDA] transition-colors">{b.title}</h3>
+                <span className="inline-block text-xs font-bold text-[#006dff] tracking-widest uppercase mb-3">{b.tag}</span>
+                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#006dff] transition-colors">{b.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
-                <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-[#196DDA]">
+                <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-[#006dff]">
                   자세히 보기
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -157,7 +158,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── 기업 경쟁력 ── */}
-      <section className="bg-[#0f1f3d] text-white py-20 px-8">
+      <section className="bg-[#101236] text-white py-20 px-8">
         <div className="max-w-4xl mx-auto">
           <p className="text-xs font-bold text-blue-300 tracking-widest uppercase mb-2">WHY FACTORIX</p>
           <h2 className="text-2xl md:text-3xl font-bold mb-12">팩토릭스를 선택해야 하는 이유</h2>
@@ -205,13 +206,13 @@ export default function AboutPage() {
           <div className="flex gap-3 shrink-0">
             <Link
               href={ROUTES.support.meeting}
-              className="inline-flex px-6 py-3 bg-[#196DDA] text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              className="inline-flex px-6 py-3 bg-[#006dff] text-white font-semibold rounded-lg hover:bg-primary-800 transition-colors text-sm"
             >
               온라인상담
             </Link>
             <Link
               href={ROUTES.blog.news}
-              className="inline-flex px-6 py-3 border border-[#196DDA] text-[#196DDA] font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
+              className="inline-flex px-6 py-3 border border-[#006dff] text-[#006dff] font-semibold rounded-lg hover:bg-primary-50 transition-colors text-sm"
             >
               특허/수상정보 보기
             </Link>

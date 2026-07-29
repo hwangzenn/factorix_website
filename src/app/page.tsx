@@ -405,7 +405,7 @@ export default async function HomePage() {
                   <span className="text-2xl md:text-3xl font-normal text-white">
                     액상 자동보정 토출 시스템
                   </span>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#196DDA]">
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#006dff]">
                     자세히 알아보기
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -425,7 +425,7 @@ export default async function HomePage() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
               자주 묻는 질문 Q&amp;A
             </h2>
-            <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
+            <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-[#006dff] hover:underline shrink-0">
               전체보기
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

@@ -11,6 +11,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "UV/IR 경화기 | Factorix",
   description: "Factorix UV/IR 경화기 — 고효율 UV·IR 경화 솔루션",
+  alternates: { canonical: ROUTES.solutions.standalone.curing },
 }
 
 export default async function CuringPage() {

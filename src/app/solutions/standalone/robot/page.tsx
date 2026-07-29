@@ -11,6 +11,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "협동/직교/3축로봇 | Factorix",
   description: "Factorix 협동·직교·3축로봇 — 자동화 로봇 솔루션",
+  alternates: { canonical: ROUTES.solutions.standalone.robot },
 }
 
 export default async function RobotPage() {

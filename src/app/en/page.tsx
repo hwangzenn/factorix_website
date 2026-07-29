@@ -388,7 +388,7 @@ export default async function EnHomePage() {
                   <span className="text-2xl md:text-3xl font-normal text-white">
                     Liquid Auto-Calibration Dispensing System
                   </span>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#196DDA]">
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#006dff]">
                     Learn More
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -408,7 +408,7 @@ export default async function EnHomePage() {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
               Frequently Asked Questions
             </h2>
-            <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-[#196DDA] hover:underline shrink-0">
+            <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-[#006dff] hover:underline shrink-0">
               View All
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

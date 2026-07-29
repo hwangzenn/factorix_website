@@ -11,6 +11,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "액제제조 솔루션 적용사례 | Factorix",
   description: "Factorix 액제제조 솔루션 제품유형별 적용사례",
+  alternates: { canonical: ROUTES.cases.product.solutions },
 }
 
 export default async function ProductSolutionsCasePage() {

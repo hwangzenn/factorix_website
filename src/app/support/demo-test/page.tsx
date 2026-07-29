@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
+import { ROUTES } from "@/lib/routes"
 import PocForm from "../poc/_components/PocForm"
 
 export const metadata: Metadata = {
   title: "평가테스트 문의 | Factorix",
   description: "Factorix 시스템 평가테스트 문의",
+  alternates: { canonical: ROUTES.support.demoTest },
 }
 
 export default function DemoTestPage() {

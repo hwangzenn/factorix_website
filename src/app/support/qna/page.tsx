@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { sanityFetch } from "@/sanity/lib/live";
 import { allFaqsQuery, type FaqItem } from "@/sanity/lib/queries";
+import { ROUTES } from "@/lib/routes";
 import FaqTabs from "@/components/home/FaqTabs";
 
 export const revalidate = 3600;
@@ -8,6 +9,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Q&A",
   description: "Factorix 자주 묻는 질문",
+  alternates: { canonical: ROUTES.support.qna },
 };
 
 const FAQ_CATEGORY_LABELS: Record<string, string> = {

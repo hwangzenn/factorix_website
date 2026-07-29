@@ -12,6 +12,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "뉴스 | Factorix",
   description: "팩토릭스의 언론보도, 특허/수상 등 소식",
+  alternates: { canonical: ROUTES.blog.news },
 }
 
 type Props = {

@@ -15,6 +15,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "블로그 | Factorix",
   description: "액제제조·디스펜싱 자동화에 대한 팩토릭스의 인사이트, 액상 공정 엔지니어링 위키, 적용사례, 뉴스",
+  alternates: { canonical: ROUTES.blog.all },
 }
 
 const CATEGORY_PATH: Record<string, string> = {

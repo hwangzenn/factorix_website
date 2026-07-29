@@ -117,7 +117,7 @@ export default async function AutoCalibrationPage() {
     <div className="flex flex-col">
 
       {/* ── 인트로 ── */}
-      <section className="bg-[#0f1f3d] text-white py-20 px-8">
+      <section className="bg-[#101236] text-white py-20 px-8">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-bold text-blue-300 tracking-widest uppercase mb-6">AI AUTO-CALIBRATION SYSTEM · AFMS</p>
           <h1 className="text-3xl md:text-4xl font-bold leading-snug mb-8 max-w-2xl">
@@ -142,7 +142,7 @@ export default async function AutoCalibrationPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-3">PRODUCT OVERVIEW</p>
+              <p className="text-xs font-bold text-[#006dff] tracking-widest uppercase mb-3">PRODUCT OVERVIEW</p>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
                 AFMS<br />제조 지능의 표준
               </h2>
@@ -153,13 +153,13 @@ export default async function AutoCalibrationPage() {
               <div className="flex gap-3">
                 <Link
                   href={ROUTES.support.poc}
-                  className="inline-flex px-5 py-2.5 bg-[#196DDA] text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-flex px-5 py-2.5 bg-[#006dff] text-white text-sm font-semibold rounded-lg hover:bg-primary-800 transition-colors"
                 >
                   도입 문의
                 </Link>
                 <Link
                   href={`${ROUTES.blog.cases}?industry=electronics`}
-                  className="inline-flex px-5 py-2.5 border border-[#196DDA] text-[#196DDA] text-sm font-semibold rounded-lg hover:bg-blue-50 transition-colors"
+                  className="inline-flex px-5 py-2.5 border border-[#006dff] text-[#006dff] text-sm font-semibold rounded-lg hover:bg-primary-50 transition-colors"
                 >
                   적용사례 보기
                 </Link>
@@ -179,19 +179,19 @@ export default async function AutoCalibrationPage() {
       {/* ── 핵심 기능 ── */}
       <section className="bg-gray-50 py-20 px-8">
         <div className="max-w-5xl mx-auto">
-          <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-2">CORE FUNCTIONS</p>
+          <p className="text-xs font-bold text-[#006dff] tracking-widest uppercase mb-2">CORE FUNCTIONS</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">5가지 자동화 아키텍처</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map((f) => (
               <div key={f.num} className="bg-white rounded-2xl p-7 border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-bold text-[#196DDA]/40 tracking-widest">{f.num}</span>
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-[#196DDA]">
+                  <span className="text-xs font-bold text-[#006dff]/40 tracking-widest">{f.num}</span>
+                  <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center text-[#006dff]">
                     {f.icon}
                   </div>
                 </div>
-                <p className="text-[10px] font-bold text-[#196DDA]/60 tracking-widest uppercase mb-1">{f.en}</p>
+                <p className="text-[10px] font-bold text-[#006dff]/60 tracking-widest uppercase mb-1">{f.en}</p>
                 <h3 className="font-bold text-gray-900 mb-2">{f.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
               </div>
@@ -201,7 +201,7 @@ export default async function AutoCalibrationPage() {
       </section>
 
       {/* ── 기대 효과 ── */}
-      <section className="bg-[#196DDA] text-white py-20 px-8">
+      <section className="bg-[#006dff] text-white py-20 px-8">
         <div className="max-w-5xl mx-auto">
           <p className="text-xs font-bold text-blue-200 tracking-widest uppercase mb-2">EXPECTED RESULTS</p>
           <h2 className="text-2xl md:text-3xl font-bold mb-12">도입 후 변화되는 지표</h2>
@@ -222,7 +222,7 @@ export default async function AutoCalibrationPage() {
       {products.length > 0 && (
         <section className="bg-white py-20 px-8">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-2">PRODUCTS</p>
+            <p className="text-xs font-bold text-[#006dff] tracking-widest uppercase mb-2">PRODUCTS</p>
             <h2 className="text-2xl font-bold text-gray-900 mb-10">제품 라인업</h2>
             <ContentCardGrid isEmpty={false}>
               {products.map((p) => (
@@ -250,13 +250,13 @@ export default async function AutoCalibrationPage() {
           <div className="flex gap-3 shrink-0">
             <Link
               href={ROUTES.support.poc}
-              className="inline-flex px-6 py-3 bg-[#196DDA] text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              className="inline-flex px-6 py-3 bg-[#006dff] text-white font-semibold rounded-lg hover:bg-primary-800 transition-colors text-sm"
             >
               PoC 문의
             </Link>
             <Link
               href={ROUTES.support.demoTest}
-              className="inline-flex px-6 py-3 border border-[#196DDA] text-[#196DDA] font-semibold rounded-lg hover:bg-blue-50 transition-colors text-sm"
+              className="inline-flex px-6 py-3 border border-[#006dff] text-[#006dff] font-semibold rounded-lg hover:bg-primary-50 transition-colors text-sm"
             >
               평가테스트 신청
             </Link>

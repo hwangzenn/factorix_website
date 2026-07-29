@@ -11,6 +11,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "쓰리롤밀 | Factorix",
   description: "Factorix 쓰리롤밀 — 정밀 액제 분산·혼합 솔루션",
+  alternates: { canonical: ROUTES.solutions.standalone.threeRollMill },
 }
 
 export default async function ThreeRollMillPage() {

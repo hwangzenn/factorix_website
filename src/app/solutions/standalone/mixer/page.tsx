@@ -11,6 +11,7 @@ export const revalidate = 3600
 export const metadata: Metadata = {
   title: "교반/탈포기 | Factorix",
   description: "Factorix 교반/탈포기 — 정밀 액제 혼합 솔루션",
+  alternates: { canonical: ROUTES.solutions.standalone.mixer },
 }
 
 export default async function MixerPage() {

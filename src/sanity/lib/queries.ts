@@ -381,6 +381,28 @@ export const featuredFaqsQuery = defineQuery(`
   }
 `)
 
+// ─────────────────────────────────────────
+// sitemap.ts 전용 — URL 생성에 필요한 최소 필드만 (개수 제한 없음)
+// ─────────────────────────────────────────
+
+export type SitemapEntry = { slug: string; category: string }
+
+export const sitemapBlogPostsQuery = defineQuery(`
+  *[_type == "blogPost" && isPublic == true]{ "slug": slug.current, category }
+`)
+
+export const sitemapCaseStudiesQuery = defineQuery(`
+  *[_type == "caseStudy" && isPublic == true]{ "slug": slug.current }
+`)
+
+export const sitemapReferenceMaterialsQuery = defineQuery(`
+  *[_type == "referenceMaterial" && isPublic == true]{ "slug": slug.current, category }
+`)
+
+export const sitemapProductsByCategoryQuery = defineQuery(`
+  *[_type == "product" && category == $category]{ "slug": slug.current }
+`)
+
 export const allFaqsQuery = defineQuery(`
   *[_type == "faq" && isPublic == true]
   | order(category asc, order asc) {

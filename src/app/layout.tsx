@@ -37,7 +37,6 @@ export const metadata: Metadata = {
     description: "팩토릭스 — 정밀 토출, 디스펜싱, 액상 제조 전문 자동화 설비 기업",
     images: ["/og-image.png"],
   },
-  alternates: { canonical: SITE_URL },
   ...(NAVER_VERIFICATION && {
     other: { "naver-site-verification": NAVER_VERIFICATION },
   }),
