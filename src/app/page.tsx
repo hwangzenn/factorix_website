@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: "팩토릭스 — 정밀 토출, 디스펜싱, 액상 제조 전문 자동화 설비 기업",
   keywords: [
     "팩토릭스", "Factorix", "디스펜싱 자동화", "액제제조 솔루션",
-    "AI 스마트팩토리", "디스펜서", "충진기", "AI 웨어러블",
+    "AI 스마트팩토리", "디스펜서", "충진기",
   ],
   alternates: {
     canonical: ROUTES.home,
@@ -446,45 +446,38 @@ export default async function HomePage() {
             </h2>
           </div>
 
-          {/* AI 웨어러블 / 블로그 / 유튜브 / 특허자료 */}
+          {/* 블로그 / 유튜브 / 특허자료 */}
           <div className="mb-14">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* 좌측: AI 웨어러블 */}
-              <div className="block rounded-lg overflow-hidden">
-                <img
-                  src="/ai웨어러블.png"
-                  alt="AI 웨어러블 신사업 CES 2026 혁신상 수상"
-                  className="w-full h-auto block"
-                />
-              </div>
-
-              {/* 우측: 블로그 / 유튜브 / 특허자료 */}
-              <div className="flex flex-col gap-4">
-                <Link
-                  href={`${ROUTES.resources}?category=tech-docs`}
-                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-                >
-                  <span className="text-lg md:text-xl font-semibold">팩토릭스 기술블로그 바로가기</span>
-                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-                <div className="flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-400 px-6 py-6">
-                  <span className="text-lg md:text-xl font-semibold">시연영상 유튜브 채널 바로가기</span>
-                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <Link
-                  href={ROUTES.blog.news}
-                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-                >
-                  <span className="text-lg md:text-xl font-semibold">특허 및 IR 자료실 바로가기</span>
-                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              </div>
+            <div className="max-w-2xl mx-auto flex flex-col gap-4">
+              <Link
+                href={`${ROUTES.resources}?category=tech-docs`}
+                className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+              >
+                <span className="text-lg md:text-xl font-semibold">팩토릭스 기술블로그 바로가기</span>
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                  <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+              <a
+                href="https://www.youtube.com/@FactoriX-t9f"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+              >
+                <span className="text-lg md:text-xl font-semibold">시연영상 유튜브 채널 바로가기</span>
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                  <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+              <Link
+                href={ROUTES.blog.news}
+                className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+              >
+                <span className="text-lg md:text-xl font-semibold">특허 및 IR 자료실 바로가기</span>
+                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                  <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
             </div>
           </div>
 

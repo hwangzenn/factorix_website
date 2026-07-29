@@ -38,7 +38,6 @@ export const ROUTES = {
   cases: {
     product: {                        // 제품유형별 ── 디렉토리
       solutions: "/cases/product/solutions",      // 액제제조 솔루션
-      wearable: "/cases/product/wearable",        // 웨어러블 디바이스
     },
   },
 

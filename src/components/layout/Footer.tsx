@@ -60,7 +60,7 @@ export default function Footer() {
               height={40}
               className="h-8 w-auto object-contain mb-2 brightness-0 invert"
             />
-            <p className="text-sm">{en ? "Liquid Manufacturing Solutions · AI Wearable Devices" : "액제제조 솔루션 · AI 웨어러블 디바이스 전문 기업"}</p>
+            <p className="text-sm">{en ? "Liquid Manufacturing Solutions" : "액제제조 솔루션 전문 기업"}</p>
           </div>
           <p className="text-sm">© 2025 Factorix. All rights reserved.</p>
         </div>

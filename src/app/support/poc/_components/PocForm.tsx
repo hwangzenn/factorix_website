@@ -21,14 +21,6 @@ const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; labe
       { value: "smart-factory", label: "자동화 설비 시스템" },
     ],
   },
-  wearable: {
-    label: "AI 웨어러블",
-    subs: [
-      { value: "b2c", label: "B2C 모델" },
-      { value: "b2b", label: "B2B 모델" },
-      { value: "b2g", label: "B2G 모델" },
-    ],
-  },
 }
 
 const SHEET_URL = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL ?? ""

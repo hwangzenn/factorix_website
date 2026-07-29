@@ -69,18 +69,12 @@ const BUSINESSES = [
     desc: "산업용 접착제, 실리콘 등 핵심 전자 소재 개발 및 공급. 소재 이해도와 공정 노하우를 동시에 보유한 통합 역량을 제공합니다.",
     href: ROUTES.cases.product.solutions,
   },
-  {
-    tag: "WEARABLE · CES 2026 수상",
-    title: "AI 웨어러블 디바이스 HSS1",
-    desc: "CES 2026 혁신상 수상 기술 기반의 차세대 AI 비서 플랫폼. 산업 현장부터 일상까지 연결하는 스마트 웨어러블 솔루션입니다.",
-  },
 ];
 
 const STATS = [
   { value: "200+", label: "국내외 파트너사" },
   { value: "100억+", label: "2026 목표 매출" },
-  { value: "4개", label: "핵심 사업 영역" },
-  { value: "CES", label: "2026 혁신상 수상" },
+  { value: "3개", label: "핵심 사업 영역" },
 ];
 
 export default function AboutPage() {
@@ -116,7 +110,7 @@ export default function AboutPage() {
             원료부터 자동화까지,<br />통합 밸류체인을 구축한 유일한 기업
           </h2>
           <p className="text-gray-500 mb-12">
-            팩토릭스는 소재·장비·AI·웨어러블 역량을 모두 내재화한 통합 기술력으로
+            팩토릭스는 소재·장비·AI 역량을 모두 내재화한 통합 기술력으로
             고객의 공정 문제를 처음부터 끝까지 해결합니다.
           </p>
 
@@ -140,37 +134,24 @@ export default function AboutPage() {
           <p className="text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-2">BUSINESS AREAS</p>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">주요 사업 영역</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {BUSINESSES.map((b) => {
-              const content = (
-                <>
-                  <span className="inline-block text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-3">{b.tag}</span>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#196DDA] transition-colors">{b.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
-                  {b.href && (
-                    <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-[#196DDA]">
-                      자세히 보기
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  )}
-                </>
-              );
-              return b.href ? (
-                <Link
-                  key={b.tag}
-                  href={b.href}
-                  className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#196DDA]/30 hover:shadow-md transition-all"
-                >
-                  {content}
-                </Link>
-              ) : (
-                <div key={b.tag} className="bg-white rounded-2xl p-8 border border-gray-100">
-                  {content}
-                </div>
-              );
-            })}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {BUSINESSES.map((b) => (
+              <Link
+                key={b.tag}
+                href={b.href}
+                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[#196DDA]/30 hover:shadow-md transition-all"
+              >
+                <span className="inline-block text-xs font-bold text-[#196DDA] tracking-widest uppercase mb-3">{b.tag}</span>
+                <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#196DDA] transition-colors">{b.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
+                <span className="inline-flex items-center gap-1 mt-5 text-xs font-semibold text-[#196DDA]">
+                  자세히 보기
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -181,7 +162,7 @@ export default function AboutPage() {
           <p className="text-xs font-bold text-blue-300 tracking-widest uppercase mb-2">WHY FACTORIX</p>
           <h2 className="text-2xl md:text-3xl font-bold mb-12">팩토릭스를 선택해야 하는 이유</h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {STATS.map((s) => (
               <div key={s.label} className="text-center">
                 <p className="text-3xl md:text-4xl font-bold text-white mb-1">{s.value}</p>

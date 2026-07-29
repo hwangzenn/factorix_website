@@ -50,7 +50,7 @@ export async function GET() {
   <channel>
     <title>Factorix</title>
     <link>${SITE_URL}</link>
-    <description>액제제조 솔루션 · AI 웨어러블 디바이스 B2B 전문 기업</description>
+    <description>액제제조 솔루션 B2B 전문 기업</description>
     <language>ko</language>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
 ${rssItems}

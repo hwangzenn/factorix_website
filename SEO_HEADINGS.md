@@ -18,7 +18,7 @@
 
 ```
 title: "팩토릭스 | Factorix — AI 액제제조 · 디스펜싱 솔루션"
-description: "팩토릭스(Factorix)는 AI 기반 초정밀 디스펜싱 자동화 설비 시스템과 AI 웨어러블 디바이스를 공급하는 B2B 전문 기업입니다."
+description: "팩토릭스(Factorix)는 AI 기반 초정밀 디스펜싱 자동화 설비 시스템을 공급하는 B2B 전문 기업입니다."
 
 h1: "액상제조 공정 자동화, 팩토릭스(FactoriX) 스마트 솔루션"  ← HeroCarousel 내 sr-only, 슬라이드 회전 카피와 별개로 페이지 전체 유일 h1
 
@@ -30,7 +30,6 @@ h1: "액상제조 공정 자동화, 팩토릭스(FactoriX) 스마트 솔루션" 
     h3: "[공정 단계] 원료 투입부터 패키징까지의 자동화"
     h3: "[장비 종류] 수율을 극대화하는 액상제조 장비 및 시스템"
     h3: "[산업 사례] 귀사의 산업군에 맞춘 특화 공정"
-    h3: "[기타] CES수상 AI 웨어러블 디바이스"
 
   h2: "팩토릭스 기술 인사이트"
     h3: "팩토릭스 기술 블로그 바로가기"
@@ -277,69 +276,6 @@ description: "Factorix 액제제조 솔루션 제품유형별 적용사례"
   h1: "액제제조 솔루션"
 ```
 
-### 웨어러블 디바이스 적용사례 `/cases/product/wearable`
-
-**파일:** `src/app/cases/product/wearable/page.tsx`
-
-```
-title: "웨어러블 디바이스 적용사례 | Factorix"
-description: "Factorix AI 웨어러블 디바이스 제품유형별 적용사례"
-
-  h1: "웨어러블 디바이스"
-```
-
----
-
-## AI 웨어러블
-
-### 소개 `/wearable/intro`
-
-**파일:** `src/app/wearable/intro/page.tsx`
-
-```
-title: "AI 웨어러블 디바이스 소개"
-description: "Factorix AI 웨어러블 디바이스 소개"
-
-⚠️ title에 "| 팩토릭스 Factorix" 누락 (다른 페이지와 형식 불일치)
-  h1: "소개"
-```
-
-### B2B 모델 `/wearable/b2b`
-
-**파일:** `src/app/wearable/b2b/page.tsx`
-
-```
-title: "웨어러블 B2B 모델"
-description: "Factorix AI 웨어러블 디바이스 B2B 모델"
-
-⚠️ title에 "| 팩토릭스 Factorix" 누락
-  h1: "B2B 모델"
-```
-
-### B2C 모델 `/wearable/b2c`
-
-**파일:** `src/app/wearable/b2c/page.tsx`
-
-```
-title: "웨어러블 B2C 모델"
-description: "Factorix AI 웨어러블 디바이스 B2C 모델"
-
-⚠️ title에 "| 팩토릭스 Factorix" 누락
-  h1: "B2C 모델"
-```
-
-### B2G 모델 `/wearable/b2g`
-
-**파일:** `src/app/wearable/b2g/page.tsx`
-
-```
-title: "웨어러블 B2G 모델"
-description: "Factorix AI 웨어러블 디바이스 B2G 모델"
-
-⚠️ title에 "| 팩토릭스 Factorix" 누락
-  h1: "B2G 모델"
-```
-
 ---
 
 ## 고객지원
@@ -350,7 +286,7 @@ description: "Factorix AI 웨어러블 디바이스 B2G 모델"
 
 ```
 title: "PoC 문의 | Factorix"
-description: "Factorix PoC 도입 문의 — 장비, 시스템, AI 웨어러블"
+description: "Factorix PoC 도입 문의 — 장비, 시스템"
 
   h1: "PoC 문의"
 ```
@@ -412,12 +348,12 @@ description: "Factorix 공지사항, 언론보도, 기술자료, 특허/수상, 
 
 ```
 og:title: "팩토릭스(Factorix) | AI 액제제조 솔루션"
-og:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 설비 시스템과 AI 웨어러블 디바이스 전문 기업"
+og:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 설비 시스템 전문 기업"
 og:image: "/og-image.png"  (1200×630px 권장)
 og:type: "website"
 og:locale: "ko_KR"
 
 twitter:card: "summary_large_image"
 twitter:title: "팩토릭스(Factorix) | AI 액제제조 솔루션"
-twitter:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 설비 시스템과 AI 웨어러블 디바이스 전문 기업"
+twitter:description: "팩토릭스 — AI 기반 초정밀 디스펜싱 자동화 설비 시스템 전문 기업"
 ```

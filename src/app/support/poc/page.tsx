@@ -3,7 +3,7 @@ import PocForm from "./_components/PocForm"
 
 export const metadata: Metadata = {
   title: "PoC 문의 | Factorix",
-  description: "Factorix PoC 도입 문의 — 장비, 시스템, AI 웨어러블",
+  description: "Factorix PoC 도입 문의 — 장비, 시스템",
 }
 
 export default function PocPage() {

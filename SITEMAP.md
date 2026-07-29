@@ -9,7 +9,7 @@
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
-총 페이지: **메인 1 + 랜딩 23 = 24개** (영문(EN) 버전 2개는 별도).
+총 페이지: **메인 1 + 랜딩 22 = 23개** (영문(EN) 버전 2개는 별도).
 
 ---
 
@@ -44,8 +44,7 @@
 │
 📁 적용사례(제품유형별) (/cases)  ── GNB 비노출, 레거시 유지
 │   └─ 📁 제품유형별 (/cases/product)
-│       ├─ ▣ 액제제조 솔루션  /cases/product/solutions
-│       └─ ▣ 웨어러블 디바이스 /cases/product/wearable
+│       └─ ▣ 액제제조 솔루션  /cases/product/solutions
 │
 📁 고객지원 (/support)
 │   ├─ ▣ 시스템 평가테스트 및 PoC 문의 /support/poc
@@ -106,8 +105,7 @@ src/
 │  │
 │  ├─ cases/                     # 📁 (레거시, GNB 비노출)
 │  │  └─ product/                # 📁
-│  │     ├─ solutions/page.tsx (+[slug])
-│  │     └─ wearable/page.tsx (+[slug])
+│  │     └─ solutions/page.tsx (+[slug])
 │  │
 │  ├─ support/                   # 📁
 │  │  ├─ poc/page.tsx
