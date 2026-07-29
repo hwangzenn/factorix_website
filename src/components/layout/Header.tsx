@@ -177,7 +177,7 @@ export default function Header() {
       {/* ── Full-width mega menu ── */}
       {menuOpen && (
         <div
-          className="absolute inset-x-0 top-full bg-white shadow-lg border-t border-gray-200 z-40"
+          className="hidden lg:block absolute inset-x-0 top-full bg-white shadow-lg border-t border-gray-200 z-40"
           onMouseEnter={open}
         >
           <div className="max-w-[1440px] mx-auto px-10 py-10">
