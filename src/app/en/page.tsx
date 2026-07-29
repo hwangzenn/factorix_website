@@ -439,7 +439,7 @@ export default async function EnHomePage() {
           <div className="mb-14">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Left: CES award */}
-              <Link href={ROUTES.blog.news} className="block rounded-lg overflow-hidden">
+              <Link href={`${ROUTES.blog.news}/ces-2026`} className="block rounded-lg overflow-hidden">
                 <img
                   src="/ai웨어러블.png"
                   alt="FactoriX CES 2026 Innovation Award"

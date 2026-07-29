@@ -450,7 +450,7 @@ export default async function HomePage() {
           <div className="mb-14">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* 좌측: CES 수상 */}
-              <Link href={ROUTES.blog.news} className="block rounded-lg overflow-hidden">
+              <Link href={`${ROUTES.blog.news}/ces-2026`} className="block rounded-lg overflow-hidden">
                 <img
                   src="/ai웨어러블.png"
                   alt="팩토릭스 CES 2026 혁신상 수상"
