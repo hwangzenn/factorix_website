@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
-import { blogPostBySlugQuery, relatedBlogPostsByTagQuery, type BlogPostDetail, type RelatedBlogPostByTag } from "@/sanity/lib/queries"
+import { blogPostBySlugQuery, blogPostRelatedPoolQuery, type BlogPostDetail, type RelatedBlogPostCandidate } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
+import { pickRelatedByPriority } from "@/lib/relatedContent"
 import ResourceDetail from "@/app/resources/_components/ResourceDetail"
 
 const CATEGORY_ROUTE: Record<string, string> = {
@@ -33,11 +34,16 @@ export default async function InsightDetailPage({ params }: Props) {
   const item = data as BlogPostDetail | null
   if (!item) notFound()
 
-  const { data: relatedData } = await sanityFetch({
-    query: relatedBlogPostsByTagQuery,
-    params: { tags: item.tags ?? [], slug },
+  const { data: poolData } = await sanityFetch({
+    query: blogPostRelatedPoolQuery,
+    params: { slug },
   })
-  const related = ((relatedData as RelatedBlogPostByTag[]) ?? []).map((p) => ({
+  const pool = (poolData as RelatedBlogPostCandidate[]) ?? []
+  const relatedPicks = pickRelatedByPriority(pool, [
+    (p) => !!item.industries && p.industries === item.industries,
+    (p) => p.category === item.category,
+  ])
+  const related = relatedPicks.map((p) => ({
     _id: p._id,
     title: p.title,
     href: `${CATEGORY_ROUTE[p.category] ?? ROUTES.blog.insight}/${p.slug}`,

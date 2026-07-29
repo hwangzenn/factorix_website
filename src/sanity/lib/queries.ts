@@ -316,42 +316,48 @@ export type RelatedContentItem = {
   thumbnail: { asset: { url: string }; alt: string | null } | null
 }
 
-export const relatedBlogPostsByTagQuery = defineQuery(`
-  *[_type == "blogPost" && isPublic == true && slug.current != $slug && defined(tags) && count(tags[@ in $tags]) > 0]
-  | order(publishedAt desc) [0...3] {
+export const blogPostRelatedPoolQuery = defineQuery(`
+  *[_type == "blogPost" && isPublic == true && slug.current != $slug]
+  | order(publishedAt desc) [0...30] {
     _id,
     title,
     "slug": slug.current,
     category,
+    industries,
     publishedAt,
     thumbnail { asset->{ url }, alt }
   }
 `)
 
-export type RelatedBlogPostByTag = {
+export type RelatedBlogPostCandidate = {
   _id: string
   title: string
   slug: string
   category: string
+  industries: string | null
   publishedAt: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
 }
 
-export const relatedCaseStudiesQuery = defineQuery(`
-  *[_type == "caseStudy" && isPublic == true && slug.current != $slug && (industries == $industries || processes == $processes)]
-  | order(publishedAt desc) [0...3] {
+export const caseStudyRelatedPoolQuery = defineQuery(`
+  *[_type == "caseStudy" && isPublic == true && slug.current != $slug]
+  | order(publishedAt desc) [0...30] {
     _id,
     title,
     "slug": slug.current,
+    industries,
+    processes,
     publishedAt,
     thumbnail { asset->{ url }, alt }
   }
 `)
 
-export type RelatedCaseStudy = {
+export type RelatedCaseStudyCandidate = {
   _id: string
   title: string
   slug: string
+  industries: string | null
+  processes: string | null
   publishedAt: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
 }

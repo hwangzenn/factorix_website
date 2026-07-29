@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { sanityFetch } from "@/sanity/lib/live"
-import { caseStudyBySlugQuery, relatedCaseStudiesQuery, type CaseStudyDetail, type RelatedCaseStudy } from "@/sanity/lib/queries"
+import { caseStudyBySlugQuery, caseStudyRelatedPoolQuery, type CaseStudyDetail, type RelatedCaseStudyCandidate } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
+import { pickRelatedByPriority } from "@/lib/relatedContent"
 import ResourceDetail from "@/app/resources/_components/ResourceDetail"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -27,11 +28,16 @@ export default async function CaseStudyDetailPage({ params }: Props) {
   const item = data as CaseStudyDetail | null
   if (!item) notFound()
 
-  const { data: relatedData } = await sanityFetch({
-    query: relatedCaseStudiesQuery,
-    params: { industries: item.industries, processes: item.processes, slug },
+  const { data: poolData } = await sanityFetch({
+    query: caseStudyRelatedPoolQuery,
+    params: { slug },
   })
-  const related = ((relatedData as RelatedCaseStudy[]) ?? []).map((c) => ({
+  const pool = (poolData as RelatedCaseStudyCandidate[]) ?? []
+  const relatedPicks = pickRelatedByPriority(pool, [
+    (c) => !!item.industries && c.industries === item.industries,
+    (c) => !!item.processes && c.processes === item.processes,
+  ])
+  const related = relatedPicks.map((c) => ({
     _id: c._id,
     title: c.title,
     href: `${ROUTES.blog.cases}/${c.slug}`,
