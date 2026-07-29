@@ -435,38 +435,50 @@ export default async function EnHomePage() {
             </h2>
           </div>
 
-          {/* blog / YouTube / patents */}
+          {/* CES award / blog / YouTube / patents */}
           <div className="mb-14">
-            <div className="max-w-2xl mx-auto flex flex-col gap-4">
-              <Link
-                href={`${ROUTES.resources}?category=tech-docs`}
-                className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-              >
-                <span className="text-lg md:text-xl font-semibold">Visit FactoriX Tech Blog</span>
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                  <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Left: CES award */}
+              <Link href={ROUTES.blog.news} className="block rounded-lg overflow-hidden">
+                <img
+                  src="/ai웨어러블.png"
+                  alt="FactoriX CES 2026 Innovation Award"
+                  className="w-full h-auto block"
+                />
               </Link>
-              <a
-                href="https://www.youtube.com/@FactoriX-t9f"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-              >
-                <span className="text-lg md:text-xl font-semibold">Visit Demo Video YouTube Channel</span>
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                  <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-              <Link
-                href={ROUTES.blog.news}
-                className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-              >
-                <span className="text-lg md:text-xl font-semibold">Visit Patents &amp; IR Resources</span>
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                  <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
+
+              {/* Right: blog / YouTube / patents */}
+              <div className="flex flex-col gap-4">
+                <Link
+                  href={`${ROUTES.resources}?category=tech-docs`}
+                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+                >
+                  <span className="text-lg md:text-xl font-semibold">Visit FactoriX Tech Blog</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+                <a
+                  href="https://www.youtube.com/@FactoriX-t9f"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+                >
+                  <span className="text-lg md:text-xl font-semibold">Visit Demo Video YouTube Channel</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+                <Link
+                  href={ROUTES.blog.news}
+                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
+                >
+                  <span className="text-lg md:text-xl font-semibold">Visit Patents &amp; IR Resources</span>
+                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
 
