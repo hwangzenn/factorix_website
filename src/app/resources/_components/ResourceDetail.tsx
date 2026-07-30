@@ -150,9 +150,9 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
   const hasToc = headings.length >= 2
   const hasRelated = related !== undefined
   const gridCols = hasToc && hasRelated
-    ? "lg:grid-cols-[200px_1fr_260px]"
+    ? "lg:grid-cols-[240px_1fr_260px]"
     : hasToc
-    ? "lg:grid-cols-[200px_1fr]"
+    ? "lg:grid-cols-[240px_1fr]"
     : hasRelated
     ? "lg:grid-cols-[1fr_260px]"
     : ""

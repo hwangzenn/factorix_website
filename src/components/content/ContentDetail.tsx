@@ -134,7 +134,7 @@ export default function ContentDetail({ eyebrow, category, groupLabel, backHref,
 
   return (
     <div className="mx-auto max-w-7xl px-8 py-20">
-      <div className={hasToc ? "grid lg:grid-cols-[200px_1fr] gap-10" : ""}>
+      <div className={hasToc ? "grid lg:grid-cols-[240px_1fr] gap-10" : ""}>
         {hasToc && <TableOfContents headings={headings} />}
         <div>
       {isProduct ? (
