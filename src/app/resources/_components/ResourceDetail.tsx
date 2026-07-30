@@ -98,7 +98,7 @@ const portableComponents = {
             <thead>
               <tr className="bg-gray-50 text-gray-500">
                 {head.cells.map((c, i) => (
-                  <th key={i} className="text-left font-semibold px-4 py-2.5">{c}</th>
+                  <th key={i} className="text-left font-semibold px-4 py-2.5 break-words">{c}</th>
                 ))}
               </tr>
             </thead>
@@ -106,7 +106,7 @@ const portableComponents = {
               {body.map((row) => (
                 <tr key={row._key} className="border-t border-gray-100">
                   {row.cells.map((c, i) => (
-                    <td key={i} className="px-4 py-2.5 text-gray-600 whitespace-pre-line">{c}</td>
+                    <td key={i} className="px-4 py-2.5 text-gray-600 whitespace-pre-line break-words">{c}</td>
                   ))}
                 </tr>
               ))}
@@ -134,12 +134,20 @@ const portableComponents = {
   block: {
     h1: ({ children }: { children?: React.ReactNode }) => <h1 className="text-3xl font-bold mt-10 mb-4">{children}</h1>,
     h2: ({ children, value }: { children?: React.ReactNode; value: PortableTextBlock }) => (
-      <h2 id={slugifyHeading(blockText(value))} className="text-2xl font-bold mt-8 mb-3 scroll-mt-28">
+      <h2 id={slugifyHeading(blockText(value))} className="text-3xl font-bold mt-8 mb-3 scroll-mt-28">
         {children}
       </h2>
     ),
-    h3: ({ children }: { children?: React.ReactNode }) => <h3 className="text-xl font-semibold mt-6 mb-2">{children}</h3>,
-    h4: ({ children }: { children?: React.ReactNode }) => <h4 className="text-lg font-semibold mt-4 mb-2">{children}</h4>,
+    h3: ({ children, value }: { children?: React.ReactNode; value: PortableTextBlock }) => (
+      <h3 id={slugifyHeading(blockText(value))} className="text-xl font-semibold mt-6 mb-2 scroll-mt-28">
+        {children}
+      </h3>
+    ),
+    h4: ({ children, value }: { children?: React.ReactNode; value: PortableTextBlock }) => (
+      <h4 id={slugifyHeading(blockText(value))} className="text-lg font-semibold mt-4 mb-2 scroll-mt-28">
+        {children}
+      </h4>
+    ),
     normal: ({ children }: { children?: React.ReactNode }) => <p className="text-base leading-relaxed mb-4 whitespace-pre-line">{children}</p>,
     blockquote: ({ children }: { children?: React.ReactNode }) => <blockquote className="border-l-4 border-primary-300 pl-4 italic text-gray-600 my-4">{children}</blockquote>,
   },
