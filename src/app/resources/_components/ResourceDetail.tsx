@@ -148,7 +148,7 @@ const portableComponents = {
         {children}
       </h4>
     ),
-    normal: ({ children }: { children?: React.ReactNode }) => <p className="text-base leading-relaxed mb-4 whitespace-pre-line">{children}</p>,
+    normal: ({ children }: { children?: React.ReactNode }) => <p className="text-lg leading-relaxed mb-4 whitespace-pre-line">{children}</p>,
     blockquote: ({ children }: { children?: React.ReactNode }) => <blockquote className="border-l-4 border-primary-300 pl-4 italic text-gray-600 my-4">{children}</blockquote>,
   },
 }
@@ -167,16 +167,16 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
 
   return (
     <div className={`mx-auto px-6 py-20 ${hasToc || hasRelated ? "max-w-7xl" : "max-w-3xl"}`}>
-      <div className={gridCols ? `grid ${gridCols} gap-10` : ""}>
+      <div className={gridCols ? `grid ${gridCols} gap-16` : ""}>
         {hasToc && <TableOfContents headings={headings} />}
-        <div>
+        <div className="px-[5px]">
       {breadcrumbRoot ? (
         <nav aria-label="breadcrumb" className="flex flex-wrap items-center gap-2 text-sm mb-1">
-          <Link href={breadcrumbRoot.href} className="text-primary-600 underline underline-offset-2 hover:text-primary-700 transition-colors">
+          <Link href={breadcrumbRoot.href} className="text-gray-400 underline underline-offset-2 hover:text-primary-600 transition-colors">
             {breadcrumbRoot.label}
           </Link>
           <span className="text-gray-300" aria-hidden>&gt;</span>
-          <Link href={backHref} className="text-primary-600 font-medium underline underline-offset-2 hover:text-primary-700 transition-colors">
+          <Link href={backHref} className="text-gray-400 underline underline-offset-2 hover:text-primary-600 transition-colors">
             {backLabel}
           </Link>
         </nav>
@@ -189,12 +189,21 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
         </>
       )}
 
-      <h1 className="text-3xl font-bold text-primary-800 mt-6 mb-3">{data.title}</h1>
+      <h1 className="text-[2.75rem] leading-tight font-bold text-primary-800 mt-8 mb-6">{data.title}</h1>
 
       {data.publishedAt && (
-        <p className="text-sm text-gray-400 mb-6">
+        <p className="text-sm text-gray-400 mb-4">
           {new Date(data.publishedAt).toLocaleDateString("ko-KR")}
+          <span className="mx-2 text-gray-300" aria-hidden>·</span>
+          작성자: Factorix
         </p>
+      )}
+
+      {data.description && (
+        <div className="mb-8 bg-gray-50 rounded-xl p-5">
+          <p className="text-sm font-semibold text-gray-400 mb-2 tracking-wide">한줄 요약</p>
+          <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-line">{data.description}</p>
+        </div>
       )}
 
       {data.thumbnail?.asset?.url && (
@@ -206,10 +215,6 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
             className="object-cover"
           />
         </div>
-      )}
-
-      {data.description && (
-        <p className="text-gray-600 mb-8 leading-relaxed whitespace-pre-line">{data.description}</p>
       )}
 
       {data.body && data.body.length > 0 && (

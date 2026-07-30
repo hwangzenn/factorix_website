@@ -59,7 +59,6 @@ export default async function BlogAllPage({ searchParams }: Props) {
       thumbnail: p.thumbnail,
       href: `${CATEGORY_PATH[p.category]}/${p.slug}`,
       categoryLabel: CATEGORY_LABEL[p.category] ?? p.category,
-      tag: p.tags?.[0] ?? null,
       processLabel: p.processes ? PROCESS_LABEL[p.processes] ?? p.processes : null,
     })),
     ...cases.map((c) => ({

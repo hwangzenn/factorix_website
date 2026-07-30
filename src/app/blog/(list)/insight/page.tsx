@@ -37,7 +37,6 @@ export default async function InsightPage({ searchParams }: Props) {
           href: `${ROUTES.blog.insight}/${item.slug}`,
           publishedAt: item.publishedAt,
           categoryLabel: "인사이트",
-          tag: item.tags?.[0] ?? null,
           processLabel: item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null,
         }))}
       />

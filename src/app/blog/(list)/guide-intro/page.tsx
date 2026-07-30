@@ -37,7 +37,6 @@ export default async function GuideIntroPage({ searchParams }: Props) {
           href: `${ROUTES.blog.guideIntro}/${item.slug}`,
           publishedAt: item.publishedAt,
           categoryLabel: "액상 공정 엔지니어링 위키",
-          tag: item.tags?.[0] ?? null,
           processLabel: item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null,
         }))}
       />

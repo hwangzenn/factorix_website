@@ -12,9 +12,10 @@ export type SeoData = {
   metaDescription: string | null
   ogImage: { asset: { url: string } } | null
   ogImageAlt: string | null
+  keywords: string[] | null
 } | null
 
-const seoProjection = `seo { metaTitle, metaDescription, ogImage { asset->{ url } }, ogImageAlt }`
+const seoProjection = `seo { metaTitle, metaDescription, ogImage { asset->{ url } }, ogImageAlt, keywords }`
 
 // body(PortableText) 안의 image 블록은 asset이 참조(_ref)일 뿐이라 asset->로 역참조해야
 // 프론트에서 value.asset.url을 읽을 수 있다. block/videoEmbed 타입은 ...로 그대로 통과.
@@ -85,7 +86,6 @@ export type BlogPostSummary = {
   publishedAt: string | null
   description: string | null
   thumbnail: { asset: { url: string }; alt: string | null } | null
-  tags: string[] | null
   industries: string | null
   processes: string | null
 }
@@ -256,7 +256,6 @@ export const blogPostsByCategoryQuery = defineQuery(`
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },
-    tags,
     industries,
     processes
   }
@@ -272,7 +271,6 @@ export const allBlogPostsQuery = defineQuery(`
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },
-    tags,
     industries,
     processes
   }
@@ -422,7 +420,6 @@ export const blogPostBySlugQuery = defineQuery(`
     publishedAt,
     description,
     thumbnail { asset->{ url }, alt },
-    tags,
     ${bodyProjection},
     ${seoProjection}
   }

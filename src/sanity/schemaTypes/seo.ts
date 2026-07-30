@@ -31,5 +31,13 @@ export const seo = defineType({
       title: 'OG 이미지 설명 (alt)',
       type: 'string',
     }),
+    defineField({
+      name: 'keywords',
+      title: '연관 키워드',
+      description: '검색엔진 메타데이터용 키워드 (선택)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: { layout: 'tags' },
+    }),
   ],
 })

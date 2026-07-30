@@ -37,7 +37,6 @@ export default async function NewsPage({ searchParams }: Props) {
           href: `${ROUTES.blog.news}/${item.slug}`,
           publishedAt: item.publishedAt,
           categoryLabel: "뉴스",
-          tag: item.tags?.[0] ?? null,
           processLabel: item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null,
         }))}
       />

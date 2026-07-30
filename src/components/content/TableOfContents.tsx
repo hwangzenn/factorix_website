@@ -1,16 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import type { Heading } from "@/lib/toc"
 
 export default function TableOfContents({ headings }: { headings: Heading[] }) {
   const tocHeadings = headings.filter((h) => h.level === "h2")
   const [activeId, setActiveId] = useState<string | null>(tocHeadings[0]?.id ?? null)
+  const suppressObserver = useRef(false)
+  const releaseTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   useEffect(() => {
     if (tocHeadings.length === 0) return
     const observer = new IntersectionObserver(
       (entries) => {
+        if (suppressObserver.current) return
         const visible = entries.filter((entry) => entry.isIntersecting)
         if (visible.length > 0) setActiveId(visible[0].target.id)
       },
@@ -23,7 +26,31 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
     return () => observer.disconnect()
   }, [tocHeadings])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!suppressObserver.current) return
+      clearTimeout(releaseTimer.current)
+      releaseTimer.current = setTimeout(() => {
+        suppressObserver.current = false
+      }, 150)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      clearTimeout(releaseTimer.current)
+    }
+  }, [])
+
   if (tocHeadings.length < 2) return null
+
+  const handleClick = (id: string) => {
+    suppressObserver.current = true
+    setActiveId(id)
+    clearTimeout(releaseTimer.current)
+    releaseTimer.current = setTimeout(() => {
+      suppressObserver.current = false
+    }, 1200)
+  }
 
   return (
     <nav className="hidden lg:block sticky top-28 self-start w-[240px] shrink-0">
@@ -33,9 +60,10 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
           <li key={h.id}>
             <a
               href={`#${h.id}`}
+              onClick={() => handleClick(h.id)}
               className={`block -ml-px pl-3 border-l-2 py-0.5 text-sm leading-snug transition-colors ${
                 activeId === h.id
-                  ? "border-primary-700 text-primary-700 font-bold"
+                  ? "border-primary-700 text-primary-700 font-normal"
                   : "border-transparent text-gray-600 hover:text-gray-900"
               }`}
             >

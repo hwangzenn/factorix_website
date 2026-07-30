@@ -77,13 +77,6 @@ export const blogPost = defineType({
       rows: 3,
     }),
     defineField({
-      name: 'tags',
-      title: '태그 키워드',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: { layout: 'tags' },
-    }),
-    defineField({
       name: 'body',
       title: '본문',
       type: 'array',
