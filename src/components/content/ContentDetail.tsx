@@ -109,6 +109,21 @@ const portableComponents = {
       )
     },
   },
+  marks: {
+    link: ({ children, value }: { children?: React.ReactNode; value?: { href?: string } }) => {
+      const href = value?.href ?? "#"
+      const isExternal = /^https?:\/\//.test(href)
+      return (
+        <a
+          href={href}
+          className="text-primary-700 underline underline-offset-2 hover:text-accent"
+          {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          {children}
+        </a>
+      )
+    },
+  },
   block: {
     h1: ({ children }: { children?: React.ReactNode }) => <h1 className="text-4xl font-bold mt-10 mb-4">{children}</h1>,
     h2: ({ children, value }: { children?: React.ReactNode; value: PortableTextBlock }) => (

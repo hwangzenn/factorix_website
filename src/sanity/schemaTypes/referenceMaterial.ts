@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { defaultDecorators, linkAnnotation } from './linkAnnotation'
 
 export const referenceMaterial = defineType({
   name: 'referenceMaterial',
@@ -64,7 +65,13 @@ export const referenceMaterial = defineType({
       title: '본문',
       type: 'array',
       of: [
-        { type: 'block' },
+        {
+          type: 'block',
+          marks: {
+            decorators: defaultDecorators,
+            annotations: [linkAnnotation],
+          },
+        },
         {
           type: 'image',
           options: { hotspot: true },

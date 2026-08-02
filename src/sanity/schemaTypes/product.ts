@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { SpecsTableInput } from '../components/SpecsTableInput'
+import { defaultDecorators, linkAnnotation } from './linkAnnotation'
 
 export const product = defineType({
   name: 'product',
@@ -96,6 +97,10 @@ export const product = defineType({
             { title: '소제목 (H3)', value: 'h3' },
             { title: '소제목 (H4)', value: 'h4' },
           ],
+          marks: {
+            decorators: defaultDecorators,
+            annotations: [linkAnnotation],
+          },
         },
         {
           type: 'image',

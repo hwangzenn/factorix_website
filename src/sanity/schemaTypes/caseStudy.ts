@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { INDUSTRIES, PROCESSES } from '../../lib/blogFilters'
 import { FeaturedToggleInput } from '../components/FeaturedToggleInput'
+import { defaultDecorators, linkAnnotation } from './linkAnnotation'
 
 export const caseStudy = defineType({
   name: 'caseStudy',
@@ -82,6 +83,10 @@ export const caseStudy = defineType({
             { title: '소제목 (H3)', value: 'h3' },
             { title: '소제목 (H4)', value: 'h4' },
           ],
+          marks: {
+            decorators: defaultDecorators,
+            annotations: [linkAnnotation],
+          },
         },
         {
           type: 'image',

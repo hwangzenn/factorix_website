@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { INDUSTRIES, PROCESSES } from '../../lib/blogFilters'
+import { defaultDecorators, linkAnnotation } from './linkAnnotation'
 
 export const blogPost = defineType({
   name: 'blogPost',
@@ -90,21 +91,8 @@ export const blogPost = defineType({
             { title: '소제목 (H4)', value: 'h4' },
           ],
           marks: {
-            annotations: [
-              {
-                name: 'link',
-                type: 'object',
-                title: '링크',
-                fields: [
-                  defineField({
-                    name: 'href',
-                    title: 'URL',
-                    type: 'url',
-                    validation: (Rule) => Rule.uri({ scheme: ['http', 'https', 'mailto', 'tel'] }),
-                  }),
-                ],
-              },
-            ],
+            decorators: defaultDecorators,
+            annotations: [linkAnnotation],
           },
         },
         {
