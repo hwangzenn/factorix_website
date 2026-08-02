@@ -4,7 +4,7 @@
 
 **구조 원칙: 메인페이지 1개 + 랜딩페이지(leaf)만 실제 page 파일.**
 중간 분류(기업정보·솔루션·블로그 카테고리 등)는 **디렉토리일 뿐 page.tsx 가 없다.**
-즉 `/solutions`, `/solutions/standalone` 같은 중간 경로는 페이지가 아니며, GNB에서도 링크가 아니라 펼침 그룹이다.
+즉 `/solutions`, `/solutions/equipment` 같은 중간 경로는 페이지가 아니며, GNB에서도 링크가 아니라 펼침 그룹이다.
 단, **블로그(`/blog`)는 예외**로 GNB에서 하위 카테고리를 펼치지 않고 `/blog` 페이지로 바로 링크된다(카테고리 이동은 `/blog` 페이지 안의 탭 링크로 한다).
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
@@ -24,22 +24,22 @@
 │   └─ ▣ 오시는길            /company/location   (연구소/생산공장 위치 = #map 섹션)
 │
 📁 솔루션 (/solutions)
-│   ├─ 📁 단독설비 (/solutions/standalone)
-│   │   ├─ ▣ 교반/탈포기         /solutions/standalone/mixer   (Sanity category: mixer-defoamer)
-│   │   ├─ ▣ 쓰리롤밀            /solutions/standalone/three-roll-mill
-│   │   ├─ ▣ 액상충진기           /solutions/standalone/filling
-│   │   ├─ ▣ 디스펜서             /solutions/standalone/dispenser
-│   │   ├─ ▣ 협동/직교/3축로봇    /solutions/standalone/robot
-│   │   ├─ ▣ UV/IR 경화기         /solutions/standalone/curing
-│   │   └─ ▣ 소모품               /solutions/standalone/consumables
-│   └─ 📁 AI 시스템 (/solutions/ai)  ── GNB 유지, 제품 CMS 카테고리에선 제외(별도 콘텐츠 모델 예정)
-│       ├─ ▣ 자동화 설비 시스템    /solutions/ai/smart-factory
-│       └─ ▣ AI 자동보정 토출시스템 /solutions/ai/auto-calibration
+│   ├─ 📁 장비 (/solutions/equipment)
+│   │   ├─ ▣ 교반/탈포기         /solutions/equipment/mixer   (Sanity category: mixer-defoamer)
+│   │   ├─ ▣ 쓰리롤밀            /solutions/equipment/three-roll-mill
+│   │   ├─ ▣ 액상충진기           /solutions/equipment/filling
+│   │   ├─ ▣ 디스펜서             /solutions/equipment/dispenser
+│   │   ├─ ▣ 협동/직교/3축로봇    /solutions/equipment/robot
+│   │   ├─ ▣ UV/IR 경화기         /solutions/equipment/curing
+│   │   └─ ▣ 소모품               /solutions/equipment/consumables
+│   └─ 📁 설비 시스템 (/solutions/equipment-systems)  ── GNB 유지, 제품 CMS 카테고리에선 제외(별도 콘텐츠 모델 예정)
+│       ├─ ▣ 자동화 설비 시스템    /solutions/equipment-systems/smart-factory
+│       └─ ▣ AI 자동보정 토출시스템 /solutions/equipment-systems/auto-calibration
 │
 ▣ 블로그 (/blog)   ── GNB에서 바로 링크(하위 카테고리 펼침 없음). 페이지 안에서 아래로 이동.
 │   ├─ ▣ 적용사례            /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)
 │   ├─ ▣ 인사이트            /blog/insight        (Sanity: blogPost, category=insight)
-│   ├─ ▣ 액상 공정 엔지니어링 위키 /blog/guide-intro    (Sanity: blogPost, category=guide-intro)
+│   ├─ ▣ 액상 공정 엔지니어링 위키 /blog/wiki    (Sanity: blogPost, category=wiki)
 │   └─ ▣ 뉴스                /blog/news           (Sanity: blogPost, category=news — 구 언론보도/특허수상 이전)
 │
 📁 적용사례(제품유형별) (/cases)  ── GNB 비노출, 레거시 유지
@@ -78,7 +78,7 @@ src/
 │  │  └─ location/page.tsx       # #map 섹션 포함
 │  │
 │  ├─ solutions/                 # 📁
-│  │  ├─ standalone/             # 📁
+│  │  ├─ equipment/              # 📁
 │  │  │  ├─ mixer/page.tsx (+[slug])
 │  │  │  ├─ three-roll-mill/page.tsx (+[slug])
 │  │  │  ├─ filling/page.tsx (+[slug])
@@ -86,7 +86,7 @@ src/
 │  │  │  ├─ robot/page.tsx (+[slug])
 │  │  │  ├─ curing/page.tsx (+[slug])
 │  │  │  └─ consumables/page.tsx (+[slug])
-│  │  └─ ai/                     # 📁
+│  │  └─ equipment-systems/       # 📁
 │  │     ├─ auto-calibration/page.tsx (+[slug])
 │  │     └─ smart-factory/page.tsx (+[slug])
 │  │
@@ -95,11 +95,11 @@ src/
 │  │  │  ├─ layout.tsx           # BlogHero(카테고리 탭 + 산업/공정 필터) + children
 │  │  │  ├─ page.tsx             # 전체보기 (blogPost + caseStudy 통합 피드)
 │  │  │  ├─ insight/page.tsx
-│  │  │  ├─ guide-intro/page.tsx
+│  │  │  ├─ wiki/page.tsx
 │  │  │  ├─ news/page.tsx
 │  │  │  └─ cases/page.tsx        # 산업군·공정 필터는 BlogHero 우측 BlogFilterBar로 이동
 │  │  ├─ insight/[slug]/page.tsx
-│  │  ├─ guide-intro/[slug]/page.tsx
+│  │  ├─ wiki/[slug]/page.tsx
 │  │  ├─ news/[slug]/page.tsx
 │  │  └─ cases/[slug]/page.tsx
 │  │
@@ -135,6 +135,6 @@ src/
 
 ### 참고
 - 중간 디렉토리엔 `page.tsx`가 없으므로 `/solutions`, `/cases` 등을 직접 입력하면 404다. 정상 동작.
-- 블로그는 다른 그룹과 달리 GNB에서 하위 카테고리를 펼치지 않고 `/blog`로 바로 이동한다. 카테고리(인사이트/액상 공정 엔지니어링 위키/적용사례/뉴스) 이동은 `/blog` 페이지 상단 탭 링크로 한다.
+- 블로그는 다른 그룹과 달리 GNB에서 하위 카테고리를 펼치지 않고 `/blog`로 바로 이동한다. 카테고리(인사이트/액상 공정 엔지니어링 위키(`/blog/wiki`)/적용사례/뉴스) 이동은 `/blog` 페이지 상단 탭 링크로 한다.
 - 산업별 적용사례(구 `/cases/industry/*` 6개)는 `/blog/cases` 하나로 통합되었고, 산업군·공정은 URL이 아니라 Sanity `caseStudy` 문서의 태그(`industries`, `processes`)로 관리된다.
 - 자료실의 언론보도·특허수상은 `/blog/news`로 이전되었다(Sanity `blogPost`, category=news).

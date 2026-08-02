@@ -4,12 +4,12 @@ import type {StructureResolver} from 'sanity/structure'
 const PRODUCT_GROUPS = [
   { key: 'mixer-defoamer', title: '교반/탈포기', categories: ['mixer-defoamer'] },
   { key: 'three-roll-mill', title: '쓰리롤밀', categories: ['three-roll-mill'] },
-  { key: 'filling', title: '충진기', categories: ['standalone-filling'] },
-  { key: 'dispenser', title: '디스펜서', categories: ['standalone-dispenser'] },
-  { key: 'robot', title: '3축로봇', categories: ['standalone-robot'] },
-  { key: 'curing', title: '경화기', categories: ['standalone-curing'] },
+  { key: 'filling', title: '충진기', categories: ['equipment-filling'] },
+  { key: 'dispenser', title: '디스펜서', categories: ['equipment-dispenser'] },
+  { key: 'robot', title: '3축로봇', categories: ['equipment-robot'] },
+  { key: 'curing', title: '경화기', categories: ['equipment-curing'] },
   { key: 'consumables', title: '소모품', categories: ['consumables'] },
-  { key: 'ai-smart-factory', title: '자동화 설비 시스템', categories: ['ai-smart-factory'] },
+  { key: 'equipment-systems-smart-factory', title: '자동화 설비 시스템', categories: ['equipment-systems-smart-factory'] },
 ]
 
 // 자료실(referenceMaterial) 카테고리 그룹 — src/sanity/schemaTypes/referenceMaterial.ts 의 category 옵션과 동기화
@@ -22,7 +22,7 @@ const RESOURCE_GROUPS = [
 // 블로그(blogPost) 카테고리 그룹 — src/sanity/schemaTypes/blogPost.ts 의 category 옵션과 동기화
 const BLOG_POST_GROUPS = [
   { key: 'insight', title: '인사이트' },
-  { key: 'guide-intro', title: '액상 공정 엔지니어링 위키' },
+  { key: 'wiki', title: '액상 공정 엔지니어링 위키' },
   { key: 'news', title: '뉴스' },
 ]
 

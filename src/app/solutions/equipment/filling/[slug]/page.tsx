@@ -1,0 +1,49 @@
+import { notFound } from "next/navigation"
+import type { Metadata } from "next"
+import { sanityFetch } from "@/sanity/lib/live"
+import { productBySlugQuery, relatedContentByTagsQuery, type ProductDetail, type RelatedContentItem } from "@/sanity/lib/queries"
+import { ROUTES } from "@/lib/routes"
+import ContentDetail from "@/components/content/ContentDetail"
+
+type Props = { params: Promise<{ slug: string }> }
+
+const CATEGORY = "장비"
+const GROUP_LABEL = "액상충진기"
+const PROCESS_KEY = "filling"
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const { data } = await sanityFetch({ query: productBySlugQuery, params: { slug } })
+  const item = data as ProductDetail | null
+  if (!item) return {}
+  return {
+    title: `${item.seo?.metaTitle || item.title} | Factorix`,
+    description: item.seo?.metaDescription || item.description || undefined,
+    alternates: { canonical: `${ROUTES.solutions.equipment.filling}/${slug}` },
+    openGraph: (item.seo?.ogImage?.asset?.url || item.images?.[0]?.asset?.url)
+      ? { images: [{ url: item.seo?.ogImage?.asset?.url || item.images![0].asset.url }] }
+      : undefined,
+  }
+}
+
+export default async function FillingDetailPage({ params }: Props) {
+  const { slug } = await params
+  const { data } = await sanityFetch({ query: productBySlugQuery, params: { slug } })
+  const item = data as ProductDetail | null
+  if (!item) notFound()
+
+  const { data: relatedData } = await sanityFetch({
+    query: relatedContentByTagsQuery,
+    params: { process: PROCESS_KEY },
+  })
+
+  return (
+    <ContentDetail
+      category={CATEGORY}
+      groupLabel={GROUP_LABEL}
+      backHref={ROUTES.solutions.equipment.filling}
+      data={item}
+      relatedContent={(relatedData as RelatedContentItem[]) ?? []}
+    />
+  )
+}

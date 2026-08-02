@@ -8,7 +8,7 @@ import ResourceDetail from "@/app/resources/_components/ResourceDetail"
 
 const CATEGORY_ROUTE: Record<string, string> = {
   insight: ROUTES.blog.insight,
-  "guide-intro": ROUTES.blog.guideIntro,
+  wiki: ROUTES.blog.guideIntro,
   news: ROUTES.blog.news,
 }
 

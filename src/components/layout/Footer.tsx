@@ -8,7 +8,7 @@ import { getLocaleFromPathname } from "@/lib/i18n";
 export default function Footer() {
   const pathname = usePathname();
   const en = getLocaleFromPathname(pathname) === "en";
-  const autoCalibrationHref = en ? ROUTES.en.autoCalibration : ROUTES.solutions.ai.autoCalibration;
+  const autoCalibrationHref = en ? ROUTES.en.autoCalibration : ROUTES.solutions.equipmentSystem.autoCalibration;
 
   return (
     <footer className="bg-gray-900 text-gray-400 py-16 px-6">
@@ -25,14 +25,14 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm">{en ? "Solutions" : "솔루션"}</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href={ROUTES.solutions.standalone.mixer} className="hover:text-white transition-colors">{en ? "Mixing/Defoaming" : "교반/탈포기"}</Link></li>
-              <li><Link href={ROUTES.solutions.standalone.threeRollMill} className="hover:text-white transition-colors">{en ? "Three-Roll Mill" : "쓰리롤밀"}</Link></li>
-              <li><Link href={ROUTES.solutions.standalone.filling} className="hover:text-white transition-colors">{en ? "Liquid Filling Machine" : "액상충진기"}</Link></li>
-              <li><Link href={ROUTES.solutions.standalone.dispenser} className="hover:text-white transition-colors">{en ? "Dispenser" : "디스펜서"}</Link></li>
-              <li><Link href={ROUTES.solutions.standalone.robot} className="hover:text-white transition-colors">{en ? "Collaborative/Cartesian/3-Axis Robot" : "협동/직교/3축로봇"}</Link></li>
-              <li><Link href={ROUTES.solutions.standalone.curing} className="hover:text-white transition-colors">{en ? "UV/IR Curing System" : "UV/IR 경화기"}</Link></li>
+              <li><Link href={ROUTES.solutions.equipment.mixer} className="hover:text-white transition-colors">{en ? "Mixing/Defoaming" : "교반/탈포기"}</Link></li>
+              <li><Link href={ROUTES.solutions.equipment.threeRollMill} className="hover:text-white transition-colors">{en ? "Three-Roll Mill" : "쓰리롤밀"}</Link></li>
+              <li><Link href={ROUTES.solutions.equipment.filling} className="hover:text-white transition-colors">{en ? "Liquid Filling Machine" : "액상충진기"}</Link></li>
+              <li><Link href={ROUTES.solutions.equipment.dispenser} className="hover:text-white transition-colors">{en ? "Dispenser" : "디스펜서"}</Link></li>
+              <li><Link href={ROUTES.solutions.equipment.robot} className="hover:text-white transition-colors">{en ? "Collaborative/Cartesian/3-Axis Robot" : "협동/직교/3축로봇"}</Link></li>
+              <li><Link href={ROUTES.solutions.equipment.curing} className="hover:text-white transition-colors">{en ? "UV/IR Curing System" : "UV/IR 경화기"}</Link></li>
               <li><Link href={autoCalibrationHref} className="hover:text-white transition-colors">{en ? "AI Auto-Calibration System" : "AI 자동보정 토출시스템"}</Link></li>
-              <li><Link href={ROUTES.solutions.ai.smartFactory} className="hover:text-white transition-colors">{en ? "Automation System" : "자동화 설비 시스템"}</Link></li>
+              <li><Link href={ROUTES.solutions.equipmentSystem.smartFactory} className="hover:text-white transition-colors">{en ? "Automation System" : "자동화 설비 시스템"}</Link></li>
             </ul>
           </div>
           <div>

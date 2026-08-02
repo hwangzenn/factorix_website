@@ -56,13 +56,13 @@ const BUSINESSES = [
     tag: "AFMS",
     title: "AI 기반 자율 액상 제조 시스템",
     desc: "실시간 공정 데이터 학습을 통한 최적의 토출 조건 자동 보정 솔루션. 온도·습도·점도 변화에 무관하게 일정한 품질을 유지합니다.",
-    href: ROUTES.solutions.ai.autoCalibration,
+    href: ROUTES.solutions.equipmentSystem.autoCalibration,
   },
   {
     tag: "EQUIPMENT",
     title: "스마트 자동화 설비 시스템",
     desc: "액상 충진기, 디스펜서, 교반/탈포기, 3축 로봇 등 정밀 제조 장비 라인업. 단품부터 통합 자동화 설비 시스템까지 구성 가능합니다.",
-    href: ROUTES.solutions.ai.smartFactory,
+    href: ROUTES.solutions.equipmentSystem.smartFactory,
   },
   {
     tag: "MATERIAL",

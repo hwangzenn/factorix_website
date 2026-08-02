@@ -22,14 +22,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${item.seo?.metaTitle || item.title} | Factorix`,
     description: item.seo?.metaDescription || item.description || undefined,
-    alternates: { canonical: `${ROUTES.blog.insight}/${slug}` },
+    alternates: { canonical: `${ROUTES.blog.guideIntro}/${slug}` },
     openGraph: (item.seo?.ogImage?.asset?.url || item.thumbnail?.asset?.url)
       ? { images: [{ url: item.seo?.ogImage?.asset?.url || item.thumbnail!.asset.url }] }
       : undefined,
   }
 }
 
-export default async function InsightDetailPage({ params }: Props) {
+export default async function WikiDetailPage({ params }: Props) {
   const { slug } = await params
   const { data } = await sanityFetch({ query: blogPostBySlugQuery, params: { slug } })
   const item = data as BlogPostDetail | null
@@ -47,21 +47,21 @@ export default async function InsightDetailPage({ params }: Props) {
   const related = relatedPicks.map((p) => ({
     _id: p._id,
     title: p.title,
-    href: `${CATEGORY_ROUTE[p.category] ?? ROUTES.blog.insight}/${p.slug}`,
+    href: `${CATEGORY_ROUTE[p.category] ?? ROUTES.blog.guideIntro}/${p.slug}`,
     publishedAt: p.publishedAt,
     thumbnail: p.thumbnail,
   }))
 
   return (
     <ResourceDetail
-      eyebrow="블로그 · 인사이트"
-      backHref={ROUTES.blog.insight}
-      backLabel="인사이트"
+      eyebrow="블로그 · 액상 공정 엔지니어링 위키"
+      backHref={ROUTES.blog.guideIntro}
+      backLabel="액상 공정 엔지니어링 위키"
       data={item}
       related={related}
       breadcrumbRoot={{ label: "블로그", href: ROUTES.blog.all }}
       contentInquirySlug={item.slug}
-      browseMoreHref={ROUTES.blog.insight}
+      browseMoreHref={ROUTES.blog.guideIntro}
     />
   )
 }

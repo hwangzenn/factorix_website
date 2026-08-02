@@ -20,13 +20,13 @@ export const metadata: Metadata = {
 
 const CATEGORY_PATH: Record<string, string> = {
   insight: ROUTES.blog.insight,
-  "guide-intro": ROUTES.blog.guideIntro,
+  wiki: ROUTES.blog.guideIntro,
   news: ROUTES.blog.news,
 }
 
 const CATEGORY_LABEL: Record<string, string> = {
   insight: "인사이트",
-  "guide-intro": "액상 공정 엔지니어링 위키",
+  wiki: "액상 공정 엔지니어링 위키",
   news: "뉴스",
 }
 

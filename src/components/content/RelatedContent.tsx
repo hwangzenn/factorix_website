@@ -5,7 +5,7 @@ import type { RelatedContentItem } from "@/sanity/lib/queries"
 
 const CATEGORY_ROUTE: Record<string, string> = {
   insight: ROUTES.blog.insight,
-  "guide-intro": ROUTES.blog.guideIntro,
+  wiki: ROUTES.blog.guideIntro,
   news: ROUTES.blog.news,
   cases: ROUTES.blog.cases,
 }

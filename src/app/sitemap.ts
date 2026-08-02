@@ -12,20 +12,20 @@ export const revalidate = 3600;
 
 const BLOG_CATEGORY_ROUTE: Record<string, string> = {
   insight: ROUTES.blog.insight,
-  "guide-intro": ROUTES.blog.guideIntro,
+  wiki: ROUTES.blog.guideIntro,
   news: ROUTES.blog.news,
 };
 
 const PRODUCT_CATEGORY_ROUTE: Record<string, string> = {
-  "mixer-defoamer": ROUTES.solutions.standalone.mixer,
-  "three-roll-mill": ROUTES.solutions.standalone.threeRollMill,
-  "standalone-filling": ROUTES.solutions.standalone.filling,
-  "standalone-dispenser": ROUTES.solutions.standalone.dispenser,
-  "standalone-robot": ROUTES.solutions.standalone.robot,
-  "standalone-curing": ROUTES.solutions.standalone.curing,
-  consumables: ROUTES.solutions.standalone.consumables,
-  "ai-smart-factory": ROUTES.solutions.ai.smartFactory,
-  "ai-auto-calibration": ROUTES.solutions.ai.autoCalibration,
+  "mixer-defoamer": ROUTES.solutions.equipment.mixer,
+  "three-roll-mill": ROUTES.solutions.equipment.threeRollMill,
+  "equipment-filling": ROUTES.solutions.equipment.filling,
+  "equipment-dispenser": ROUTES.solutions.equipment.dispenser,
+  "equipment-robot": ROUTES.solutions.equipment.robot,
+  "equipment-curing": ROUTES.solutions.equipment.curing,
+  consumables: ROUTES.solutions.equipment.consumables,
+  "equipment-systems-smart-factory": ROUTES.solutions.equipmentSystem.smartFactory,
+  "equipment-systems-auto-calibration": ROUTES.solutions.equipmentSystem.autoCalibration,
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

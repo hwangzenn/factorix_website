@@ -19,18 +19,18 @@ export const ROUTES = {
 
   // 액제제조 솔루션  ── 디렉토리
   solutions: {
-    standalone: {                     // 단독설비 ── 디렉토리
-      mixer: "/solutions/standalone/mixer",          // 교반/탈포기
-      threeRollMill: "/solutions/standalone/three-roll-mill", // 쓰리롤밀
-      filling: "/solutions/standalone/filling",      // 액상충진기
-      dispenser: "/solutions/standalone/dispenser",  // 디스펜서
-      robot: "/solutions/standalone/robot",          // 협동/직교/3축로봇
-      curing: "/solutions/standalone/curing",        // UV/IR 경화기
-      consumables: "/solutions/standalone/consumables", // 소모품
+    equipment: {                      // 장비 ── 디렉토리
+      mixer: "/solutions/equipment/mixer",          // 교반/탈포기
+      threeRollMill: "/solutions/equipment/three-roll-mill", // 쓰리롤밀
+      filling: "/solutions/equipment/filling",      // 액상충진기
+      dispenser: "/solutions/equipment/dispenser",  // 디스펜서
+      robot: "/solutions/equipment/robot",          // 협동/직교/3축로봇
+      curing: "/solutions/equipment/curing",        // UV/IR 경화기
+      consumables: "/solutions/equipment/consumables", // 소모품
     },
-    ai: {                             // AI 시스템 ── 디렉토리
-      autoCalibration: "/solutions/ai/auto-calibration",       // AI 자동보정 토출시스템
-      smartFactory: "/solutions/ai/smart-factory",             // 자동화 설비 시스템
+    equipmentSystem: {                // 설비 시스템 ── 디렉토리
+      autoCalibration: "/solutions/equipment-systems/auto-calibration",       // AI 자동보정 토출시스템
+      smartFactory: "/solutions/equipment-systems/smart-factory",             // 자동화 설비 시스템
     },
   },
 
@@ -46,7 +46,7 @@ export const ROUTES = {
     all: "/blog",                     // 전체보기
     cases: "/blog/cases",             // 적용사례 (산업별 통합)
     insight: "/blog/insight",         // 인사이트
-    guideIntro: "/blog/guide-intro",       // 액상 공정 엔지니어링 위키
+    guideIntro: "/blog/wiki",              // 액상 공정 엔지니어링 위키
     news: "/blog/news",               // 뉴스 (구 자료실 > 언론보도/특허수상 통합)
   },
 
@@ -64,7 +64,7 @@ export const ROUTES = {
   // 영문(EN) 버전 ── 1단계: 홈 + AFMS 대표페이지만. 이후 단계에서 순차 추가.
   en: {
     home: "/en",
-    autoCalibration: "/en/solutions/ai/auto-calibration",
+    autoCalibration: "/en/solutions/equipment-systems/auto-calibration",
   },
 } as const;
 

@@ -15,7 +15,7 @@ export function getLocaleFromPathname(pathname: string): Locale {
 
 const LOCALE_PAGE_PAIRS: { ko: string; en: string }[] = [
   { ko: ROUTES.home, en: ROUTES.en.home },
-  { ko: ROUTES.solutions.ai.autoCalibration, en: ROUTES.en.autoCalibration },
+  { ko: ROUTES.solutions.equipmentSystem.autoCalibration, en: ROUTES.en.autoCalibration },
 ];
 
 // 현재 경로에 대응하는 다른 언어의 경로를 찾는다. 매핑이 없으면 해당 언어의 홈으로 폴백.

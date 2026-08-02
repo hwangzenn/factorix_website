@@ -20,7 +20,7 @@ const SLIDES_KO = [
     heading: "Hyper-Precision & Zero-Defection",
     sub: "AI융합 차세대 디스펜싱 솔루션",
     ctas: [
-      { label: "관련 제품 보기", href: ROUTES.solutions.ai.autoCalibration },
+      { label: "관련 제품 보기", href: ROUTES.solutions.equipmentSystem.autoCalibration },
     ],
   },
 ] as const;

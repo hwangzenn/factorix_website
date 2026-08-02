@@ -31,7 +31,7 @@ export default async function ProductSolutionsCasePage() {
 
       <div className="flex flex-wrap gap-4 mt-16">
         <Link href={ROUTES.support.poc} className="inline-flex px-6 py-3 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors">도입 문의</Link>
-        <Link href={ROUTES.solutions.standalone.dispenser} className="inline-flex px-6 py-3 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors">솔루션 보기</Link>
+        <Link href={ROUTES.solutions.equipment.dispenser} className="inline-flex px-6 py-3 border border-primary-700 text-primary-700 font-semibold rounded-md hover:bg-primary-50 transition-colors">솔루션 보기</Link>
       </div>
     </div>
   )

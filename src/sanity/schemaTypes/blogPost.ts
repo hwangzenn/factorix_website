@@ -30,7 +30,7 @@ export const blogPost = defineType({
       options: {
         list: [
           { title: '인사이트', value: 'insight' },
-          { title: '액상 공정 엔지니어링 위키', value: 'guide-intro' },
+          { title: '액상 공정 엔지니어링 위키', value: 'wiki' },
           { title: '뉴스', value: 'news' },
         ],
       },

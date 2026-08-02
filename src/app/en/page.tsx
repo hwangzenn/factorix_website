@@ -73,12 +73,12 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
 ];
 
 const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] = [
-  { label: "Collaborative/Cartesian/3-Axis Robot", tag: "3-Axis Robot", href: ROUTES.solutions.standalone.robot, image: "/장비시스템/탁상로봇.png" },
-  { label: "Dispenser", tag: "Dispenser", href: ROUTES.solutions.standalone.dispenser, image: "/장비시스템/디스펜서.png" },
-  { label: "Liquid Filling Machine", tag: "Filling Machine", href: ROUTES.solutions.standalone.filling, image: "/장비시스템/충진기.png" },
-  { label: "Mixing/Defoaming", tag: "Mixer/Defoamer", href: ROUTES.solutions.standalone.mixer, image: "/장비시스템/쓰리롤밀.png" },
-  { label: "UV/IR Curing System", tag: "UV/IR Curing System", href: ROUTES.solutions.standalone.curing, image: "/장비시스템/경화기.png" },
-  { label: "Automation System", tag: "Custom Automation System", href: ROUTES.solutions.ai.smartFactory, image: "/장비시스템/자동화시스템.png" },
+  { label: "Collaborative/Cartesian/3-Axis Robot", tag: "3-Axis Robot", href: ROUTES.solutions.equipment.robot, image: "/장비시스템/탁상로봇.png" },
+  { label: "Dispenser", tag: "Dispenser", href: ROUTES.solutions.equipment.dispenser, image: "/장비시스템/디스펜서.png" },
+  { label: "Liquid Filling Machine", tag: "Filling Machine", href: ROUTES.solutions.equipment.filling, image: "/장비시스템/충진기.png" },
+  { label: "Mixing/Defoaming", tag: "Mixer/Defoamer", href: ROUTES.solutions.equipment.mixer, image: "/장비시스템/쓰리롤밀.png" },
+  { label: "UV/IR Curing System", tag: "UV/IR Curing System", href: ROUTES.solutions.equipment.curing, image: "/장비시스템/경화기.png" },
+  { label: "Automation System", tag: "Custom Automation System", href: ROUTES.solutions.equipmentSystem.smartFactory, image: "/장비시스템/자동화시스템.png" },
 ];
 
 const AFMS_FEATURE = {
@@ -160,13 +160,13 @@ const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
 };
 
 const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
-  { label: "Liquid Mixing\n& Defoaming", iconKey: "mixing", href: ROUTES.solutions.standalone.mixer },
-  { label: "Particle Dispersion\n& 3-Roll Milling", iconKey: "dispersion", href: ROUTES.solutions.standalone.mixer },
-  { label: "Liquid Filling\n& Dividing", iconKey: "filling", href: ROUTES.solutions.standalone.filling },
-  { label: "Precision\nDispensing", iconKey: "dispensing", href: ROUTES.solutions.standalone.dispenser },
-  { label: "Desktop Robot", iconKey: "robot", href: ROUTES.solutions.standalone.robot },
-  { label: "IR/UV Curing\n& Ovens", iconKey: "curing", href: ROUTES.solutions.standalone.curing },
-  { label: "Custom Process\nAutomation Systems", iconKey: "automation", href: ROUTES.solutions.ai.smartFactory },
+  { label: "Liquid Mixing\n& Defoaming", iconKey: "mixing", href: ROUTES.solutions.equipment.mixer },
+  { label: "Particle Dispersion\n& 3-Roll Milling", iconKey: "dispersion", href: ROUTES.solutions.equipment.mixer },
+  { label: "Liquid Filling\n& Dividing", iconKey: "filling", href: ROUTES.solutions.equipment.filling },
+  { label: "Precision\nDispensing", iconKey: "dispensing", href: ROUTES.solutions.equipment.dispenser },
+  { label: "Desktop Robot", iconKey: "robot", href: ROUTES.solutions.equipment.robot },
+  { label: "IR/UV Curing\n& Ovens", iconKey: "curing", href: ROUTES.solutions.equipment.curing },
+  { label: "Custom Process\nAutomation Systems", iconKey: "automation", href: ROUTES.solutions.equipmentSystem.smartFactory },
 ];
 
 export default async function EnHomePage() {
