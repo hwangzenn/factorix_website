@@ -9,7 +9,7 @@ import ContentCardGrid from "@/components/content/ContentCardGrid"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "AI Auto-Calibration Dispensing System AFMS | Factorix",
+  title: "AI Auto-Calibration Dispensing System AFMS",
   description: "AFMS is an AI manufacturing intelligence system that learns and auto-calibrates dispensing conditions through real-time material analysis and Vision AI.",
   alternates: {
     canonical: ROUTES.en.autoCalibration,

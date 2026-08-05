@@ -10,7 +10,7 @@ const PROCESS_LABEL: Record<string, string> = Object.fromEntries(PROCESSES.map((
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "액상 공정 엔지니어링 위키 | Factorix",
+  title: "액상 공정 엔지니어링 위키",
   description: "액상 제조·디스펜싱 공정의 기초 개념과 실무 지식을 정리한 팩토릭스의 엔지니어링 위키",
   alternates: { canonical: ROUTES.blog.guideIntro },
 }

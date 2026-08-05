@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = data as ReferenceMaterialDetail | null
   if (!item) return {}
   return {
-    title: `${item.seo?.metaTitle || item.title} | Factorix`,
+    title: item.seo?.metaTitle || item.title,
     description: item.seo?.metaDescription || item.description || undefined,
     alternates: { canonical: `${ROUTES.resources}/ir/${slug}` },
     openGraph: (item.seo?.ogImage?.asset?.url || item.thumbnail?.asset?.url)

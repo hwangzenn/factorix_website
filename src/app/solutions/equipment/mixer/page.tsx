@@ -10,7 +10,7 @@ import CategoryBreadcrumb from "@/components/content/CategoryBreadcrumb"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "교반/탈포기 | Factorix",
+  title: "교반/탈포기",
   description: "Factorix 교반/탈포기 — 정밀 액제 혼합 솔루션",
   alternates: { canonical: ROUTES.solutions.equipment.mixer },
 }

@@ -9,7 +9,7 @@ import ContentCardGrid from "@/components/content/ContentCardGrid"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "AI 자동보정 토출시스템 AFMS | 팩토릭스 Factorix",
+  title: "AI 자동보정 토출시스템 AFMS",
   description: "실시간 물성 분석과 Vision AI로 디스펜싱 조건을 스스로 학습·자동보정하는 AI 제조 지능 시스템 AFMS",
   alternates: {
     canonical: ROUTES.solutions.equipmentSystem.autoCalibration,

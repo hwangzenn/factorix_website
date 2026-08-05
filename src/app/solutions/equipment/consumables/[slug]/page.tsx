@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = data as ProductDetail | null
   if (!item) return {}
   return {
-    title: `${item.seo?.metaTitle || item.title} | Factorix`,
+    title: item.seo?.metaTitle || item.title,
     description: item.seo?.metaDescription || item.description || undefined,
     alternates: { canonical: `${ROUTES.solutions.equipment.consumables}/${slug}` },
     openGraph: (item.seo?.ogImage?.asset?.url || item.images?.[0]?.asset?.url)

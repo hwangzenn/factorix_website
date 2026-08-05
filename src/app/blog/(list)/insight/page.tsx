@@ -10,7 +10,7 @@ const PROCESS_LABEL: Record<string, string> = Object.fromEntries(PROCESSES.map((
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "인사이트 | Factorix",
+  title: "인사이트",
   description: "액제제조·디스펜싱 자동화에 대한 팩토릭스의 인사이트",
   alternates: { canonical: ROUTES.blog.insight },
 }

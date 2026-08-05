@@ -10,7 +10,7 @@ import CategoryBreadcrumb from "@/components/content/CategoryBreadcrumb"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "디스펜서 | Factorix",
+  title: "디스펜서",
   description: "Factorix 디스펜서 — AI 기반 정밀 토출 솔루션",
   alternates: { canonical: ROUTES.solutions.equipment.dispenser },
 }

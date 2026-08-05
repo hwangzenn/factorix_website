@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ROUTES } from "@/lib/routes";
 
 export const metadata: Metadata = {
-  title: "CEO 인사말 | Factorix",
+  title: "CEO 인사말",
   description: "팩토릭스 대표이사 인사말 — 스마트 제조 파트너를 지향합니다.",
   alternates: { canonical: ROUTES.company.ceo },
 };

@@ -3,7 +3,7 @@ import { ROUTES } from "@/lib/routes"
 import PocForm from "./_components/PocForm"
 
 export const metadata: Metadata = {
-  title: "PoC 문의 | Factorix",
+  title: "PoC 문의",
   description: "Factorix PoC 도입 문의 — 장비, 시스템",
   alternates: { canonical: ROUTES.support.poc },
 }

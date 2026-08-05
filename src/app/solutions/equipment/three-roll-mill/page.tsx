@@ -10,7 +10,7 @@ import CategoryBreadcrumb from "@/components/content/CategoryBreadcrumb"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "쓰리롤밀 | Factorix",
+  title: "쓰리롤밀",
   description: "Factorix 쓰리롤밀 — 정밀 액제 분산·혼합 솔루션",
   alternates: { canonical: ROUTES.solutions.equipment.threeRollMill },
 }

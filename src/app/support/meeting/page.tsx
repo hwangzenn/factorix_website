@@ -3,7 +3,7 @@ import { ROUTES } from "@/lib/routes";
 import PocForm from "../poc/_components/PocForm";
 
 export const metadata: Metadata = {
-  title: "온라인상담 신청 | Factorix",
+  title: "온라인상담 신청",
   description: "Factorix 온라인상담 신청",
   alternates: { canonical: ROUTES.support.meeting },
 };

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 
 export const metadata: Metadata = {
-  title: "오시는길 | 팩토릭스 Factorix",
+  title: "오시는길",
   description: "팩토릭스 오시는길 — 경기도 오산시 세교동 586 현대프리미어캠퍼스 A동 1115~1117호",
   alternates: { canonical: ROUTES.company.location },
 };

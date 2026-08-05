@@ -10,7 +10,7 @@ import CategoryBreadcrumb from "@/components/content/CategoryBreadcrumb"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "자동화 설비 시스템 | Factorix",
+  title: "자동화 설비 시스템",
   description: "Factorix AI 스마트팩토리 시스템 — 생산 공정 자동화",
   alternates: { canonical: ROUTES.solutions.equipmentSystem.smartFactory },
 }

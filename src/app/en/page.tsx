@@ -12,7 +12,7 @@ import {
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "Factorix | AI Liquid Manufacturing & Dispensing Solutions",
+  title: "AI Liquid Manufacturing & Dispensing Solutions",
   description: "Factorix is a B2B specialist supplying AI-powered ultra-precision dispensing automation systems.",
   keywords: [
     "Factorix", "liquid manufacturing", "dispensing automation", "AI smart factory",

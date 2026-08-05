@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 
 export const metadata: Metadata = {
-  title: "회사소개 | 팩토릭스 Factorix",
+  title: "회사소개",
   description: "팩토릭스는 액상 소재의 물성 변화를 실시간 학습하고 디스펜싱 공정을 자동 보정하는 AI 제조 지능 시스템 기업입니다.",
   alternates: { canonical: ROUTES.company.about },
 };

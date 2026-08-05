@@ -15,7 +15,7 @@ import {
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "팩토릭스 | Factorix — AI 액제제조 · 디스펜싱 솔루션",
+  title: "AI 액제제조 · 디스펜싱 솔루션",
   description: "팩토릭스 — 정밀 토출, 디스펜싱, 액상 제조 전문 자동화 설비 기업",
   keywords: [
     "팩토릭스", "Factorix", "디스펜싱 자동화", "액제제조 솔루션",
