@@ -80,13 +80,13 @@ const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] 
   { label: "액상 충진기", tag: "충진기", href: ROUTES.solutions.equipment.filling, image: "/장비시스템/충진기.png" },
   { label: "교반/탈포기", tag: "교반기/탈포기", href: ROUTES.solutions.equipment.mixer, image: "/장비시스템/쓰리롤밀.png" },
   { label: "UV/IR 경화기", tag: "UV/IR 경화기", href: ROUTES.solutions.equipment.curing, image: "/장비시스템/경화기.png" },
-  { label: "자동화 설비 시스템", tag: "맞춤형 자동화 설비 시스템", href: ROUTES.solutions.equipmentSystem.smartFactory, image: "/장비시스템/자동화시스템.png" },
+  { label: "제조자동화 단동설비", tag: "산업별 맞춤 단동설비", href: ROUTES.solutions.automationSystem, image: "/장비시스템/자동화시스템.png" },
 ];
 
 const AFMS_FEATURE = {
   name: "AFMS-X1",
   desc: "AFMS는 바이오시약, 산업용 페이스트 등 액상 소재의 물성변화를 실시간 분석해 디스펜싱 조건을 자동으로 보정하는 AI 기반 제조 액상 자동보정 토출 시스템입니다.",
-  href: ROUTES.solutions.equipmentSystem.autoCalibration,
+  href: `${ROUTES.blog.news}/ces-2026`,
   image: "/장비시스템/자동보정 시스템.png",
 };
 
@@ -173,7 +173,7 @@ const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
   { label: "정량/정밀\n토출", iconKey: "dispensing", href: ROUTES.solutions.equipment.dispenser },
   { label: "탁상로봇", iconKey: "robot", href: ROUTES.solutions.equipment.robot },
   { label: "IR/UV경화\n및 오븐", iconKey: "curing", href: ROUTES.solutions.equipment.curing },
-  { label: "커스텀 자동화 설비 시스템", iconKey: "automation", href: ROUTES.solutions.equipmentSystem.smartFactory },
+  { label: "제조자동화 단동설비", iconKey: "automation", href: ROUTES.solutions.automationSystem },
 ];
 
 export default async function HomePage() {

@@ -44,11 +44,14 @@ export const GNB: NavItem[] = [
         ],
       },
       {
-        label: "설비 시스템",
-        labelEn: "Systems",
+        label: "제조자동화 단동설비",
+        labelEn: "Manufacturing Automation Equipment",
         children: [
-          { label: "자동화 설비 시스템", labelEn: "Automation System", href: ROUTES.solutions.equipmentSystem.smartFactory },
-          { label: "AI보정 토출시스템", labelEn: "AI Auto-Calibration Dispensing System", href: ROUTES.solutions.equipmentSystem.autoCalibration },
+          { label: "바이오·의료기기", labelEn: "Bio & Medical Devices", href: ROUTES.solutions.automationSystemIndustries.bioMedical },
+          { label: "화학·소재", labelEn: "Chemicals & Materials", href: ROUTES.solutions.automationSystemIndustries.chemicalsMaterials },
+          { label: "전자·배터리", labelEn: "Electronics & Battery", href: ROUTES.solutions.automationSystemIndustries.electronicsBattery },
+          { label: "자동차·부품", labelEn: "Automotive & Parts", href: ROUTES.solutions.automationSystemIndustries.automotive },
+          { label: "연구기관·대학", labelEn: "Research & Academia", href: ROUTES.solutions.automationSystemIndustries.researchAcademia },
         ],
       },
     ],

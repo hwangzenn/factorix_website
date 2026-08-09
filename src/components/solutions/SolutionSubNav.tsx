@@ -6,10 +6,13 @@ import { ROUTES } from "@/lib/routes"
 
 const GROUPS = [
   {
-    label: "설비 시스템",
+    label: "제조자동화 단동설비",
     items: [
-      { href: ROUTES.solutions.equipmentSystem.smartFactory, label: "자동화 설비 시스템" },
-      { href: ROUTES.solutions.equipmentSystem.autoCalibration, label: "AI보정 토출시스템" },
+      { href: ROUTES.solutions.automationSystemIndustries.bioMedical, label: "바이오·의료기기" },
+      { href: ROUTES.solutions.automationSystemIndustries.chemicalsMaterials, label: "화학·소재" },
+      { href: ROUTES.solutions.automationSystemIndustries.electronicsBattery, label: "전자·배터리" },
+      { href: ROUTES.solutions.automationSystemIndustries.automotive, label: "자동차·부품" },
+      { href: ROUTES.solutions.automationSystemIndustries.researchAcademia, label: "연구기관·대학" },
     ],
   },
   {

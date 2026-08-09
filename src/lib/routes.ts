@@ -28,9 +28,13 @@ export const ROUTES = {
       curing: "/solutions/equipment/curing",        // UV/IR 경화기
       consumables: "/solutions/equipment/consumables", // 소모품
     },
-    equipmentSystem: {                // 설비 시스템 ── 디렉토리
-      autoCalibration: "/solutions/equipment-systems/auto-calibration",       // AI 자동보정 토출시스템
-      smartFactory: "/solutions/equipment-systems/smart-factory",             // 자동화 설비 시스템
+    automationSystem: "/solutions/automation-system",           // 제조자동화 단동설비 (허브, GNB 비노출)
+    automationSystemIndustries: {      // 제조자동화 단동설비 ── 산업별 상세
+      bioMedical: "/solutions/automation-system/bio-medical",               // 바이오·의료기기
+      chemicalsMaterials: "/solutions/automation-system/chemicals-materials", // 화학·소재
+      electronicsBattery: "/solutions/automation-system/electronics-battery", // 전자·배터리
+      automotive: "/solutions/automation-system/automotive",                 // 자동차·부품
+      researchAcademia: "/solutions/automation-system/research-academia",    // 연구기관·대학
     },
   },
 
@@ -61,10 +65,9 @@ export const ROUTES = {
   // 자료실
   resources: "/resources",
 
-  // 영문(EN) 버전 ── 1단계: 홈 + AFMS 대표페이지만. 이후 단계에서 순차 추가.
+  // 영문(EN) 버전 ── 1단계: 홈만. 이후 단계에서 순차 추가.
   en: {
     home: "/en",
-    autoCalibration: "/en/solutions/equipment-systems/auto-calibration",
   },
 } as const;
 

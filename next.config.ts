@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
       { source: "/solutions/ai/:path*", destination: "/solutions/equipment-systems/:path*", permanent: true },
       { source: "/en/solutions/ai/:path*", destination: "/en/solutions/equipment-systems/:path*", permanent: true },
       { source: "/blog/guide-intro/:path*", destination: "/blog/wiki/:path*", permanent: true },
+      { source: "/solutions/equipment-systems/smart-factory/:path*", destination: "/solutions/automation-system/:path*", permanent: true },
+      { source: "/solutions/equipment-systems/auto-calibration/:path*", destination: "/blog/news/ces-2026", permanent: true },
+      { source: "/en/solutions/equipment-systems/auto-calibration/:path*", destination: "/blog/news/ces-2026", permanent: true },
     ];
   },
 };

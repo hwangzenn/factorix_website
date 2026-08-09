@@ -78,13 +78,13 @@ const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] 
   { label: "Liquid Filling Machine", tag: "Filling Machine", href: ROUTES.solutions.equipment.filling, image: "/장비시스템/충진기.png" },
   { label: "Mixing/Defoaming", tag: "Mixer/Defoamer", href: ROUTES.solutions.equipment.mixer, image: "/장비시스템/쓰리롤밀.png" },
   { label: "UV/IR Curing System", tag: "UV/IR Curing System", href: ROUTES.solutions.equipment.curing, image: "/장비시스템/경화기.png" },
-  { label: "Automation System", tag: "Custom Automation System", href: ROUTES.solutions.equipmentSystem.smartFactory, image: "/장비시스템/자동화시스템.png" },
+  { label: "Manufacturing Automation Equipment", tag: "Industry-Specific Automation Equipment", href: ROUTES.solutions.automationSystem, image: "/장비시스템/자동화시스템.png" },
 ];
 
 const AFMS_FEATURE = {
   name: "AFMS-X1",
   desc: "AFMS is an AI-powered liquid auto-calibration dispensing system that analyzes real-time changes in the physical properties of liquid materials — such as bio-reagents and industrial pastes — and automatically corrects dispensing conditions.",
-  href: ROUTES.en.autoCalibration,
+  href: `${ROUTES.blog.news}/ces-2026`,
   image: "/장비시스템/자동보정 시스템.png",
 };
 
@@ -166,7 +166,7 @@ const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
   { label: "Precision\nDispensing", iconKey: "dispensing", href: ROUTES.solutions.equipment.dispenser },
   { label: "Desktop Robot", iconKey: "robot", href: ROUTES.solutions.equipment.robot },
   { label: "IR/UV Curing\n& Ovens", iconKey: "curing", href: ROUTES.solutions.equipment.curing },
-  { label: "Custom Process\nAutomation Systems", iconKey: "automation", href: ROUTES.solutions.equipmentSystem.smartFactory },
+  { label: "Manufacturing\nAutomation Equipment", iconKey: "automation", href: ROUTES.solutions.automationSystem },
 ];
 
 export default async function EnHomePage() {

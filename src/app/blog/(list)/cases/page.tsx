@@ -8,7 +8,7 @@ import BlogFeed from "@/components/blog/BlogFeed"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "적용사례",
+  title: "고객 적용사례",
   description: "산업군·공정별로 살펴보는 팩토릭스 적용사례",
   alternates: { canonical: ROUTES.blog.cases },
 }
@@ -38,7 +38,7 @@ export default async function CaseStudiesPage({ searchParams }: Props) {
           thumbnail: item.thumbnail,
           href: `${ROUTES.blog.cases}/${item.slug}`,
           publishedAt: item.publishedAt,
-          categoryLabel: "적용사례",
+          categoryLabel: "고객 적용사례",
           tag: item.industries ? INDUSTRY_LABEL[item.industries] ?? item.industries : null,
           processLabel: item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null,
         }))}

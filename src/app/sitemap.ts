@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { flattenRoutes, ROUTES } from "@/lib/routes";
+import { PRODUCT_CATEGORY_ROUTE } from "@/lib/productCategoryRoutes";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   sitemapBlogPostsQuery,
@@ -14,18 +15,6 @@ const BLOG_CATEGORY_ROUTE: Record<string, string> = {
   insight: ROUTES.blog.insight,
   wiki: ROUTES.blog.guideIntro,
   news: ROUTES.blog.news,
-};
-
-const PRODUCT_CATEGORY_ROUTE: Record<string, string> = {
-  "mixer-defoamer": ROUTES.solutions.equipment.mixer,
-  "three-roll-mill": ROUTES.solutions.equipment.threeRollMill,
-  "equipment-filling": ROUTES.solutions.equipment.filling,
-  "equipment-dispenser": ROUTES.solutions.equipment.dispenser,
-  "equipment-robot": ROUTES.solutions.equipment.robot,
-  "equipment-curing": ROUTES.solutions.equipment.curing,
-  consumables: ROUTES.solutions.equipment.consumables,
-  "equipment-systems-smart-factory": ROUTES.solutions.equipmentSystem.smartFactory,
-  "equipment-systems-auto-calibration": ROUTES.solutions.equipmentSystem.autoCalibration,
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -30,8 +30,8 @@ export const blogPost = defineType({
       options: {
         list: [
           { title: '인사이트', value: 'insight' },
-          { title: '액상 공정 엔지니어링 위키', value: 'wiki' },
-          { title: '뉴스', value: 'news' },
+          { title: '엔지니어링 위키', value: 'wiki' },
+          { title: '팩토릭스 뉴스', value: 'news' },
         ],
       },
       validation: (Rule) => Rule.required(),

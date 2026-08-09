@@ -27,9 +27,9 @@ const label = (item: NavItem, locale: Locale) => (locale === "en" ? item.labelEn
 // 다른 그룹을 열었을 때 함께 뜨는 메가메뉴 안에서는 카테고리 미리보기를 보여준다.
 const BLOG_LINKS: NavItem[] = [
   { label: "인사이트", labelEn: "Insight", href: ROUTES.blog.insight },
-  { label: "액상 공정 엔지니어링 위키", labelEn: "Engineering Wiki", href: ROUTES.blog.guideIntro },
-  { label: "적용사례", labelEn: "Case Studies", href: ROUTES.blog.cases },
-  { label: "뉴스", labelEn: "News", href: ROUTES.blog.news },
+  { label: "엔지니어링 위키", labelEn: "Engineering Wiki", href: ROUTES.blog.guideIntro },
+  { label: "고객 적용사례", labelEn: "Customer Case Studies", href: ROUTES.blog.cases },
+  { label: "팩토릭스 뉴스", labelEn: "Factorix News", href: ROUTES.blog.news },
 ];
 
 export default function Header() {

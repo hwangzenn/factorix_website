@@ -16,9 +16,9 @@ const HERO_CONTENT: Record<BlogCategoryKey, { label: string; path: string; title
     description: "적용사례부터 다양한 인사이트까지, 팩토릭스의 블로그",
   },
   cases: {
-    label: "적용사례",
+    label: "고객 적용사례",
     path: ROUTES.blog.cases,
-    title: "적용사례",
+    title: "고객 적용사례",
     description: "산업별 액상 제조·디스펜싱 자동화 도입 사례를 확인하세요",
   },
   insight: {
@@ -28,15 +28,15 @@ const HERO_CONTENT: Record<BlogCategoryKey, { label: string; path: string; title
     description: "액상 제조·디스펜싱 자동화에 대한 팩토릭스의 인사이트",
   },
   guideIntro: {
-    label: "액상 공정 엔지니어링 위키",
+    label: "엔지니어링 위키",
     path: ROUTES.blog.guideIntro,
-    title: "액상 공정 엔지니어링 위키",
+    title: "엔지니어링 위키",
     description: "액상 제조·디스펜싱 공정의 기초 개념과 실무 지식을 정리했습니다",
   },
   news: {
-    label: "뉴스",
+    label: "팩토릭스 뉴스",
     path: ROUTES.blog.news,
-    title: "뉴스",
+    title: "팩토릭스 뉴스",
     description: "팩토릭스의 소식과 산업 동향을 전합니다",
   },
 }

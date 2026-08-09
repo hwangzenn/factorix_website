@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { SpecsTableInput } from '../components/SpecsTableInput'
 import { defaultDecorators, linkAnnotation } from './linkAnnotation'
+import { MANUFACTURING_INDUSTRIES } from '../../lib/industries'
 
 export const product = defineType({
   name: 'product',
@@ -26,7 +27,7 @@ export const product = defineType({
           { title: '3축로봇', value: 'equipment-robot' },
           { title: '경화기', value: 'equipment-curing' },
           { title: '소모품', value: 'consumables' },
-          { title: '자동화 설비 시스템', value: 'equipment-systems-smart-factory' },
+          { title: '제조자동화 단동설비', value: 'equipment-systems-smart-factory' },
         ],
       },
       validation: (Rule) => Rule.required(),
@@ -38,6 +39,16 @@ export const product = defineType({
       type: 'slug',
       options: { source: 'title' },
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'industries',
+      title: '적용 산업군',
+      description: '이 장비가 적용 가능한 산업군을 선택하면 해당 산업 상세페이지의 "포트폴리오"에 자동 노출됩니다.',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: MANUFACTURING_INDUSTRIES.map((i) => ({ title: i.label, value: i.key })),
+      },
     }),
     defineField({
       name: 'description',

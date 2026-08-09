@@ -20,7 +20,7 @@ const SLIDES_KO = [
     heading: "Hyper-Precision & Zero-Defection",
     sub: "AI융합 차세대 디스펜싱 솔루션",
     ctas: [
-      { label: "관련 제품 보기", href: ROUTES.solutions.equipmentSystem.autoCalibration },
+      { label: "CES 수상 소식 보기", href: `${ROUTES.blog.news}/ces-2026` },
     ],
   },
 ] as const;
@@ -40,7 +40,7 @@ const SLIDES_EN = [
     heading: "Hyper-Precision & Zero-Defection",
     sub: "Next-generation AI-powered dispensing solutions",
     ctas: [
-      { label: "View Product", href: ROUTES.en.autoCalibration },
+      { label: "View CES Award News", href: `${ROUTES.blog.news}/ces-2026` },
     ],
   },
 ] as const;

@@ -54,9 +54,9 @@ export default async function NewsDetailPage({ params }: Props) {
 
   return (
     <ResourceDetail
-      eyebrow="블로그 · 뉴스"
+      eyebrow="블로그 · 팩토릭스 뉴스"
       backHref={ROUTES.blog.news}
-      backLabel="뉴스"
+      backLabel="팩토릭스 뉴스"
       data={item}
       related={related}
       breadcrumbRoot={{ label: "블로그", href: ROUTES.blog.all }}

@@ -54,9 +54,9 @@ export default async function WikiDetailPage({ params }: Props) {
 
   return (
     <ResourceDetail
-      eyebrow="블로그 · 액상 공정 엔지니어링 위키"
+      eyebrow="블로그 · 엔지니어링 위키"
       backHref={ROUTES.blog.guideIntro}
-      backLabel="액상 공정 엔지니어링 위키"
+      backLabel="엔지니어링 위키"
       data={item}
       related={related}
       breadcrumbRoot={{ label: "블로그", href: ROUTES.blog.all }}

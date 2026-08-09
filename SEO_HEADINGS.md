@@ -85,34 +85,22 @@ description: "팩토릭스 오시는길 — 경기도 오산시 세교동 586 �
 
 ## 솔루션
 
-### AI 자동보정 토출시스템 `/solutions/ai/auto-calibration`
+### (삭제됨) AI 자동보정 토출시스템 — 구 `/solutions/equipment-systems/auto-calibration`
 
-**파일:** `src/app/solutions/ai/auto-calibration/page.tsx`
+판매 솔루션에서 완전히 삭제됨(구 URL은 `/blog/news/ces-2026`로 301 리다이렉트). 홈/회사소개에 남아있는 AFMS 소개 문구는 그대로 두고 링크만 CES 2026 수상 뉴스로 연결한다. 해당 뉴스 게시물(Sanity `blogPost`)에 "AFMS는 상용화를 위해 개발 중"이라는 문구를 Sanity Studio에서 추가하는 것을 권장.
 
-```
-title: "AI 자동보정 토출시스템 AFMS | 팩토릭스 Factorix"
-description: "실시간 물성 분석과 Vision AI로 디스펜싱 조건을 스스로 학습·자동보정하는 AI 제조 지능 시스템 AFMS"
+### 제조자동화 단동설비 `/solutions/automation-system`
 
-  h1: "AI 자동보정 토출시스템 AFMS [현재 코드 확인 필요]"
-  h2: "AFMS란 무엇인가 [현재 코드 확인 필요]"
-  h2: "5가지 자동화 아키텍처"
-    h3: [아키텍처 항목 동적 렌더링]
-  h2: "도입 후 변화되는 지표"
-    h3: [지표 항목 동적 렌더링]
-  h2: "제품 라인업"
-  h2: "AFMS 도입을 검토 중이시라면"  ← CTA
-```
-
-### 자동화 설비 시스템 `/solutions/ai/smart-factory`
-
-**파일:** `src/app/solutions/ai/smart-factory/page.tsx`
+**파일:** `src/app/solutions/automation-system/page.tsx` (허브, 산업별 5개 상세는 `bio-medical`/`chemicals-materials`/`electronics-battery`/`automotive`/`research-academia` 하위 페이지)
 
 ```
-title: "자동화 설비 시스템 | Factorix"
-description: "Factorix AI 스마트팩토리 시스템 — 생산 공정 자동화"
+title: "제조자동화 단동설비"
+description: "산업별 액상 제조공정·자동화 요구에 맞춘 Factorix 제조자동화 단동설비"
 
-  h1: "자동화 설비 시스템"
+  h1: "제조자동화 단동설비"
 ```
+
+산업별 5개 상세페이지는 공통 섹션 순서를 따른다: `h1`(산업명) → 컨셉(서브버티컬+개요문단) → `h2: "특장점"` → `h2: "주요 고객사"`(로고, 있을 때만) → `h2: "포트폴리오"`(Sanity `product.industries` 태그 매핑, 비어있으면 안내문) → 연관콘텐츠(`RelatedContent`, `blogPost`/`caseStudy`의 `industries` 태그 매핑) → 도입문의 CTA.
 
 ### 디스펜서 `/solutions/standalone/dispenser`
 

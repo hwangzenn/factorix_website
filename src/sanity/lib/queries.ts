@@ -58,6 +58,10 @@ export type ProductDetail = ProductItem & {
   seo: SeoData
 }
 
+export type IndustryPortfolioItem = ProductItem & {
+  category: string
+}
+
 export type CaseStudySummary = {
   _id: string
   title: string
@@ -190,6 +194,18 @@ export const productsByCategoryQuery = defineQuery(`
   }
 `)
 
+export const productsByIndustryQuery = defineQuery(`
+  *[_type == "product" && category != "equipment-systems-smart-factory" && $industry in industries]
+  | order(_createdAt asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    description,
+    images[] { asset->{ url }, alt, caption }
+  }
+`)
+
 export const productBySlugQuery = defineQuery(`
   *[_type == "product" && slug.current == $slug][0] {
     _id,
@@ -297,6 +313,18 @@ export type RelatedBlogPost = {
 
 export const relatedContentByTagsQuery = defineQuery(`
   *[(_type == "blogPost" || _type == "caseStudy") && isPublic == true && processes == $process]
+  | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    "category": select(_type == "caseStudy" => "cases", category),
+    description,
+    thumbnail { asset->{ url }, alt }
+  }
+`)
+
+export const relatedContentByIndustryQuery = defineQuery(`
+  *[(_type == "blogPost" || _type == "caseStudy") && isPublic == true && industries == $industry]
   | order(publishedAt desc) [0...3] {
     _id,
     title,

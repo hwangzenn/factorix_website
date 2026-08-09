@@ -48,9 +48,9 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
   return (
     <ResourceDetail
-      eyebrow="블로그 · 적용사례"
+      eyebrow="블로그 · 고객 적용사례"
       backHref={ROUTES.blog.cases}
-      backLabel="적용사례"
+      backLabel="고객 적용사례"
       data={item}
       related={related}
       breadcrumbRoot={{ label: "블로그", href: ROUTES.blog.all }}

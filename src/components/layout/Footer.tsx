@@ -8,7 +8,6 @@ import { getLocaleFromPathname } from "@/lib/i18n";
 export default function Footer() {
   const pathname = usePathname();
   const en = getLocaleFromPathname(pathname) === "en";
-  const autoCalibrationHref = en ? ROUTES.en.autoCalibration : ROUTES.solutions.equipmentSystem.autoCalibration;
 
   return (
     <footer className="bg-gray-900 text-gray-400 py-16 px-6">
@@ -31,8 +30,7 @@ export default function Footer() {
               <li><Link href={ROUTES.solutions.equipment.dispenser} className="hover:text-white transition-colors">{en ? "Dispenser" : "디스펜서"}</Link></li>
               <li><Link href={ROUTES.solutions.equipment.robot} className="hover:text-white transition-colors">{en ? "Collaborative/Cartesian/3-Axis Robot" : "협동/직교/3축로봇"}</Link></li>
               <li><Link href={ROUTES.solutions.equipment.curing} className="hover:text-white transition-colors">{en ? "UV/IR Curing System" : "UV/IR 경화기"}</Link></li>
-              <li><Link href={autoCalibrationHref} className="hover:text-white transition-colors">{en ? "AI Auto-Calibration System" : "AI 자동보정 토출시스템"}</Link></li>
-              <li><Link href={ROUTES.solutions.equipmentSystem.smartFactory} className="hover:text-white transition-colors">{en ? "Automation System" : "자동화 설비 시스템"}</Link></li>
+              <li><Link href={ROUTES.solutions.automationSystem} className="hover:text-white transition-colors">{en ? "Manufacturing Automation Equipment" : "제조자동화 단동설비"}</Link></li>
             </ul>
           </div>
           <div>

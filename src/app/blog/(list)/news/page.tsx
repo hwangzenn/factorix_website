@@ -10,7 +10,7 @@ const PROCESS_LABEL: Record<string, string> = Object.fromEntries(PROCESSES.map((
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "뉴스",
+  title: "팩토릭스 뉴스",
   description: "팩토릭스의 언론보도, 특허/수상 등 소식",
   alternates: { canonical: ROUTES.blog.news },
 }
@@ -36,7 +36,7 @@ export default async function NewsPage({ searchParams }: Props) {
           thumbnail: item.thumbnail,
           href: `${ROUTES.blog.news}/${item.slug}`,
           publishedAt: item.publishedAt,
-          categoryLabel: "뉴스",
+          categoryLabel: "팩토릭스 뉴스",
           processLabel: item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null,
         }))}
       />

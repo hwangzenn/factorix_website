@@ -9,7 +9,7 @@
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
-총 페이지: **메인 1 + 랜딩 22 = 23개** (영문(EN) 버전 2개는 별도).
+총 페이지: **메인 1 + 랜딩 26 = 27개** (영문(EN) 버전 1개는 별도).
 
 ---
 
@@ -32,15 +32,26 @@
 │   │   ├─ ▣ 협동/직교/3축로봇    /solutions/equipment/robot
 │   │   ├─ ▣ UV/IR 경화기         /solutions/equipment/curing
 │   │   └─ ▣ 소모품               /solutions/equipment/consumables
-│   └─ 📁 설비 시스템 (/solutions/equipment-systems)  ── GNB 유지, 제품 CMS 카테고리에선 제외(별도 콘텐츠 모델 예정)
-│       ├─ ▣ 자동화 설비 시스템    /solutions/equipment-systems/smart-factory
-│       └─ ▣ AI 자동보정 토출시스템 /solutions/equipment-systems/auto-calibration
+│   └─ ▣ 제조자동화 단동설비 (허브, GNB 비노출·레거시 유지)  /solutions/automation-system
+│       └─ 제조자동화 단동설비 (GNB 그룹) ── 산업별 5개
+│           ├─ ▣ 바이오·의료기기        /solutions/automation-system/bio-medical
+│           ├─ ▣ 화학·소재             /solutions/automation-system/chemicals-materials
+│           ├─ ▣ 전자·배터리           /solutions/automation-system/electronics-battery
+│           ├─ ▣ 자동차·부품           /solutions/automation-system/automotive
+│           └─ ▣ 연구기관·대학         /solutions/automation-system/research-academia
+│           (각 산업 상세페이지 공통 순서: 컨셉→특장점→포트폴리오→연관콘텐츠→도입문의.
+│            "포트폴리오"는 Sanity `product.industries` 태그로 자동 매핑 — 단독설비 CMS에서
+│            산업군을 체크하면 해당 산업 페이지에 노출된다.)
+│
+│   (구 AI 자동보정 토출시스템/AFMS는 판매 솔루션에서 삭제됨 — 관련 마케팅 콘텐츠는 /blog/news/ces-2026 으로 연결.
+│    구 URL 리다이렉트는 next.config.ts 참고: /solutions/equipment-systems/smart-factory→/solutions/automation-system,
+│    /solutions/equipment-systems/auto-calibration→/blog/news/ces-2026)
 │
 ▣ 블로그 (/blog)   ── GNB에서 바로 링크(하위 카테고리 펼침 없음). 페이지 안에서 아래로 이동.
-│   ├─ ▣ 적용사례            /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)
+│   ├─ ▣ 고객 적용사례        /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)
 │   ├─ ▣ 인사이트            /blog/insight        (Sanity: blogPost, category=insight)
-│   ├─ ▣ 액상 공정 엔지니어링 위키 /blog/wiki    (Sanity: blogPost, category=wiki)
-│   └─ ▣ 뉴스                /blog/news           (Sanity: blogPost, category=news — 구 언론보도/특허수상 이전)
+│   ├─ ▣ 엔지니어링 위키       /blog/wiki           (Sanity: blogPost, category=wiki)
+│   └─ ▣ 팩토릭스 뉴스        /blog/news           (Sanity: blogPost, category=news — 구 언론보도/특허수상 이전)
 │
 📁 적용사례(제품유형별) (/cases)  ── GNB 비노출, 레거시 유지
 │   └─ 📁 제품유형별 (/cases/product)
@@ -86,9 +97,13 @@ src/
 │  │  │  ├─ robot/page.tsx (+[slug])
 │  │  │  ├─ curing/page.tsx (+[slug])
 │  │  │  └─ consumables/page.tsx (+[slug])
-│  │  └─ equipment-systems/       # 📁
-│  │     ├─ auto-calibration/page.tsx (+[slug])
-│  │     └─ smart-factory/page.tsx (+[slug])
+│  │  └─ automation-system/      # ▣ 허브(제조자동화 단동설비) + 산업별 5개 리프
+│  │     ├─ page.tsx
+│  │     ├─ bio-medical/page.tsx
+│  │     ├─ chemicals-materials/page.tsx
+│  │     ├─ electronics-battery/page.tsx
+│  │     ├─ automotive/page.tsx
+│  │     └─ research-academia/page.tsx
 │  │
 │  ├─ blog/                      # ▣ /blog (전체보기) + 카테고리 3종
 │  │  ├─ (list)/                 # 라우트 그룹(URL 미노출) — BlogHero를 layout에 둬 카테고리 전환 시 헤더 고정
@@ -138,3 +153,4 @@ src/
 - 블로그는 다른 그룹과 달리 GNB에서 하위 카테고리를 펼치지 않고 `/blog`로 바로 이동한다. 카테고리(인사이트/액상 공정 엔지니어링 위키(`/blog/wiki`)/적용사례/뉴스) 이동은 `/blog` 페이지 상단 탭 링크로 한다.
 - 산업별 적용사례(구 `/cases/industry/*` 6개)는 `/blog/cases` 하나로 통합되었고, 산업군·공정은 URL이 아니라 Sanity `caseStudy` 문서의 태그(`industries`, `processes`)로 관리된다.
 - 자료실의 언론보도·특허수상은 `/blog/news`로 이전되었다(Sanity `blogPost`, category=news).
+- AI 자동보정 토출시스템(AFMS)은 판매 솔루션에서 삭제되었다. 이미 노출돼 있던 홈/회사소개 마케팅 콘텐츠는 문구를 유지하되 링크만 `/blog/news/ces-2026`(CES 2026 수상 뉴스)로 연결된다.

@@ -5,7 +5,7 @@ import { defaultDecorators, linkAnnotation } from './linkAnnotation'
 
 export const caseStudy = defineType({
   name: 'caseStudy',
-  title: '적용사례',
+  title: '고객 적용사례',
   type: 'document',
   fieldsets: [
     { name: 'tagsRow', title: '분류 태그', options: { columns: 2 } },
