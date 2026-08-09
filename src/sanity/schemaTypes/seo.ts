@@ -13,13 +13,6 @@ export const seo = defineType({
       description: '비워두면 문서 제목을 사용합니다. 60자 이내 권장.',
     }),
     defineField({
-      name: 'metaDescription',
-      title: '메타 설명',
-      type: 'text',
-      rows: 2,
-      description: '비워두면 기본 설명을 사용합니다. 155자 이내 권장.',
-    }),
-    defineField({
       name: 'ogImage',
       title: 'OG 이미지',
       type: 'image',

@@ -39,7 +39,7 @@ export function FeaturedToggleInput(props: BooleanInputProps) {
         style={{ width: 16, height: 16 }}
       />
       <span style={{ fontSize: 13, color: 'var(--card-muted-fg-color, #6b7280)' }}>
-        {value ? '켜짐 — 같은 산업군의 다른 대표콘텐츠는 자동으로 꺼집니다' : '꺼짐'}
+        {value ? '대표콘텐츠로 지정 — 같은 산업군의 다른 대표콘텐츠는 자동으로 꺼집니다' : '꺼짐'}
       </span>
     </label>
   )

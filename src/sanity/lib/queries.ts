@@ -221,7 +221,7 @@ export const productBySlugQuery = defineQuery(`
 `)
 
 export const caseStudiesByCategoryQuery = defineQuery(`
-  *[_type == "caseStudy" && category == $category && isPublic == true]
+  *[_type == "caseStudy" && category == $category]
   | order(publishedAt desc) {
     _id,
     title,
@@ -233,7 +233,7 @@ export const caseStudiesByCategoryQuery = defineQuery(`
 `)
 
 export const allCaseStudiesQuery = defineQuery(`
-  *[_type == "caseStudy" && isPublic == true]
+  *[_type == "caseStudy"]
   | order(publishedAt desc) [0...60] {
     _id,
     title,
@@ -248,7 +248,7 @@ export const allCaseStudiesQuery = defineQuery(`
 `)
 
 export const caseStudyBySlugQuery = defineQuery(`
-  *[_type == "caseStudy" && slug.current == $slug && isPublic == true][0] {
+  *[_type == "caseStudy" && slug.current == $slug][0] {
     _id,
     title,
     "slug": slug.current,
@@ -312,7 +312,7 @@ export type RelatedBlogPost = {
 }
 
 export const relatedContentByTagsQuery = defineQuery(`
-  *[(_type == "blogPost" || _type == "caseStudy") && isPublic == true && processes == $process]
+  *[(_type == "blogPost" && isPublic == true || _type == "caseStudy") && processes == $process]
   | order(publishedAt desc) [0...3] {
     _id,
     title,
@@ -324,7 +324,7 @@ export const relatedContentByTagsQuery = defineQuery(`
 `)
 
 export const relatedContentByIndustryQuery = defineQuery(`
-  *[(_type == "blogPost" || _type == "caseStudy") && isPublic == true && industries == $industry]
+  *[(_type == "blogPost" && isPublic == true || _type == "caseStudy") && industries == $industry]
   | order(publishedAt desc) [0...3] {
     _id,
     title,
@@ -368,7 +368,7 @@ export type RelatedBlogPostCandidate = {
 }
 
 export const caseStudyRelatedPoolQuery = defineQuery(`
-  *[_type == "caseStudy" && isPublic == true && slug.current != $slug]
+  *[_type == "caseStudy" && slug.current != $slug]
   | order(publishedAt desc) [0...30] {
     _id,
     title,
@@ -418,7 +418,7 @@ export const sitemapBlogPostsQuery = defineQuery(`
 `)
 
 export const sitemapCaseStudiesQuery = defineQuery(`
-  *[_type == "caseStudy" && isPublic == true]{ "slug": slug.current }
+  *[_type == "caseStudy"]{ "slug": slug.current }
 `)
 
 export const sitemapReferenceMaterialsQuery = defineQuery(`

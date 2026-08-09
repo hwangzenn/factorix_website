@@ -39,6 +39,14 @@ export const caseStudy = defineType({
       },
     }),
     defineField({
+      name: 'featuredOnMain',
+      title: '대표콘텐츠 (메인페이지 노출)',
+      description: '메인페이지 산업군별 적용사례 카드에 노출할 대표콘텐츠. 산업군당 1개만 켤 수 있으며, 켜면 같은 산업군의 이전 대표콘텐츠는 자동으로 꺼집니다.',
+      type: 'boolean',
+      initialValue: false,
+      components: { input: FeaturedToggleInput },
+    }),
+    defineField({
       name: 'slug',
       title: '슬러그 (URL)',
       description: '제목 + 산업군/공정 태그에서 자동 생성됩니다.',
@@ -99,20 +107,6 @@ export const caseStudy = defineType({
         { type: 'videoEmbed' },
         { type: 'table' },
       ],
-    }),
-    defineField({
-      name: 'isPublic',
-      title: '공개 여부',
-      type: 'boolean',
-      initialValue: true,
-    }),
-    defineField({
-      name: 'featuredOnMain',
-      title: '대표콘텐츠 (메인페이지 노출)',
-      description: '메인페이지 산업군별 적용사례 카드에 노출할 대표콘텐츠. 산업군당 1개만 켤 수 있으며, 켜면 같은 산업군의 이전 대표콘텐츠는 자동으로 꺼집니다.',
-      type: 'boolean',
-      initialValue: false,
-      components: { input: FeaturedToggleInput },
     }),
     defineField({
       name: 'seo',
