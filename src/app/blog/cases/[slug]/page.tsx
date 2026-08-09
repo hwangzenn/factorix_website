@@ -54,7 +54,6 @@ export default async function CaseStudyDetailPage({ params }: Props) {
       data={item}
       related={related}
       breadcrumbRoot={{ label: "블로그", href: ROUTES.blog.all }}
-      contentInquirySlug={item.slug}
       browseMoreHref={ROUTES.blog.cases}
     />
   )
