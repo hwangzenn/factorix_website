@@ -195,7 +195,7 @@ export const productsByCategoryQuery = defineQuery(`
 `)
 
 export const productsByIndustryQuery = defineQuery(`
-  *[_type == "product" && category != "equipment-systems-smart-factory" && $industry in industries]
+  *[_type == "product" && $industry in industries]
   | order(_createdAt asc) {
     _id,
     title,
