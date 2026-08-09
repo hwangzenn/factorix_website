@@ -8,6 +8,7 @@ import type { VideoEmbedBlock, TableBlock } from "@/sanity/lib/queries"
 import TableOfContents from "@/components/content/TableOfContents"
 import ShareButton from "@/components/content/ShareButton"
 import NewsletterSubscribe from "@/components/content/NewsletterSubscribe"
+import ContentInquiryButton from "@/components/content/ContentInquiryButton"
 
 type ImageBlock = {
   asset: { url: string }
@@ -47,6 +48,7 @@ type Props = {
   data: ResourceDetailData
   related?: RelatedItem[]
   breadcrumbRoot?: { label: string; href: string }
+  contentInquirySlug?: string
   browseMoreHref?: string
 }
 
@@ -153,7 +155,7 @@ const portableComponents = {
   },
 }
 
-export default function ResourceDetail({ eyebrow, backHref, backLabel, data, related, breadcrumbRoot, browseMoreHref }: Props) {
+export default function ResourceDetail({ eyebrow, backHref, backLabel, data, related, breadcrumbRoot, contentInquirySlug, browseMoreHref }: Props) {
   const headings = extractHeadings(data.body)
   const hasToc = headings.length >= 2
   const hasRelated = related !== undefined
@@ -268,6 +270,11 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
             원문 보기 ↗
           </a>
         )}
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3 mt-10 pt-8 border-t border-gray-100">
+        {contentInquirySlug && <ContentInquiryButton slug={contentInquirySlug} />}
+        <ShareButton />
       </div>
 
       <NewsletterSubscribe />
