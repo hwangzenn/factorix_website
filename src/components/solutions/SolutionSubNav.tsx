@@ -16,7 +16,7 @@ const GROUPS = [
     ],
   },
   {
-    label: "장비",
+    label: "액상제조 장비",
     items: [
       { href: ROUTES.solutions.equipment.mixer, label: "교반/탈포기" },
       { href: ROUTES.solutions.equipment.threeRollMill, label: "쓰리롤밀" },

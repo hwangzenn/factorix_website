@@ -7,7 +7,7 @@ import ContentDetail from "@/components/content/ContentDetail"
 
 type Props = { params: Promise<{ slug: string }> }
 
-const CATEGORY = "장비"
+const CATEGORY = "액상제조 장비"
 const GROUP_LABEL = "교반/탈포기"
 const PROCESS_KEY = "mixer-defoamer"
 

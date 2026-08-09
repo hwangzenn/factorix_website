@@ -31,7 +31,7 @@ export const GNB: NavItem[] = [
     labelEn: "Solutions",
     children: [
       {
-        label: "장비",
+        label: "액상제조 장비",
         labelEn: "Products",
         children: [
           { label: "교반/탈포기", labelEn: "Mixing/Defoaming", href: ROUTES.solutions.equipment.mixer },

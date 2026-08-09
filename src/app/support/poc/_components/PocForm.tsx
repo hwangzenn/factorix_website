@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react"
 
 const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; label: string }[] }> = {
   equipment: {
-    label: "장비",
+    label: "액상제조 장비",
     subs: [
       { value: "mixer", label: "교반/탈포기" },
       { value: "three-roll-mill", label: "쓰리롤밀" },
