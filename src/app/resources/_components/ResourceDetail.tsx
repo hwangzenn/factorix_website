@@ -7,6 +7,8 @@ import { getVideoEmbedUrl } from "@/lib/video"
 import type { VideoEmbedBlock, TableBlock } from "@/sanity/lib/queries"
 import TableOfContents from "@/components/content/TableOfContents"
 import ContentInquiryButton from "@/components/content/ContentInquiryButton"
+import ShareButton from "@/components/content/ShareButton"
+import NewsletterSubscribe from "@/components/content/NewsletterSubscribe"
 
 type ImageBlock = {
   asset: { url: string }
@@ -191,13 +193,18 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
 
       <h1 className="text-[2.75rem] leading-tight font-bold text-primary-800 mt-8 mb-6">{data.title}</h1>
 
-      {data.publishedAt && (
-        <p className="text-sm text-gray-400 mb-4">
-          {new Date(data.publishedAt).toLocaleDateString("ko-KR")}
-          <span className="mx-2 text-gray-300" aria-hidden>·</span>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <p className="text-sm text-gray-400">
+          {data.publishedAt && (
+            <>
+              {new Date(data.publishedAt).toLocaleDateString("ko-KR")}
+              <span className="mx-2 text-gray-300" aria-hidden>·</span>
+            </>
+          )}
           작성자: Factorix
         </p>
-      )}
+        <ShareButton />
+      </div>
 
       {data.description && (
         <div className="mb-8 bg-gray-50 rounded-xl p-5">
@@ -270,6 +277,8 @@ export default function ResourceDetail({ eyebrow, backHref, backLabel, data, rel
           <ContentInquiryButton slug={contentInquirySlug} />
         </div>
       )}
+
+      <NewsletterSubscribe />
         </div>
 
         {hasRelated && (
