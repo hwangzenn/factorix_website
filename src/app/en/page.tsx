@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
-import HeroCarousel from "@/components/HeroCarousel";
+import Hero from "@/components/Hero";
 import TrustBar from "@/components/home/TrustBar";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -141,7 +141,7 @@ export default async function EnHomePage() {
   return (
     <div className="flex flex-col">
       {/* ── Hero ── */}
-      <HeroCarousel locale="en" />
+      <Hero locale="en" />
 
       {/* ── Trust bar ── */}
       <TrustBar logos={industryLogos} locale="en" />

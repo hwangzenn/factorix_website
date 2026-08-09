@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
-import HeroCarousel from "@/components/HeroCarousel";
+import Hero from "@/components/Hero";
 import TrustBar from "@/components/home/TrustBar";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
 import FaqTabs from "@/components/home/FaqTabs";
@@ -170,7 +170,7 @@ export default async function HomePage() {
       )}
 
       {/* ── Hero ── */}
-      <HeroCarousel />
+      <Hero />
 
       {/* ── 트러스트바 ── */}
       <TrustBar logos={industryLogos} />
