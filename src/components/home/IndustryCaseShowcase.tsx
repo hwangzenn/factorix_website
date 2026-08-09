@@ -116,6 +116,9 @@ export default function IndustryCaseShowcase({
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
               <p className="font-bold text-white text-lg mb-2">{featured.title}</p>
+              {featured.description && (
+                <p className="text-sm text-white/80 leading-relaxed line-clamp-2 mb-2">{featured.description}</p>
+              )}
               {featured.publishedAt && (
                 <div className="flex items-center gap-2 text-xs text-white/70">
                   <span>{new Date(featured.publishedAt).toLocaleDateString(en ? "en-US" : "ko-KR")}</span>

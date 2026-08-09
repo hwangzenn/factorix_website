@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import HeroCarousel from "@/components/HeroCarousel";
+import TrustBar from "@/components/home/TrustBar";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
 import FaqTabs from "@/components/home/FaqTabs";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -149,10 +150,30 @@ export default async function HomePage() {
     .map(([key, label]) => ({ key, label, items: faqs.filter((f) => f.category === key) }))
     .filter((c) => c.items.length > 0);
 
+  const faqJsonLd = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  } : null;
+
   return (
     <div className="flex flex-col">
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
+
       {/* ── Hero ── */}
       <HeroCarousel />
+
+      {/* ── 트러스트바 ── */}
+      <TrustBar logos={industryLogos} />
 
       {/* ── 까다로운 액상제조 공정, Factorix가 해결합니다 ── */}
       <section className="bg-white py-20 px-8">
@@ -373,9 +394,12 @@ export default async function HomePage() {
 
           {/* 온라인 상담 CTA */}
           <div className="bg-primary-700 rounded-xl px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
-              온라인 상담 신청하기
-            </h3>
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-2">
+                온라인 상담 신청하기
+              </h3>
+              <p className="text-sm text-primary-100">누적 1,000건 이상 R&amp;D · 200개 이상 파트너사가 증명하는 경험</p>
+            </div>
             <Link
               href={ROUTES.support.meeting}
               className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary-700 text-sm font-bold rounded hover:bg-gray-100 transition-colors shrink-0"

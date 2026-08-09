@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import HeroCarousel from "@/components/HeroCarousel";
+import TrustBar from "@/components/home/TrustBar";
 import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
@@ -141,6 +142,9 @@ export default async function EnHomePage() {
     <div className="flex flex-col">
       {/* ── Hero ── */}
       <HeroCarousel locale="en" />
+
+      {/* ── Trust bar ── */}
+      <TrustBar logos={industryLogos} locale="en" />
 
       {/* ── Demanding liquid processes, Factorix solves them ── */}
       <section className="bg-white py-20 px-8">
@@ -341,9 +345,12 @@ export default async function EnHomePage() {
 
           {/* Online consultation CTA */}
           <div className="bg-primary-700 rounded-xl px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">
-              Request an Online Consultation
-            </h3>
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-2">
+                Request an Online Consultation
+              </h3>
+              <p className="text-sm text-primary-100">Backed by 1,000+ R&amp;D projects and 200+ partner companies</p>
+            </div>
             <Link
               href={ROUTES.support.meeting}
               className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary-700 text-sm font-bold rounded hover:bg-gray-100 transition-colors shrink-0"

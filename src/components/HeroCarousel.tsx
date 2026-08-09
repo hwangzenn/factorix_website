@@ -8,11 +8,10 @@ import type { Locale } from "@/lib/i18n";
 const SLIDES_KO = [
   {
     image: "/hero-bg-2.jpg",
-    heading: "Connect Innovation For Your Factory",
-    sub: "액상제조 전문 맞춤형 스마트팩토리 솔루션",
+    heading: "액상 정밀 토출, 불량률부터 줄입니다",
+    sub: "액상 디스펜싱·충진·경화 자동화 설비를 찾고 계신가요? 30년 엔지니어링 경험의 팩토릭스가 설계부터 양산까지 함께합니다.",
     ctas: [
-      { label: "장비 및 시스템 보기", href: `${ROUTES.home}#equipment` },
-      { label: "고객 적용사례 보기", href: `${ROUTES.home}#cases` },
+      { label: "온라인 상담 신청", href: ROUTES.support.meeting },
     ],
   },
   {
@@ -28,11 +27,10 @@ const SLIDES_KO = [
 const SLIDES_EN = [
   {
     image: "/hero-bg-2.jpg",
-    heading: "Connect Innovation For Your Factory",
-    sub: "Custom smart factory solutions for liquid manufacturing",
+    heading: "Precision Liquid Dispensing That Cuts Defect Rates",
+    sub: "Looking for liquid dispensing, filling, or curing automation? Factorix partners with you from design through mass production, backed by 30 years of engineering experience.",
     ctas: [
-      { label: "View Equipment & Systems", href: `${ROUTES.en.home}#equipment` },
-      { label: "View Customer Case Studies", href: `${ROUTES.en.home}#cases` },
+      { label: "Request Consultation", href: ROUTES.support.meeting },
     ],
   },
   {
