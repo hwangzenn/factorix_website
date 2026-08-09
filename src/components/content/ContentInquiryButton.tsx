@@ -22,9 +22,9 @@ export default function ContentInquiryButton({ slug }: { slug: string }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex px-8 py-4 bg-primary-700 text-white font-semibold rounded-md hover:bg-accent transition-colors text-lg"
+        className="inline-flex items-center text-sm text-gray-400 hover:text-primary-600 transition-colors"
       >
-        이 질문 남기기
+        이 글에 궁금한 점이 있으신가요?
       </button>
 
       {open && (
