@@ -81,45 +81,7 @@ const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] 
   { label: "Manufacturing Automation Equipment", tag: "Industry-Specific Automation Equipment", href: ROUTES.solutions.automationSystem, image: "/장비시스템/자동화시스템.png" },
 ];
 
-const AFMS_FEATURE = {
-  name: "AFMS-X1",
-  desc: "AFMS is an AI-powered liquid auto-calibration dispensing system that analyzes real-time changes in the physical properties of liquid materials — such as bio-reagents and industrial pastes — and automatically corrects dispensing conditions.",
-  href: `${ROUTES.blog.news}/ces-2026`,
-  image: "/장비시스템/자동보정 시스템.png",
-};
-
-const AFMS_BENEFITS: { title: string; desc: string; icon: React.ReactNode }[] = [
-  {
-    title: "Smart Dispensing Control",
-    desc: "Real-time automatic correction of dispensing volume, pressure, speed, and error",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-        <path d="M12 3c-3 4-5 7-5 10a5 5 0 0 0 10 0c0-3-2-6-5-10z" />
-      </svg>
-    ),
-  },
-  {
-    title: "Smart Vision Prediction",
-    desc: "Detects dots, lines, coating area, and micro air bubbles to predict defects",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-        <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
-        <circle cx="12" cy="12" r="3" />
-      </svg>
-    ),
-  },
-  {
-    title: "Integrated Manufacturing Data Platform",
-    desc: "Unified storage of process and quality data, production history management, and continuous learning",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-        <ellipse cx="12" cy="6" rx="8" ry="3" />
-        <path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6" />
-        <path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" />
-      </svg>
-    ),
-  },
-];
+const AFMS_IMAGE = "/장비시스템/자동보정 시스템.png";
 
 const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
   mixing: (
@@ -319,71 +281,6 @@ export default async function EnHomePage() {
         </div>
       </section>
 
-      {/* ── AI-integrated next-gen dispensing solution ── */}
-      <section className="bg-white py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
-          {/* AFMS intro */}
-          <div className="mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                  AI-Integrated Next-Gen Dispensing Solutions
-                </h2>
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-                  About AFMS
-                </h3>
-                <p className="text-base md:text-lg text-gray-500 leading-relaxed">
-                  {AFMS_FEATURE.desc}
-                </p>
-
-                {/* Expected benefits */}
-                <div className="mt-10">
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-                    Expected Benefits
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {AFMS_BENEFITS.map((b) => (
-                      <div key={b.title} className="rounded-xl border border-gray-200 bg-white p-6">
-                        <div className="w-10 h-10 rounded-full bg-primary-50 border border-primary-200 flex items-center justify-center text-primary-700 mb-3">
-                          {b.icon}
-                        </div>
-                        <p className="font-bold text-gray-900 mb-2">{b.title}</p>
-                        <p className="text-sm text-gray-500 leading-relaxed">{b.desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <Link
-                href={AFMS_FEATURE.href}
-                className="group relative overflow-hidden rounded-[5px] bg-gray-100 block w-full md:w-[85%] mx-auto"
-              >
-                <img
-                  src={AFMS_FEATURE.image}
-                  alt={AFMS_FEATURE.name}
-                  className="w-full h-auto block group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
-                <div className="absolute top-10 left-10 flex flex-col items-start gap-2">
-                  <span className="text-2xl md:text-3xl font-normal text-white">
-                    {AFMS_FEATURE.name}
-                  </span>
-                  <span className="text-2xl md:text-3xl font-normal text-white">
-                    Liquid Auto-Calibration Dispensing System
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-700">
-                    Learn More
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── FactoriX tech insights ── */}
       <section className="bg-gray-50 py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
@@ -399,7 +296,7 @@ export default async function EnHomePage() {
               {/* Left: CES award */}
               <Link href={`${ROUTES.blog.news}/ces-2026`} className="block rounded-lg overflow-hidden">
                 <img
-                  src="/ai웨어러블.png"
+                  src={AFMS_IMAGE}
                   alt="FactoriX CES 2026 Innovation Award"
                   className="w-full h-auto block"
                 />
