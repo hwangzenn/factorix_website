@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { ROUTES } from "@/lib/routes"
-import { MANUFACTURING_INDUSTRIES, MANUFACTURING_TO_LEGACY_INDUSTRY } from "@/lib/industries"
+import { MANUFACTURING_INDUSTRIES } from "@/lib/industries"
 import type { Locale } from "@/lib/i18n"
 import type { CaseStudyWithTags } from "@/sanity/lib/queries"
 
@@ -18,7 +18,6 @@ const INDUSTRY_HREF: Record<string, string> = {
 const CATEGORIES = MANUFACTURING_INDUSTRIES.map((i) => ({
   ...i,
   href: INDUSTRY_HREF[i.key],
-  legacyKeys: MANUFACTURING_TO_LEGACY_INDUSTRY[i.key],
 }))
 
 type IndustryLogo = {
@@ -39,9 +38,9 @@ export default function IndustryCaseShowcase({
   const [active, setActive] = useState<string>(CATEGORIES[0].key)
 
   const activeCat = CATEGORIES.find((c) => c.key === active)!
-  const filtered = items.filter((item) => !!item.industries && activeCat.legacyKeys.includes(item.industries))
+  const filtered = items.filter((item) => item.industries === active)
   const activeLogos = logos
-    .filter((l) => activeCat.legacyKeys.includes(l.category))
+    .filter((l) => l.category === active)
     .flatMap((l) => l.logos ?? [])
     .slice(0, 4)
   const featured = filtered.find((item) => item.featuredOnMain) ?? filtered[0]

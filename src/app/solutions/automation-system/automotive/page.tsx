@@ -9,7 +9,6 @@ import {
   type IndustryLogo,
 } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
-import { MANUFACTURING_TO_LEGACY_INDUSTRY } from "@/lib/industries"
 import ManufacturingAutomationIndustryDetail from "@/components/solutions/ManufacturingAutomationIndustryDetail"
 
 export const revalidate = 3600
@@ -33,7 +32,7 @@ export default async function AutomotivePage() {
     sanityFetch({ query: industryLogosQuery }),
   ])
   const logos = ((logoData as IndustryLogo[]) ?? [])
-    .filter((l) => MANUFACTURING_TO_LEGACY_INDUSTRY["automotive"].includes(l.category))
+    .filter((l) => l.category === "automotive")
     .flatMap((l) => l.logos ?? [])
 
   return (

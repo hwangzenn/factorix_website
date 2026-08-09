@@ -1,14 +1,8 @@
 import { defineField, defineType } from 'sanity'
+import { MANUFACTURING_INDUSTRIES } from '../../lib/industries'
 
-// caseStudy.ts 의 산업별 카테고리 값과 동일 문자열을 사용한다.
-const INDUSTRY_CATEGORIES = [
-  { title: '바이오', value: 'bio' },
-  { title: '화장품/뷰티', value: 'cosmetics' },
-  { title: '화학/소재', value: 'chemical' },
-  { title: '전기/전자', value: 'electronics' },
-  { title: '자동차', value: 'automotive' },
-  { title: '연구기관/대학', value: 'research' },
-]
+// caseStudy.ts/blogPost.ts/product.ts 의 산업군 태그와 동일한 5개 카테고리 체계를 사용한다.
+const INDUSTRY_CATEGORIES = MANUFACTURING_INDUSTRIES.map((i) => ({ title: i.label, value: i.key }))
 
 export const industryLogo = defineType({
   name: 'industryLogo',

@@ -9,7 +9,6 @@ import {
   type IndustryLogo,
 } from "@/sanity/lib/queries"
 import { ROUTES } from "@/lib/routes"
-import { MANUFACTURING_TO_LEGACY_INDUSTRY } from "@/lib/industries"
 import ManufacturingAutomationIndustryDetail from "@/components/solutions/ManufacturingAutomationIndustryDetail"
 
 export const revalidate = 3600
@@ -29,11 +28,11 @@ const FEATURES = [
 export default async function BioMedicalPage() {
   const [{ data: portfolioData }, { data: relatedData }, { data: logoData }] = await Promise.all([
     sanityFetch({ query: productsByIndustryQuery, params: { industry: "bio-medical" } }),
-    sanityFetch({ query: relatedContentByIndustryQuery, params: { industry: "bio" } }),
+    sanityFetch({ query: relatedContentByIndustryQuery, params: { industry: "bio-medical" } }),
     sanityFetch({ query: industryLogosQuery }),
   ])
   const logos = ((logoData as IndustryLogo[]) ?? [])
-    .filter((l) => MANUFACTURING_TO_LEGACY_INDUSTRY["bio-medical"].includes(l.category))
+    .filter((l) => l.category === "bio-medical")
     .flatMap((l) => l.logos ?? [])
 
   return (
