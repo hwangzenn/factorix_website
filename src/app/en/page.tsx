@@ -3,12 +3,10 @@ import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/home/TrustBar";
-import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
+import SolutionExplorer from "@/components/home/SolutionExplorer";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
-  allCaseStudiesQuery,
   industryLogosQuery,
-  type CaseStudyWithTags,
   type IndustryLogo,
 } from "@/sanity/lib/queries";
 
@@ -26,11 +24,10 @@ export const metadata: Metadata = {
   openGraph: { locale: "en_US" },
 };
 
-const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNode }[] = [
+const PROBLEMS: { num: string; title: string; icon: React.ReactNode }[] = [
   {
     num: "01",
     title: "Constantly Changing Variables",
-    desc: "Liquid materials constantly change their physical and chemical properties in real time due to temperature, humidity, pressure, and other internal and external conditions — making it difficult to guarantee consistent quality even with identical settings.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M3 13c2-7 4-7 6 0s4 7 6 0 4-7 6 0" />
@@ -40,7 +37,6 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   {
     num: "02",
     title: "High Defect Rates",
-    desc: "Manual operator error combined with unstable dispensing volume easily leads to defects such as over/under-application and misalignment from the designed position.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M12 3l9 16H3L12 3z" />
@@ -52,7 +48,6 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   {
     num: "03",
     title: "Rising Costs & Lower Yield",
-    desc: "Defects require immediate manual correction and rework, driving up rework costs and material waste — raising manufacturing costs across the entire process.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M3 7l7 7 4-4 7 7" />
@@ -63,7 +58,6 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   {
     num: "04",
     title: "Declining Customer Trust",
-    desc: "Shipping underperforming components can critically damage the performance of the end user's final product, ultimately harming your company's reputation.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
         <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" />
@@ -73,68 +67,9 @@ const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNod
   },
 ];
 
-const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] = [
-  { label: "Collaborative/Cartesian/3-Axis Robot", tag: "3-Axis Robot", href: ROUTES.solutions.equipment.robot, image: "/장비시스템/탁상로봇.png" },
-  { label: "Dispenser", tag: "Dispenser", href: ROUTES.solutions.equipment.dispenser, image: "/장비시스템/디스펜서.png" },
-  { label: "Liquid Filling Machine", tag: "Filling Machine", href: ROUTES.solutions.equipment.filling, image: "/장비시스템/충진기.png" },
-  { label: "Mixing/Defoaming", tag: "Mixer/Defoamer", href: ROUTES.solutions.equipment.mixer, image: "/장비시스템/쓰리롤밀.png" },
-  { label: "UV/IR Curing System", tag: "UV/IR Curing System", href: ROUTES.solutions.equipment.curing, image: "/장비시스템/경화기.png" },
-  { label: "Manufacturing Automation Equipment", tag: "Industry-Specific Automation Equipment", href: ROUTES.solutions.automationSystem, image: "/장비시스템/자동화시스템.png" },
-];
-
 const AFMS_IMAGE = "/장비시스템/자동보정 시스템.png";
 
-const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
-  mixing: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4" /><circle cx="12" cy="12" r="3" />
-    </svg>
-  ),
-  dispersion: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <circle cx="12" cy="12" r="9" /><path d="M12 3v18M3 12h18" /><circle cx="12" cy="12" r="3" />
-    </svg>
-  ),
-  filling: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <path d="M12 2v8l-4 4v6h8v-6l-4-4V2" /><path d="M8 20h8" /><path d="M10 2h4" />
-    </svg>
-  ),
-  dispensing: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <path d="M12 2v6M12 12v10" /><circle cx="12" cy="10" r="2" /><path d="M8 22h8M6 6h12" />
-    </svg>
-  ),
-  robot: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <rect x="4" y="10" width="16" height="10" rx="1" /><path d="M8 10V6h8v4" /><path d="M12 2v4M8 15h2M14 15h2" />
-    </svg>
-  ),
-  curing: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-    </svg>
-  ),
-  automation: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <rect x="2" y="6" width="20" height="12" rx="1" /><path d="M6 10v4M10 9v6M14 10v4M18 8v8" /><path d="M2 2h4M18 2h4" />
-    </svg>
-  ),
-};
-
-const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
-  { label: "Liquid Mixing\n& Defoaming", iconKey: "mixing", href: ROUTES.solutions.equipment.mixer },
-  { label: "Particle Dispersion\n& 3-Roll Milling", iconKey: "dispersion", href: ROUTES.solutions.equipment.mixer },
-  { label: "Liquid Filling\n& Dividing", iconKey: "filling", href: ROUTES.solutions.equipment.filling },
-  { label: "Precision\nDispensing", iconKey: "dispensing", href: ROUTES.solutions.equipment.dispenser },
-  { label: "Desktop Robot", iconKey: "robot", href: ROUTES.solutions.equipment.robot },
-  { label: "IR/UV Curing\n& Ovens", iconKey: "curing", href: ROUTES.solutions.equipment.curing },
-  { label: "Manufacturing\nAutomation Equipment", iconKey: "automation", href: ROUTES.solutions.automationSystem },
-];
-
 export default async function EnHomePage() {
-  const { data: caseData } = await sanityFetch({ query: allCaseStudiesQuery });
-  const caseStudies = (caseData as CaseStudyWithTags[]) ?? [];
   const { data: logoData } = await sanityFetch({ query: industryLogosQuery });
   const industryLogos = (logoData as IndustryLogo[]) ?? [];
 
@@ -149,82 +84,23 @@ export default async function EnHomePage() {
       {/* ── Demanding liquid processes, Factorix solves them ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
-          <div className="mb-14 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Demanding Liquid Processes,<br />Challenges on the Factory Floor
-            </h2>
-            <p className="text-lg md:text-xl text-gray-500 leading-relaxed md:text-right">
-              Adhesives, bio-reagents, pastes, and other core materials for advanced industries<br />
-              <strong className="font-bold text-gray-900">precisely dispensing liquids in exact quantities</strong><br />
-              is extremely difficult.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8 items-center">
+            <div className="text-left">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
+                Demanding Liquid Processes,<br />Challenges on the Factory Floor
+              </h2>
+              <p className="text-lg md:text-xl text-gray-500 leading-relaxed">
+                Adhesives, bio-reagents, pastes, and other core materials for advanced industries —{" "}
+                <strong className="font-bold text-gray-900">precisely dispensing liquids in exact quantities</strong> is extremely difficult.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PROBLEMS.map((p) => (
-              <div key={p.num} className="rounded-xl border border-gray-200 p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-primary-700">{p.icon}</span>
-                  <span className="text-sm font-bold text-gray-300">{p.num}</span>
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-10">{p.title}</h3>
-                <p className="text-sm md:text-base text-gray-500 leading-relaxed">{p.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── What sets FactoriX apart (background image) ── */}
-      <section className="relative overflow-hidden py-20 px-8">
-        <img
-          src="/valuechain_bg.png"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/35" />
-
-        <div className="relative max-w-[1440px] mx-auto">
-          <div className="mb-32 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-              Liquid Process Specialists —<br />Dispensing &amp; Process Automation
-            </h2>
-            <p className="text-lg md:text-xl text-white/80 leading-relaxed md:text-right">
-              From raw materials to automation, FactoriX is a team of engineers with{" "}
-              <strong className="font-bold text-white">30 years</strong> of experience across diverse industrial liquid manufacturing processes,
-              in an industry long biased toward semiconductor packaging. Built on more than 1,000 R&amp;D projects, we deliver{" "}
-              <strong className="font-bold text-white">integrated solutions across the entire value chain</strong>.
-            </p>
-          </div>
-
-          {/* Integrated solutions by process stage */}
-          <div>
-            <h3 className="text-xl md:text-2xl font-bold text-white leading-tight mb-10">
-              Integrated Solutions by Process Stage
-            </h3>
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:flex-wrap md:gap-y-4">
-              {VALUE_CHAIN.map((step, i) => (
-                <div key={step.label} className="flex items-center gap-2 w-full md:w-auto md:gap-3">
-                  <Link
-                    href={step.href}
-                    className="flex items-center gap-4 w-full rounded-xl px-5 py-4 md:w-40 md:h-44 md:flex-col md:gap-0 md:rounded-2xl md:px-3 md:py-5 bg-white/95 border border-white/40 text-center hover:bg-white transition-all text-primary-700"
-                  >
-                    {VALUE_CHAIN_ICONS[step.iconKey]}
-                    <span className="flex-1 text-left text-sm font-bold text-gray-800 leading-tight md:flex-1 md:flex md:items-center md:justify-center md:whitespace-pre-line md:text-center md:text-xs md:mt-1.5">
-                      {step.label}
-                    </span>
-                    <span className="shrink-0 inline-flex items-center gap-0.5 text-xs md:text-[11px] font-semibold text-primary-600">
-                      View Products
-                      <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  </Link>
-                  {i < VALUE_CHAIN.length - 1 && (
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="hidden md:block shrink-0 text-white/60">
-                      <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  )}
+            <div className="grid grid-cols-2 gap-4 md:gap-6">
+              {PROBLEMS.map((p) => (
+                <div key={p.num} className="rounded-xl border border-gray-200 p-5 md:p-6">
+                  <span className="text-primary-700 block mb-3">{p.icon}</span>
+                  <span className="text-sm font-bold text-gray-300 block mb-2">{p.num}</span>
+                  <h3 className="text-base md:text-lg font-bold text-gray-900">{p.title}</h3>
                 </div>
               ))}
             </div>
@@ -232,58 +108,8 @@ export default async function EnHomePage() {
         </div>
       </section>
 
-      {/* ── Customer-tailored solutions / Equipment & systems ── */}
-      <section className="bg-white py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
-          {/* Customer-tailored solutions */}
-          <div id="cases" className="mb-16 scroll-mt-20">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-              Customer-Tailored Solutions
-            </h3>
-            <IndustryCaseShowcase items={caseStudies} logos={industryLogos} locale="en" />
-          </div>
-
-          {/* FactoriX equipment & systems */}
-          <div id="equipment" className="scroll-mt-20">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-              FactoriX Equipment &amp; Systems
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
-              {SOLUTIONS.map((s) => (
-                <Link
-                  key={s.label}
-                  href={s.href}
-                  className="group relative overflow-hidden rounded-[5px] bg-gray-100 block"
-                >
-                  {s.image ? (
-                    <img
-                      src={s.image}
-                      alt={s.label}
-                      className="w-full aspect-[16/9] object-cover block group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="aspect-square" />
-                  )}
-                  {/* Dark overlay on hover */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
-                  {/* Top-left equipment tag + view lineup */}
-                  <div className="absolute top-6 left-6 md:top-10 md:left-10 flex flex-col items-start gap-2">
-                    <span className="text-xl md:text-3xl font-normal text-primary-900">
-                      {s.tag}
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-900">
-                      View Product Lineup
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
-                        <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── Explore by process / equipment / industry ── */}
+      <SolutionExplorer locale="en" />
 
       {/* ── FactoriX tech insights ── */}
       <section className="bg-gray-50 py-20 px-8">

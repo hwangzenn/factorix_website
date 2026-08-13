@@ -108,6 +108,13 @@ export const blogPost = defineType({
       ],
     }),
     defineField({
+      name: 'sourceUrl',
+      title: '원본 URL (네이버 블로그 등)',
+      description: '외부에서 가져온 글의 원본 링크. 자동 수집된 초안 검수용입니다.',
+      type: 'url',
+      readOnly: true,
+    }),
+    defineField({
       name: 'isPublic',
       title: '공개 여부',
       type: 'boolean',

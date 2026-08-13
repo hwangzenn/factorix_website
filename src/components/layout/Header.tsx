@@ -23,15 +23,6 @@ const DARK_HERO_PATHS: string[] = [
 
 const label = (item: NavItem, locale: Locale) => (locale === "en" ? item.labelEn ?? item.label : item.label);
 
-// 블로그는 GNB 자체에서는 하위 카테고리를 펼치지 않는 리프 링크지만(항상 /blog로 바로 이동),
-// 다른 그룹을 열었을 때 함께 뜨는 메가메뉴 안에서는 카테고리 미리보기를 보여준다.
-const BLOG_LINKS: NavItem[] = [
-  { label: "인사이트", labelEn: "Insight", href: ROUTES.blog.insight },
-  { label: "엔지니어링 위키", labelEn: "Engineering Wiki", href: ROUTES.blog.guideIntro },
-  { label: "고객 적용사례", labelEn: "Customer Case Studies", href: ROUTES.blog.cases },
-  { label: "팩토릭스 뉴스", labelEn: "Factorix News", href: ROUTES.blog.news },
-];
-
 export default function Header() {
   const pathname = usePathname();
   const locale = getLocaleFromPathname(pathname);
@@ -192,28 +183,13 @@ export default function Header() {
           <div className="max-w-[1440px] mx-auto px-10 py-10">
             {/* 6-column flex layout — 솔루션 gets 2× width for its 2-column sub-groups */}
             <div className="flex">
-              {GNB.map((col, ci, all) => {
+              {GNB.filter(isGroup).map((col, ci, all) => {
                 const isSolutions = col.label === "솔루션";
                 const isLast = ci === all.length - 1;
                 const colClass = [
                   isSolutions ? "flex-[2]" : "flex-1",
                   !isLast ? "border-r border-gray-200 mr-8 pr-8" : "",
                 ].join(" ");
-
-                if (!isGroup(col)) {
-                  return (
-                    <div key={col.label} className={colClass}>
-                      <Link
-                        href={col.href!}
-                        onClick={() => setMenuOpen(false)}
-                        className="block text-base font-bold text-gray-800 hover:text-primary-700 transition-colors mb-5"
-                      >
-                        {label(col, locale)}
-                      </Link>
-                      <ColItems items={BLOG_LINKS} onClose={() => setMenuOpen(false)} locale={locale} />
-                    </div>
-                  );
-                }
 
                 return (
                   <div key={col.label} className={colClass}>

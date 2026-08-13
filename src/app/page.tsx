@@ -3,16 +3,19 @@ import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/home/TrustBar";
-import IndustryCaseShowcase from "@/components/home/IndustryCaseShowcase";
+import SolutionExplorer from "@/components/home/SolutionExplorer";
 import FaqTabs from "@/components/home/FaqTabs";
+import BlogCard from "@/components/blog/BlogCard";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   allCaseStudiesQuery,
   industryLogosQuery,
   featuredFaqsQuery,
+  blogPostsByCategoryQuery,
   type CaseStudyWithTags,
   type IndustryLogo,
   type FaqItem,
+  type BlogPostSummary,
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
@@ -28,120 +31,21 @@ export const metadata: Metadata = {
   },
 };
 
-const PROBLEMS: { num: string; title: string; desc: string; icon: React.ReactNode }[] = [
-  {
-    num: "01",
-    title: "실시간 변화하는 변수",
-    desc: "액상은 온도, 습도, 압력 등 외부 및 내부 환경 변화에 따라 물리·화학적 특성이 실시간으로 변화해 동일한 설정값으로도 동일한 품질을 보장하기 어렵습니다.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-        <path d="M3 13c2-7 4-7 6 0s4 7 6 0 4-7 6 0" />
-      </svg>
-    ),
-  },
-  {
-    num: "02",
-    title: "높은 불량률",
-    desc: "수작업자의 실수와 액상 변화로 인한 토출량 불안정은 과다·과소 도포 및 설계 위치 이탈 등 불량으로 이어지기 쉽습니다.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-        <path d="M12 3l9 16H3L12 3z" />
-        <path d="M12 10v4" />
-        <circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none" />
-      </svg>
-    ),
-  },
-  {
-    num: "03",
-    title: "원가 상승 및 수율 저하",
-    desc: "불량 발생 시 즉각적인 수동 보정 및 재작업이 필요해 재작업 비용이 발생할 뿐만 아니라 소재 낭비 등 공정 전반의 제조 원가를 상승시킵니다.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-        <path d="M3 7l7 7 4-4 7 7" />
-        <path d="M21 10v7h-7" />
-      </svg>
-    ),
-  },
-  {
-    num: "04",
-    title: "고객 신뢰도 하락",
-    desc: "성능이 저하된 부품이 납품될 경우 최종 엔드유저 제품 성능에 치명적인 문제가 발생하며, 이는 결국 기업 평판을 크게 하락시킵니다.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-        <path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z" />
-        <path d="M9.5 9l2 2-2 3.5M14.5 9l-2 2 2 3.5" />
-      </svg>
-    ),
-  },
+// TODO: 위키 콘텐츠 발행 후 각 항목을 개별 글 slug로 연결(현재는 발행 전이라 비활성 표시만)
+const PROBLEM_TOPICS: string[] = [
+  "액상 공정이 까다로운 이유는?",
+  "디스펜싱, 정량토출 불량 예시",
+  "액상 제조사를 위한 수율 극대화 전략",
 ];
-
-const SOLUTIONS: { label: string; tag: string; href: string; image?: string }[] = [
-  { label: "협동/직교/3축 로봇", tag: "3축로봇", href: ROUTES.solutions.equipment.robot, image: "/장비시스템/탁상로봇.png" },
-  { label: "디스펜서", tag: "디스펜서", href: ROUTES.solutions.equipment.dispenser, image: "/장비시스템/디스펜서.png" },
-  { label: "액상 충진기", tag: "충진기", href: ROUTES.solutions.equipment.filling, image: "/장비시스템/충진기.png" },
-  { label: "교반/탈포기", tag: "교반기/탈포기", href: ROUTES.solutions.equipment.mixer, image: "/장비시스템/쓰리롤밀.png" },
-  { label: "UV/IR 경화기", tag: "UV/IR 경화기", href: ROUTES.solutions.equipment.curing, image: "/장비시스템/경화기.png" },
-  { label: "제조자동화 단동설비", tag: "산업별 맞춤 단동설비", href: ROUTES.solutions.automationSystem, image: "/장비시스템/자동화시스템.png" },
-];
-
-const AFMS_IMAGE = "/장비시스템/자동보정 시스템.png";
-
-const VALUE_CHAIN_ICONS: Record<string, React.ReactNode> = {
-  mixing: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <path d="M12 3v18M8 7l4-4 4 4M8 17l4 4 4-4" /><circle cx="12" cy="12" r="3" />
-    </svg>
-  ),
-  dispersion: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <circle cx="12" cy="12" r="9" /><path d="M12 3v18M3 12h18" /><circle cx="12" cy="12" r="3" />
-    </svg>
-  ),
-  filling: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <path d="M12 2v8l-4 4v6h8v-6l-4-4V2" /><path d="M8 20h8" /><path d="M10 2h4" />
-    </svg>
-  ),
-  dispensing: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <path d="M12 2v6M12 12v10" /><circle cx="12" cy="10" r="2" /><path d="M8 22h8M6 6h12" />
-    </svg>
-  ),
-  robot: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <rect x="4" y="10" width="16" height="10" rx="1" /><path d="M8 10V6h8v4" /><path d="M12 2v4M8 15h2M14 15h2" />
-    </svg>
-  ),
-  curing: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-    </svg>
-  ),
-  automation: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 md:w-9 md:h-9">
-      <rect x="2" y="6" width="20" height="12" rx="1" /><path d="M6 10v4M10 9v6M14 10v4M18 8v8" /><path d="M2 2h4M18 2h4" />
-    </svg>
-  ),
-};
 
 const FAQ_CATEGORY_LABELS: Record<string, string> = {
   solution: "FactoriX 솔루션",
   process: "액상 제조공정",
 };
 
-const VALUE_CHAIN: { label: string; iconKey: string; href: string }[] = [
-  { label: "액상 교반\n및 탈포", iconKey: "mixing", href: ROUTES.solutions.equipment.mixer },
-  { label: "입자 분산\n및 3롤밀", iconKey: "dispersion", href: ROUTES.solutions.equipment.mixer },
-  { label: "액상 충진\n및 소분", iconKey: "filling", href: ROUTES.solutions.equipment.filling },
-  { label: "정량/정밀\n토출", iconKey: "dispensing", href: ROUTES.solutions.equipment.dispenser },
-  { label: "탁상로봇", iconKey: "robot", href: ROUTES.solutions.equipment.robot },
-  { label: "IR/UV경화\n및 오븐", iconKey: "curing", href: ROUTES.solutions.equipment.curing },
-  { label: "제조자동화 단동설비", iconKey: "automation", href: ROUTES.solutions.automationSystem },
-];
-
 export default async function HomePage() {
   const { data: caseData } = await sanityFetch({ query: allCaseStudiesQuery });
-  const caseStudies = (caseData as CaseStudyWithTags[]) ?? [];
+  const caseStudies = ((caseData as CaseStudyWithTags[]) ?? []).slice(0, 3);
   const { data: logoData } = await sanityFetch({ query: industryLogosQuery });
   const industryLogos = (logoData as IndustryLogo[]) ?? [];
   const { data: faqData } = await sanityFetch({ query: featuredFaqsQuery });
@@ -149,6 +53,9 @@ export default async function HomePage() {
   const faqCategories = Object.entries(FAQ_CATEGORY_LABELS)
     .map(([key, label]) => ({ key, label, items: faqs.filter((f) => f.category === key) }))
     .filter((c) => c.items.length > 0);
+
+  const { data: insightData } = await sanityFetch({ query: blogPostsByCategoryQuery, params: { category: "insight" } });
+  const insightPosts = ((insightData as BlogPostSummary[]) ?? []).slice(0, 3);
 
   const faqJsonLd = faqs.length > 0 ? {
     "@context": "https://schema.org",
@@ -178,150 +85,93 @@ export default async function HomePage() {
       {/* ── 까다로운 액상제조 공정, Factorix가 해결합니다 ── */}
       <section className="bg-white py-20 px-8">
         <div className="max-w-[1440px] mx-auto">
-          <div className="mb-14 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              까다로운 액상공정,<br />제조현장에서 겪는 어려움
-            </h2>
-            <p className="text-lg md:text-xl text-gray-500 leading-relaxed md:text-right">
-              첨단 산업의 핵심 소재인 접착제·바이오시약·페이스트 등<br />
-              <strong className="font-bold text-gray-900">액상을 정밀하게 정량으로 도포하는 공정은</strong><br />
-              매우 어렵습니다.
-            </p>
-          </div>
+          <span className="block text-base md:text-lg font-semibold text-primary-700 tracking-widest uppercase mb-2">
+            팩토릭스가 해결하는 과제
+          </span>
+          <h2 className="text-4xl md:text-5xl leading-tight mb-10 break-keep max-w-4xl">
+            <span className="font-semibold text-gray-900">액상 소재의 정밀 토출·도포 공정을 해결</span>
+            <span className="font-normal text-gray-900">해 제조사의 CV 및 ROI 극대화 합니다.</span>
+          </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PROBLEMS.map((p) => (
-              <div key={p.num} className="rounded-xl border border-gray-200 p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-primary-700">{p.icon}</span>
-                  <span className="text-sm font-bold text-gray-300">{p.num}</span>
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-10">{p.title}</h3>
-                <p className="text-sm md:text-base text-gray-500 leading-relaxed">{p.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FactoriX 솔루션의 차별점 (배경 이미지) ── */}
-      <section className="relative overflow-hidden py-20 px-8">
-        <img
-          src="/valuechain_bg.png"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/35" />
-
-        <div className="relative max-w-[1440px] mx-auto">
-          <div className="mb-32 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-              액상공정 전문<br />디스펜싱&amp;공정 자동화 솔루션
-            </h2>
-            <p className="text-lg md:text-xl text-white/80 leading-relaxed md:text-right">
-              원료부터 자동화까지, FactoriX는 반도체 패키징에 편향된 액상공정 업계에서{" "}
-              <strong className="font-bold text-white">30년간</strong> 다양한 산업용 액상 제조 공정을 다룬 엔지니어 그룹입니다.
-              누적 1,000건 이상 연구개발 노하우에 기반해{" "}
-              <strong className="font-bold text-white">전체 밸류체인에 대한 통합 솔루션</strong>을 제공합니다.
-            </p>
-          </div>
-
-          {/* 공정별로 세분화된 통합 솔루션 */}
-          <div>
-            <h3 className="text-xl md:text-2xl font-bold text-white leading-tight mb-10">
-              공정별로 세분화된 통합 솔루션
-            </h3>
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:flex-wrap md:gap-y-4">
-              {VALUE_CHAIN.map((step, i) => (
-                <div key={step.label} className="flex items-center gap-2 w-full md:w-auto md:gap-3">
-                  <Link
-                    href={step.href}
-                    className="flex items-center gap-4 w-full rounded-xl px-5 py-4 md:w-40 md:h-44 md:flex-col md:gap-0 md:rounded-2xl md:px-3 md:py-5 bg-white/95 border border-white/40 text-center hover:bg-white transition-all text-primary-700"
-                  >
-                    {VALUE_CHAIN_ICONS[step.iconKey]}
-                    <span className="flex-1 text-left text-sm font-bold text-gray-800 leading-tight md:flex-1 md:flex md:items-center md:justify-center md:whitespace-pre-line md:text-center md:mt-1.5">
-                      {step.label}
-                    </span>
-                    <span className="shrink-0 inline-flex items-center gap-0.5 text-xs md:text-[11px] font-semibold text-primary-600">
-                      관련제품 보기
-                      <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  </Link>
-                  {i < VALUE_CHAIN.length - 1 && (
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="hidden md:block shrink-0 text-white/60">
-                      <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 lg:gap-8">
+            <div className="border-t border-gray-200">
+              {PROBLEM_TOPICS.map((topic) => (
+                <div key={topic} className="flex items-center justify-between gap-4 py-5 border-b border-gray-200">
+                  <span className="text-lg font-medium text-gray-700">{topic}</span>
+                  <span className="shrink-0 inline-flex h-8 w-20 items-center justify-center rounded-full bg-gray-100 text-gray-400">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                  )}
+                  </span>
                 </div>
               ))}
             </div>
+
+            <Link
+              href={ROUTES.support.meeting}
+              className="flex flex-col justify-center rounded-xl bg-gray-100 p-8 hover:bg-gray-200 transition-colors"
+            >
+              <span className="text-xl font-bold text-gray-900 leading-snug break-keep">
+                우리 공정
+                <br />
+                간편 진단 받아보기
+              </span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ── 고객 맞춤형 솔루션 / 장비 및 시스템 ── */}
-      <section className="bg-white py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
-          {/* 고객 맞춤형 솔루션 */}
-          <div id="cases" className="mb-16 scroll-mt-20">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-              고객 맞춤형 솔루션
-            </h3>
-            <IndustryCaseShowcase items={caseStudies} logos={industryLogos} />
-          </div>
+      {/* ── 공정별/장비별/산업군별 탐색 ── */}
+      <SolutionExplorer />
 
-          {/* FactoriX 장비 및 시스템 */}
-          <div id="equipment" className="scroll-mt-20">
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-6">
-              FactoriX 장비 및 시스템
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
-              {SOLUTIONS.map((s) => (
-                <Link
-                  key={s.label}
-                  href={s.href}
-                  className="group relative overflow-hidden rounded-[5px] bg-gray-100 block"
-                >
-                  {s.image ? (
-                    <img
-                      src={s.image}
-                      alt={s.label}
-                      className="w-full aspect-[16/9] object-cover block group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="aspect-square" />
-                  )}
-                  {/* 호버 시 어두운 레이어 */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
-                  {/* 좌상단 장비명 태그 + 제품 라인업 보기 */}
-                  <div className="absolute top-6 left-6 md:top-10 md:left-10 flex flex-col items-start gap-2">
-                    <span className="text-xl md:text-3xl font-normal text-primary-900">
-                      {s.tag}
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-900">
-                      제품 라인업 보기
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
-                        <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
+      {/* ── 고객 적용사례 블로그 ── */}
+      {caseStudies.length > 0 && (
+        <section id="cases" className="bg-white py-20 px-8 scroll-mt-20">
+          <div className="max-w-[1440px] mx-auto">
+            <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                고객 적용사례
+              </h2>
+              <Link
+                href={ROUTES.blog.cases}
+                className="inline-flex items-center gap-1 px-6 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded hover:bg-primary-700 hover:text-white transition-colors shrink-0"
+              >
+                전체보기
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {caseStudies.map((item, i) => (
+                <BlogCard
+                  key={item._id}
+                  title={item.title}
+                  description={item.description}
+                  thumbnailUrl={item.thumbnail?.asset?.url}
+                  thumbnailAlt={item.thumbnail?.alt}
+                  href={`${ROUTES.blog.cases}/${item.slug}`}
+                  publishedAt={item.publishedAt}
+                  categoryLabel="고객 적용사례"
+                  colorIndex={i}
+                />
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {faqCategories.length > 0 && (
         <section className="bg-white py-20 px-8">
           <div className="max-w-[1440px] mx-auto">
-            <div className="mb-14 flex items-end justify-between">
+            <div className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
                 자주 묻는 질문 Q&amp;A
               </h2>
-              <Link href={ROUTES.support.qna} className="flex items-center gap-1 text-sm text-primary-700 hover:underline shrink-0">
+              <Link
+                href={ROUTES.support.qna}
+                className="inline-flex items-center gap-1 px-6 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded hover:bg-primary-700 hover:text-white transition-colors shrink-0"
+              >
                 전체보기
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -334,81 +184,42 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── 팩토릭스 기술 인사이트 ── */}
-      <section className="bg-gray-50 py-20 px-8">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              팩토릭스 기술 인사이트
-            </h2>
-          </div>
-
-          {/* CES 수상 / 블로그 / 유튜브 / 특허자료 */}
-          <div className="mb-14">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* 좌측: CES 수상 */}
-              <Link href={`${ROUTES.blog.news}/ces-2026`} className="block rounded-lg overflow-hidden">
-                <img
-                  src={AFMS_IMAGE}
-                  alt="팩토릭스 CES 2026 혁신상 수상"
-                  className="w-full h-auto block"
-                />
+      {/* ── 인사이트 블로그 ── */}
+      {insightPosts.length > 0 && (
+        <section className="bg-white py-20 px-8">
+          <div className="max-w-[1440px] mx-auto">
+            <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                제조사를 위한 인사이트
+              </h2>
+              <Link
+                href={ROUTES.blog.insight}
+                className="inline-flex items-center gap-1 px-6 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded hover:bg-primary-700 hover:text-white transition-colors shrink-0"
+              >
+                전체보기
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
-
-              {/* 우측: 블로그 / 유튜브 / 특허자료 */}
-              <div className="flex flex-col gap-4">
-                <a
-                  href="https://blog.naver.com/factorix"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-                >
-                  <span className="text-lg md:text-xl font-semibold">네이버블로그</span>
-                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-                <a
-                  href="https://www.youtube.com/@FactoriX-t9f"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-                >
-                  <span className="text-lg md:text-xl font-semibold">시연영상 유튜브 채널 바로가기</span>
-                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-                <Link
-                  href={ROUTES.blog.news}
-                  className="group flex-1 flex items-center justify-between gap-3 rounded-lg border border-gray-200 text-gray-800 px-6 py-6 hover:bg-primary-700 hover:border-primary-700 hover:text-white transition-colors"
-                >
-                  <span className="text-lg md:text-xl font-semibold">특허 및 IR 자료실 바로가기</span>
-                  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" className="shrink-0">
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {insightPosts.map((post, i) => (
+                <BlogCard
+                  key={post._id}
+                  title={post.title}
+                  description={post.description}
+                  thumbnailUrl={post.thumbnail?.asset?.url}
+                  thumbnailAlt={post.thumbnail?.alt}
+                  href={`${ROUTES.blog.insight}/${post.slug}`}
+                  publishedAt={post.publishedAt}
+                  categoryLabel="인사이트"
+                  colorIndex={i}
+                />
+              ))}
             </div>
           </div>
-
-          {/* 온라인 상담 CTA */}
-          <div className="bg-primary-700 rounded-xl px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-2">
-                온라인 상담 신청하기
-              </h3>
-              <p className="text-sm text-primary-100">누적 1,000건 이상 R&amp;D · 200개 이상 파트너사가 증명하는 경험</p>
-            </div>
-            <Link
-              href={ROUTES.support.meeting}
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary-700 text-sm font-bold rounded hover:bg-gray-100 transition-colors shrink-0"
-            >
-              온라인상담 신청
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
 
     </div>
   );
