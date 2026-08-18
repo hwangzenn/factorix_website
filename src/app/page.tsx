@@ -19,11 +19,14 @@ import {
 } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
-  title: "AI 액제제조 · 디스펜싱 솔루션",
-  description: "팩토릭스 — 정밀 토출, 디스펜싱, 액상 제조 전문 자동화 설비 기업",
+  title: {
+    absolute: "팩토릭스 | AI 액상 충진 토출 디스펜싱·스마트팩토리 자동화시스템 전문기업",
+  },
+  description:
+    "접착제·바이오 시약·전자재료의 정밀 토출부터 배합·혼합·탈포·충진·경화까지. 전문제조 엔지니어링 솔루션과 AI 자동보정 기술로 제조공정의 불량률을 낮추고 생산성을 높입니다.",
   keywords: [
-    "팩토릭스", "Factorix", "디스펜싱 자동화", "액제제조 솔루션",
-    "AI 스마트팩토리", "디스펜서", "충진기",
+    "팩토릭스", "Factorix", "산업용 디스펜서 업체", "액상 제조 솔루션",
+    "정량토출", "정밀토출", "액상 충진 및 교반,탈포 설비 업체",
   ],
   alternates: {
     canonical: ROUTES.home,

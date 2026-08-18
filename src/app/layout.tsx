@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: "팩토릭스 — 정밀 토출, 디스펜싱, 액상 제조 전문 자동화 설비 기업",
     url: SITE_URL,
     siteName: "팩토릭스 | Factorix",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/og_img.png", width: 1200, height: 630 }],
     type: "website",
     locale: "ko_KR",
   },
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "팩토릭스(Factorix) | AI 액제제조 솔루션",
     description: "팩토릭스 — 정밀 토출, 디스펜싱, 액상 제조 전문 자동화 설비 기업",
-    images: ["/og-image.png"],
+    images: ["/og_img.png"],
   },
   ...(NAVER_VERIFICATION && {
     other: { "naver-site-verification": NAVER_VERIFICATION },
