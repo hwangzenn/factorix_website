@@ -330,10 +330,8 @@ function SolutionGroup({ group, en }: { group: Group; en: boolean }) {
   const isIndustry = group.variant === "industry";
   const isEquipment = group.variant === "equipment";
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-  // 첫 카드를 기본 펼침 상태로 두면 모바일에서 "1탭=펼침, 2탭=이동"이 첫 카드에만
-  // 적용되지 않는 문제가 생긴다(이미 펼쳐진 상태라 1탭에 바로 이동). 아무것도
-  // 호버/탭하기 전에는 전부 접힌 상태로 시작해 데스크톱·모바일 동작을 일치시킨다.
-  const activeKey = hoveredKey;
+  // 기본값은 첫 카드(바이오·의료기기)가 펼쳐진 상태. 호버하거나 탭하면 그 카드로 바뀐다.
+  const activeKey = hoveredKey ?? group.items[0]?.key;
   const headingWeight = isIndustry ? "font-semibold" : "font-bold";
   const [headingBefore, headingAfter] = group.headingBold
     ? group.heading.split(group.headingBold)
