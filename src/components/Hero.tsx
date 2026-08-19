@@ -12,8 +12,8 @@ const SLIDE_3_IMAGE = "/hero-slide-3.png"; // 엔지니어 그룹의 현장 협�
 const SLIDES_KO = [
   {
     image: SLIDE_1_IMAGE,
-    heading: "초정밀 수율 극대화\n산업용 디스펜싱 솔루션 기업",
-    sub: "정량 토출부터 혼합·탈포·도포·경화, 커스텀 자동화 설비까지\n제조 공정에 맞는 액상 제어 솔루션을 설계합니다.",
+    heading: "액상제조 수율은 극대화,\n불량률은 최소화합니다",
+    sub: "정밀 디스펜싱 자동화 솔루션 기업\n팩토릭스와 액상 제조 혁신을 만들어가세요.",
     ctas: [
       { label: "온라인 문의", href: ROUTES.support.meeting },
       { label: "담당자 전화 문의", href: "tel:070-8672-0192" },
@@ -21,15 +21,15 @@ const SLIDES_KO = [
   },
   {
     image: SLIDE_2_IMAGE,
-    heading: "산업별 맞춤형 솔루션\n성공노하우 1000건+",
-    sub: "바이오·화학·전자·자동차·연구기관까지,\n산업에 맞춘 장비와 커스텀 자동화 시스템을 설계합니다.",
+    heading: "산업별 맞춤형 솔루션\n적용사례 1000건+",
+    sub: "바이오 · 화학 · 전자 · 자동차 · 연구기관까지,\n산업에 맞춘 장비와 커스텀 자동화 시스템을 제안합니다.",
     ctas: [
       { label: "산업별 팩토릭스 솔루션 알아보기", href: ROUTES.solutions.automationSystemIndustries.bioMedical },
     ],
   },
   {
     image: SLIDE_3_IMAGE,
-    heading: "액상공정 전문\n20년+ 엔지니어 그룹",
+    heading: "액상공정 전문가들이\n최적의 공정을 제안합니다",
     sub: "전문성과 현장경험을 갖춘 엔지니어 그룹이\n평가테스트부터 최종납품까지 책임집니다.",
     ctas: [
       { label: "엔지니어 기술블로그 보기", href: ROUTES.blog.guideIntro },

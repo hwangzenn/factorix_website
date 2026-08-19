@@ -32,13 +32,29 @@ export const metadata: Metadata = {
     canonical: ROUTES.home,
     languages: { ko: ROUTES.home, en: ROUTES.en.home },
   },
+  openGraph: {
+    title: "팩토릭스 | AI 액상 충진 토출 디스펜싱·스마트팩토리 자동화시스템 전문기업",
+    description:
+      "접착제·바이오 시약·전자재료의 정밀 토출부터 배합·혼합·탈포·충진·경화까지. 전문제조 엔지니어링 솔루션과 AI 자동보정 기술로 제조공정의 불량률을 낮추고 생산성을 높입니다.",
+    url: ROUTES.home,
+    siteName: "팩토릭스 | Factorix",
+    images: [{ url: "/og_img.png", width: 1200, height: 630 }],
+    type: "website",
+    locale: "ko_KR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "팩토릭스 | AI 액상 충진 토출 디스펜싱·스마트팩토리 자동화시스템 전문기업",
+    description:
+      "접착제·바이오 시약·전자재료의 정밀 토출부터 배합·혼합·탈포·충진·경화까지. 전문제조 엔지니어링 솔루션과 AI 자동보정 기술로 제조공정의 불량률을 낮추고 생산성을 높입니다.",
+    images: ["/og_img.png"],
+  },
 };
 
-// TODO: 위키 콘텐츠 발행 후 각 항목을 개별 글 slug로 연결(현재는 발행 전이라 비활성 표시만)
-const PROBLEM_TOPICS: string[] = [
-  "액상 공정이 까다로운 이유는?",
-  "디스펜싱, 정량토출 불량 예시",
-  "액상 제조사를 위한 수율 극대화 전략",
+// TODO: 나머지 항목도 위키 콘텐츠 발행 후 개별 글 slug로 연결(현재는 발행 전이라 비활성 표시만)
+const PROBLEM_TOPICS: { label: string; href?: string }[] = [
+  { label: "액상 공정이 까다로운 이유는?" },
+  { label: "우리 공장은 스마트 공장일까? 자가진단 5단계", href: `${ROUTES.blog.insight}/smartfactory-self-guide` },
 ];
 
 const FAQ_CATEGORY_LABELS: Record<string, string> = {
@@ -92,22 +108,40 @@ export default async function HomePage() {
             팩토릭스가 해결하는 과제
           </span>
           <h2 className="text-4xl md:text-5xl leading-tight mb-10 break-keep max-w-4xl">
-            <span className="font-semibold text-gray-900">액상 소재의 정밀 토출·도포 공정을 해결</span>
-            <span className="font-normal text-gray-900">해 제조사의 CV 및 ROI 극대화 합니다.</span>
+            <span className="font-semibold text-gray-900">액상 소재의 정밀 토출 충진 공정을 해결하여</span>
+            <br />
+            <span className="font-normal text-gray-900">공정 편차는 줄이고, 품질 및 생산성 안정성을 높입니다.</span>
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 lg:gap-8">
             <div className="border-t border-gray-200">
-              {PROBLEM_TOPICS.map((topic) => (
-                <div key={topic} className="flex items-center justify-between gap-4 py-5 border-b border-gray-200">
-                  <span className="text-lg font-medium text-gray-700">{topic}</span>
-                  <span className="shrink-0 inline-flex h-8 w-20 items-center justify-center rounded-full bg-gray-100 text-gray-400">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </div>
-              ))}
+              {PROBLEM_TOPICS.map((topic) =>
+                topic.href ? (
+                  <Link
+                    key={topic.label}
+                    href={topic.href}
+                    className="flex items-center justify-between gap-4 py-5 border-b border-gray-200"
+                  >
+                    <span className="text-lg font-medium text-gray-700">{topic.label}</span>
+                    <span className="shrink-0 inline-flex h-8 items-center justify-center gap-1 rounded-full bg-gray-100 px-4 text-sm text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-600">
+                      알아보기
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                  </Link>
+                ) : (
+                  <div key={topic.label} className="flex items-center justify-between gap-4 py-5 border-b border-gray-200">
+                    <span className="text-lg font-medium text-gray-700">{topic.label}</span>
+                    <span className="shrink-0 inline-flex h-8 items-center justify-center gap-1 rounded-full bg-gray-100 px-4 text-sm text-gray-400">
+                      알아보기
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                  </div>
+                )
+              )}
             </div>
 
             <Link
@@ -189,15 +223,18 @@ export default async function HomePage() {
 
       {/* ── 인사이트 블로그 ── */}
       {insightPosts.length > 0 && (
-        <section className="bg-white py-20 px-8">
-          <div className="max-w-[1440px] mx-auto">
+        <section className="relative overflow-hidden py-20 px-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/valuechain_bg.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/35" />
+          <div className="relative max-w-[1440px] mx-auto">
             <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
                 제조사를 위한 인사이트
               </h2>
               <Link
                 href={ROUTES.blog.insight}
-                className="inline-flex items-center gap-1 px-6 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded hover:bg-primary-700 hover:text-white transition-colors shrink-0"
+                className="inline-flex items-center gap-1 px-6 py-2.5 border border-white/60 text-white text-sm font-semibold rounded hover:bg-white hover:text-black hover:border-white transition-colors shrink-0"
               >
                 전체보기
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">

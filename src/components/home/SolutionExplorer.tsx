@@ -65,7 +65,6 @@ const ICONS: Record<string, React.ReactNode> = {
 };
 
 type Item = { key: string; label: string; href: string; iconKey: keyof typeof ICONS; badge?: string; image?: string; subverticals?: string; tag?: string };
-type ProcessStep = { num: string; label: string; labelKo: string; iconKey: keyof typeof ICONS; href?: string; note?: string; dimmed?: boolean };
 type Group = {
   eyebrow?: string;
   heading: string;
@@ -73,10 +72,9 @@ type Group = {
   sub?: string;
   items: Item[];
   bg: string;
-  variant?: "industry" | "equipment" | "flow";
+  variant?: "industry" | "equipment";
   bgImage?: string;
   dark?: boolean;
-  steps?: ProcessStep[];
 };
 
 const INDUSTRY_IMAGES: Record<string, string | undefined> = {
@@ -89,7 +87,7 @@ const INDUSTRY_IMAGES: Record<string, string | undefined> = {
 
 const INDUSTRY_ITEMS_KO: Item[] = MANUFACTURING_INDUSTRIES.map((i) => ({
   key: i.key,
-  label: i.label,
+  label: i.label.replace("·", "·\n"),
   href: ROUTES.solutions.automationSystemIndustries[
     i.key === "bio-medical" ? "bioMedical"
       : i.key === "chemicals-materials" ? "chemicalsMaterials"
@@ -108,16 +106,6 @@ const INDUSTRY_ITEMS_EN: Item[] = MANUFACTURING_INDUSTRIES.map((i, idx) => ({
   subverticals: i.subverticalsEn,
 }));
 
-const PROCESS_ITEMS_KO: Item[] = [
-  { key: "mixing", label: "액상 교반\n및 탈포", href: ROUTES.solutions.equipment.mixer, iconKey: "mixing" },
-  { key: "dispersion", label: "입자 분산\n및 3롤밀", href: ROUTES.solutions.equipment.threeRollMill, iconKey: "dispersion" },
-  { key: "filling", label: "액상 충진\n및 소분", href: ROUTES.solutions.equipment.filling, iconKey: "filling" },
-  { key: "dispensing", label: "정량/정밀\n토출", href: ROUTES.solutions.equipment.dispenser, iconKey: "dispensing" },
-  { key: "robot", label: "탁상로봇", href: ROUTES.solutions.equipment.robot, iconKey: "robot" },
-  { key: "curing", label: "IR/UV경화\n및 오븐", href: ROUTES.solutions.equipment.curing, iconKey: "curing" },
-  { key: "automation", label: "제조자동화\n단동설비", href: ROUTES.solutions.automationSystem, iconKey: "automation", badge: "커스텀 제작" },
-];
-
 const PROCESS_ITEMS_EN: Item[] = [
   { key: "mixing", label: "Liquid Mixing\n& Defoaming", href: ROUTES.solutions.equipment.mixer, iconKey: "mixing" },
   { key: "dispersion", label: "Particle Dispersion\n& 3-Roll Milling", href: ROUTES.solutions.equipment.threeRollMill, iconKey: "dispersion" },
@@ -126,18 +114,6 @@ const PROCESS_ITEMS_EN: Item[] = [
   { key: "robot", label: "Desktop Robot", href: ROUTES.solutions.equipment.robot, iconKey: "robot" },
   { key: "curing", label: "IR/UV Curing\n& Ovens", href: ROUTES.solutions.equipment.curing, iconKey: "curing" },
   { key: "automation", label: "Manufacturing\nAutomation Equipment", href: ROUTES.solutions.automationSystem, iconKey: "automation", badge: "Custom-Built" },
-];
-
-// 01 원료, 02 전자재료 제조 모두 그룹사 페타엑스가 담당(팩토릭스 제품 아님, 링크 없음 + 딤 처리).
-const PROCESS_STEPS_KO: ProcessStep[] = [
-  { num: "01", label: "Materials", labelKo: "원료 조달", iconKey: "materials", note: "그룹사 페타엑스 담당", dimmed: true },
-  { num: "02", label: "Adhesives", labelKo: "전자재료 제조", iconKey: "adhesives", note: "그룹사 페타엑스 담당", dimmed: true },
-  { num: "03", label: "Mixing / Degassing", labelKo: "교반 & 탈포", iconKey: "mixing", href: ROUTES.solutions.equipment.mixer },
-  { num: "04", label: "Particle Dispersion", labelKo: "입자 분산", iconKey: "dispersion", href: ROUTES.solutions.equipment.threeRollMill },
-  { num: "05", label: "Liquid Filling / Dividing", labelKo: "액상 충진 & 소분", iconKey: "filling", href: ROUTES.solutions.equipment.filling },
-  { num: "06", label: "Dispensing & Pneumatic Control", labelKo: "정량/정밀 토출", iconKey: "dispensing", href: ROUTES.solutions.equipment.dispenser },
-  { num: "07", label: "3-Axis Dispensing Robot", labelKo: "3축 로봇", iconKey: "robot", href: ROUTES.solutions.equipment.robot },
-  { num: "08", label: "UV/IR Curing & Oven", labelKo: "UV/IR 경화 & 오븐", iconKey: "curing", href: ROUTES.solutions.equipment.curing },
 ];
 
 // 쓰리롤밀 이미지는 실제 쓰리롤밀 카드에만 사용한다. 교반/탈포기·소모품은 전용 제품 사진이 없어
@@ -167,8 +143,8 @@ const EQUIPMENT_ITEMS_EN: Item[] = [
 const GROUPS_KO: Group[] = [
   {
     eyebrow: "산업별 맞춤형 솔루션",
-    heading: "기성 설비가 아닌,\n귀사의 소재·⁠점도·⁠토출량·⁠생산조건에 최적화된\n액상 자동화 공정을 설계합니다.",
-    headingBold: "귀사의 소재·⁠점도·⁠토출량·⁠생산조건에 최적화",
+    heading: "산업마다 소재가 다르고, 공정마다 해답이 다릅니다.\n팩토릭스는 고객의 생산조건에 최적화된\n액상 자동화 공정을 설계합니다.",
+    headingBold: "고객의 생산조건에 최적화된",
     items: INDUSTRY_ITEMS_KO,
     bg: "bg-white",
     variant: "industry",
@@ -177,16 +153,6 @@ const GROUPS_KO: Group[] = [
     eyebrow: "토탈 밸류체인 솔루션",
     heading: "공정마다 다른 업체 찾을 필요 없이,\n액상 제조 전 공정을 하나의 파트너와 구축하세요.",
     headingBold: "액상 제조 전 공정을 하나의 파트너와",
-    items: PROCESS_ITEMS_KO,
-    steps: PROCESS_STEPS_KO,
-    bg: "bg-gray-50",
-    bgImage: "/valuechain_bg.png",
-    dark: true,
-    variant: "flow",
-  },
-  {
-    eyebrow: "팩토릭스 장비 제품라인업",
-    heading: "필요한 장비를 바로 선택해 제품 사양을 확인하세요.",
     items: EQUIPMENT_ITEMS_KO,
     bg: "bg-white",
     variant: "equipment",
@@ -232,7 +198,11 @@ function IndustryCard({
   return (
     <Link
       href={item.href}
-      onMouseEnter={onMouseEnter}
+      onPointerEnter={(e) => {
+        // 터치는 탭 시 합성 pointerenter를 함께 쏴서 첫 탭에 바로 펼쳐진 것처럼 되어버림.
+        // 실제 마우스 호버일 때만 펼침 상태를 미리 세팅하고, 터치는 클릭 핸들러의 1탭=펼침/2탭=이동 로직만 타게 한다.
+        if (e.pointerType === "mouse") onMouseEnter();
+      }}
       onClick={(e) => {
         if (!expanded) {
           e.preventDefault();
@@ -257,7 +227,7 @@ function IndustryCard({
 
       {/* 상단: 제목 */}
       <div className="relative px-5 py-5 md:px-6 md:py-6">
-        <h3 className="text-lg md:text-xl font-bold text-white leading-snug break-keep drop-shadow-sm">{item.label}</h3>
+        <h3 className="text-xl md:text-2xl font-bold text-white leading-snug break-keep whitespace-pre-line drop-shadow-sm">{item.label}</h3>
       </div>
 
       {/* 중간: 하위 산업 카테고리 (펼침 시만) */}
@@ -305,11 +275,11 @@ function EquipmentTileCard({ item, en }: { item: Item; en: boolean }) {
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 pointer-events-none" />
       {/* 좌상단 장비명 태그 + 제품 라인업 보기 */}
       <div className="absolute top-5 left-5 md:top-7 md:left-7 flex flex-col items-start gap-2">
-        <span className="text-lg md:text-2xl font-normal text-primary-900 break-keep">
+        <span className="text-xl md:text-2xl font-bold text-black break-keep">
           {item.tag ?? item.label}
         </span>
-        <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary-900">
-          {en ? "View lineup" : "제품 목록 보기"}
+        <span className="hidden sm:inline-flex items-center gap-1 text-base md:text-lg font-medium text-primary-900">
+          {en ? "Product Lineup" : "제품 라인업"}
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
             <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -331,7 +301,7 @@ function IconCard({ item, en }: { item: Item; en: boolean }) {
         </span>
       )}
       <span className="text-primary-700">{ICONS[item.iconKey]}</span>
-      <span className="text-base font-bold text-gray-900 leading-snug whitespace-pre-line">
+      <span className="text-lg font-bold text-black leading-snug whitespace-nowrap">
         {item.label}
       </span>
       <span className="mt-auto inline-flex items-center gap-1 text-sm font-semibold text-primary-700">
@@ -356,111 +326,14 @@ function withResponsiveBreaks(text: string) {
   ));
 }
 
-function DownArrow({ dark }: { dark?: boolean }) {
-  return (
-    <div className="flex h-6 flex-col items-center lg:hidden">
-      <div className={`w-px flex-1 ${dark ? "bg-white/30" : "bg-gray-300"}`} />
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" className={`-mt-1 shrink-0 rotate-90 ${dark ? "text-white/30" : "text-gray-300"}`}>
-        <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </div>
-  );
-}
-
-function ProcessStepCard({ step, dark }: { step: ProcessStep; dark?: boolean }) {
-  const content = (
-    <div className={`flex shrink-0 flex-col items-center gap-2 text-center ${step.dimmed ? "opacity-50 grayscale" : ""}`}>
-      <div className="flex w-48 items-center gap-2 rounded-full border border-gray-200 bg-white py-2 pl-2 pr-3 transition-colors group-hover:border-primary-700 md:w-60 md:gap-2.5 md:py-2.5 md:pl-2.5 md:pr-4">
-        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-900 text-[11px] font-bold text-white md:h-7 md:w-7">
-          {step.num}
-        </span>
-        <span className="shrink-0 text-primary-700">{ICONS[step.iconKey]}</span>
-        <span className="text-sm font-bold text-gray-900 break-keep md:text-base">{step.labelKo}</span>
-      </div>
-      {step.note && <span className={`text-[11px] break-keep ${dark ? "text-white/60" : "text-gray-400"}`}>{step.note}</span>}
-    </div>
-  );
-
-  if (!step.href) return content;
-
-  return (
-    <Link href={step.href} className="group">
-      {content}
-    </Link>
-  );
-}
-
-// 인접 버튼을 잇는 짧은 연결선(참고 이미지처럼 행 폭 전체가 아니라 버튼 사이 짧은 구간만).
-function Connector({ dark, arrow }: { dark?: boolean; arrow?: "left" }) {
-  const stroke = dark ? "stroke-white/30" : "stroke-gray-300";
-  return (
-    <svg width="28" height="12" viewBox="0 0 28 12" fill="none" className="hidden shrink-0 lg:block">
-      {arrow === "left" ? (
-        <path d="M27 6H8M12 1L7 6L12 11" className={stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      ) : (
-        <path d="M1 6H27" className={stroke} strokeWidth="1.5" strokeLinecap="round" />
-      )}
-    </svg>
-  );
-}
-
-// 오른쪽으로 볼록한 곡선으로 1행 마지막 버튼과 2행 마지막 버튼을 잇는다.
-function CurveConnector({ dark }: { dark?: boolean }) {
-  return (
-    <div className="relative hidden h-20 w-10 self-end lg:block md:h-24">
-      <svg viewBox="0 0 40 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
-        <path d="M0,0 C32,0 32,100 0,100" fill="none" className={dark ? "stroke-white/30" : "stroke-gray-300"} strokeWidth="1.5" />
-      </svg>
-    </div>
-  );
-}
-
-function ProcessFlow({ steps, dark }: { steps: ProcessStep[]; dark?: boolean }) {
-  const top = steps.slice(0, 4);
-  const bottom = steps.slice(4, 8).reverse();
-
-  return (
-    <div>
-      {/* 모바일: 세로 흐름(01→08 순서) */}
-      <div className="flex flex-col items-center gap-4 lg:hidden">
-        {steps.map((s, i) => (
-          <Fragment key={s.num}>
-            <ProcessStepCard step={s} dark={dark} />
-            {i < steps.length - 1 && <DownArrow dark={dark} />}
-          </Fragment>
-        ))}
-      </div>
-
-      {/* 데스크톱: 참고 이미지처럼 4열 2행 + 우측 곡선 연결 */}
-      <div className="mx-auto hidden w-fit flex-col items-center lg:flex">
-        <div className="flex items-center">
-          {top.map((s, i) => (
-            <Fragment key={s.num}>
-              {i > 0 && <Connector dark={dark} />}
-              <ProcessStepCard step={s} dark={dark} />
-            </Fragment>
-          ))}
-        </div>
-        <CurveConnector dark={dark} />
-        <div className="flex items-center">
-          {bottom.map((s, i) => (
-            <Fragment key={s.num}>
-              {i > 0 && <Connector dark={dark} arrow={i === 1 ? "left" : undefined} />}
-              <ProcessStepCard step={s} dark={dark} />
-            </Fragment>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function SolutionGroup({ group, en }: { group: Group; en: boolean }) {
   const isIndustry = group.variant === "industry";
   const isEquipment = group.variant === "equipment";
-  const isFlow = group.variant === "flow";
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
-  const activeKey = hoveredKey ?? group.items[0]?.key;
+  // 첫 카드를 기본 펼침 상태로 두면 모바일에서 "1탭=펼침, 2탭=이동"이 첫 카드에만
+  // 적용되지 않는 문제가 생긴다(이미 펼쳐진 상태라 1탭에 바로 이동). 아무것도
+  // 호버/탭하기 전에는 전부 접힌 상태로 시작해 데스크톱·모바일 동작을 일치시킨다.
+  const activeKey = hoveredKey;
   const headingWeight = isIndustry ? "font-semibold" : "font-bold";
   const [headingBefore, headingAfter] = group.headingBold
     ? group.heading.split(group.headingBold)
@@ -498,38 +371,32 @@ function SolutionGroup({ group, en }: { group: Group; en: boolean }) {
           )}
         </div>
 
-        {isFlow && group.steps ? (
-          <div className="pt-6 md:pt-10">
-            <ProcessFlow steps={group.steps} dark={group.dark} />
-          </div>
-        ) : (
-          <div
-            className={
-              isIndustry
-                ? "flex flex-col gap-3 lg:flex-row lg:h-[360px]"
-                : isEquipment
-                ? "grid grid-cols-2 sm:grid-cols-4 gap-3"
-                : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
-            }
-            onMouseLeave={isIndustry ? () => setHoveredKey(null) : undefined}
-          >
-            {group.items.map((item) =>
-              isEquipment ? (
-                <EquipmentTileCard key={item.key} item={item} en={en} />
-              ) : isIndustry ? (
-                <IndustryCard
-                  key={item.key}
-                  item={item}
-                  expanded={item.key === activeKey}
-                  onMouseEnter={() => setHoveredKey(item.key)}
-                  onToggle={() => setHoveredKey(item.key)}
-                />
-              ) : (
-                <IconCard key={item.key} item={item} en={en} />
-              )
-            )}
-          </div>
-        )}
+        <div
+          className={
+            isIndustry
+              ? "flex flex-col gap-3 lg:flex-row lg:h-[360px]"
+              : isEquipment
+              ? "grid grid-cols-2 lg:grid-cols-4 gap-3"
+              : "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+          }
+          onMouseLeave={isIndustry ? () => setHoveredKey(null) : undefined}
+        >
+          {group.items.map((item) =>
+            isEquipment ? (
+              <EquipmentTileCard key={item.key} item={item} en={en} />
+            ) : isIndustry ? (
+              <IndustryCard
+                key={item.key}
+                item={item}
+                expanded={item.key === activeKey}
+                onMouseEnter={() => setHoveredKey(item.key)}
+                onToggle={() => setHoveredKey(item.key)}
+              />
+            ) : (
+              <IconCard key={item.key} item={item} en={en} />
+            )
+          )}
+        </div>
       </div>
     </section>
   );
