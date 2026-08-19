@@ -56,8 +56,8 @@ export const GNB: NavItem[] = [
     children: [
       { label: "전체보기", labelEn: "All Posts", href: ROUTES.blog.all },
       { label: "고객 적용사례", labelEn: "Case Studies", href: ROUTES.blog.cases },
-      { label: "인사이트", labelEn: "Insights", href: ROUTES.blog.insight },
-      { label: "액상 공정 엔지니어링 위키", labelEn: "Process Engineering Wiki", href: ROUTES.blog.guideIntro },
+      { label: "비즈니스 리포트", labelEn: "Insights", href: ROUTES.blog.insight },
+      { label: "액상공정 위키", labelEn: "Process Engineering Wiki", href: ROUTES.blog.guideIntro },
       { label: "팩토릭스 뉴스", labelEn: "News", href: ROUTES.blog.news },
     ],
   },
