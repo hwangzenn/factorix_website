@@ -124,13 +124,13 @@ export default function ManufacturingAutomationIndustryDetail({
           <div className="flex flex-wrap gap-2 shrink-0 self-start sm:self-end">
             <Link
               href={ROUTES.support.meeting}
-              className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-lg font-semibold rounded-md hover:bg-accent transition-colors"
+              className="inline-flex px-5 py-2.5 bg-primary-900 text-white text-lg font-semibold rounded-md hover:bg-accent transition-colors"
             >
               상세 문의하기
             </Link>
             <Link
               href={ROUTES.support.poc}
-              className="inline-flex px-5 py-2.5 border border-white/60 text-white text-lg font-semibold rounded-md hover:bg-white hover:text-black hover:border-white transition-colors"
+              className="inline-flex px-5 py-2.5 bg-primary-900 text-white text-lg font-semibold rounded-md hover:bg-accent transition-colors"
             >
               PoC 문의하기
             </Link>
@@ -148,7 +148,7 @@ export default function ManufacturingAutomationIndustryDetail({
           {subverticals.split(",").map((item) => (
             <div
               key={item}
-              className="flex h-32 w-32 shrink-0 items-center justify-center rounded-full bg-primary-900 text-center"
+              className="flex h-32 w-32 shrink-0 items-center justify-center rounded-full bg-primary-700 text-center"
             >
               <span className="px-3 font-bold leading-snug text-white break-keep">{item.trim()}</span>
             </div>
