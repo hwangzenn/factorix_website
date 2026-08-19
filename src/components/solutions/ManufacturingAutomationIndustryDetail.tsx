@@ -148,11 +148,9 @@ export default function ManufacturingAutomationIndustryDetail({
           {subverticals.split(",").map((item) => (
             <div
               key={item}
-              className="relative flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-200 bg-cover bg-center text-center"
-              style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}
+              className="flex h-32 w-32 shrink-0 items-center justify-center rounded-full bg-primary-900 text-center"
             >
-              <span className="absolute inset-0 bg-black/40" />
-              <span className="relative px-3 font-bold leading-snug text-white break-keep">{item.trim()}</span>
+              <span className="px-3 font-bold leading-snug text-white break-keep">{item.trim()}</span>
             </div>
           ))}
         </div>
