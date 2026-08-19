@@ -77,17 +77,9 @@ type Group = {
   dark?: boolean;
 };
 
-const INDUSTRY_IMAGES: Record<string, string | undefined> = {
-  "bio-medical": "/산업군/바이오의료기기.png",
-  "chemicals-materials": "/산업군/화학소재.png",
-  "electronics-battery": "/산업군/전자배터리.png",
-  automotive: "/산업군/자동차부품.png",
-  "research-academia": "/산업군/연구기관대학.png",
-};
-
 const INDUSTRY_ITEMS_KO: Item[] = MANUFACTURING_INDUSTRIES.map((i) => ({
   key: i.key,
-  label: i.label.replace("·", "·\n"),
+  label: i.label,
   href: ROUTES.solutions.automationSystemIndustries[
     i.key === "bio-medical" ? "bioMedical"
       : i.key === "chemicals-materials" ? "chemicalsMaterials"
@@ -96,7 +88,7 @@ const INDUSTRY_ITEMS_KO: Item[] = MANUFACTURING_INDUSTRIES.map((i) => ({
       : "researchAcademia"
   ],
   iconKey: "industry",
-  image: INDUSTRY_IMAGES[i.key],
+  image: i.image,
   subverticals: i.subverticals,
 }));
 
@@ -126,7 +118,7 @@ const EQUIPMENT_ITEMS_KO: Item[] = [
   { key: "robot", label: "협동/직교/3축로봇", tag: "3축로봇", href: ROUTES.solutions.equipment.robot, iconKey: "robot", image: "/장비시스템/탁상로봇.png" },
   { key: "curing", label: "UV/IR 경화기", tag: "UV/IR 경화기", href: ROUTES.solutions.equipment.curing, iconKey: "curing", image: "/장비시스템/경화기.png" },
   { key: "consumables", label: "소모품", tag: "소모품", href: ROUTES.solutions.equipment.consumables, iconKey: "consumables" },
-  { key: "automation", label: "제조자동화 단동설비", tag: "산업별 맞춤 단동설비", href: ROUTES.solutions.automationSystem, iconKey: "automation", image: "/장비시스템/자동화시스템.png" },
+  { key: "automation", label: "제조자동화 시스템", tag: "산업별 맞춤 시스템", href: ROUTES.solutions.automationSystem, iconKey: "automation", image: "/장비시스템/자동화시스템.png" },
 ];
 
 const EQUIPMENT_ITEMS_EN: Item[] = [
@@ -143,7 +135,7 @@ const EQUIPMENT_ITEMS_EN: Item[] = [
 const GROUPS_KO: Group[] = [
   {
     eyebrow: "산업별 맞춤형 솔루션",
-    heading: "산업마다 소재가 다르고, 공정마다 해답이 다릅니다.\n팩토릭스는 고객의 생산조건에 최적화된\n액상 자동화 공정을 설계합니다.",
+    heading: "산업마다 소재가 다르고, 공정마다 해답이 다릅니다.\n고객의 생산조건에 최적화된\n액상제조 자동화 공정을 설계합니다.",
     headingBold: "고객의 생산조건에 최적화된",
     items: INDUSTRY_ITEMS_KO,
     bg: "bg-white",
@@ -227,7 +219,9 @@ function IndustryCard({
 
       {/* 상단: 제목 */}
       <div className="relative px-5 py-5 md:px-6 md:py-6">
-        <h3 className="text-xl md:text-2xl font-bold text-white leading-snug break-keep whitespace-pre-line drop-shadow-sm">{item.label}</h3>
+        <h3 className="text-xl md:text-2xl font-bold text-white leading-snug break-keep whitespace-pre-line drop-shadow-sm">
+          {expanded ? item.label.replace("·", " & ") : item.label.replace("·", " &\n")}
+        </h3>
       </div>
 
       {/* 중간: 하위 산업 카테고리 (펼침 시만) */}

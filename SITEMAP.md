@@ -3,9 +3,9 @@
 > Claude Code가 매 작업마다 따르는 프로젝트 규칙. 중요한 규칙을 위에 둔다.
 
 **구조 원칙: 메인페이지 1개 + 랜딩페이지(leaf)만 실제 page 파일.**
-중간 분류(기업정보·솔루션·블로그 카테고리 등)는 **디렉토리일 뿐 page.tsx 가 없다.**
+중간 분류(기업정보·솔루션 등)는 **디렉토리일 뿐 page.tsx 가 없다.**
 즉 `/solutions`, `/solutions/equipment` 같은 중간 경로는 페이지가 아니며, GNB에서도 링크가 아니라 펼침 그룹이다.
-단, **블로그(`/blog`)는 예외**로 GNB에서 하위 카테고리를 펼치지 않고 `/blog` 페이지로 바로 링크된다(카테고리 이동은 `/blog` 페이지 안의 탭 링크로 한다).
+블로그는 GNB에서 펼침 그룹으로 동작하며(GNB 라벨: "기술블로그"), 그룹 헤더는 비링크이고 하위 카테고리(전체보기·고객 적용사례·인사이트·액상 공정 엔지니어링 위키·팩토릭스 뉴스)가 각각 링크다. `/blog`는 "전체보기" 링크로 연결되는 실제 페이지다.
 
 경로 정본(canonical)은 `src/lib/routes.ts`. 이 문서는 사람이 읽는 참조본이며, 어긋나면 `routes.ts`가 이긴다.
 
@@ -23,17 +23,18 @@
 │   ├─ ▣ CEO 인사말          /company/ceo
 │   └─ ▣ 오시는길            /company/location   (연구소/생산공장 위치 = #map 섹션)
 │
-📁 솔루션 (/solutions)
-│   ├─ 📁 장비 (/solutions/equipment)
-│   │   ├─ ▣ 교반/탈포기         /solutions/equipment/mixer   (Sanity category: mixer-defoamer)
-│   │   ├─ ▣ 쓰리롤밀            /solutions/equipment/three-roll-mill
-│   │   ├─ ▣ 액상충진기           /solutions/equipment/filling
-│   │   ├─ ▣ 디스펜서             /solutions/equipment/dispenser
-│   │   ├─ ▣ 협동/직교/3축로봇    /solutions/equipment/robot
-│   │   ├─ ▣ UV/IR 경화기         /solutions/equipment/curing
-│   │   └─ ▣ 소모품               /solutions/equipment/consumables
-│   └─ ▣ 제조자동화 단동설비 (허브, GNB 비노출·레거시 유지)  /solutions/automation-system
-│       └─ 제조자동화 단동설비 (GNB 그룹) ── 산업별 5개
+📁 제품 (GNB 최상위 그룹, URL은 여전히 /solutions/equipment 하위)
+│   ├─ ▣ 교반/탈포기         /solutions/equipment/mixer   (Sanity category: mixer-defoamer)
+│   ├─ ▣ 쓰리롤밀            /solutions/equipment/three-roll-mill
+│   ├─ ▣ 액상충진기           /solutions/equipment/filling
+│   ├─ ▣ 디스펜서             /solutions/equipment/dispenser
+│   ├─ ▣ 협동/직교/3축로봇    /solutions/equipment/robot
+│   ├─ ▣ UV/IR 경화기         /solutions/equipment/curing
+│   └─ ▣ 소모품               /solutions/equipment/consumables
+│
+📁 공정 솔루션 (GNB 최상위 그룹, URL은 여전히 /solutions 하위. 구 GNB 라벨 "솔루션")
+│   └─ ▣ 제조자동화 시스템 (허브, GNB 비노출·레거시 유지)  /solutions/automation-system
+│       └─ 제조자동화 시스템 (GNB 그룹) ── 산업별 5개
 │           ├─ ▣ 바이오·의료기기        /solutions/automation-system/bio-medical
 │           ├─ ▣ 화학·소재             /solutions/automation-system/chemicals-materials
 │           ├─ ▣ 전자·배터리           /solutions/automation-system/electronics-battery
@@ -47,7 +48,8 @@
 │    구 URL 리다이렉트는 next.config.ts 참고: /solutions/equipment-systems/smart-factory→/solutions/automation-system,
 │    /solutions/equipment-systems/auto-calibration→/blog/news/ces-2026)
 │
-▣ 블로그 (/blog)   ── GNB에서 바로 링크(하위 카테고리 펼침 없음). 페이지 안에서 아래로 이동.
+📁 블로그   ── GNB 펼침 그룹(비링크). 하위 항목이 각각 링크.
+│   ├─ ▣ 전체보기            /blog                (블로그 인덱스)
 │   ├─ ▣ 고객 적용사례        /blog/cases          (Sanity: caseStudy, 산업군·공정 태그 필터)
 │   ├─ ▣ 인사이트            /blog/insight        (Sanity: blogPost, category=insight)
 │   ├─ ▣ 엔지니어링 위키       /blog/wiki           (Sanity: blogPost, category=wiki)
@@ -97,7 +99,7 @@ src/
 │  │  │  ├─ robot/page.tsx (+[slug])
 │  │  │  ├─ curing/page.tsx (+[slug])
 │  │  │  └─ consumables/page.tsx (+[slug])
-│  │  └─ automation-system/      # ▣ 허브(제조자동화 단동설비) + 산업별 5개 리프
+│  │  └─ automation-system/      # ▣ 허브(제조자동화 시스템) + 산업별 5개 리프
 │  │     ├─ page.tsx
 │  │     ├─ bio-medical/page.tsx
 │  │     ├─ chemicals-materials/page.tsx
@@ -135,7 +137,7 @@ src/
 │     └─ ir/[slug]/page.tsx
 │
 ├─ components/
-│  ├─ layout/Header.tsx          # GNB 데스크톱(그룹=펼침, leaf=링크). 블로그는 leaf.
+│  ├─ layout/Header.tsx          # GNB 데스크톱(그룹=펼침, leaf=링크). 블로그(GNB 라벨: 기술블로그)도 그룹.
 │  ├─ layout/MobileNav.tsx       # GNB 모바일 아코디언
 │  ├─ layout/Footer.tsx
 │  ├─ blog/BlogHero.tsx          # 카테고리 탭(고정 헤더) — usePathname으로 활성 탭 계산
@@ -150,7 +152,7 @@ src/
 
 ### 참고
 - 중간 디렉토리엔 `page.tsx`가 없으므로 `/solutions`, `/cases` 등을 직접 입력하면 404다. 정상 동작.
-- 블로그는 다른 그룹과 달리 GNB에서 하위 카테고리를 펼치지 않고 `/blog`로 바로 이동한다. 카테고리(인사이트/액상 공정 엔지니어링 위키(`/blog/wiki`)/적용사례/뉴스) 이동은 `/blog` 페이지 상단 탭 링크로 한다.
+- GNB 최상위 그룹은 기업정보 · 제품(구 "솔루션 > 액상제조 장비", URL은 `/solutions/equipment/*` 그대로) · 공정 솔루션(구 "솔루션", 이제 제조자동화 시스템만 하위로 가짐) · 기술블로그(구 라벨 "블로그", 이제 GNB에서 펼침) · 고객지원 · 자료실이다. 어느 그룹도 URL을 바꾸지 않았고 `nav.ts`의 GNB 라벨/그룹핑만 바뀌었다.
 - 산업별 적용사례(구 `/cases/industry/*` 6개)는 `/blog/cases` 하나로 통합되었고, 산업군·공정은 URL이 아니라 Sanity `caseStudy` 문서의 태그(`industries`, `processes`)로 관리된다.
 - 자료실의 언론보도·특허수상은 `/blog/news`로 이전되었다(Sanity `blogPost`, category=news).
 - AI 자동보정 토출시스템(AFMS)은 판매 솔루션에서 삭제되었다. 이미 노출돼 있던 홈/회사소개 마케팅 콘텐츠는 문구를 유지하되 링크만 `/blog/news/ces-2026`(CES 2026 수상 뉴스)로 연결된다.

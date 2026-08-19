@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
+import { INDUSTRIES, PROCESSES } from "@/lib/blogFilters";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/home/TrustBar";
 import SolutionExplorer from "@/components/home/SolutionExplorer";
@@ -56,6 +57,17 @@ const PROBLEM_TOPICS: { label: string; href?: string }[] = [
   { label: "액상 공정이 까다로운 이유는?" },
   { label: "우리 공장은 스마트 공장일까? 자가진단 5단계", href: `${ROUTES.blog.insight}/smartfactory-self-guide` },
 ];
+
+const INDUSTRY_LABEL: Record<string, string> = Object.fromEntries(INDUSTRIES.map((i) => [i.key, i.label]));
+const PROCESS_LABEL: Record<string, string> = Object.fromEntries(PROCESSES.map((p) => [p.key, p.label]));
+
+// Sanity에 남아있는 구버전 짧은 산업군 값("bio", "research" 등)도 대응하기 위해
+// 정식 키(bio-medical 등)와의 접두사 일치로 라벨을 찾고, 배지용으로 "·" 앞부분만 사용한다.
+function shortIndustryLabel(raw: string): string {
+  const exact = INDUSTRY_LABEL[raw];
+  const full = exact ?? INDUSTRIES.find((i) => i.key.startsWith(raw) || raw.startsWith(i.key.split("-")[0]))?.label;
+  return (full ?? raw).split("·")[0];
+}
 
 const FAQ_CATEGORY_LABELS: Record<string, string> = {
   solution: "FactoriX 솔루션",
@@ -151,7 +163,7 @@ export default async function HomePage() {
               <span className="text-xl font-bold text-gray-900 leading-snug break-keep">
                 우리 공정
                 <br />
-                간편 진단 받아보기
+                간편 진단 받기 →
               </span>
             </Link>
           </div>
@@ -166,12 +178,19 @@ export default async function HomePage() {
         <section id="cases" className="bg-white py-20 px-8 scroll-mt-20">
           <div className="max-w-[1440px] mx-auto">
             <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                고객 적용사례
-              </h2>
+              <div>
+                <span className="block text-base md:text-lg font-semibold text-primary-700 tracking-widest uppercase mb-2">
+                  고객 적용사례
+                </span>
+                <h2 className="text-4xl md:text-5xl leading-tight break-keep">
+                  <span className="font-bold text-gray-900">팩토릭스가 실제 제조현장에서 해결한</span>
+                  <br />
+                  <span className="font-normal text-gray-900">액상공정 사례를 확인해보세요.</span>
+                </h2>
+              </div>
               <Link
                 href={ROUTES.blog.cases}
-                className="inline-flex items-center gap-1 px-6 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded hover:bg-primary-700 hover:text-white transition-colors shrink-0"
+                className="hidden md:inline-flex items-center gap-1 text-primary-700 text-sm font-semibold hover:text-primary-900 transition-colors shrink-0"
               >
                 전체보기
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -189,10 +208,23 @@ export default async function HomePage() {
                   thumbnailAlt={item.thumbnail?.alt}
                   href={`${ROUTES.blog.cases}/${item.slug}`}
                   publishedAt={item.publishedAt}
-                  categoryLabel="고객 적용사례"
+                  tag={item.industries ? shortIndustryLabel(item.industries) : null}
+                  processLabel={item.processes ? PROCESS_LABEL[item.processes] ?? item.processes : null}
                   colorIndex={i}
+                  allBadgesPrimary
                 />
               ))}
+            </div>
+            <div className="mt-8 flex justify-center md:hidden">
+              <Link
+                href={ROUTES.blog.cases}
+                className="inline-flex items-center gap-1 px-6 py-2.5 border border-primary-700 text-primary-700 text-sm font-semibold rounded hover:bg-primary-700 hover:text-white transition-colors shrink-0"
+              >
+                전체보기
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
             </div>
           </div>
         </section>
@@ -234,7 +266,7 @@ export default async function HomePage() {
               </h2>
               <Link
                 href={ROUTES.blog.insight}
-                className="inline-flex items-center gap-1 px-6 py-2.5 border border-white/60 text-white text-sm font-semibold rounded hover:bg-white hover:text-black hover:border-white transition-colors shrink-0"
+                className="hidden md:inline-flex items-center gap-1 text-white text-sm font-semibold hover:text-white/70 transition-colors shrink-0"
               >
                 전체보기
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -256,6 +288,17 @@ export default async function HomePage() {
                   colorIndex={i}
                 />
               ))}
+            </div>
+            <div className="mt-8 flex justify-center md:hidden">
+              <Link
+                href={ROUTES.blog.insight}
+                className="inline-flex items-center gap-1 px-6 py-2.5 border border-white/60 text-white text-sm font-semibold rounded hover:bg-white hover:text-black hover:border-white transition-colors shrink-0"
+              >
+                전체보기
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
             </div>
           </div>
         </section>

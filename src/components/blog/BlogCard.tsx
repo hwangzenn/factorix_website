@@ -10,10 +10,11 @@ type Props = {
   thumbnailAlt?: string | null
   href: string
   publishedAt?: string | null
-  categoryLabel: string
+  categoryLabel?: string | null
   tag?: string | null
   processLabel?: string | null
   colorIndex?: number
+  allBadgesPrimary?: boolean
 }
 
 export default function BlogCard({
@@ -27,7 +28,10 @@ export default function BlogCard({
   tag,
   processLabel,
   colorIndex = 0,
+  allBadgesPrimary = false,
 }: Props) {
+  const badges = [categoryLabel, tag, processLabel].filter((b): b is string => !!b)
+
   return (
     <Link
       href={href}
@@ -47,19 +51,18 @@ export default function BlogCard({
           </div>
         )}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          <span className="px-2.5 py-1 rounded-full bg-primary-700 text-white text-xs font-semibold shadow-sm">
-            {categoryLabel}
-          </span>
-          {tag && (
-            <span className="px-2.5 py-1 rounded-full bg-white/90 text-gray-900 text-xs font-semibold shadow-sm backdrop-blur-sm">
-              {tag}
+          {badges.map((label, i) => (
+            <span
+              key={label}
+              className={
+                allBadgesPrimary || i === 0
+                  ? "px-2.5 py-1 rounded-full bg-primary-700 text-white text-xs font-semibold shadow-sm"
+                  : "px-2.5 py-1 rounded-full bg-white/90 text-gray-900 text-xs font-semibold shadow-sm backdrop-blur-sm"
+              }
+            >
+              {label}
             </span>
-          )}
-          {processLabel && (
-            <span className="px-2.5 py-1 rounded-full bg-white/90 text-gray-900 text-xs font-semibold shadow-sm backdrop-blur-sm">
-              {processLabel}
-            </span>
-          )}
+          ))}
         </div>
       </div>
 

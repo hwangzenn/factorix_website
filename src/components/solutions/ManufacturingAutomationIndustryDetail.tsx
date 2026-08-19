@@ -104,31 +104,58 @@ export default function ManufacturingAutomationIndustryDetail({
 }: Props) {
   return (
     <div className="pb-20">
-      {/* 히어로 — 카테고리 목록바 바로 아래, 뷰포트 가로 전체로 확장 */}
+      {/* 히어로 — 뷰포트 가로 전체로 확장. 브레드크럼은 상단, 타이틀/CTA는 하단에 배치 */}
       <div
-        className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden mb-8 min-h-[260px] sm:min-h-[320px] flex items-end bg-primary-900 bg-cover bg-center"
+        className="relative left-1/2 right-1/2 -mx-[50vw] w-screen overflow-hidden mb-8 min-h-[260px] sm:min-h-[320px] flex flex-col justify-between bg-primary-900 bg-cover bg-center"
         style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}
       >
         <div className="absolute inset-0 bg-black/45" />
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-5 sm:pt-6">
+          <CategoryBreadcrumb segments={["공정 솔루션", label]} light />
+        </div>
         <div className="relative z-10 w-full max-w-5xl mx-auto px-6 py-8 sm:py-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-white/70 text-sm mb-2">{subverticals}</p>
-            <h1 className="text-3xl sm:text-4xl font-bold text-white">{label}</h1>
+            <h1 className="text-4xl sm:text-5xl font-semibold text-white leading-snug">
+              {label} 공정
+              <br />
+              제조 자동화 시스템
+            </h1>
           </div>
-          <Link
-            href={ROUTES.support.poc}
-            className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-sm font-semibold rounded-md hover:bg-accent transition-colors shrink-0 self-start sm:self-end"
-          >
-            도입 문의
-          </Link>
+          <div className="flex flex-wrap gap-2 shrink-0 self-start sm:self-end">
+            <Link
+              href={ROUTES.support.meeting}
+              className="inline-flex px-5 py-2.5 bg-primary-700 text-white text-lg font-semibold rounded-md hover:bg-accent transition-colors"
+            >
+              상세 문의하기
+            </Link>
+            <Link
+              href={ROUTES.support.poc}
+              className="inline-flex px-5 py-2.5 border border-white/60 text-white text-lg font-semibold rounded-md hover:bg-white hover:text-black hover:border-white transition-colors"
+            >
+              PoC 문의하기
+            </Link>
+          </div>
         </div>
       </div>
 
       <div className="max-w-5xl mx-auto px-6">
-        <CategoryBreadcrumb segments={["솔루션", "제조자동화 단동설비", label]} />
-
         {/* 컨셉 */}
         <p className="text-lg text-gray-600 mb-12 leading-relaxed">{concept}</p>
+
+        {/* 적용산업 예시 */}
+        <h2 className="text-2xl font-bold text-gray-900 mb-5">적용산업 예시</h2>
+        <div className="flex flex-wrap gap-4 mb-12">
+          {subverticals.split(",").map((item) => (
+            <div
+              key={item}
+              className="relative flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-200 bg-cover bg-center text-center"
+              style={heroImage ? { backgroundImage: `url(${heroImage})` } : undefined}
+            >
+              <span className="absolute inset-0 bg-black/40" />
+              <span className="relative px-3 font-bold leading-snug text-white break-keep">{item.trim()}</span>
+            </div>
+          ))}
+        </div>
 
         {/* 특장점 */}
         <h2 className="text-2xl font-bold text-gray-900 mb-5">특장점</h2>
@@ -183,16 +210,6 @@ export default function ManufacturingAutomationIndustryDetail({
 
         {/* 연관콘텐츠 */}
         <RelatedContent items={relatedContent} />
-
-        {/* 도입문의 */}
-        <div className="mt-4 text-center">
-          <Link
-            href={ROUTES.support.poc}
-            className="inline-flex justify-center px-8 py-4 rounded-md bg-primary-700 text-white text-lg font-bold hover:bg-accent transition-colors"
-          >
-            도입 문의하기 →
-          </Link>
-        </div>
       </div>
     </div>
   )

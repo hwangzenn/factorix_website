@@ -15,7 +15,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "바이오·의료기기",
-  description: "제약, 바이오, 진단, 의료기기, 콘택트렌즈, 코스메틱 — 고정밀·무결점 액상 제조공정을 위한 Factorix 제조자동화 단동설비",
+  description: "제약, 바이오, 진단, 의료기기, 콘택트렌즈, 코스메틱 — 고정밀·무결점 액상 제조공정을 위한 Factorix 제조자동화 시스템",
   alternates: { canonical: ROUTES.solutions.automationSystemIndustries.bioMedical },
 }
 
@@ -44,6 +44,7 @@ export default async function BioMedicalPage() {
       portfolio={(portfolioData as IndustryPortfolioItem[]) ?? []}
       relatedContent={(relatedData as RelatedContentItem[]) ?? []}
       logos={logos}
+      heroImage="/산업군/바이오의료기기.png"
     />
   )
 }

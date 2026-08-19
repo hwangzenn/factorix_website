@@ -17,7 +17,7 @@ const MODEL_OPTIONS: Record<string, { label: string; subs: { value: string; labe
   system: {
     label: "시스템",
     subs: [
-      { value: "automation-system", label: "제조자동화 단동설비" },
+      { value: "automation-system", label: "제조자동화 시스템" },
     ],
   },
 }

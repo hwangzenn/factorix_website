@@ -181,15 +181,10 @@ export default function Header() {
           onMouseEnter={open}
         >
           <div className="max-w-[1440px] mx-auto px-10 py-10">
-            {/* 6-column flex layout — 솔루션 gets 2× width for its 2-column sub-groups */}
             <div className="flex">
               {GNB.filter(isGroup).map((col, ci, all) => {
-                const isSolutions = col.label === "솔루션";
                 const isLast = ci === all.length - 1;
-                const colClass = [
-                  isSolutions ? "flex-[2]" : "flex-1",
-                  !isLast ? "border-r border-gray-200 mr-8 pr-8" : "",
-                ].join(" ");
+                const colClass = ["flex-1", !isLast ? "border-r border-gray-200 mr-8 pr-8" : ""].join(" ");
 
                 return (
                   <div key={col.label} className={colClass}>
@@ -197,11 +192,7 @@ export default function Header() {
                     <p className="text-base font-bold text-gray-800 mb-5">{label(col, locale)}</p>
 
                     {/* Column contents */}
-                    {isSolutions ? (
-                      <SolutionsColumn items={col.children ?? []} onClose={() => setMenuOpen(false)} locale={locale} />
-                    ) : (
-                      <ColItems items={col.children ?? []} onClose={() => setMenuOpen(false)} locale={locale} />
-                    )}
+                    <ColItems items={col.children ?? []} onClose={() => setMenuOpen(false)} locale={locale} />
                   </div>
                 );
               })}
@@ -256,38 +247,6 @@ function ColItems({ items, onClose, locale }: { items: NavItem[]; onClose: () =>
             {label(item, locale)}
           </Link>
         ) : null;
-      })}
-    </div>
-  );
-}
-
-/* ── 솔루션 컬럼: 제품/시스템 하위 그룹을 2열로 나란히 ── */
-function SolutionsColumn({ items, onClose, locale }: { items: NavItem[]; onClose: () => void; locale: Locale }) {
-  return (
-    <div className="grid grid-cols-2 gap-x-16 gap-y-4">
-      {items.map((group) => {
-        if (!isGroup(group)) return null;
-        return (
-          <div key={group.label}>
-            <p className="text-sm text-gray-400 font-medium mb-2">
-              {label(group, locale)} <span className="text-[11px]">›</span>
-            </p>
-            <div className="space-y-1.5">
-              {group.children?.map((child) =>
-                child.href ? (
-                  <Link
-                    key={child.label}
-                    href={child.href}
-                    onClick={onClose}
-                    className="block text-[16px] text-primary-700 hover:text-primary-900 hover:underline leading-snug"
-                  >
-                    {label(child, locale)}
-                  </Link>
-                ) : null
-              )}
-            </div>
-          </div>
-        );
       })}
     </div>
   );

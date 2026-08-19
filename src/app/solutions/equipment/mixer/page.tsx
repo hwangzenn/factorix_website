@@ -26,7 +26,7 @@ export default async function MixerPage() {
     <div className="max-w-5xl mx-auto px-6 py-20">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
         <div>
-          <CategoryBreadcrumb segments={["솔루션", "액상제조 장비", "교반/탈포기"]} />
+          <CategoryBreadcrumb segments={["제품", "교반/탈포기"]} />
           <h1 className="hidden sm:block text-4xl font-bold text-primary-800">교반/탈포기</h1>
         </div>
         <div className="flex flex-wrap gap-3">

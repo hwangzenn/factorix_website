@@ -15,7 +15,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "전자·배터리",
-  description: "전기·전자, 반도체, 디스플레이, 배터리 — 초미세 패턴 토출과 무결점 공정을 위한 Factorix 제조자동화 단동설비",
+  description: "전기·전자, 반도체, 디스플레이, 배터리 — 초미세 패턴 토출과 무결점 공정을 위한 Factorix 제조자동화 시스템",
   alternates: { canonical: ROUTES.solutions.automationSystemIndustries.electronicsBattery },
 }
 
@@ -44,6 +44,7 @@ export default async function ElectronicsBatteryPage() {
       portfolio={(portfolioData as IndustryPortfolioItem[]) ?? []}
       relatedContent={(relatedData as RelatedContentItem[]) ?? []}
       logos={logos}
+      heroImage="/산업군/전자배터리.png"
     />
   )
 }

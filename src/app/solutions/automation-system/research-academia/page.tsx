@@ -15,7 +15,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "연구기관·대학",
-  description: "대학 연구실, 정부출연연구기관, 기업 R&D센터, 시험·분석기관 — 소량·다품종 실험 공정을 위한 Factorix 제조자동화 단동설비",
+  description: "대학 연구실, 정부출연연구기관, 기업 R&D센터, 시험·분석기관 — 소량·다품종 실험 공정을 위한 Factorix 제조자동화 시스템",
   alternates: { canonical: ROUTES.solutions.automationSystemIndustries.researchAcademia },
 }
 
@@ -44,6 +44,7 @@ export default async function ResearchAcademiaPage() {
       portfolio={(portfolioData as IndustryPortfolioItem[]) ?? []}
       relatedContent={(relatedData as RelatedContentItem[]) ?? []}
       logos={logos}
+      heroImage="/산업군/연구기관대학.png"
     />
   )
 }

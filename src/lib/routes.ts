@@ -28,8 +28,8 @@ export const ROUTES = {
       curing: "/solutions/equipment/curing",        // UV/IR 경화기
       consumables: "/solutions/equipment/consumables", // 소모품
     },
-    automationSystem: "/solutions/automation-system",           // 제조자동화 단동설비 (허브, GNB 비노출)
-    automationSystemIndustries: {      // 제조자동화 단동설비 ── 산업별 상세
+    automationSystem: "/solutions/automation-system",           // 제조자동화 시스템 (허브, GNB 비노출)
+    automationSystemIndustries: {      // 제조자동화 시스템 ── 산업별 상세
       bioMedical: "/solutions/automation-system/bio-medical",               // 바이오·의료기기
       chemicalsMaterials: "/solutions/automation-system/chemicals-materials", // 화학·소재
       electronicsBattery: "/solutions/automation-system/electronics-battery", // 전자·배터리

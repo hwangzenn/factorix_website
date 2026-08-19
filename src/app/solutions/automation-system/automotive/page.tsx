@@ -15,7 +15,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "자동차·부품",
-  description: "자동차, 자동차 부품, 전장, 모빌리티 — 대량 생산 라인 연동 액상 공정을 위한 Factorix 제조자동화 단동설비",
+  description: "자동차, 자동차 부품, 전장, 모빌리티 — 대량 생산 라인 연동 액상 공정을 위한 Factorix 제조자동화 시스템",
   alternates: { canonical: ROUTES.solutions.automationSystemIndustries.automotive },
 }
 
@@ -44,6 +44,7 @@ export default async function AutomotivePage() {
       portfolio={(portfolioData as IndustryPortfolioItem[]) ?? []}
       relatedContent={(relatedData as RelatedContentItem[]) ?? []}
       logos={logos}
+      heroImage="/산업군/자동차부품.png"
     />
   )
 }

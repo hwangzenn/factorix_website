@@ -15,7 +15,7 @@ export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "화학·소재",
-  description: "화학, 접착제, 수지, 실리콘, 기능성 소재 — 고점도·경화 민감 액상 공정을 위한 Factorix 제조자동화 단동설비",
+  description: "화학, 접착제, 수지, 실리콘, 기능성 소재 — 고점도·경화 민감 액상 공정을 위한 Factorix 제조자동화 시스템",
   alternates: { canonical: ROUTES.solutions.automationSystemIndustries.chemicalsMaterials },
 }
 
@@ -44,6 +44,7 @@ export default async function ChemicalsMaterialsPage() {
       portfolio={(portfolioData as IndustryPortfolioItem[]) ?? []}
       relatedContent={(relatedData as RelatedContentItem[]) ?? []}
       logos={logos}
+      heroImage="/산업군/화학소재.png"
     />
   )
 }

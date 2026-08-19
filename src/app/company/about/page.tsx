@@ -60,7 +60,7 @@ const BUSINESSES = [
   },
   {
     tag: "EQUIPMENT",
-    title: "제조자동화 단동설비",
+    title: "제조자동화 시스템",
     desc: "액상 충진기, 디스펜서, 교반/탈포기, 3축 로봇 등 정밀 제조 장비 라인업. 산업별 액상 제조공정 특성에 맞춰 단품부터 통합 자동화까지 구성 가능합니다.",
     href: ROUTES.solutions.automationSystem,
   },

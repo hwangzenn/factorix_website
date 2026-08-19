@@ -12,8 +12,8 @@ const SLIDE_3_IMAGE = "/hero-slide-3.png"; // 엔지니어 그룹의 현장 협�
 const SLIDES_KO = [
   {
     image: SLIDE_1_IMAGE,
-    heading: "액상제조 수율은 극대화,\n불량률은 최소화합니다",
-    sub: "정밀 디스펜싱 자동화 솔루션 기업\n팩토릭스와 액상 제조 혁신을 만들어가세요.",
+    heading: "정밀 디스펜싱 자동화\n설비 솔루션 기업, 팩토릭스",
+    sub: "액상제조 수율은 극대화하고,\n불량률은 최소화합니다.",
     ctas: [
       { label: "온라인 문의", href: ROUTES.support.meeting },
       { label: "담당자 전화 문의", href: "tel:070-8672-0192" },

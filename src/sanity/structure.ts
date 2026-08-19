@@ -9,7 +9,7 @@ const PRODUCT_GROUPS = [
   { key: 'robot', title: '3축로봇', categories: ['equipment-robot'] },
   { key: 'curing', title: '경화기', categories: ['equipment-curing'] },
   { key: 'consumables', title: '소모품', categories: ['consumables'] },
-  { key: 'equipment-systems-smart-factory', title: '제조자동화 단동설비', categories: ['equipment-systems-smart-factory'] },
+  { key: 'equipment-systems-smart-factory', title: '제조자동화 시스템', categories: ['equipment-systems-smart-factory'] },
 ]
 
 // 자료실(referenceMaterial) 카테고리 그룹 — src/sanity/schemaTypes/referenceMaterial.ts 의 category 옵션과 동기화

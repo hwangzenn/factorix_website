@@ -8,7 +8,7 @@ import ContentDetail from "@/components/content/ContentDetail"
 type Props = { params: Promise<{ slug: string }> }
 
 const CATEGORY = "솔루션"
-const GROUP_LABEL = "제조자동화 단동설비"
+const GROUP_LABEL = "제조자동화 시스템"
 const PROCESS_KEY = "other"
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
